@@ -1,0 +1,31 @@
+.forum-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #0036a0;
+
+    .filter-button {
+        height: 40px;
+        border: none;
+        background-color: #f6e6e9;
+
+        .filter-icon {
+            height: 100%;
+            aspect-ratio: 1/1;
+        }
+    }
+
+    .filter-options {
+        background-color: #f0d9dd;
+        position: absolute;
+        margin-top: 10px;
+        z-index: 999;
+
+        .filter-option {
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: larger;
+            font-weight: bold;
+        }
+    }
+}

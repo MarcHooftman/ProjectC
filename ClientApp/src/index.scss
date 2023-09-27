@@ -1,9 +1,17 @@
-/* Provide sufficient contrast against white background */
+html,
+.bg-color {
+  background-color: #f6e6e9;
+}
+
 a {
   color: #0366d6;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 

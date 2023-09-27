@@ -22,6 +22,11 @@ const NavMenu = () => {
             Over ons
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="text-light" to="/forum">
+            Forum
+          </NavLink>
+        </NavItem>
       </ul>
     </Navbar>
   );

@@ -7,7 +7,7 @@ const LogoRed = require("../assets/logo-red.png");
 
 const NavMenu2 = () => {
   return (
-    <Navbar className="navbar navbar-expand-lg p-4 border-bottom">
+    <Navbar className="navbar navbar-expand-lg p-4">
       <NavbarBrand tag={Link} to="/">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
       </NavbarBrand>
@@ -20,6 +20,11 @@ const NavMenu2 = () => {
         <NavItem>
           <NavLink tag={Link} className="red-link" to="/about">
             Over ons
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="red-link" to="/forum">
+            Forum
           </NavLink>
         </NavItem>
       </ul>
