@@ -13,7 +13,7 @@ const NavMenu = () => {
       </NavbarBrand>
       <ul className="navbar-nav">
         <NavItem>
-          <NavLink tag={Link} className="text-light" to="/">
+          <NavLink tag={Link} className="text-light" to="/activities">
             Activiteiten
           </NavLink>
         </NavItem>
@@ -25,6 +25,11 @@ const NavMenu = () => {
         <NavItem>
           <NavLink tag={Link} className="text-light" to="/forum">
             Forum
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="text-light" to="/profile">
+            Profiel
           </NavLink>
         </NavItem>
       </ul>

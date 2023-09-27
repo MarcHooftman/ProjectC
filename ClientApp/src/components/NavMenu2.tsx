@@ -14,7 +14,7 @@ const NavMenu2 = () => {
       </NavbarBrand>
       <ul className="navbar-nav">
         <NavItem>
-          <NavLink tag={Link} className="red-link" to="/">
+          <NavLink tag={Link} className="red-link" to="/activities">
             Activiteiten
           </NavLink>
         </NavItem>
@@ -26,6 +26,11 @@ const NavMenu2 = () => {
         <NavItem>
           <NavLink tag={Link} className="red-link" to="/forum">
             Forum
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="red-link" to="/profile">
+            Profiel
           </NavLink>
         </NavItem>
       </ul>
