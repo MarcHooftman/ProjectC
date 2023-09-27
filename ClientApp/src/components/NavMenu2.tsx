@@ -7,23 +7,24 @@ const LogoRed = require("../assets/logo-red.png");
 
 const NavMenu2 = () => {
   return (
-    <Navbar className="navbar navbar-expand-lg p-4">
+    <Navbar className="navbar navbar-expand-lg p-4 antes-white border-bottom">
+
       <NavbarBrand tag={Link} to="/">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
       </NavbarBrand>
       <ul className="navbar-nav">
         <NavItem>
-          <NavLink tag={Link} className="red-link fs-1" to="/">
-            Home
+          <NavLink tag={Link} className="red-link fs-3" to="/">
+            Activiteiten
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="red-link fs-1" to="/about">
+          <NavLink tag={Link} className="red-link fs-3 ms-3" to="/about">
             Over ons
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="red-link fs-1" to="/forum">
+          <NavLink tag={Link} className="red-link fs-3 ms-3" to="/forum">
             Forum
           </NavLink>
         </NavItem>

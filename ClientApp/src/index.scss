@@ -4,7 +4,7 @@ html,
 }
 
 a {
-  color: #0366d6;
+  color: #000000;
 }
 
 .btn:focus,
@@ -20,11 +20,28 @@ code {
 }
 
 .btn-primary {
-  color: #fff;
+  color: white;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
 
 .antes-red {
   background-color: #760000;
+}
+
+.antes-white {
+  background-color: #ffffff;
+}
+
+body {
+  background-color: #f6e6e9;
+}
+
+.blue-title {
+  color: #0036a0;
+}
+
+.title {
+  color: #e01a24;
+
 }

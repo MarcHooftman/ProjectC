@@ -1,0 +1,48 @@
+.about-title {
+    color: #0036a0;
+}
+
+.intro {
+
+    .antes-picture {
+        width: 400px;
+        height: 300px;
+        float: right;
+        margin-left: 20px;
+    }
+
+    p {
+        text-align: justify;
+        color: #0036a0;
+    }
+}
+
+.general-info {
+    width: 500px;
+    background-color: #f0d9dd;
+    padding: 20px;
+
+    .info-title {
+        text-align: center;
+        color: #0036a0;
+    }
+
+    .general-info-table {
+        display: flex;
+
+        .keys {
+            flex: 1;
+            color: #0036a0;
+        }
+
+        .values {
+            flex: 2;
+            text-align: end;
+            color: #0036a0;
+        }
+    }
+}
+
+.map-image {
+    width: 100%;
+}
