@@ -1,4 +1,8 @@
-/* Provide sufficient contrast against white background */
+html,
+.bg-color {
+  background-color: #f6e6e9;
+}
+
 a {
   color: #000000;
 }
@@ -39,4 +43,5 @@ body {
 
 .title {
   color: #e01a24;
+
 }
