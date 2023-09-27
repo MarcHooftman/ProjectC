@@ -24,6 +24,7 @@ const Forum = () => {
         <ForumPostExample />
         <ForumPostExample />
         <ForumPostExample />
+        <ForumPostExample />
     </Layout>
 }
 
