@@ -4,6 +4,7 @@ import { NavItem, NavLink, Navbar, NavbarBrand } from "reactstrap";
 import "./NavMenu.scss";
 
 const LogoWhite = require("../assets/logo-white.png");
+const profile = require("../assets/profile-icon.png");
 
 const NavMenu = () => {
   return (
@@ -28,9 +29,9 @@ const NavMenu = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-light fs-3 ms-3" to="/profile">
-            Profiel
-          </NavLink>
+          <NavbarBrand tag={Link} to="/profile">
+            <img className="profile-image" src={profile} alt="profiel" />
+          </NavbarBrand>
         </NavItem>
       </ul>
     </Navbar>

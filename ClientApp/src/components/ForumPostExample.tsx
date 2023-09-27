@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ForumPostExample.scss"
 
-import upArrow from '../assets/up-arrow.png';
+import upArrow from "../assets/up-arrow.png";
 import downArrow from '../assets/down-arrow.png';
 import { Collapse } from "reactstrap";
 
