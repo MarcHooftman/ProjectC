@@ -1,0 +1,50 @@
+.example-activity {
+    background-color: #f0d9dd;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    flex: 1;
+
+    .example-activity-header {
+        display: flex;
+        //align-items: center;
+
+        .clock-icon {
+            height: 45px;
+            aspect-ratio: 1/1;
+            margin: 5px 5px 5px 5px;
+
+        }
+
+        .date-place-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 2;
+            padding: 5px;
+
+            .date-time {
+                font-size: 20px;
+                white-space: nowrap;
+            }
+
+            .place-info {
+                font-size: 12px;
+                white-space: nowrap;
+            }
+
+            * {
+                margin-bottom: 0;
+            }
+        }
+
+        .activity-name {
+            justify-self: end;
+            align-self: center;
+            text-align: end;
+            flex: 1;
+            margin: 0 10px 0 0;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+    }
+}

@@ -14,17 +14,17 @@ const NavMenu = () => {
       </NavbarBrand>
       <ul className="navbar-nav">
         <NavItem>
-          <NavLink tag={Link} className="text-light" to="/activities">
+          <NavLink tag={Link} className="text-light fs-3" to="/activities">
             Activiteiten
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-light" to="/about">
+          <NavLink tag={Link} className="text-light fs-3 ms-3" to="/about">
             Over ons
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-light" to="/forum">
+          <NavLink tag={Link} className="text-light fs-3 ms-3" to="/forum">
             Forum
           </NavLink>
         </NavItem>
