@@ -1,4 +1,4 @@
-namespace probeersel;
+namespace onboarding;
 
 public class WeatherForecast
 {

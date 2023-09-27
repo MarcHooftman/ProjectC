@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "probeersel": {
+    "onboarding-antes": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7185;http://localhost:5091",

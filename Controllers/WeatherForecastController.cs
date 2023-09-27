@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace probeersel.Controllers;
+namespace onboarding.Controllers;
 
 [ApiController]
 [Route("[controller]")]
