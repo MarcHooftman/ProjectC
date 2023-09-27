@@ -2,6 +2,11 @@
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  margin-left: 10%;
+}
+
+.navbar-nav {
+  margin-right: 10%;
 }
 
 html {
@@ -15,4 +20,8 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar-logo {
+  height: 60px;
 }
