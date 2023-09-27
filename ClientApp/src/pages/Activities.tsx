@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 
 const Activities = () => {
-    return <Layout dark={true}>About</Layout>;
+    return <Layout dark={false}>About</Layout>;
 };
 
 export default Activities;
