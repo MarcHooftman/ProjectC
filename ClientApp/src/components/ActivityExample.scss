@@ -1,7 +1,13 @@
+.header-margin {
+    .example-activity-header {
+        margin: 10px;
+    }
+}
+
 .example-activity {
     background-color: #f0d9dd;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    //padding: 10px;
     flex: 1;
 
     .example-activity-header {

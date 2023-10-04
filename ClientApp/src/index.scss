@@ -1,3 +1,10 @@
+:root {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+}
+
 html,
 .bg-color {
   background-color: #f6e6e9;
@@ -39,9 +46,4 @@ body {
 
 .blue-title {
   color: #0036a0;
-}
-
-.title {
-  color: #e01a24;
-
 }
