@@ -2,7 +2,7 @@
   ::-webkit-scrollbar {
     display: none;
   }
-  
+
 }
 
 html,
@@ -46,4 +46,26 @@ body {
 
 .blue-title {
   color: #0036a0;
+}
+
+details[aria-disabled="true"] {
+  summary {
+    cursor: auto !important;
+  }
+}
+
+details[open] summary~* {
+  animation: sweep 0.5s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    //margin-left: -10px
+  }
+
+  100% {
+    opacity: 1;
+    //margin-left: 0px
+  }
 }

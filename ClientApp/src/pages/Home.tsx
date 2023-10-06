@@ -3,12 +3,39 @@ import Layout from "../components/Layout";
 import HomeInfoBox from "../components/HomeInfoBox";
 import { Button } from "reactstrap";
 import { useState } from "react";
-import ActivityExample from "../components/ActivityExample";
+//import ActivityExample from "../components/ActivityExample";
 
 import "./Home.scss";
+import NextActivityCard from "./Activities/NextActivityCard";
 
-const lorum =
-  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?";
+const tempNextActivity = {
+  datetime: "morgen 13:45", location: "nepstraat 123a, rotterdam", name: "activiteit naam", description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex neque
+doloremque dicta dolores nulla suscipit quibusdam magni itaque
+blanditiis labore, iusto recusandae rerum delectus provident alias
+assumenda commodi ab quisquam! Nobis recusandae quos cupiditate
+culpa maxime, incidunt possimus dolorem eveniet reprehenderit
+deleniti ab quisquam asperiores magni ipsum tenetur nam repellendus
+eligendi perferendis magnam? Ab officia ad soluta distinctio aperiam
+maxime! Deserunt exercitationem libero maxime quaerat nobis eaque
+nemo tempore dolor, numquam et minus qui delectus sapiente
+voluptates laudantium! Quidem suscipit, a natus tenetur voluptatem
+impedit nam dolore obcaecati minima cumque? Eligendi, consequuntur
+pariatur provident quia eum placeat perferendis asperiores quo
+dignissimos accusamus temporibus, sunt, enim neque doloremque. Ullam
+quo, obcaecati, voluptatem omnis delectus vero repudiandae
+praesentium earum, ab hic unde! Ab delectus modi illum repellendus
+ad aspernatur corporis quasi. Minus aliquam sapiente harum
+voluptatibus et vitae ratione totam sunt explicabo. Optio iusto
+aliquid officia quo, eveniet quasi alias quisquam animi! Qui,
+voluptatum labore ex assumenda quas voluptates eius mollitia
+veritatis deleniti repellendus autem! Deleniti voluptas quisquam
+officia vero quasi voluptates accusamus natus possimus ratione
+molestias ea pariatur, a soluta quos. Eos nesciunt expedita ab, ea
+incidunt nihil distinctio esse qui modi maxime similique provident
+repudiandae, non earum doloremque dolorem ipsum dicta quis harum
+facilis debitis hic? Molestias ad eligendi debitis! At dolorum fuga
+vero culpa molestiae nesciunt quisquam? Corrupti non delectus quia
+sit eius dignissimos enim a atque cum.`}
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -20,11 +47,9 @@ const Home = () => {
       <div className="row row-cols-1 row-cols-md-3 g-4 home-cards">
         <div className="col">
           <h3 className="blue-title">Eerstvolgende activiteit</h3>
-          <ActivityExample
-            className="card header-margin"
-            text={
-              "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-            }
+          <NextActivityCard
+            activity={tempNextActivity}
+            disabled={true}
             footer="updated 10 min ago"
           />
         </div>
@@ -32,7 +57,7 @@ const Home = () => {
           <h3 className="blue-title">Populaire discussies</h3>
           <HomeInfoBox
             title="Nieuwe klant aanmelden"
-            children={lorum}
+          //children={lorum}
           ></HomeInfoBox>
         </div>
         <div className="col">
