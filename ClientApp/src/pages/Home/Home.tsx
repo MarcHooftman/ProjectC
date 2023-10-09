@@ -1,15 +1,18 @@
 //import { Link } from "react-router-dom";
-import Layout from "../components/Layout";
-import HomeInfoBox from "../components/HomeInfoBox";
+import Layout from "../../components/Layout";
+import HomeInfoBox from "../../components/HomeInfoBox";
 import { Button } from "reactstrap";
 import { useState } from "react";
 //import ActivityExample from "../components/ActivityExample";
 
 import "./Home.scss";
-import NextActivityCard from "./Activities/NextActivityCard";
+import NextActivityCard from "../Activities/NextActivityCard";
 
 const tempNextActivity = {
-  datetime: "morgen 13:45", location: "nepstraat 123a, rotterdam", name: "activiteit naam", description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex neque
+  datetime: "morgen 13:45",
+  location: "nepstraat 123a, rotterdam",
+  name: "activiteit naam",
+  description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex neque
 doloremque dicta dolores nulla suscipit quibusdam magni itaque
 blanditiis labore, iusto recusandae rerum delectus provident alias
 assumenda commodi ab quisquam! Nobis recusandae quos cupiditate
@@ -35,7 +38,8 @@ incidunt nihil distinctio esse qui modi maxime similique provident
 repudiandae, non earum doloremque dolorem ipsum dicta quis harum
 facilis debitis hic? Molestias ad eligendi debitis! At dolorum fuga
 vero culpa molestiae nesciunt quisquam? Corrupti non delectus quia
-sit eius dignissimos enim a atque cum.`}
+sit eius dignissimos enim a atque cum.`,
+};
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -44,23 +48,24 @@ const Home = () => {
       <h1 className="text-left py-5 welcome-title">
         Welkom bij de Onboarding-App van Antes
       </h1>
-      <div className="row row-cols-1 row-cols-md-3 g-4 home-cards">
-        <div className="col">
+      <div className="d-flex justify-content-between align-items-start gap-4">
+        <div className="next-activity-container">
           <h3 className="blue-title">Eerstvolgende activiteit</h3>
           <NextActivityCard
             activity={tempNextActivity}
             disabled={true}
             footer="updated 10 min ago"
+            fontSize={4}
           />
         </div>
-        <div className="col">
+        <div className="pop-forum-post-container">
           <h3 className="blue-title">Populaire discussies</h3>
           <HomeInfoBox
             title="Nieuwe klant aanmelden"
-          //children={lorum}
+            //children={lorum}
           ></HomeInfoBox>
         </div>
-        <div className="col">
+        <div className="training-container">
           <h3 className="blue-title">Training</h3>
           <HomeInfoBox title="testing">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita

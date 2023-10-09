@@ -69,3 +69,11 @@ details[open] summary~* {
     //margin-left: 0px
   }
 }
+
+details > summary:first-of-type {
+  list-style-type: none;
+}
+
+.no-border {
+  border-width: 0px !important;
+}

@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Forum from "./pages/Forum";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Forum from "./pages/Forum/Forum";
 import Activities from "./pages/Activities/Activities";
 import Profile from "./pages/Profile/Profile";
 
