@@ -8,25 +8,36 @@
 }
 
 .filter {
-    height:40px;
+    --filter-height: 40px;
+    height: var(--filter-height);
 
     summary {
         height: 100%;
         float: right;
     }
+
+    .filter-options {
+        background-color: #f0d9dd;
+        position: relative;
+        margin-top: calc(var(--filter-height) + 5px);
+        z-index: 999;
+
+        .filter-option {
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: larger;
+            font-weight: bold;
+        }
+    }
 }
 
-.filter-options {
-    background-color: #f0d9dd;
-    position: relative;
-    margin-top: 10px;
-    z-index: 999;
-    margin-left: -48px;
+.poster-pfp {
+    width: 60px;
+    aspect-ratio: 1/1;
+    background-color: #6e6e6e;
+    border-radius: 50%;
+}
 
-    .filter-option {
-        padding: 15px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        font-size: larger;
-        font-weight: bold;
-    }
+.card-header {
+    background-color: inherit !important;
 }

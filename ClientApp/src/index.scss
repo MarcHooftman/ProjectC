@@ -2,7 +2,6 @@
   ::-webkit-scrollbar {
     display: none;
   }
-
 }
 
 html,
@@ -55,7 +54,7 @@ details[aria-disabled="true"] {
 }
 
 details[open] summary~* {
-  animation: sweep 0.5s ease-in-out;
+  animation: sweep 0.25s ease-in-out;
 }
 
 @keyframes sweep {
@@ -70,7 +69,7 @@ details[open] summary~* {
   }
 }
 
-details > summary:first-of-type {
+details>summary:first-of-type {
   list-style-type: none;
 }
 

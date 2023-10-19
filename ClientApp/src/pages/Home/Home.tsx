@@ -62,7 +62,7 @@ const Home = () => {
           <h3 className="blue-title">Populaire discussies</h3>
           <HomeInfoBox
             title="Nieuwe klant aanmelden"
-            //children={lorum}
+          //children={lorum}
           ></HomeInfoBox>
         </div>
         <div className="training-container">
