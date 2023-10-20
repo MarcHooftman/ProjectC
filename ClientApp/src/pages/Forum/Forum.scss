@@ -19,15 +19,15 @@
     .filter-options {
         background-color: #f0d9dd;
         position: relative;
-        margin-top: calc(var(--filter-height) + 5px);
+        margin-top: 5px;
         z-index: 999;
 
-        .filter-option {
-            padding: 15px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            font-size: larger;
-            font-weight: bold;
-        }
+        // .filter-option {
+        //     padding: 15px;
+        //     border: 1px solid rgba(0, 0, 0, 0.1);
+        //     font-size: larger;
+        //     font-weight: bold;
+        // }
     }
 }
 

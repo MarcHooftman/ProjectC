@@ -21,9 +21,9 @@ const ForumPostCard = () => {
                         </h3>
                     </div>
                     <span className="d-flex gap-2">
-                        <a href="#" className="tag btn btn-primary btn-sm">Tag 1</a>
-                        <a href="#" className="tag btn btn-primary btn-sm">Tag 2</a>
-                        <a href="#" className="tag btn btn-primary btn-sm">Tag 3</a>
+                        <a href="/forum?filter=tag1" className="tag btn btn-primary btn-sm">Tag 1</a>
+                        <a href="/forum?filter=tag2" className="tag btn btn-primary btn-sm">Tag 2</a>
+                        <a href="/forum?filter=tag3" className="tag btn btn-primary btn-sm">Tag 3</a>
                     </span>
                     <span className="opacity-50 text-dark">3 uur geleden</span>
                 </div>
