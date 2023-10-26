@@ -13,9 +13,9 @@ const Login = () => {
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
+                        <h1 className="my-5">Inloggen</h1>
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Sign In</h5>
                                 <form
                                     onSubmit={e => {
                                         e.preventDefault();
@@ -30,7 +30,7 @@ const Login = () => {
                                             type="email"
                                             className="form-control"
                                             id="email"
-                                            placeholder="Enter your email"
+                                            placeholder="Voer uw email in"
                                             required
                                             value={email}
                                             onChange={e => setEmail(e.target.value)}
@@ -39,12 +39,12 @@ const Login = () => {
 
                                     {/* Password Input */}
                                     <div className="form-group">
-                                        <label htmlFor="password">Password</label>
+                                        <label htmlFor="password">Wachtwoord</label>
                                         <input
                                             type="password"
                                             className="form-control"
                                             id="password"
-                                            placeholder="Enter your password"
+                                            placeholder="Voer uw wachtwoord in"
                                             required
                                             value={password}
                                             onChange={e => setPassword(e.target.value)}
@@ -52,7 +52,7 @@ const Login = () => {
                                     </div>
 
                                     {/* Sign In Button */}
-                                    <button type="submit" className="btn btn-primary">Sign in</button>
+                                    <button type="submit" className="btn btn-primary">Log in</button>
                                 </form>
                             </div>
                         </div>
