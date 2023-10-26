@@ -13,7 +13,7 @@ const Login = () => {
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
-                        <h1 className="my-5">Inloggen</h1>
+                        <h1 className="my-5 login-title">Inloggen</h1>
                         <div className="card">
                             <div className="card-body">
                                 <form
@@ -24,7 +24,7 @@ const Login = () => {
                                 >
 
                                     {/* Email Input */}
-                                    <div className="form-group">
+                                    <div className="form-group mb-3 mt-3">
                                         <label htmlFor="email">Email</label>
                                         <input
                                             type="email"
@@ -38,7 +38,7 @@ const Login = () => {
                                     </div>
 
                                     {/* Password Input */}
-                                    <div className="form-group">
+                                    <div className="form-group mb-3 mt-3">
                                         <label htmlFor="password">Wachtwoord</label>
                                         <input
                                             type="password"
