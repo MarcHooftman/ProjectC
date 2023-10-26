@@ -24,7 +24,7 @@ const Login = () => {
                                 >
 
                                     {/* Email Input */}
-                                    <div className="form-group mb-3 mt-3">
+                                    <div className="form-group mb-3">  {/* evt mt-3 */}
                                         <label htmlFor="email">Email</label>
                                         <input
                                             type="email"
