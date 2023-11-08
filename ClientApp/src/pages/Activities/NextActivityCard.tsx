@@ -79,7 +79,7 @@ const NextActivityCard = ({
         ) : (
           <img
             className="next-arrow-icon"
-            src={collapse ? upArrow : downArrow}
+            src={collapse ? downArrow : upArrow}
           />
         )}
       </summary>

@@ -59,7 +59,7 @@ const ActivityCard = ({ activity, className = "", fontSize = 4 }: Props) => {
         >
           <strong>{activity?.name}</strong>
         </h2>
-        <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
+        <img className="arrow-icon" src={collapse ? downArrow : upArrow} />
       </summary>
       <p>{activity?.description}</p>
     </details>
