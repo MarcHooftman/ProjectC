@@ -42,9 +42,8 @@ sit eius dignissimos enim a atque cum.`,
 };
 
 const Home = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
   return (
-    <Layout dark={darkMode}>
+    <Layout>
       <h1 className="text-left py-5 welcome-title">
         Welkom bij de Onboarding-App van Antes
       </h1>
@@ -106,7 +105,6 @@ const Home = () => {
           </HomeInfoBox>
         </div>
       </div>
-      <Button onClick={() => setDarkMode(!darkMode)}>Switch theme</Button>
     </Layout>
   );
 };

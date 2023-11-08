@@ -8,7 +8,7 @@ const profile = require("../assets/profile-icon.png");
 
 const NavMenu = () => {
   return (
-    <Navbar className="navbar navbar-expand-lg antes-red p-4">
+    <Navbar className="navbar navbar-expand-lg antes-white p-4">
       <NavbarBrand tag={Link} to="/">
         <img className="navbar-logo" src={LogoWhite} alt="Logo" />
       </NavbarBrand>
