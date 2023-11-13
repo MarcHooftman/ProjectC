@@ -15,7 +15,7 @@ const EditProfile = () => {
         // phoneNumber is optional
         phoneNumber: "",
         bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde quod eum cumque aspernatur? Fuga est earum eos laudantium minus eligendi tempore ullam, sequi sint ab unde? Labore, provident porro. Suscipit in soluta numquam dolores maiores id, culpa sequi exercitationem nihil consequatur inventore blanditiis aliquam iste labore expedita eveniet optio velit eligendi odit dolor vero error voluptas?",
-        department: "Rotterdam-Zuid",
+        department: "HR",
     };
 
     // State to store the edited profile data
@@ -55,16 +55,16 @@ const EditProfile = () => {
         });
     };
 
-    // Function to handle profile picture changes
-    const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]; // Get the selected file
-        if (file) {
-            setEditedProfile((prevProfile: IProfile) => ({
-                ...prevProfile,
-                profilePicture: file, // Set the selected file as the profile picture
-            }));
-        }
-    };
+    // // Function to handle profile picture changes
+    // const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = e.target.files?.[0]; // Get the selected file
+    //     if (file) {
+    //         setEditedProfile((prevProfile: IProfile) => ({
+    //             ...prevProfile,
+    //             profilePicture: file, // Set the selected file as the profile picture
+    //         }));
+    //     }
+    // };
 
     return (
         <Layout dark={false}>
@@ -73,7 +73,7 @@ const EditProfile = () => {
                 <div className="card">
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label htmlFor="profilePicture">Profielfoto wijzigen:</label>
                                 <input
                                     type="file"
@@ -83,18 +83,7 @@ const EditProfile = () => {
                                     accept="image/*" // Allow only image files
                                     onChange={handleProfilePictureChange}
                                 />
-                            </div>
-                            <div className="form-group mt-3">
-                                <label htmlFor="name">Volledige Naam</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="fullName"
-                                    name="fullName"
-                                    value={editedProfile.fullName}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
+                            </div> */}
                             <div className="form-group mt-3">
                                 <label htmlFor="role">Functie</label>
                                 <input
@@ -118,17 +107,6 @@ const EditProfile = () => {
                                     placeholder={editedProfile.dateOfBirth}
                                 />
                             </div>
-                            {/* <div className="form-group mt-3">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="email"
-                                    name="email"
-                                    value={editedProfile.email}
-                                    onChange={handleInputChange}
-                                />
-                            </div> */}
                             <div className="form-group mt-3">
                                 <label htmlFor="phone">Telefoonnummer (optioneel)</label>
                                 <input
@@ -140,7 +118,7 @@ const EditProfile = () => {
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div className="form-group mt-3">
+                            {/* <div className="form-group mt-3">
                                 <label htmlFor="department">Department</label>
                                 <input
                                     type="text"
@@ -150,7 +128,7 @@ const EditProfile = () => {
                                     value={editedProfile.department}
                                     onChange={handleInputChange}
                                 />
-                            </div>
+                            </div> */}
                             <div className="form-group mt-3">
                                 <label htmlFor="bio">Bio</label>
                                 <textarea
