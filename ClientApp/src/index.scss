@@ -4,6 +4,12 @@
   }
 }
 
+@media (max-width: 575px) {
+  body {
+    position: absolute;
+  }
+}
+
 html,
 .bg-color {
   background-color: #f6e6e9;

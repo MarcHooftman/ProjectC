@@ -44,13 +44,13 @@ const Profile = () => {
   }, [])
 
   return (
-    <Layout dark={false}>
+    <Layout>
       <h1 className="blue-title my-5">Jouw profiel</h1>
       <div className="d-flex gap-5">
         <PersonalInfoCard pfp={profilePicUrl} profile={profile} />
         <UserDataCard userData={userData} />
       </div>
-      <a href="/edit_profile" className="btn btn-primary mt-3">Update Profiel</a>
+      <a href="/edit_profile" className="btn btn-primary mt-3">Profiel bewerken</a>
     </Layout>
   );
 };

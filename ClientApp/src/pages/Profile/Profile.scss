@@ -10,3 +10,16 @@
 .user-data {
     flex: 1;
 }
+
+.profile-table>*>* {
+    color: #0036a0;
+
+    >* {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    th {
+        padding-right: 1rem !important;
+    }
+}

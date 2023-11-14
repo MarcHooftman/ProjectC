@@ -1,3 +1,4 @@
+import { Card, Table } from 'react-bootstrap';
 import IUserData from './IUserData';
 
 interface Props {
@@ -6,26 +7,33 @@ interface Props {
 
 const UserDataCard = ({ userData }: Props) => {
     return (
-        <div className="card user-data">
-            <div className="card-body d-flex flex-column">
-                <div className="card-title text-center">
+        <Card className="user-data shadow-lg">
+            <Card.Body className="d-flex flex-column">
+                <Card.Title className="text-center">
                     <strong>Overzicht</strong>
-                </div>
-                <div className="d-flex justify-content-between">
-                    <ul className="user-data-keys p-0">
-                        <li className="d-flex">Posts geplaatst</li>
-                        <li className="d-flex">Comments geplaatst</li>
-                        <li className="d-flex">Behulpzame comments</li>
-                        <li className="d-flex">Likes ontvangen</li>
-                    </ul>
-                    <ul className="user-data-cells p-0">
-                        <li className="d-flex">{userData?.postsPlaced}</li>
-                        <li className="d-flex">{userData?.commentsPlaced}</li>
-                        <li className="d-flex">{userData?.helpfulComments}</li>
-                        <li className="d-flex">{userData?.totalLikes}</li>
-                    </ul></div>
-            </div>
-        </div>
+                </Card.Title>
+                <Table className="profile-table">
+                    <tbody>
+                        <tr>
+                            <th>Posts geplaatst</th>
+                            <td>{userData?.postsPlaced}</td>
+                        </tr>
+                        <tr>
+                            <th>Comments geplaatst</th>
+                            <td>{userData?.commentsPlaced}</td>
+                        </tr>
+                        <tr>
+                            <th>Behulpzame comments</th>
+                            <td>{userData?.helpfulComments}</td>
+                        </tr>
+                        <tr>
+                            <th>Likes ontvangen</th>
+                            <td>{userData?.totalLikes}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Card.Body>
+        </Card>
     )
 }
 
