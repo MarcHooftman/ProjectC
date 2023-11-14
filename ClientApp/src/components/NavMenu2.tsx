@@ -30,6 +30,11 @@ const NavMenu2 = () => {
           </NavLink>
         </NavItem>
         <NavItem>
+          <NavLink tag={Link} className="red-link fs-3 ms-3" to="/training">
+            Training
+          </NavLink>
+        </NavItem>
+        <NavItem>
           <NavbarBrand tag={Link} to="/profile">
             <img className="profile-image" src={profile} alt="profiel" />
           </NavbarBrand>

@@ -5,6 +5,7 @@ import About from "./pages/About/About";
 import Forum from "./pages/Forum/Forum";
 import Activities from "./pages/Activities/Activities";
 import Profile from "./pages/Profile/Profile";
+import Training from "./pages/Training/Training";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/forum" element={<Forum />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/training" element={<Training />} />
         </Routes>
       </Router>
     </>
