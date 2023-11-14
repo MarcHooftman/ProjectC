@@ -17,7 +17,8 @@ const NavDropDown = () => {
                 <DropdownItem href="/forum" className="fs-5">Forum</DropdownItem>
                 <DropdownItem href="/activities" className="fs-5">Activiteiten</DropdownItem>
                 <DropdownItem href="/profile" className="fs-5">Profiel</DropdownItem>
-                <DropdownItem href="/" className="fs-5">Trainingen</DropdownItem>
+                <DropdownItem href="/login" className="fs-5">Login</DropdownItem>
+                <DropdownItem href="/training" className="fs-5">Trainingen</DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem href="/about" className="fs-5">Over ons</DropdownItem>
             </DropdownMenu>
