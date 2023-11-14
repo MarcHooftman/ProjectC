@@ -5,7 +5,10 @@ import About from "./pages/About/About";
 import Forum from "./pages/Forum/Forum";
 import Activities from "./pages/Activities/Activities";
 import Profile from "./pages/Profile/Profile";
+import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
+import Login from "./pages/Login/Login";
+
 
 const App = () => {
     return (
@@ -18,6 +21,8 @@ const App = () => {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/edit_profile" element={<ProfileEdit />} />
                     <Route path="/activities" element={<Activities />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/training" element={<Training />} />
                 </Routes>
             </Router>
         </>

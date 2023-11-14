@@ -1,0 +1,32 @@
+.modalvideo {
+    // width: 90vw !important;
+    max-width: fit-content !important;
+
+}
+
+// .description {
+//     font-size: 0.6em;
+// }
+
+.training-card {
+    min-width: 15rem !important;
+}
+
+.card :hover {
+    background-color: #dab0b7 !important;
+}
+
+
+.Category :hover {
+    background-color: #ab0909 !important;
+}
+
+.badge-color {
+    background-color: #ab0909 !important;
+}
+
+
+.video {
+    aspect-ratio: 16/9;
+    width: 90vw !important;
+}
