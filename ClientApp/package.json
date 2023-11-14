@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.2",
     "child_process": "^1.0.2",
     "fs": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.6",

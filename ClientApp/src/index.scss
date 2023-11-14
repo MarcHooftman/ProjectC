@@ -9,6 +9,11 @@ html,
   background-color: #f6e6e9;
 }
 
+.bg-color {
+  min-height: calc(100vh - 5rem);
+
+}
+
 a {
   color: #000000;
 }
