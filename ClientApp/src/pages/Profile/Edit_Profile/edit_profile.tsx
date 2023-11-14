@@ -33,7 +33,7 @@ const EditProfile = () => {
 
         // Commented out to test with a console.log, redirecting resets browser console.
         // Redirect to the profile page after the form is submitted
-        //window.location.href = '/profile';
+        // window.location.href = '/profile';
     };
 
     // Function to handle input changes (both text inputs and text areas)
