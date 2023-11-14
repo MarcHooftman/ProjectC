@@ -1,16 +1,21 @@
 :root {
-  ::-webkit-scrollbar {
-    display: none;
-  }
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 html,
 .bg-color {
-  background-color: #f6e6e9;
+    background-color: #f6e6e9;
+}
+
+.bg-color {
+    min-height: calc(100vh - 5rem);
+
 }
 
 a {
-  color: #000000;
+    color: #000000;
 }
 
 .btn:focus,
@@ -18,61 +23,61 @@ a {
 .btn-link.nav-link:focus,
 .form-control:focus,
 .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 code {
-  color: #E01A76;
+    color: #E01A76;
 }
 
 .btn-primary {
-  color: white;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: white;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .antes-red {
-  background-color: #760000;
+    background-color: #760000;
 }
 
 .antes-white {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 body {
-  background-color: #f6e6e9;
+    background-color: #f6e6e9;
 }
 
 .blue-title {
-  color: #0036a0;
+    color: #0036a0;
 }
 
 details[aria-disabled="true"] {
-  summary {
-    cursor: auto !important;
-  }
+    summary {
+        cursor: auto !important;
+    }
 }
 
 details[open] summary~* {
-  animation: sweep 0.25s ease-in-out;
+    animation: sweep 0.25s ease-in-out;
 }
 
 @keyframes sweep {
-  0% {
-    opacity: 0;
-    //margin-left: -10px
-  }
+    0% {
+        opacity: 0;
+        //margin-left: -10px
+    }
 
-  100% {
-    opacity: 1;
-    //margin-left: 0px
-  }
+    100% {
+        opacity: 1;
+        //margin-left: 0px
+    }
 }
 
 details>summary:first-of-type {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .no-border {
-  border-width: 0px !important;
+    border-width: 0px !important;
 }

@@ -18,13 +18,23 @@ const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile-icon.pn
                             <li className="d-flex justify-content-end"><strong>Functie</strong></li>
                             <li className="d-flex justify-content-end"><strong>Geboortedatum</strong></li>
                             <li className="d-flex justify-content-end"><strong>Email</strong></li>
+                            {/* Display phoneNumber if not null*/}
+                            {profile?.phoneNumber !== '' && (
+                                <li className="d-flex justify-content-end"><strong>Telefoonnummer</strong></li>
+                            )}
+                            <li className="d-flex justify-content-end"><strong>Department</strong></li>
                             <li className="d-flex justify-content-end"><strong>Lid sinds</strong></li>
                         </ul>
                         <ul className="personal-info-cells p-0">
-                            <li className="d-flex">{profile?.name}</li>
+                            <li className="d-flex">{profile?.fullName}</li>
                             <li className="d-flex">{profile?.role}</li>
                             <li className="d-flex">{profile?.dateOfBirth}</li>
                             <li className="d-flex">{profile?.email}</li>
+                            {/* Display phoneNumber if not null*/}
+                            {profile?.phoneNumber !== '' && (
+                                <li className="d-flex">{profile?.phoneNumber}</li>
+                            )}
+                            <li className="d-flex">{profile?.department}</li>
                             <li className="d-flex">{profile?.memberSince}</li>
                         </ul>
                     </div>
@@ -34,13 +44,7 @@ const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile-icon.pn
                     <strong>Bio</strong>
                 </div>
                 <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde
-                    quod eum cumque aspernatur? Fuga est earum eos laudantium minus
-                    eligendi tempore ullam, sequi sint ab unde? Labore, provident porro.
-                    Suscipit in soluta numquam dolores maiores id, culpa sequi
-                    exercitationem nihil consequatur inventore blanditiis aliquam iste
-                    labore expedita eveniet optio velit eligendi odit dolor vero error
-                    voluptas?
+                    {profile?.bio}
                 </p>
             </div>
         </div>

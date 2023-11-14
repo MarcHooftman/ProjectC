@@ -1,8 +1,13 @@
+// import { Media } from "reactstrap";
+
 export default interface IProfile {
-    name: string;
+    fullName: string;
     role: string;
     dateOfBirth: string;
     email: string;
     memberSince: string;
-    phone: string;
+    phoneNumber: string | null;
+    bio: string;
+    department: string;
+    // ProfilePicture: Media;
 }
