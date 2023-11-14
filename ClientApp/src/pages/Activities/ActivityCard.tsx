@@ -22,7 +22,7 @@ const ActivityCard = ({ activity, className = "", fontSize = 4 }: Props) => {
   return (
     <details
       id="details"
-      className={"card activity-card px-3".concat(" ", className)}
+      className={"card shadow activity-card px-3".concat(" ", className)}
     >
       <summary
         className="d-flex justify-content-between align-items-center p-2"
@@ -52,7 +52,7 @@ const ActivityCard = ({ activity, className = "", fontSize = 4 }: Props) => {
           </div>
         </div>
         <h2
-          className={"teaxt-nowrap activity-name".concat(
+          className={"text-nowrap activity-name".concat(
             " ",
             getFontsizeClassName(fontSize)
           )}

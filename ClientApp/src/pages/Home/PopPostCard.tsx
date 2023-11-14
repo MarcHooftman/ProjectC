@@ -1,18 +1,12 @@
-import { useState } from "react";
+import { Card } from 'react-bootstrap';
 
-const upArrow = require("../../assets/up-arrow.png");
-const downArrow = require('../../assets/down-arrow.png');
-
-
-const ForumPostCard = () => {
-    const [collapse, setCollapse] = useState<boolean>(true);
-
+const PopPostCard = () => {
     return (
-        <details className="card my-3 shadow-lg">
-            <summary className="card-header d-flex justify-content-between align-items-center" onClick={() => setCollapse(!collapse)}>
-                <div className="poster-pfp"></div>
-                <div className="d-flex justify-content-between align-items-center flex-grow-1 mx-4">
-                    <div className="">
+        <Card className="shadow-lg">
+            <Card.Header className="d-flex justify-content-between align-items-center">
+                <div className="poster-pfp shadow"></div>
+                <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
+                    <div>
                         <h2 className="fs-5 m-0">
                             <strong>gebruiker12345</strong>
                         </h2>
@@ -21,23 +15,25 @@ const ForumPostCard = () => {
                         </h3>
                     </div>
                     <span className="d-flex gap-2">
-                        <a href="/forum?filter=tag1" className="tag btn btn-primary btn-sm">Tag 1</a>
-                        <a href="/forum?filter=tag2" className="tag btn btn-primary btn-sm">Tag 2</a>
-                        <a href="/forum?filter=tag3" className="tag btn btn-primary btn-sm">Tag 3</a>
+                        <a href="/forum?filter=tag1" className="tag btn btn-primary btn-sm shadow">Tag 1</a>
+                        <a href="/forum?filter=tag2" className="tag btn btn-primary btn-sm shadow">Tag 2</a>
+                        <a href="/forum?filter=tag3" className="tag btn btn-primary btn-sm shadow">Tag 3</a>
                     </span>
                     <span className="opacity-50 text-dark">3 uur geleden</span>
-                </div>
-                <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
-            </summary>
-            <p className='card-body'>
+                </span>
+            </Card.Header>
+            <Card.Body>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptates repudiandae sapiente nemo tempora! Quibusdam quas molestiae non nesciunt ad quisquam excepturi reiciendis in? Enim possimus debitis dignissimos quidem asperiores.
                 Hic voluptatum autem, voluptates commodi dolorem et quisquam perspiciatis obcaecati tempore rerum. Perferendis dolor fugiat temporibus libero, recusandae, non a sit necessitatibus autem quam ipsum ipsa neque commodi itaque explicabo!
                 Rem autem delectus incidunt quos ex distinctio ducimus quisquam quis ad magnam dolorum odit eum ipsa ipsam nam non dolore doloribus nisi, dolorem placeat? Ut fugiat expedita excepturi possimus soluta.
                 Repudiandae facere reprehenderit consectetur esse molestias recusandae facilis explicabo, adipisci tempore! Velit vitae dignissimos mollitia, tempore sapiente repellat quo sed quam, officiis deserunt possimus eligendi modi. Eligendi quos quibusdam mollitia.
                 Hic possimus enim soluta voluptatem quo repellendus maxime doloremque aut eius ipsa tempora obcaecati, sit similique sint tempore quas qui odit. Optio sint ea illum repellendus tenetur sapiente quisquam vero.
-            </p>
-        </details>
+            </Card.Body>
+            <Card.Footer className="card-footer">
+                <span className="opacity-50 text-dark">No comments yet</span>
+            </Card.Footer>
+        </Card>
     )
 }
 
-export default ForumPostCard;
+export default PopPostCard

@@ -76,3 +76,41 @@ details>summary:first-of-type {
 .no-border {
   border-width: 0px !important;
 }
+
+.antes-red-image {
+  filter: invert(7%) sepia(98%) saturate(6211%) hue-rotate(1deg) brightness(90%) contrast(107%);
+}
+
+.antes-blue-image {
+  filter: invert(9%) sepia(76%) saturate(5782%) hue-rotate(219deg) brightness(102%) contrast(101%);
+}
+
+.card {
+  background-color: #f0d9dd !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #0036a0;
+}
+
+.card-title {
+  font-size: 24px;
+  color: #0036a0;
+}
+
+.list-group {
+  float: left;
+  padding-left: 30px !important;
+  width: 100%;
+  color: #0036a0;
+}
+
+.card-body {
+  overflow: hidden;
+}
+
+.no-after::after {
+  content: none !important;
+}
+
+.drop-shadow {
+  filter: drop-shadow(2px 4px 10px rgb(85, 85, 85));
+}

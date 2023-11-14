@@ -56,7 +56,7 @@ const Activities = () => {
 
   return (
     <Layout>
-      <h1 className="my-5">Activiteiten</h1>
+      <h1 className="my-5 blue-title">Activiteiten</h1>
       <NextActivityCard activity={nextActivity} />
       <h2 className="mt-5 mb-4">Overige activiteiten</h2>
       <div className="d-flex justify-content-between flex-wrap gap-4">

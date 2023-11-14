@@ -51,9 +51,9 @@ const About = () => {
       </div>
       <div className="d-flex gap-4">
         <GeneralInfoCard />
-        <div className="card p-4 my-5 unknown-card"></div>
+        <div className="card p-4 my-5 unknown-card shadow"></div>
       </div>
-      <img className="map-image mb-5" src={map} />
+      <img className="map-image mb-5 shadow" src={map} />
     </Layout>
   );
 };

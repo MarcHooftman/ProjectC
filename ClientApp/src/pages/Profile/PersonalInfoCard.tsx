@@ -5,7 +5,7 @@ interface Props {
     profile?: IProfile;
 }
 
-const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile-icon.png") }: Props) => {
+const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png") }: Props) => {
     return (
         <div className="card personalia">
             <div className="card-body">

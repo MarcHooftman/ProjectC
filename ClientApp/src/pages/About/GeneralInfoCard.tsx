@@ -1,10 +1,10 @@
-import React from 'react'
+import { Card, Table } from "react-bootstrap"
 
 const GeneralInfoCard = () => {
     return (
-        <div className="card p-4 my-5 general-info-card">
-            <h2 className="">Algemene informatie</h2>
-            <table className="table my-2">
+        <Card className="p-4 my-5 general-info-card shadow">
+            <Card.Title className="fs-2">Algemene informatie</Card.Title>
+            <Table className="my-2">
                 <tbody>
                     <tr>
                         <th className="no-border p-1" scope="row">
@@ -33,8 +33,8 @@ const GeneralInfoCard = () => {
                         </td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
+            </Table>
+        </Card>
     )
 }
 

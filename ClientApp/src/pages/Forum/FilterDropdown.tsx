@@ -5,7 +5,7 @@ const FilterDropdown = () => {
     return (
         <details className="filter d-flex">
             <summary className="d-flex justify-content-end">
-                <img className="filter-icon" src={filterIcon} />
+                <img className="filter-icon antes-blue-image" src={filterIcon} />
             </summary>
             <div className="filter-options btn-group-vertical">
                 <a href="/forum" className="card btn">No filter</a>
