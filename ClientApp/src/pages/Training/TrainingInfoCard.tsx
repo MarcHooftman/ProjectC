@@ -19,7 +19,7 @@ const TrainingInfoCard = ({ Training }: Props) => {
                     <iframe className="video" src={Training?.url} allowFullScreen />
                 </Modal.Body>
             </Modal>
-            <Card className="training-card" onClick={() => { setModelstate(true) }}>
+            <Card className="training-card hover-pointer shadow-lg" onClick={() => { setModelstate(true) }}>
                 <Card.Header>
                     <Card.Title><h4>{Training?.title}</h4></Card.Title>
                     <div className="d-flex Category gap-2 pb-2 ">

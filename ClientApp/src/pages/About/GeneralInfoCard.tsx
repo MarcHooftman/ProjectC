@@ -7,28 +7,28 @@ const GeneralInfoCard = () => {
             <Table className="my-2">
                 <tbody>
                     <tr>
-                        <th className="no-border p-1" scope="row">
+                        <th className="no-border p-1 blue-text" scope="row">
                             Telefoon
                         </th>
-                        <td className="no-border p-1">010 12 34 567</td>
+                        <td className="no-border p-1 blue-text">010 12 34 567</td>
                     </tr>
                     <tr>
-                        <th className="no-border p-1" scope="row">
+                        <th className="no-border p-1 blue-text" scope="row">
                             Noodnummer
                         </th>
-                        <td className="no-border p-1">06 12 34 56 78</td>
+                        <td className="no-border p-1 blue-text">06 12 34 56 78</td>
                     </tr>
                     <tr>
-                        <th className="no-border p-1" scope="row">
+                        <th className="no-border p-1 blue-text" scope="row">
                             Adres
                         </th>
-                        <td className="no-border p-1">Nepstraat 123a, Rotterdam</td>
+                        <td className="no-border p-1 blue-text">Nepstraat 123a, Rotterdam</td>
                     </tr>
                     <tr>
-                        <th className="no-border p-1" scope="row">
+                        <th className="no-border p-1 blue-text" scope="row">
                             Postadres
                         </th>
-                        <td className="no-border p-1">
+                        <td className="no-border p-1 blue-text">
                             Postbus 8549, 3009 AM Rotterdam
                         </td>
                     </tr>

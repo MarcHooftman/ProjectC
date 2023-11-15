@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace probeersel.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231115142053_all-controllers")]
-    partial class allcontrollers
+    [Migration("20231115204613_foreign-keys")]
+    partial class foreignkeys
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,7 +146,7 @@ namespace probeersel.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ProfilePictureID")
+                    b.Property<int>("ProfilePictureID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Role")
@@ -180,7 +180,7 @@ namespace probeersel.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("MediaID")
+                    b.Property<int>("MediaID")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ProfileID")
@@ -234,7 +234,8 @@ namespace probeersel.Migrations
                         .WithMany()
                         .HasForeignKey("ProfileID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FKprofile");
 
                     b.Navigation("Profile");
                 });
@@ -251,13 +252,17 @@ namespace probeersel.Migrations
 
                     b.HasOne("API.Models.Media", "ProfilePicture")
                         .WithMany()
-                        .HasForeignKey("ProfilePictureID");
+                        .HasForeignKey("ProfilePictureID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FKmedia");
 
                     b.HasOne("API.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FKuser");
 
                     b.Navigation("ProfilePicture");
 
@@ -268,7 +273,10 @@ namespace probeersel.Migrations
                 {
                     b.HasOne("API.Models.Media", "Media")
                         .WithMany()
-                        .HasForeignKey("MediaID");
+                        .HasForeignKey("MediaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FKmedia");
 
                     b.HasOne("API.Models.Profile", null)
                         .WithMany("TrainingsWatched")

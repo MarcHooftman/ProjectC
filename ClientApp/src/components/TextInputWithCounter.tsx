@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-interface TextInputWithCounterProps {
+interface Props {
     maxLength: number;
 }
 
-const TextInputWithCounter: React.FC<TextInputWithCounterProps> = ({ maxLength }) => {
+const TextInputWithCounter = ({ maxLength }: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -15,8 +15,8 @@ const TextInputWithCounter: React.FC<TextInputWithCounterProps> = ({ maxLength }
 
     return (
         <div>
-            <textarea 
-                className="form-control" 
+            <textarea
+                className="form-control"
                 style={{ height: '120px' }}
                 value={inputValue}
                 onChange={handleInputChange}

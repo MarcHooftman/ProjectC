@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.ForumPost.ToListAsync();
+            return await _context.ForumPost.Include(_ => _.Profile).ToListAsync();
         }
 
         // GET: api/ForumPost/5

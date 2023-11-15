@@ -63,7 +63,7 @@ body {
 }
 
 .blue-text {
-  color: #0036a0;
+  color: #0036a0 !important;
 }
 
 details[aria-disabled="true"] {
@@ -135,4 +135,8 @@ details>summary:first-of-type {
 
 .drop-shadow {
   filter: drop-shadow(2px 4px 10px rgb(85, 85, 85));
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
 }

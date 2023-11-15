@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace probeersel.Migrations
 {
     /// <inheritdoc />
-    public partial class allcontrollers : Migration
+    public partial class foreignkeys : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,7 +93,7 @@ namespace probeersel.Migrations
                     Role = table.Column<string>(type: "text", nullable: true),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Department = table.Column<string>(type: "text", nullable: true),
-                    ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
+                    ProfilePictureID = table.Column<int>(type: "integer", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     ForumPostID = table.Column<int>(type: "integer", nullable: true),
                     ForumPostID1 = table.Column<int>(type: "integer", nullable: true)
@@ -112,12 +112,13 @@ namespace probeersel.Migrations
                         principalTable: "ForumPost",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Profile_Media_ProfilePictureID",
+                        name: "FKmedia",
                         column: x => x.ProfilePictureID,
                         principalTable: "Media",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Profile_User_UserID",
+                        name: "FKuser",
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "ID",
@@ -132,7 +133,7 @@ namespace probeersel.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    MediaID = table.Column<int>(type: "integer", nullable: true),
+                    MediaID = table.Column<int>(type: "integer", nullable: false),
                     Tags = table.Column<string[]>(type: "text[]", nullable: false),
                     ProfileID = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -140,15 +141,16 @@ namespace probeersel.Migrations
                 {
                     table.PrimaryKey("PK_Training", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Training_Media_MediaID",
-                        column: x => x.MediaID,
-                        principalTable: "Media",
-                        principalColumn: "ID");
-                    table.ForeignKey(
                         name: "FK_Training_Profile_ProfileID",
                         column: x => x.ProfileID,
                         principalTable: "Profile",
                         principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FKmedia",
+                        column: x => x.MediaID,
+                        principalTable: "Media",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -192,7 +194,7 @@ namespace probeersel.Migrations
                 column: "ProfileID");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ForumPost_Profile_ProfileID",
+                name: "FKprofile",
                 table: "ForumPost",
                 column: "ProfileID",
                 principalTable: "Profile",
@@ -204,7 +206,7 @@ namespace probeersel.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ForumPost_Profile_ProfileID",
+                name: "FKprofile",
                 table: "ForumPost");
 
             migrationBuilder.DropTable(

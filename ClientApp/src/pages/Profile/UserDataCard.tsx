@@ -15,20 +15,20 @@ const UserDataCard = ({ userData }: Props) => {
                 <Table className="profile-table">
                     <tbody>
                         <tr>
-                            <th>Posts geplaatst</th>
-                            <td>{userData?.postsPlaced}</td>
+                            <th className="blue-text">Posts geplaatst</th>
+                            <td className="blue-text">{userData?.postsPlaced}</td>
                         </tr>
                         <tr>
-                            <th>Comments geplaatst</th>
-                            <td>{userData?.commentsPlaced}</td>
+                            <th className="blue-text">Comments geplaatst</th>
+                            <td className="blue-text">{userData?.commentsPlaced}</td>
                         </tr>
                         <tr>
-                            <th>Behulpzame comments</th>
-                            <td>{userData?.helpfulComments}</td>
+                            <th className="blue-text">Behulpzame comments</th>
+                            <td className="blue-text">{userData?.helpfulComments}</td>
                         </tr>
                         <tr>
-                            <th>Likes ontvangen</th>
-                            <td>{userData?.totalLikes}</td>
+                            <th className="blue-text">Likes ontvangen</th>
+                            <td className="blue-text">{userData?.totalLikes}</td>
                         </tr>
                     </tbody>
                 </Table>

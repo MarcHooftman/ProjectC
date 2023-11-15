@@ -6,6 +6,7 @@ public class ForumPost
     public string Title { get; set; } = null!;
     public string Content { get; set; } = null!;
     public string[] Tags { get; set; } = null!;
+    public int ProfileID { get; set; }
     public Profile Profile { get; set; } = null!;
     public DateTime Time { get; set; }
     public ForumPost[] Comments { get; set; } = null!;

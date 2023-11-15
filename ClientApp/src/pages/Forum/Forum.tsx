@@ -5,6 +5,8 @@ import { useSearchParams } from "react-router-dom";
 
 import "./Forum.scss";
 import IForumPost from "./IForumPost";
+import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
 
 const tempForumPost: IForumPost = {
   id: 123,
@@ -29,19 +31,33 @@ const tempForumPost: IForumPost = {
 }
 
 const Forum = () => {
+  const [forumPosts, setForumPosts] = useState<IForumPost[]>([])
   const [searchParams,] = useSearchParams()
   const filter = searchParams.get('filter')
+
+  let { loading, data, error } = useFetch<IForumPost>("https://localhost:7185/api/forumpost")
+  console.log(filter)
+
+  useEffect(() => {
+    if (data) {
+      if (filter) {
+        data = data.filter(post => post.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())))
+      }
+
+      const sortedData = data.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+
+      setForumPosts(sortedData);
+    }
+  }, [filter, data]);
+
+
   return (
     <Layout>
       <span className="forum-header d-flex justify-content-between align-items-center">
-        <h1 className="my-5">Antes Forum</h1>
+        <h1 className="my-5 blue-text">Antes Forum</h1>
         <FilterDropdown />
       </span>
-      <ForumPostCard post={tempForumPost} />
-      <ForumPostCard post={tempForumPost} />
-      <ForumPostCard post={tempForumPost} />
-      <ForumPostCard post={tempForumPost} />
-      <ForumPostCard post={tempForumPost} />
+      {forumPosts.length > 0 ? forumPosts.map(forumPost => <ForumPostCard key={forumPost.id} post={forumPost} />) : <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>}
     </Layout>
   );
 };

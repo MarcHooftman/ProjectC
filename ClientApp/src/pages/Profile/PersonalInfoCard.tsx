@@ -16,27 +16,27 @@ const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png") }
                     <Table className="d-flex gap-4 mx-5 justify-content-end profile-table">
                         <tbody>
                             <tr>
-                                <th className="text-end">Naam</th><td>{profile?.fullName}</td>
+                                <th className="text-end blue-text">Naam</th><td className="blue-text">{profile?.fullName}</td>
                             </tr>
                             <tr>
-                                <th className="text-end">Functie</th><td>{profile?.role}</td>
+                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
                             </tr>
                             <tr>
-                                <th className="text-end">Geboortedatum</th><td>{profile?.dateOfBirth}</td>
+                                <th className="text-end blue-text">Geboortedatum</th><td className="blue-text">{profile?.dateOfBirth}</td>
                             </tr>
                             <tr>
-                                <th className="text-end">Email</th><td>{profile?.email}</td>
+                                <th className="text-end blue-text">Email</th><td className="blue-text">{profile?.email}</td>
                             </tr>
                             {profile?.phoneNumber !== '' && (
                                 <tr>
-                                    <th className="text-end">Telefoonnummer</th><td>{profile?.phoneNumber}</td>
+                                    <th className="text-end blue-text">Telefoonnummer</th><td className="blue-text">{profile?.phoneNumber}</td>
                                 </tr>
                             )}
                             <tr>
-                                <th className="text-end">Afdeling</th><td>{profile?.department}</td>
+                                <th className="text-end blue-text">Afdeling</th><td className="blue-text">{profile?.department}</td>
                             </tr>
                             <tr>
-                                <th className="text-end">Lid sinds</th><td>{profile?.memberSince}</td>
+                                <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.memberSince}</td>
                             </tr>
                         </tbody>
                     </Table>

@@ -14,7 +14,7 @@ const Login = () => {
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <h1 className="my-5 login-title">Inloggen</h1>
-                        <div className="card">
+                        <div className="card shadow-lg">
                             <div className="card-body">
                                 <form
                                     onSubmit={e => {
