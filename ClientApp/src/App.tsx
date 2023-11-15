@@ -8,6 +8,7 @@ import Profile from "./pages/Profile/Profile";
 import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
+import Post from "./pages/Forum/Post/Post";
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/activities" element={<Activities />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/training" element={<Training />} />
+                    <Route path="/Post" element={<Post/>} />
                 </Routes>
             </Router>
         </>
