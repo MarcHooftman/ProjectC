@@ -1,18 +1,18 @@
 import Layout from "../../components/Layout";
 
 import "./About.scss";
+import AntesMap from "./AntesMap";
 import GeneralInfoCard from "./GeneralInfoCard";
 
 const empty = require("../../assets/empty.jpg");
-const map = require("../../assets/map-image.png");
 
 const About = () => {
   return (
     <Layout>
-      <h1 className="about-title mt-5 mb-4">Over Antes</h1>
+      <h1 className="blue-text mt-5 mb-4">Over Antes</h1>
       <div>
         <img className="antes-picture float-end m-3" src={empty} />
-        <p className="">
+        <p className="blue-text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus
           exercitationem tempora eos, facere, facilis repellendus cum ipsa
           officiis numquam saepe accusamus totam quo excepturi nisi vel nesciunt
@@ -53,7 +53,7 @@ const About = () => {
         <GeneralInfoCard />
         <div className="card p-4 my-5 unknown-card shadow"></div>
       </div>
-      <img className="map-image mb-5 shadow" src={map} />
+      <AntesMap />
     </Layout>
   );
 };

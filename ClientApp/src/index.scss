@@ -50,11 +50,19 @@ code {
   background-color: #ffffff;
 }
 
+.table,
+tbody,
+th,
+td,
+tr {
+  background-color: inherit !important;
+}
+
 body {
   background-color: #f6e6e9;
 }
 
-.blue-title {
+.blue-text {
   color: #0036a0;
 }
 

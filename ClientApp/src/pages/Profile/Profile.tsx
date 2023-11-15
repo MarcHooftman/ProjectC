@@ -45,7 +45,7 @@ const Profile = () => {
 
   return (
     <Layout>
-      <h1 className="blue-title my-5">Jouw profiel</h1>
+      <h1 className="blue-text my-5">Jouw profiel</h1>
       <div className="d-flex gap-5">
         <PersonalInfoCard pfp={profilePicUrl} profile={profile} />
         <UserDataCard userData={userData} />

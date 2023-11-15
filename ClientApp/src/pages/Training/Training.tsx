@@ -6,7 +6,7 @@ import "./Training.scss"
 
 const Training = () => {
     const [Trainings, setTraining] = useState<ITraining[]>([]);
-    let Category : string[] = []
+    let Category: string[] = []
 
 
     useEffect(() => {
@@ -48,20 +48,20 @@ const Training = () => {
         }])
     }, [])
     // sets category to every first tag of trainings
-    Trainings.forEach((i) => { if (!Category.includes(i.tags[0]))Category.push(i.tags[0])})
+    Trainings.forEach((i) => { if (!Category.includes(i.tags[0])) Category.push(i.tags[0]) })
 
     return (
-    <Layout>
-        {Category.map(i => 
-        {return <div key={i} className="ps-3">
-                    <h3 className="pt-3" >{i}</h3>
+        <Layout>
+            {Category.map(i => {
+                return <div key={i} className="ps-3">
+                    <h3 className="pt-3 blue-text" >{i}</h3>
                     <div className="d-flex pt-3 gap-4 flex-row flex-wrap justify-content-start">
-                    {Trainings.map((item) => {if (item.tags.includes(i)) return <TrainingInfoCard key={item.ID} Training={item} />})}
+                        {Trainings.map((item) => { if (item.tags.includes(i)) return <TrainingInfoCard key={item.ID} Training={item} /> })}
                     </div>
                 </div>
-        })}
-    </Layout>
-  );
+            })}
+        </Layout>
+    );
 };
 
 export default Training;

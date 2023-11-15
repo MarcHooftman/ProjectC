@@ -5,7 +5,7 @@ import About from "./pages/About/About";
 import Forum from "./pages/Forum/Forum";
 import Activities from "./pages/Activities/Activities";
 import Profile from "./pages/Profile/Profile";
-import Training from "./pages/Training/Training"; 
+import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
 

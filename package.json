@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@types/react-dom": "^18.2.7"
+  },
+  "dependencies": {
+    "react-google-maps": "^9.4.5"
   }
 }
