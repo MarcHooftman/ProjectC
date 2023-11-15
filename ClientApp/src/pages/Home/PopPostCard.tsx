@@ -1,12 +1,16 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+const profilePicture = require("../../assets/profile.png")
+
 const PopPostCard = () => {
     return (
         <Link to="/forum" className="text-decoration-none">
             <Card className="shadow-lg">
                 <Card.Header className="d-flex justify-content-between align-items-center">
-                    <Link to="/profile" className="poster-pfp shadow"></Link>
+                    <Link to="/profile" className="poster-pfp">
+                        <Card.Img src={profilePicture}></Card.Img>
+                    </Link>
                     <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
                         <Link to="/profile" className="text-decoration-none blue-text">
                             <h2 className="fs-5 m-0">

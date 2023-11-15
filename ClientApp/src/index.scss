@@ -92,8 +92,11 @@ details>summary:first-of-type {
   list-style-type: none;
 }
 
+.no-border:focus,
 .no-border {
   border-width: 0px !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .antes-red-image {

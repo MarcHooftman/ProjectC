@@ -4,26 +4,40 @@ import "./Activities.scss";
 import IActivity from "./IActivity";
 import ActivityCard from "./ActivityCard";
 import { Col, Row } from "reactstrap";
+import useFetch from "../../hooks/useFetch";
 
-const tempActivity = {
-  id: 1, time: "25-12-2023", location: "kalverstraat 33b, amsterdam", name: "kerstviering", description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex neque
-doloremque dicta dolores nulla suscipit quibusdam magni itaque
-blanditiis labore, iusto recusandae rerum delectus provident alias
-assumenda commodi ab quisquam!`}
 
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>();
 
+  const { loading, data, error } = useFetch("https://localhost:7185/api/activity/");
+
   useEffect(() => {
-    // api call for activities
-    setActivities(Array(8).fill(tempActivity)) // temp array
-  }, [])
+    if (data) {
+      setActivities(data);
+    }
+  }, [data]);
+
+
+  // useEffect(() => {
+  //   // api call for activities
+
+  //   fetch('https://localhost:7185/api/activity/', {
+  //     method: 'GET',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => setActivities(data))
+  //     .catch(error => { throw new Error(error) });
+  // }, [])
 
   return (
     <Layout>
       <h1 className="my-5 blue-text">Activiteiten</h1>
       <Row xl="2" xs="1">
-        {activities?.map((item) => <Col><ActivityCard activity={item} className="my-3 shadow-lg" /></Col>)}
+        {activities?.map((item) => <Col key={item.id}><ActivityCard activity={item} className="my-3 shadow-lg" /></Col>)}
       </Row>
     </Layout>
   );

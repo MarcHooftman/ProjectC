@@ -1,42 +1,45 @@
 import { useState } from "react";
+import { Badge, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import IForumPost from "./IForumPost";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require('../../assets/down-arrow.png');
+const profilePicture = require("../../assets/profile.png");
 
+interface Props {
+    post?: IForumPost;
+}
 
-const ForumPostCard = () => {
+const ForumPostCard = ({ post }: Props) => {
     const [collapse, setCollapse] = useState<boolean>(true);
 
     return (
-        <details className="card my-3 shadow-lg">
-            <summary className="card-header d-flex justify-content-between align-items-center" onClick={() => setCollapse(!collapse)}>
-                <div className="poster-pfp"></div>
+        <Card as="details" className="my-3 shadow-lg">
+            <Card.Header as="summary" className="d-flex justify-content-between align-items-center" onClick={() => setCollapse(!collapse)}>
+                <Link to="/profile">
+                    <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
+                </Link>
                 <div className="d-flex justify-content-between align-items-center flex-grow-1 mx-4">
                     <div className="">
                         <h2 className="fs-5 m-0">
-                            <strong>gebruiker12345</strong>
+                            <strong>{post?.profile.fullName}</strong>
                         </h2>
                         <h3 className="fs-6 m-0 opacity-50 text-dark">
-                            lid sinds 2014
+                            lid sinds {post?.profile.memberSince}
                         </h3>
                     </div>
                     <span className="d-flex gap-2">
-                        <a href="/forum?filter=tag1" className="tag btn btn-primary btn-sm">Tag 1</a>
-                        <a href="/forum?filter=tag2" className="tag btn btn-primary btn-sm">Tag 2</a>
-                        <a href="/forum?filter=tag3" className="tag btn btn-primary btn-sm">Tag 3</a>
+                        {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag}</Badge></Link>)}
                     </span>
-                    <span className="opacity-50 text-dark">3 uur geleden</span>
+                    <span className="opacity-50 text-dark">{post?.time}</span>
                 </div>
                 <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
-            </summary>
+            </Card.Header>
             <p className='card-body'>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptates repudiandae sapiente nemo tempora! Quibusdam quas molestiae non nesciunt ad quisquam excepturi reiciendis in? Enim possimus debitis dignissimos quidem asperiores.
-                Hic voluptatum autem, voluptates commodi dolorem et quisquam perspiciatis obcaecati tempore rerum. Perferendis dolor fugiat temporibus libero, recusandae, non a sit necessitatibus autem quam ipsum ipsa neque commodi itaque explicabo!
-                Rem autem delectus incidunt quos ex distinctio ducimus quisquam quis ad magnam dolorum odit eum ipsa ipsam nam non dolore doloribus nisi, dolorem placeat? Ut fugiat expedita excepturi possimus soluta.
-                Repudiandae facere reprehenderit consectetur esse molestias recusandae facilis explicabo, adipisci tempore! Velit vitae dignissimos mollitia, tempore sapiente repellat quo sed quam, officiis deserunt possimus eligendi modi. Eligendi quos quibusdam mollitia.
-                Hic possimus enim soluta voluptatem quo repellendus maxime doloremque aut eius ipsa tempora obcaecati, sit similique sint tempore quas qui odit. Optio sint ea illum repellendus tenetur sapiente quisquam vero.
+                {post?.content}
             </p>
-        </details>
+        </Card>
     )
 }
 

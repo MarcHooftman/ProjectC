@@ -11,55 +11,55 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ForumPostController : ControllerBase
+    public class ProfileController : ControllerBase
     {
         private readonly AntesContext _context;
 
-        public ForumPostController(AntesContext context)
+        public ProfileController(AntesContext context)
         {
             _context = context;
         }
 
-        // GET: api/ForumPost
+        // GET: api/Profile
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPost()
+        public async Task<ActionResult<IEnumerable<Profile>>> GetProfile()
         {
-            if (_context.ForumPost == null)
+            if (_context.Profile == null)
             {
                 return NotFound();
             }
-            return await _context.ForumPost.ToListAsync();
+            return await _context.Profile.ToListAsync();
         }
 
-        // GET: api/ForumPost/5
+        // GET: api/Profile/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ForumPost>> GetForumPost(int id)
+        public async Task<ActionResult<Profile>> GetProfile(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Profile == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
+            var profile = await _context.Profile.FindAsync(id);
 
-            if (forumPost == null)
+            if (profile == null)
             {
                 return NotFound();
             }
 
-            return forumPost;
+            return profile;
         }
 
-        // PUT: api/ForumPost/5
+        // PUT: api/Profile/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutForumPost(int id, ForumPost forumPost)
+        public async Task<IActionResult> PutProfile(int id, Profile profile)
         {
-            if (id != forumPost.ID)
+            if (id != profile.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(forumPost).State = EntityState.Modified;
+            _context.Entry(profile).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ForumPostExists(id))
+                if (!ProfileExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/ForumPost
+        // POST: api/Profile
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ForumPost>> PostForumPost(ForumPost forumPost)
+        public async Task<ActionResult<Profile>> PostProfile(Profile profile)
         {
-            if (_context.ForumPost == null)
+            if (_context.Profile == null)
             {
-                return Problem("Entity set 'AntesContext.ForumPost'  is null.");
+                return Problem("Entity set 'AntesContext.Profile'  is null.");
             }
-            _context.ForumPost.Add(forumPost);
+            _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetForumPost", new { id = forumPost.ID }, forumPost);
+            return CreatedAtAction("GetProfile", new { id = profile.ID }, profile);
         }
 
-        // DELETE: api/ForumPost/5
+        // DELETE: api/Profile/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteForumPost(int id)
+        public async Task<IActionResult> DeleteProfile(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Profile == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
-            if (forumPost == null)
+            var profile = await _context.Profile.FindAsync(id);
+            if (profile == null)
             {
                 return NotFound();
             }
 
-            _context.ForumPost.Remove(forumPost);
+            _context.Profile.Remove(profile);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ForumPostExists(int id)
+        private bool ProfileExists(int id)
         {
-            return (_context.ForumPost?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Profile?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

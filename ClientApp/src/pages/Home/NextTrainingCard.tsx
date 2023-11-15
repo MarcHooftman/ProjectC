@@ -9,13 +9,13 @@ const NextTrainingCard = () => {
                     <Card.Title className="mb-0">Naam van training</Card.Title>
                     <div className="d-flex gap-2">
                         <Link to="/training?filter=tag1">
-                            <Badge className="badge-color" text="light" bg="dark" pill={true}>Tag 1</Badge>
+                            <Badge className="badge-color" text="light" pill={true}>Tag 1</Badge>
                         </Link>
                         <Link to="/training?filter=tag2">
-                            <Badge className="badge-color" text="light" bg="dark" pill={true}>Tag 2</Badge>
+                            <Badge className="badge-color" text="light" pill={true}>Tag 2</Badge>
                         </Link>
                         <Link to="/training?filter=tag3">
-                            <Badge className="badge-color" text="light" bg="dark" pill={true}>Tag 3</Badge>
+                            <Badge className="badge-color" text="light" pill={true}>Tag 3</Badge>
                         </Link>
                     </div>
                 </Card.Header>

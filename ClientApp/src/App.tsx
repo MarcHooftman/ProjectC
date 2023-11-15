@@ -8,6 +8,8 @@ import Profile from "./pages/Profile/Profile";
 import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
+import ActivityDetail from "./pages/Activities/ActivityDetail/ActivityDetail";
+import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 
 const App = () => {
     return (
@@ -20,6 +22,8 @@ const App = () => {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/edit_profile" element={<ProfileEdit />} />
                     <Route path="/activities" element={<Activities />} />
+                    <Route path="/activities/:id" element={<ActivityDetail />} />
+                    <Route path="/activities/add" element={<AddActivity />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/training" element={<Training />} />
                 </Routes>

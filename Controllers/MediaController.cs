@@ -11,55 +11,55 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ForumPostController : ControllerBase
+    public class MediaController : ControllerBase
     {
         private readonly AntesContext _context;
 
-        public ForumPostController(AntesContext context)
+        public MediaController(AntesContext context)
         {
             _context = context;
         }
 
-        // GET: api/ForumPost
+        // GET: api/Media
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPost()
+        public async Task<ActionResult<IEnumerable<Media>>> GetMedia()
         {
-            if (_context.ForumPost == null)
+            if (_context.Media == null)
             {
                 return NotFound();
             }
-            return await _context.ForumPost.ToListAsync();
+            return await _context.Media.ToListAsync();
         }
 
-        // GET: api/ForumPost/5
+        // GET: api/Media/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ForumPost>> GetForumPost(int id)
+        public async Task<ActionResult<Media>> GetMedia(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Media == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
+            var media = await _context.Media.FindAsync(id);
 
-            if (forumPost == null)
+            if (media == null)
             {
                 return NotFound();
             }
 
-            return forumPost;
+            return media;
         }
 
-        // PUT: api/ForumPost/5
+        // PUT: api/Media/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutForumPost(int id, ForumPost forumPost)
+        public async Task<IActionResult> PutMedia(int id, Media media)
         {
-            if (id != forumPost.ID)
+            if (id != media.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(forumPost).State = EntityState.Modified;
+            _context.Entry(media).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ForumPostExists(id))
+                if (!MediaExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/ForumPost
+        // POST: api/Media
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ForumPost>> PostForumPost(ForumPost forumPost)
+        public async Task<ActionResult<Media>> PostMedia(Media media)
         {
-            if (_context.ForumPost == null)
+            if (_context.Media == null)
             {
-                return Problem("Entity set 'AntesContext.ForumPost'  is null.");
+                return Problem("Entity set 'AntesContext.Media'  is null.");
             }
-            _context.ForumPost.Add(forumPost);
+            _context.Media.Add(media);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetForumPost", new { id = forumPost.ID }, forumPost);
+            return CreatedAtAction("GetMedia", new { id = media.ID }, media);
         }
 
-        // DELETE: api/ForumPost/5
+        // DELETE: api/Media/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteForumPost(int id)
+        public async Task<IActionResult> DeleteMedia(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Media == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
-            if (forumPost == null)
+            var media = await _context.Media.FindAsync(id);
+            if (media == null)
             {
                 return NotFound();
             }
 
-            _context.ForumPost.Remove(forumPost);
+            _context.Media.Remove(media);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ForumPostExists(int id)
+        private bool MediaExists(int id)
         {
-            return (_context.ForumPost?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Media?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

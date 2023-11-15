@@ -7,6 +7,7 @@ import IProfile from "../IProfile";
 // Change to the data of logged in person
 const EditProfile = () => {
     const initialProfile: IProfile = {
+        id: 123,
         fullName: "Voornaam Achternaam",
         role: "Functie",
         dateOfBirth: "2001-01-01",
@@ -68,7 +69,7 @@ const EditProfile = () => {
 
     return (
         <Layout>
-            <h1 className="blue-title my-5">Update Profiel</h1>
+            <h1 className="blue-text my-5">Update Profiel</h1>
             <div className="container mt-5">
                 <div className="card">
                     <div className="card-body">

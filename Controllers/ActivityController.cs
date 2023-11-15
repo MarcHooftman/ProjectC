@@ -11,55 +11,55 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ForumPostController : ControllerBase
+    public class ActivityController : ControllerBase
     {
         private readonly AntesContext _context;
 
-        public ForumPostController(AntesContext context)
+        public ActivityController(AntesContext context)
         {
             _context = context;
         }
 
-        // GET: api/ForumPost
+        // GET: api/Activity
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPost()
+        public async Task<ActionResult<IEnumerable<Activity>>> GetActivity()
         {
-            if (_context.ForumPost == null)
+            if (_context.Activity == null)
             {
                 return NotFound();
             }
-            return await _context.ForumPost.ToListAsync();
+            return await _context.Activity.ToListAsync();
         }
 
-        // GET: api/ForumPost/5
+        // GET: api/Activity/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ForumPost>> GetForumPost(int id)
+        public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Activity == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
+            var activity = await _context.Activity.FindAsync(id);
 
-            if (forumPost == null)
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            return forumPost;
+            return activity;
         }
 
-        // PUT: api/ForumPost/5
+        // PUT: api/Activity/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutForumPost(int id, ForumPost forumPost)
+        public async Task<IActionResult> PutActivity(int id, Activity activity)
         {
-            if (id != forumPost.ID)
+            if (id != activity.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(forumPost).State = EntityState.Modified;
+            _context.Entry(activity).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ForumPostExists(id))
+                if (!ActivityExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/ForumPost
+        // POST: api/Activity
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ForumPost>> PostForumPost(ForumPost forumPost)
+        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
-            if (_context.ForumPost == null)
+            if (_context.Activity == null)
             {
-                return Problem("Entity set 'AntesContext.ForumPost'  is null.");
+                return Problem("Entity set 'AntesContext.Activity'  is null.");
             }
-            _context.ForumPost.Add(forumPost);
+            _context.Activity.Add(activity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetForumPost", new { id = forumPost.ID }, forumPost);
+            return CreatedAtAction("GetActivity", new { id = activity.ID }, activity);
         }
 
-        // DELETE: api/ForumPost/5
+        // DELETE: api/Activity/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteForumPost(int id)
+        public async Task<IActionResult> DeleteActivity(int id)
         {
-            if (_context.ForumPost == null)
+            if (_context.Activity == null)
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
-            if (forumPost == null)
+            var activity = await _context.Activity.FindAsync(id);
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            _context.ForumPost.Remove(forumPost);
+            _context.Activity.Remove(activity);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ForumPostExists(int id)
+        private bool ActivityExists(int id)
         {
-            return (_context.ForumPost?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Activity?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

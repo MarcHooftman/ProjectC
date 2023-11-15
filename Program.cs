@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-//builder.Services.AddDbContext<TodoContext>();
+builder.Services.AddDbContext<AntesContext>();
 
 var app = builder.Build();
 
@@ -16,7 +16,18 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseCors(builder => builder
+    .WithOrigins("https://localhost:44463")
+    .AllowAnyHeader()
+    .AllowAnyMethod());
+
 app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 
 app.MapControllerRoute(
