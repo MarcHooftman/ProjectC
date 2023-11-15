@@ -1,5 +1,6 @@
 export default interface IActivity {
-    datetime: string;
+    id: number;
+    time: string;
     location: string;
     name: string;
     description: string;

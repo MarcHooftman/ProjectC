@@ -8,7 +8,7 @@ const ForumPostCard = () => {
     const [collapse, setCollapse] = useState<boolean>(true);
 
     return (
-        <details className="card my-3">
+        <details className="card my-3 shadow-lg">
             <summary className="card-header d-flex justify-content-between align-items-center" onClick={() => setCollapse(!collapse)}>
                 <div className="poster-pfp"></div>
                 <div className="d-flex justify-content-between align-items-center flex-grow-1 mx-4">
@@ -35,9 +35,6 @@ const ForumPostCard = () => {
                 Rem autem delectus incidunt quos ex distinctio ducimus quisquam quis ad magnam dolorum odit eum ipsa ipsam nam non dolore doloribus nisi, dolorem placeat? Ut fugiat expedita excepturi possimus soluta.
                 Repudiandae facere reprehenderit consectetur esse molestias recusandae facilis explicabo, adipisci tempore! Velit vitae dignissimos mollitia, tempore sapiente repellat quo sed quam, officiis deserunt possimus eligendi modi. Eligendi quos quibusdam mollitia.
                 Hic possimus enim soluta voluptatem quo repellendus maxime doloremque aut eius ipsa tempora obcaecati, sit similique sint tempore quas qui odit. Optio sint ea illum repellendus tenetur sapiente quisquam vero.
-                Neque tempora, voluptates doloremque quia nesciunt inventore laudantium ipsa tempore eligendi itaque nisi? Perferendis ipsum aperiam earum eum aliquid quasi praesentium cupiditate, deleniti sapiente! Odio fugit nisi eveniet minus necessitatibus?
-                Reprehenderit sit doloremque aspernatur voluptate ipsam dolores, officiis sed fuga inventore! Nulla magnam molestiae consectetur iure, eius esse autem sed praesentium atque, explicabo rerum! Minus hic eligendi odit commodi ab?
-                Vero, beatae corporis optio quod sapiente dolorum perferendis ipsa quos quae dolores, consequatur sunt ratione quis vitae soluta, at quia nihil odio voluptas eveniet libero. Quibusdam dicta iusto aut facere!
             </p>
         </details>
     )

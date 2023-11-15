@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Layout from "../../../components/Layout";
 import "./edit_profile.scss";
 
@@ -67,7 +67,7 @@ const EditProfile = () => {
     // };
 
     return (
-        <Layout dark={false}>
+        <Layout>
             <h1 className="blue-title my-5">Update Profiel</h1>
             <div className="container mt-5">
                 <div className="card">
