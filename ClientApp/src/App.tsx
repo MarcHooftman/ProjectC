@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import NotFound from "./pages/NotFound"
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Forum from "./pages/Forum/Forum";
@@ -8,6 +9,8 @@ import Profile from "./pages/Profile/Profile";
 import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
+import Post from "./pages/Forum/Post/Post";
+
 import ActivityDetail from "./pages/Activities/ActivityDetail/ActivityDetail";
 import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 
@@ -16,6 +19,7 @@ const App = () => {
         <>
             <Router>
                 <Routes>
+                    <Route path='*' element={<NotFound />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/forum" element={<Forum />} />
@@ -26,6 +30,7 @@ const App = () => {
                     <Route path="/activities/add" element={<AddActivity />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/training" element={<Training />} />
+                    <Route path="/Post" element={<Post />} />
                 </Routes>
             </Router>
         </>
