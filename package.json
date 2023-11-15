@@ -3,6 +3,6 @@
     "@types/react-dom": "^18.2.7"
   },
   "dependencies": {
-    "react-google-maps": "^9.4.5"
+    "react-bootstrap": "^2.9.1"
   }
 }
