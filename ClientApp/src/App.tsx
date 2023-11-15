@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import NotFound from "./pages/NotFound"
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Forum from "./pages/Forum/Forum";
@@ -15,6 +16,7 @@ const App = () => {
         <>
             <Router>
                 <Routes>
+                    <Route path='*' element={<NotFound />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/forum" element={<Forum />} />
