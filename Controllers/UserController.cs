@@ -49,6 +49,24 @@ namespace API.Controllers
             return user;
         }
 
+        // GET: api/User/by-email/mail@mail.com
+        [HttpGet("by-email/{email}")]
+        public async Task<ActionResult<User>> GetUser(string email)
+        {
+            if (_context.User == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
