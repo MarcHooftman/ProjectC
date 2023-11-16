@@ -69,7 +69,7 @@ const EditProfile = () => {
 
     return (
         <Layout>
-            <h1 className="blue-text my-5">Update Profiel</h1>
+            <h1 className="blue-text my-5">Profiel bewerken</h1>
             <div className="container mt-5">
                 <div className="card">
                     <div className="card-body">
@@ -78,7 +78,7 @@ const EditProfile = () => {
                                 <label htmlFor="profilePicture">Profielfoto wijzigen:</label>
                                 <input
                                     type="file"
-                                    className="form-control-file"
+                                    className="form-control-file d-block"
                                     id="profilePicture"
                                     name="profilePicture"
                                     accept="image/*" // Allow only image files
