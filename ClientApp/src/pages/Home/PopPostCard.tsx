@@ -1,12 +1,16 @@
-import { Card } from 'react-bootstrap';
+import { Badge, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+const profilePicture = require("../../assets/profile.png")
 
 const PopPostCard = () => {
     return (
         <Link to="/forum" className="text-decoration-none">
             <Card className="shadow-lg">
                 <Card.Header className="d-flex justify-content-between align-items-center">
-                    <Link to="/profile" className="poster-pfp shadow"></Link>
+                    <Link to="/profile" className="poster-pfp">
+                        <Card.Img src={profilePicture}></Card.Img>
+                    </Link>
                     <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
                         <Link to="/profile" className="text-decoration-none blue-text">
                             <h2 className="fs-5 m-0">
@@ -17,9 +21,9 @@ const PopPostCard = () => {
                             </h3>
                         </Link>
                         <span className="d-flex gap-2">
-                            <a href="/forum?filter=tag1" className="tag btn btn-primary btn-sm shadow">Tag 1</a>
-                            <a href="/forum?filter=tag2" className="tag btn btn-primary btn-sm shadow">Tag 2</a>
-                            <a href="/forum?filter=tag3" className="tag btn btn-primary btn-sm shadow">Tag 3</a>
+                            <Link to="/forum?filter=tag1"><Badge pill={true}>Tag 1</Badge></Link>
+                            <Link to="/forum?filter=tag2"><Badge pill={true}>Tag 2</Badge></Link>
+                            <Link to="/forum?filter=tag3"><Badge pill={true}>Tag 3</Badge></Link>
                         </span>
                         <span className="opacity-50 text-dark">3 uur geleden</span>
                     </span>

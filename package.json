@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/react-dom": "^18.2.7"
-  },
-  "dependencies": {
-    "react-bootstrap": "^2.9.1"
-  }
-}

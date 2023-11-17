@@ -4,27 +4,43 @@ import "./Activities.scss";
 import IActivity from "./IActivity";
 import ActivityCard from "./ActivityCard";
 import { Col, Row } from "reactstrap";
-
-const tempActivity = {
-  id: 1, time: "25-12-2023", location: "kalverstraat 33b, amsterdam", name: "kerstviering", description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex neque
-doloremque dicta dolores nulla suscipit quibusdam magni itaque
-blanditiis labore, iusto recusandae rerum delectus provident alias
-assumenda commodi ab quisquam!`}
+import useFetch from "../../hooks/useFetch";
 
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>();
 
+  const { loading, data, error } = useFetch<IActivity>(
+    "https://localhost:7185/api/activity/"
+  );
+
   useEffect(() => {
-    // api call for activities
-    setActivities(Array(8).fill(tempActivity)) // temp array
-  }, [])
+    if (data) {
+      const now = new Date();
+      //const filteredActivities = data.filter(activity => new Date(activity.time) > now);
+      const filteredActivities = data;
+      const sortedActivities = filteredActivities.sort(
+        (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
+      );
+      setActivities(sortedActivities);
+    }
+  }, [data]);
 
   return (
     <Layout>
-      <h1 className="my-5 blue-text">Activiteiten</h1>
-      <Row xl="2" xs="1">
-        {activities?.map((item) => <Col><ActivityCard activity={item} className="my-3 shadow-lg" /></Col>)}
-      </Row>
+      <h1 className="mt-5 blue-text">Activiteiten</h1>
+      {activities?.length == undefined || activities?.length > 0 ? (
+        <Row xl="2" xs="1">
+          {activities?.map((item) => (
+            <Col key={item.id} className="my-3">
+              <ActivityCard activity={item} className="my-3 shadow-lg" />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <h4 className="blue-text opacity-75">
+          Er zijn momenteel nog geen activiteiten bekend
+        </h4>
+      )}
     </Layout>
   );
 };

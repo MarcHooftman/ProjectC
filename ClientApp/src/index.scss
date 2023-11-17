@@ -17,7 +17,6 @@ html,
 
 .bg-color {
   min-height: calc(100vh - 5rem);
-
 }
 
 a {
@@ -63,37 +62,14 @@ body {
 }
 
 .blue-text {
-  color: #0036a0;
+  color: #0036a0 !important;
 }
 
-details[aria-disabled="true"] {
-  summary {
-    cursor: auto !important;
-  }
-}
-
-details[open] summary~* {
-  animation: sweep 0.25s ease-in-out;
-}
-
-@keyframes sweep {
-  0% {
-    opacity: 0;
-    //margin-left: -10px
-  }
-
-  100% {
-    opacity: 1;
-    //margin-left: 0px
-  }
-}
-
-details>summary:first-of-type {
-  list-style-type: none;
-}
-
+.no-border:focus,
 .no-border {
   border-width: 0px !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .antes-red-image {
@@ -104,16 +80,6 @@ details>summary:first-of-type {
   filter: invert(9%) sepia(76%) saturate(5782%) hue-rotate(219deg) brightness(102%) contrast(101%);
 }
 
-.card {
-  background-color: #f0d9dd !important;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #0036a0;
-}
-
-.card-title {
-  font-size: 24px;
-  color: #0036a0;
-}
 
 .list-group {
   float: left;
@@ -122,9 +88,6 @@ details>summary:first-of-type {
   color: #0036a0;
 }
 
-.card-body {
-  overflow: hidden;
-}
 
 .no-after::after {
   content: none !important;
@@ -132,4 +95,8 @@ details>summary:first-of-type {
 
 .drop-shadow {
   filter: drop-shadow(2px 4px 10px rgb(85, 85, 85));
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
 }
