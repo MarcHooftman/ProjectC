@@ -1,29 +1,22 @@
 import { Card, Table } from 'react-bootstrap';
-import IUserData from './IUserData';
-import { useEffect, useState } from 'react';
 import IForumPost from '../Forum/IForumPost';
-import useFetch from '../../hooks/useFetch';
 
 interface Props {
-    profileID: number;
+    posts: IForumPost[];
+    className?: string;
 }
 
-const UserDataCard = ({ profileID }: Props) => {
-    const [userPosts, setUserPosts] = useState<IForumPost[]>();
+const UserDataCard = ({ posts, className = "" }: Props) => {
 
-    const { loading, data, } = useFetch<IForumPost[]>(`https://localhost:7185/api/forumpost/by-profile/${profileID}`)
+    let totalLikes = 0;
+    if (Array.isArray(posts)) {
+        totalLikes = posts?.reduce((currentTotal, post) => currentTotal + post?.likes?.length, 0) || 0
+    }
 
-    useEffect(() => {
-        if (data) {
-            console.log(data)
-            setUserPosts(data)
-        }
-    }, [loading])
 
-    const totalLikes = userPosts?.reduce((currentTotal, post) => currentTotal + post?.likes?.length, 0)
 
     return (
-        <Card className="user-data shadow-lg">
+        <Card className={"user-data shadow-lg".concat(' ', className)}>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="text-center">
                     <strong>Overzicht</strong>
@@ -32,7 +25,7 @@ const UserDataCard = ({ profileID }: Props) => {
                     <tbody>
                         <tr>
                             <th className="blue-text">Posts geplaatst</th>
-                            <td className="blue-text">{userPosts?.length}</td>
+                            <td className="blue-text">{posts?.length}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Comments geplaatst</th>

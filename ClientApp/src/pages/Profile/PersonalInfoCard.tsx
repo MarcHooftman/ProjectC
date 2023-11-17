@@ -4,11 +4,12 @@ import IProfile from "./IProfile";
 interface Props {
     pfp?: string;
     profile?: IProfile;
+    className?: string;
 }
 
-const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png") }: Props) => {
+const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png"), className = '' }: Props) => {
     return (
-        <Card className="personalia shadow-lg d-flex">
+        <Card className={"personalia shadow-lg d-flex".concat(" ", className)}>
             <Card.Body>
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <img className="pfp" src={pfp} alt="profile picture" />

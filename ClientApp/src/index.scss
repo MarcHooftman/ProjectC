@@ -80,6 +80,10 @@ body {
   filter: invert(9%) sepia(76%) saturate(5782%) hue-rotate(219deg) brightness(102%) contrast(101%);
 }
 
+.gray-image {
+  filter: invert(30%) sepia(6%) saturate(855%) hue-rotate(169deg) brightness(92%) contrast(88%);
+}
+
 
 .list-group {
   float: left;

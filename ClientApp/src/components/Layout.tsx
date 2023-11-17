@@ -1,7 +1,6 @@
 import { Container } from "reactstrap";
 import NavMenu from "./NavMenu/NavMenu";
 import Footer from "./Footer";
-import Cover from "./Cover/Cover";
 
 interface Props {
   children?: any;

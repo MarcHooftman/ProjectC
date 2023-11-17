@@ -39,12 +39,14 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var profile = await _context.Profile.FindAsync(id);
+            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.ID == id);
 
             if (profile == null)
             {
                 return NotFound();
             }
+
+            profile.User.Password = "Redacted"; // hide password before returning
 
             return profile;
         }

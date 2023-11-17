@@ -9,11 +9,12 @@ import "./Profile.scss";
 import IProfile from "./IProfile";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import useFetch from "../../hooks/useFetch";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import IForumPost from "../Forum/IForumPost";
+import ProfilePostCard from "./ProfilePostCard";
 
 const Profile = () => {
   const [profilePicUrl, setProfilePicUrl] = useState<string>("");
-  const [profile, setProfile] = useState<IProfile>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,31 +23,29 @@ const Profile = () => {
     }
   }, [])
 
-  const { loading, data, } = useFetch<IProfile>(`https://localhost:7185/api/profile/by-user/${localStorage.getItem("user")}`)
+  const { loading: profileLoading, data: profileData } = useFetch<IProfile>(`https://localhost:7185/api/profile/by-user/${localStorage.getItem("user")}`)
 
-  useEffect(() => {
-    console.log(data)
-    if (data) {
-      setProfile(data);
-    }
-  }, [loading])
+  const { loading: postsLoading, data: postsData } = useFetch<IForumPost[]>(`https://localhost:7185/api/forumpost/by-profile/${profileData?.id}`)
 
   useEffect(() => {
     // fetch api for profile pic
     setProfilePicUrl(require("../../assets/profile.png"))
   }, [])
 
+
   return (
     <Layout>
       <h1 className="blue-text my-5">Jouw profiel</h1>
-      <Row className="d-flex gap-5">
-        <Col><PersonalInfoCard pfp={profilePicUrl} profile={profile} /></Col>
-        <Col><UserDataCard profileID={profile?.id || -1} /></Col>
-      </Row>
-      <Row className="">
-        <Col><Button href="/edit_profile" className="mt-3">Profiel bewerken</Button></Col>
-        <Col><Button href="/logout" className="mt-3">Uitloggen</Button></Col>
-      </Row>
+      <div className="d-flex gap-5">
+        <PersonalInfoCard pfp={profilePicUrl} profile={profileData} />
+        <UserDataCard posts={postsData || []} />
+      </div>
+      <div className="d-flex justify-content-between">
+        <Button href="/edit_profile" className="mt-3">Profiel bewerken</Button>
+        <Button href="/logout" className="mt-3">Uitloggen</Button>
+      </div>
+      <h2 className="my-5 blue-text">Jouw posts</h2>
+      {Array.isArray(postsData) && postsData?.map((post) => <ProfilePostCard post={post} />)}
     </Layout>
   );
 };

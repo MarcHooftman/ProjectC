@@ -20,7 +20,7 @@ const NavMenu = () => {
         </NavItem>
         <NavItem className="d-flex align-items-center">
           <NavLink tag={Link} to="/profile">
-            <img className="profile-image antes-red-image" src={profile} alt="profiel" />
+            <img className="profile-image gray-image" src={profile} alt="profiel" />
           </NavLink>
         </NavItem>
       </Nav>
