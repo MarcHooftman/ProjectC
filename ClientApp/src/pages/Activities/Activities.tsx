@@ -9,7 +9,7 @@ import useFetch from "../../hooks/useFetch";
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>();
 
-  const { loading, data, error } = useFetch<IActivity>(
+  const { loading, data, error } = useFetch<IActivity[]>(
     "https://localhost:7185/api/activity/"
   );
 

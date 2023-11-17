@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Profile.ToListAsync();
+            return await _context.Profile.Include(_ => _.User).ToListAsync();
         }
 
         // GET: api/Profile/5
@@ -45,6 +45,26 @@ namespace API.Controllers
             {
                 return NotFound();
             }
+
+            return profile;
+        }
+
+        // GET: api/Profile/by-user/6
+        [HttpGet("by-user/{userID}")]
+        public async Task<ActionResult<Profile>> GetProfileByUserID(int userID)
+        {
+            if (_context.Profile == null)
+            {
+                return NotFound();
+            }
+            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.UserID == userID);
+
+            if (profile == null)
+            {
+                return NotFound();
+            }
+
+            profile.User.Password = "Redacted"; // hide password before returning
 
             return profile;
         }

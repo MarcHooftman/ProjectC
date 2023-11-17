@@ -25,7 +25,7 @@ const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png") }
                                 <th className="text-end blue-text">Geboortedatum</th><td className="blue-text">{profile?.dateOfBirth}</td>
                             </tr>
                             <tr>
-                                <th className="text-end blue-text">Email</th><td className="blue-text">{profile?.email}</td>
+                                <th className="text-end blue-text">Email</th><td className="blue-text">{profile?.user?.email}</td>
                             </tr>
                             {profile?.phoneNumber !== '' && (
                                 <tr>

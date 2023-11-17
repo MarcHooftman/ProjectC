@@ -23,7 +23,7 @@ const Registration = () => {
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
-            <h1 className="my-5 login-title">Registreren</h1>
+            <h1 className="my-5 blue-text">Registreren</h1>
             <div className="card shadow-lg">
               <div className="card-body">
                 <form

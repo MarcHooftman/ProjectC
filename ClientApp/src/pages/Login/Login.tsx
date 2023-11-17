@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "../../utils/isLoggedIn";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,9 +20,9 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         if (data?.password === password) {
-          localStorage.setItem("user", data.ID);
-          localStorage.setItem("email", data.email);
+          localStorage.setItem("user", data.id);
           navigate("/");
         } else {
           console.log("failed...");

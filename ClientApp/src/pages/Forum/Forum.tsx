@@ -35,7 +35,7 @@ const Forum = () => {
   const [searchParams,] = useSearchParams()
   const filter = searchParams.get('filter')
 
-  let { loading, data, error } = useFetch<IForumPost>("https://localhost:7185/api/forumpost")
+  let { loading, data, error } = useFetch<IForumPost[]>("https://localhost:7185/api/forumpost")
   console.log(filter)
 
   useEffect(() => {

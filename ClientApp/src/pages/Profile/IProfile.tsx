@@ -10,5 +10,9 @@ export default interface IProfile {
     phoneNumber: string | null;
     bio: string;
     department: string;
+    user: {
+        id: number;
+        email: string;
+    }
     // ProfilePicture: Media;
 }
