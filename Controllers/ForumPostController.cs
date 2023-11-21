@@ -49,6 +49,28 @@ namespace API.Controllers
             return forumPost;
         }
 
+        // GET: api/ForumPost/popular
+        [HttpGet("popular")]
+        public async Task<ActionResult<ForumPost>> GetPopularForumPost()
+        {
+            if (_context.ForumPost == null)
+            {
+                return NotFound();
+            }
+            
+            var forumPost = await _context.ForumPost
+            .Include(_ => _.Profile)
+                .OrderByDescending(fp => fp.Likes.Length)
+                .FirstOrDefaultAsync();
+
+            if (forumPost == null)
+            {
+                return NotFound();
+            }
+
+            return forumPost;
+        }
+
         // PUT: api/ForumPost/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

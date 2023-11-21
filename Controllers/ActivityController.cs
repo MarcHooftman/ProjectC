@@ -49,6 +49,24 @@ namespace API.Controllers
             return activity;
         }
 
+        // GET: api/Activity/5
+        [HttpGet("first")]
+        public async Task<ActionResult<Activity>> GetFirstActivity()
+        {
+            if (_context.Activity == null)
+            {
+                return NotFound();
+            }
+            var activity = await _context.Activity.OrderBy(_ => _.Time).FirstOrDefaultAsync();
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            return activity;
+        }
+
         // PUT: api/Activity/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
