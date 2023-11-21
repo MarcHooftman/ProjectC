@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
     return (
-        <Layout dark={false}>
+        <Layout>
 
             <div className="container my-5">
                 <div className="row justify-content-center">

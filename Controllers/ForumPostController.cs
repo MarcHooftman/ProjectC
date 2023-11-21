@@ -49,6 +49,24 @@ namespace API.Controllers
             return forumPost;
         }
 
+        // GET: api/ForumPost/by-profile/5
+        [HttpGet("by-profile/{profileID}")]
+        public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPostByProfileID(int profileID)
+        {
+            if (_context.ForumPost == null)
+            {
+                return NotFound();
+            }
+            var forumPost = await _context.ForumPost.Where(_ => _.ProfileID == profileID).ToListAsync();
+
+            if (forumPost == null)
+            {
+                return NotFound();
+            }
+
+            return forumPost;
+        }
+
         // GET: api/ForumPost/popular
         [HttpGet("popular")]
         public async Task<ActionResult<ForumPost>> GetPopularForumPost()

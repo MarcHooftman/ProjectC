@@ -1,13 +1,22 @@
 import { Card, Table } from 'react-bootstrap';
-import IUserData from './IUserData';
+import IForumPost from '../Forum/IForumPost';
 
 interface Props {
-    userData?: IUserData;
+    posts: IForumPost[];
+    className?: string;
 }
 
-const UserDataCard = ({ userData }: Props) => {
+const UserDataCard = ({ posts, className = "" }: Props) => {
+
+    let totalLikes = 0;
+    if (Array.isArray(posts)) {
+        totalLikes = posts?.reduce((currentTotal, post) => currentTotal + post?.likes?.length, 0) || 0
+    }
+
+
+
     return (
-        <Card className="user-data shadow-lg">
+        <Card className={"user-data shadow-lg".concat(' ', className)}>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="text-center">
                     <strong>Overzicht</strong>
@@ -16,19 +25,19 @@ const UserDataCard = ({ userData }: Props) => {
                     <tbody>
                         <tr>
                             <th className="blue-text">Posts geplaatst</th>
-                            <td className="blue-text">{userData?.postsPlaced}</td>
+                            <td className="blue-text">{posts?.length}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Comments geplaatst</th>
-                            <td className="blue-text">{userData?.commentsPlaced}</td>
+                            <td className="blue-text">{0}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Behulpzame comments</th>
-                            <td className="blue-text">{userData?.helpfulComments}</td>
+                            <td className="blue-text">{0}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Likes ontvangen</th>
-                            <td className="blue-text">{userData?.totalLikes}</td>
+                            <td className="blue-text">{totalLikes}</td>
                         </tr>
                     </tbody>
                 </Table>

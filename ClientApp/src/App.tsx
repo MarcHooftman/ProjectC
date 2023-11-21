@@ -12,6 +12,8 @@ import Login from "./pages/Login/Login";
 import Post from "./pages/Forum/Post/Post";
 import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 import Registration from "./pages/Registration/Registration";
+import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
+import Logout from "./pages/Logout";
 
 const App = () => {
   return (
@@ -23,10 +25,12 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/forum" element={<Forum />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<ProfileByID />} />
           <Route path="/edit_profile" element={<ProfileEdit />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/training" element={<Training />} />
           <Route path="/Post" element={<Post />} />

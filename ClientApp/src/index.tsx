@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./index.scss";
+import "./card.scss";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

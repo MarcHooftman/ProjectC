@@ -10,29 +10,43 @@ import NextActivityCard from "./NextActivityCard";
 import { Col, Row } from "reactstrap";
 import PopPostCard from "./PopPostCard";
 import NextTrainingCard from "./NextTrainingCard";
+import homeCover from "../../assets/home-cover.jpg";
+import Cover from "../../components/Cover/Cover";
+import { isLoggedIn } from "../../utils/isLoggedIn";
+
+
+//const homeCover = require("../../assets/images/home-cover.jpg");
 
 const Home = () => {
   return (
-    <Layout>
-      <h1 className="text-left py-5 blue-text">
-        Welkom bij de Onboarding-App van Antes
-      </h1>
-      <Row>
-        <Col className="home-box mb-5">
-          <h3 className="blue-text">Populair op dit moment</h3>
-          <PopPostCard />
-        </Col>
-        <Col className="home-box mb-5">
-          <h3 className="blue-text">Eerstvolgende activiteit</h3>
-          <NextActivityCard />
-        </Col>
-      </Row>
-      <Row>
-        <Col className="home-box mb-5">
-          <h3 className="blue-text">Volgende training</h3>
-          <NextTrainingCard />
-        </Col>
-      </Row>
+    <Layout cover={
+      <Cover src={homeCover} className="mb-5">
+        <h1 className="py-5 text-white">
+          Welkom bij de Onboarding-App van Antes
+        </h1>
+      </Cover>
+    }>
+      {isLoggedIn() &&
+        <>
+          <Row>
+            <Col className="home-box mb-5">
+              <h3 className="blue-text">Populair op dit moment</h3>
+              <PopPostCard />
+            </Col>
+            <Col className="home-box mb-5">
+              <h3 className="blue-text">Eerstvolgende activiteit</h3>
+              <NextActivityCard />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="home-box mb-5">
+              <h3 className="blue-text">Volgende training</h3>
+              <NextTrainingCard />
+            </Col>
+          </Row>
+        </>
+      }
+
     </Layout>
   );
 };

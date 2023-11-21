@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import PersonalInfoCard from "./PersonalInfoCard";
@@ -6,51 +7,45 @@ import UserDataCard from "./UserDataCard";
 import "./Profile.scss";
 
 import IProfile from "./IProfile";
-import IUserData from "./IUserData";
+import { isLoggedIn } from "../../utils/isLoggedIn";
+import useFetch from "../../hooks/useFetch";
+import { Button } from "react-bootstrap";
+import IForumPost from "../Forum/IForumPost";
+import ProfilePostCard from "./ProfilePostCard";
 
 const Profile = () => {
   const [profilePicUrl, setProfilePicUrl] = useState<string>("");
-  const [profile, setProfile] = useState<IProfile>();
-  const [userData, setUserData] = useState<IUserData>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/login")
+    }
+  }, [])
+
+  const { loading: profileLoading, data: profileData } = useFetch<IProfile>(`https://localhost:7185/api/profile/by-user/${localStorage.getItem("user")}`)
+
+  const { loading: postsLoading, data: postsData } = useFetch<IForumPost[]>(`https://localhost:7185/api/forumpost/by-profile/${profileData?.id}`)
 
   useEffect(() => {
     // fetch api for profile pic
     setProfilePicUrl(require("../../assets/profile.png"))
   }, [])
 
-  useEffect(() => {
-    // fetch api for profile
-    setProfile({
-      fullName: "Voornaam Achternaam",
-      role: "Functie",
-      dateOfBirth: "01-01-2001",
-      email: "nep@anteszorg.com",
-      memberSince: "05-10-2023",
-      // phoneNumber is optional
-      phoneNumber: '',
-      bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde quod eum cumque aspernatur? Fuga est earum eos laudantium minus eligendi tempore ullam, sequi sint ab unde? Labore, provident porro. Suscipit in soluta numquam dolores maiores id, culpa sequi exercitationem nihil consequatur inventore blanditiis aliquam iste labore expedita eveniet optio velit eligendi odit dolor vero error voluptas?",
-      department: "HR",
-    })
-  }, [])
-
-  useEffect(() => {
-    // fetch api for user data
-    setUserData({
-      postsPlaced: 0,
-      commentsPlaced: 0,
-      helpfulComments: 0,
-      totalLikes: 0,
-    })
-  }, [])
 
   return (
     <Layout>
       <h1 className="blue-text my-5">Jouw profiel</h1>
       <div className="d-flex gap-5">
-        <PersonalInfoCard pfp={profilePicUrl} profile={profile} />
-        <UserDataCard userData={userData} />
+        <PersonalInfoCard pfp={profilePicUrl} profile={profileData} />
+        <UserDataCard posts={postsData || []} />
       </div>
-      <a href="/edit_profile" className="btn btn-primary mt-3">Profiel bewerken</a>
+      <div className="d-flex justify-content-between">
+        <Button href="/edit_profile" className="mt-3">Profiel bewerken</Button>
+        <Button href="/logout" className="mt-3">Uitloggen</Button>
+      </div>
+      <h2 className="my-5 blue-text">Jouw posts</h2>
+      {Array.isArray(postsData) && postsData?.map((post) => <ProfilePostCard post={post} />)}
     </Layout>
   );
 };
