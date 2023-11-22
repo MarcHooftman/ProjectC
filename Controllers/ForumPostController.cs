@@ -75,10 +75,10 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            
+
             var forumPost = await _context.ForumPost
             .Include(_ => _.Profile)
-                .OrderByDescending(fp => fp.Likes.Length)
+                .OrderByDescending(fp => fp.Likes.Count())
                 .FirstOrDefaultAsync();
 
             if (forumPost == null)
@@ -129,6 +129,17 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.ForumPost'  is null.");
             }
+
+            // if (forumPost.Profile == null)
+            // {
+            //     return Problem("Post has no profile attached");
+            // }
+
+            // // prevent Entity Framework from adding the profile to the Profile table
+            // // by setting it as null
+            // forumPost.ProfileID = forumPost.Profile.ID;
+            // forumPost.Profile = null;
+
             _context.ForumPost.Add(forumPost);
             await _context.SaveChangesAsync();
 

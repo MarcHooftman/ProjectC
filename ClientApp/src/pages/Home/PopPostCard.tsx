@@ -9,11 +9,11 @@ const profilePicture = require("../../assets/profile.png");
 const PopPostCard = () => {
   const [post, setPost] = useState<IForumPost>();
 
-  const { loading, data } = useFetch(
+  const { loading, data, error } = useFetch(
     "https://localhost:7185/api/forumpost/popular"
   );
   useEffect(() => {
-    console.log(data);
+    console.log(data)
     if (data) {
       setPost(data);
     }
@@ -49,38 +49,42 @@ const PopPostCard = () => {
 
   return (
     <Link to="/forum" className="text-decoration-none">
-      <Card className="shadow-lg">
-        <Card.Header className="d-flex justify-content-between align-items-center">
-          <Link to="/profile" className="poster-pfp">
-            <Card.Img src={profilePicture}></Card.Img>
-          </Link>
-          <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
-            <Link to="/profile" className="text-decoration-none blue-text">
-              <h2 className="fs-5 m-0">
-                <strong>{post?.profile.fullName}</strong>
-              </h2>
-              <h3 className="fs-6 m-0 opacity-50 text-dark">
-                lid sinds {post?.profile.memberSince}
-              </h3>
+      {post == undefined
+        ? <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
+        : <Card className="shadow-lg">
+          <Card.Header className="d-flex justify-content-between align-items-center">
+            <Link to="/profile" className="poster-pfp">
+              <Card.Img src={profilePicture}></Card.Img>
             </Link>
-            <span className="opacity-50 text-dark">{formattedDate}</span>
-          </span>
-        </Card.Header>
-        <Card.Body>
-          <Card.Title as={"h5"}>{post?.title}</Card.Title>
-          {post?.content}
-          <span className="d-flex gap-2 mt-2">
-            {post?.tags.map((tag) => (
-              <Link to={`/forum?filter=${tag}`}>
-                <Badge pill={true}>{tag}</Badge>
+            <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
+              <Link to="/profile" className="text-decoration-none blue-text">
+                <h2 className="fs-5 m-0">
+                  <strong>{post?.profile?.fullName}</strong>
+                </h2>
+                <h3 className="fs-6 m-0 opacity-50 text-dark">
+                  lid sinds {post?.profile?.memberSince}
+                </h3>
               </Link>
-            ))}
-          </span>
-        </Card.Body>
-        <Card.Footer className="card-footer">
-          <span className="opacity-50 text-dark">No comments yet</span>
-        </Card.Footer>
-      </Card>
+              <span className="opacity-50 text-dark">{formattedDate}</span>
+            </span>
+          </Card.Header>
+          <Card.Body>
+            <Card.Title as={"h5"}>{post?.title}</Card.Title>
+            {post?.content}
+            <span className="d-flex gap-2 mt-2">
+              {Array.isArray(post?.tags) && post?.tags.map((tag) => (
+                <Link to={`/forum?filter=${tag}`}>
+                  <Badge pill={true}>{tag.name}</Badge>
+                </Link>
+              ))}
+            </span>
+          </Card.Body>
+          <Card.Footer className="card-footer">
+            <span className="opacity-50 text-dark">No comments yet</span>
+          </Card.Footer>
+        </Card>
+      }
+
     </Link>
   );
 };

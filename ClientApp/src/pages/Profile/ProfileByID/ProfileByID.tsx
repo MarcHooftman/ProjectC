@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Layout from '../../../components/Layout';
 import PersonalInfoCard from '../PersonalInfoCard';
 import UserDataCard from '../UserDataCard';
-import { Button } from 'reactstrap';
 import ProfilePostCard from '../ProfilePostCard';
 import IProfile from '../IProfile';
 import IForumPost from '../../Forum/IForumPost';
@@ -21,8 +20,10 @@ const ProfileByID = () => {
         }
     }, [])
 
-    const { loading: profileLoading, data: profileData } = useFetch<IProfile>(`https://localhost:7185/api/profile/by-user/${id}`)
-    const { loading: postsLoading, data: postsData } = useFetch<IForumPost[]>(`https://localhost:7185/api/forumpost/by-profile/${id}`)
+    const { loading: profileLoading, data: profileData } = useFetch(`https://localhost:7185/api/profile/by-user/${id}`)
+    const { loading: postsLoading, data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${id}`)
+    const profile = profileData as IProfile | null;
+    const posts = postsData as IForumPost[] | null;
 
     useEffect(() => {
         // fetch api for profile pic
@@ -32,12 +33,12 @@ const ProfileByID = () => {
 
     return (
         <Layout>
-            <h1 className="blue-text my-5">{profileData?.fullName}</h1>
+            <h1 className="blue-text my-5">{profile?.fullName}</h1>
             <div className="d-flex gap-5 mb-5">
-                <PersonalInfoCard pfp={profilePicUrl} profile={profileData} />
+                <PersonalInfoCard pfp={profilePicUrl} profile={profile} />
                 <UserDataCard posts={postsData || []} />
             </div>
-            {Array.isArray(postsData) && postsData?.map((post) => <ProfilePostCard post={post} />)}
+            {Array.isArray(posts) && posts?.map((post) => <ProfilePostCard post={post} />)}
         </Layout>
     )
 }

@@ -3,5 +3,4 @@ export default interface IUserData {
     commentsPlaced: number;
     helpfulComments: number;
     totalLikes: number;
-    // Trainings watched?
 }

@@ -29,11 +29,11 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
                         </tr>
                         <tr>
                             <th className="blue-text">Comments geplaatst</th>
-                            <td className="blue-text">{0}</td>
+                            <td className="blue-text">{posts?.filter(_ => _.parentID != null).length}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Behulpzame comments</th>
-                            <td className="blue-text">{0}</td>
+                            <td className="blue-text">{posts?.filter(_ => _.parentID != null && _.likes.length > 10).length}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Likes ontvangen</th>

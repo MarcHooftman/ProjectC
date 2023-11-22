@@ -61,15 +61,11 @@ namespace probeersel.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ForumPostID")
+                    b.Property<int>("ParentPostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
                         .HasColumnType("integer");
-
-                    b.Property<string[]>("Tags")
-                        .IsRequired()
-                        .HasColumnType("text[]");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("timestamp with time zone");
@@ -80,11 +76,34 @@ namespace probeersel.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ForumPostID");
+                    b.HasIndex("ParentPostID");
 
                     b.HasIndex("ProfileID");
 
                     b.ToTable("ForumPost");
+                });
+
+            modelBuilder.Entity("API.Models.Like", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("PostID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("Like");
                 });
 
             modelBuilder.Entity("API.Models.Media", b =>
@@ -108,6 +127,21 @@ namespace probeersel.Migrations
                     b.ToTable("Media");
                 });
 
+            modelBuilder.Entity("API.Models.PostTag", b =>
+                {
+                    b.Property<int>("PostID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TagID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PostID", "TagID");
+
+                    b.HasIndex("TagID");
+
+                    b.ToTable("PostTag");
+                });
+
             modelBuilder.Entity("API.Models.Profile", b =>
                 {
                     b.Property<int>("ID")
@@ -124,12 +158,6 @@ namespace probeersel.Migrations
 
                     b.Property<string>("Department")
                         .HasColumnType("text");
-
-                    b.Property<int?>("ForumPostID")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("ForumPostID1")
-                        .HasColumnType("integer");
 
                     b.Property<string>("FullName")
                         .HasColumnType("text");
@@ -154,15 +182,51 @@ namespace probeersel.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ForumPostID");
-
-                    b.HasIndex("ForumPostID1");
-
                     b.HasIndex("ProfilePictureID");
 
                     b.HasIndex("UserID");
 
                     b.ToTable("Profile");
+                });
+
+            modelBuilder.Entity("API.Models.Report", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("PostID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("Report");
+                });
+
+            modelBuilder.Entity("API.Models.Tag", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("API.Models.Training", b =>
@@ -180,13 +244,6 @@ namespace probeersel.Migrations
                     b.Property<int>("MediaID")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProfileID")
-                        .HasColumnType("integer");
-
-                    b.Property<string[]>("Tags")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -195,9 +252,37 @@ namespace probeersel.Migrations
 
                     b.HasIndex("MediaID");
 
-                    b.HasIndex("ProfileID");
-
                     b.ToTable("Training");
+                });
+
+            modelBuilder.Entity("API.Models.TrainingProfile", b =>
+                {
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TrainingID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProfileID", "TrainingID");
+
+                    b.HasIndex("TrainingID");
+
+                    b.ToTable("TrainingProfile");
+                });
+
+            modelBuilder.Entity("API.Models.TrainingTag", b =>
+                {
+                    b.Property<int>("TagID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TrainingID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("TagID", "TrainingID");
+
+                    b.HasIndex("TrainingID");
+
+                    b.ToTable("TrainingTag");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -223,47 +308,97 @@ namespace probeersel.Migrations
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
-                    b.HasOne("API.Models.ForumPost", null)
+                    b.HasOne("API.Models.ForumPost", "ParentPost")
                         .WithMany("Comments")
-                        .HasForeignKey("ForumPostID");
+                        .HasForeignKey("ParentPostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Profile", "Profile")
                         .WithMany()
                         .HasForeignKey("ProfileID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FKprofile");
+                        .IsRequired();
+
+                    b.Navigation("ParentPost");
 
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("API.Models.Like", b =>
+                {
+                    b.HasOne("API.Models.ForumPost", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("API.Models.PostTag", b =>
+                {
+                    b.HasOne("API.Models.ForumPost", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("API.Models.Profile", b =>
                 {
-                    b.HasOne("API.Models.ForumPost", null)
-                        .WithMany("Likes")
-                        .HasForeignKey("ForumPostID");
-
-                    b.HasOne("API.Models.ForumPost", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("ForumPostID1");
-
                     b.HasOne("API.Models.Media", "ProfilePicture")
                         .WithMany()
                         .HasForeignKey("ProfilePictureID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FKmedia");
+                        .IsRequired();
 
                     b.HasOne("API.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FKuser");
+                        .IsRequired();
 
                     b.Navigation("ProfilePicture");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("API.Models.Report", b =>
+                {
+                    b.HasOne("API.Models.ForumPost", "Post")
+                        .WithMany("Reports")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("API.Models.Training", b =>
@@ -272,14 +407,47 @@ namespace probeersel.Migrations
                         .WithMany()
                         .HasForeignKey("MediaID")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FKmedia");
-
-                    b.HasOne("API.Models.Profile", null)
-                        .WithMany("TrainingsWatched")
-                        .HasForeignKey("ProfileID");
+                        .IsRequired();
 
                     b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("API.Models.TrainingProfile", b =>
+                {
+                    b.HasOne("API.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+
+                    b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("API.Models.TrainingTag", b =>
+                {
+                    b.HasOne("API.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tag");
+
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
@@ -289,11 +457,6 @@ namespace probeersel.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Reports");
-                });
-
-            modelBuilder.Entity("API.Models.Profile", b =>
-                {
-                    b.Navigation("TrainingsWatched");
                 });
 #pragma warning restore 612, 618
         }

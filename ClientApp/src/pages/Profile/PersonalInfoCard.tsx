@@ -3,7 +3,7 @@ import IProfile from "./IProfile";
 
 interface Props {
     pfp?: string;
-    profile?: IProfile;
+    profile?: IProfile | null;
     className?: string;
 }
 

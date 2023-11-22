@@ -12,8 +12,8 @@ public class Profile
     public string? Role { get; set; }
     public DateOnly? DateOfBirth { get; set; }
     public string? Department { get; set; }
-    public int ProfilePictureID { get; set; }
+    public int? ProfilePictureID { get; set; }
     public Media? ProfilePicture { get; set; }
     public string? PhoneNumber { get; set; }
-    public IEnumerable<Training>? TrainingsWatched { get; set; }
+    public IEnumerable<Training>? Training { get; set; }
 }

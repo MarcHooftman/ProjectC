@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 
 interface Props {
-    maxLength: number;
+    maxLength?: number;
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextInputWithCounter = ({ maxLength }: Props) => {
-    const [inputValue, setInputValue] = useState<string>('');
+const TextInputWithCounter = ({ onChange = () => { }, maxLength = 300 }: Props) => {
+    const [privateValue, setPrivateValue] = useState("")
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setInputValue(event.target.value.slice(0, maxLength));
-    };
-
-    const charsLeft = maxLength - inputValue.length;
+    const charsLeft = maxLength - privateValue.length;
 
     return (
         <div>
             <textarea
                 className="form-control"
                 style={{ height: '120px' }}
-                value={inputValue}
-                onChange={handleInputChange}
+                value={privateValue}
+                onChange={(event) => {
+                    setPrivateValue(event.target.value);
+                    onChange(event);
+                }}
                 maxLength={maxLength}
                 placeholder="Bericht"
             ></textarea>

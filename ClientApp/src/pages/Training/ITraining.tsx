@@ -5,6 +5,6 @@ export default interface ITraining {
     title: string;
     description: string;
     url: string;
-    tags: string[];
+    tags: { id: number; name: string; }[];
     watchedBy: IProfile[];
 }

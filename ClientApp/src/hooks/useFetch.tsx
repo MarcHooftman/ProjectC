@@ -9,7 +9,16 @@ const useFetch = (url: string) => {
     const fetchData = async () => {
       fetch(url)
         .then((response) => response.json())
-        .then((json) => setData(json))
+        .then((json) => {
+          if (json.traceId) {
+            if (json.status && json.title) {
+              setError(`Error: ${json.status} - ${json.title}, traceId: ${json.traceId}`);
+            }
+            setError("Error: Unknown error");
+          } else {
+            setData(json);
+          }
+        })
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
     };

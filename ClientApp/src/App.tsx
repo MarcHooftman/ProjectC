@@ -14,6 +14,7 @@ import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 import Registration from "./pages/Registration/Registration";
 import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
 import Logout from "./pages/Logout";
+import CreateProfile from "./pages/Registration/CreateProfile";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/create-profile/:email" element={<CreateProfile />} />
           <Route path="/training" element={<Training />} />
           <Route path="/Post" element={<Post />} />
         </Routes>

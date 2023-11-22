@@ -2,10 +2,13 @@ import Layout from "../../components/Layout";
 import { useState } from "react";
 
 import "./Registration.scss";
+import { Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     //console.log({ email, password });
@@ -16,6 +19,8 @@ const Registration = () => {
       },
       body: JSON.stringify({ email: email, password: password }),
     });
+
+    navigate(`/create-profile/${email}`);
   };
 
   return (
@@ -24,8 +29,8 @@ const Registration = () => {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <h1 className="my-5 blue-text">Registreren</h1>
-            <div className="card shadow-lg">
-              <div className="card-body">
+            <Card className="shadow-lg">
+              <Card.Body className="">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -34,8 +39,6 @@ const Registration = () => {
                 >
                   {/* Email Input */}
                   <div className="form-group mb-3">
-                    {" "}
-                    {/* evt mt-3 */}
                     <label htmlFor="email">Email</label>
                     <input
                       type="email"
@@ -67,8 +70,8 @@ const Registration = () => {
                     Registreer
                   </button>
                 </form>
-              </div>
-            </div>
+              </Card.Body>
+            </Card>
           </div>
         </div>
       </div>
