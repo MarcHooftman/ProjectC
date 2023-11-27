@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../../../authConfig";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { callMsGraph, callMsGraphPhoto } from "../../../graph";
-
+import useGraphData from "../../../hooks/useGraphData";
+import IProfile from "../../../interfaces/IProfile";
+import useFetch from "../../../hooks/useFetch";
 
 const EditProfile = () => {
     const loggedIn = useIsAuthenticated();
@@ -24,56 +26,63 @@ const EditProfile = () => {
         });
     }
 
+    const { graphData, graphDataPhoto } = useGraphData();
 
+    const { loading, data, error } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`);
 
-    const [graphData, setGraphData] = useState<IGraphData | null>(null);
-    const [photo, setPhoto] = useState(null);
+    // Initialize prevProfile with the existing data
+    const [prevProfile, setPrevProfile] = useState({
+        ID: data?.ID,
+        UserID: data?.UserID,
+        FullName: data?.FullName,
+        Bio: data?.Bio,
+        MemberSince: data?.MemberSince,
+        LastLogin: data?.LastLogin,
+        Role: data?.Role,
+        DateOfBirth: data?.DateOfBirth,
+        Department: data?.Department,
+        ProfilePictureID: data?.ProfilePictureID,
+        PhoneNumber: data?.PhoneNumber,
+    });
 
-    function RequestProfileData() {
-        // Silently acquires an access token which is then attached to a request for MS Graph data
-        instance.acquireTokenSilent({
-            ...loginRequest,
-            account: accounts[0]
-        }).then((response) => {
-            callMsGraph(response.accessToken).then(response => setGraphData(response));
-            callMsGraphPhoto(response.accessToken).then(response => setPhoto(response));
-        });
-    }
+    // Initialize editedProfile with the existing data or an empty object
+    const [editedProfile, setEditedProfile] = useState<any>({
+        prevProfile,
+    });
 
-    useEffect(() => {
-        if (loggedIn) {
-            RequestProfileData()
-            console.log(graphData)
-            console.log(photo)
-        }
-
-    }, [loggedIn])
-
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Send the editedProfile data to the API or update it as needed.
-        // ...
+        try {
+            console.log("Request Payload:", JSON.stringify(editedProfile));
 
-        ////////////////////////////////////////////////////////////////////////////
-        // This is to test, make an API request in the completed version.
-        //console.log("Edited Profile Data:", editedProfile);
-        ////////////////////////////////////////////////////////////////////////////
+            const response = await fetch(`https://localhost:7185/api/profile/${data?.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(editedProfile),
+            });
 
-        // Commented out to test with a console.log, redirecting resets the browser console.
-        // Redirect to the profile page after the form is submitted
-        // navigate('/profile');
+            if (response.ok) {
+                console.log("Profile updated successfully");
+                // Redirect to the profile page or perform any other actions as needed
+            } else {
+                console.error('Failed to update profile:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
     };
-
-    const [editedProfile, setEditedProfile] = useState<any>({});
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target;
 
+        // Update editedProfile with the existing data and the changes
         setEditedProfile((prevProfile: any) => ({
-            ...prevProfile,
-            [name]: value,
+            ...data, // Spread the existing data
+            [name]: value, // Add or update the specific field with the new value
         }));
     };
 
@@ -85,28 +94,16 @@ const EditProfile = () => {
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
                             <div className="form-group mt-3">
-                                <label htmlFor="jobTitle">Functie</label>
+                                <label htmlFor="Role">Functie</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="jobTitle"
-                                    name="jobTitle"
-                                    value={graphData?.jobTitle || ""}
+                                    id="Role"
+                                    name="Role"
+                                    value={editedProfile?.Role || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            {/* <div className="form-group mt-3">
-                                <label htmlFor="dateOfBirth">Geboortedatum (Optioneel)</label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    id="dateOfBirth"
-                                    name="dateOfBirth"
-                                    value={editedProfile.dateOfBirth}
-                                    onChange={handleInputChange}
-                                />
-                            </div> */}
-                            {/* Add more input fields as needed */}
                             <div className="form-group mt-3">
                                 <label htmlFor="mobilePhone">Telefoonnummer (optioneel)</label>
                                 <input
@@ -114,17 +111,17 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="mobilePhone"
                                     name="mobilePhone"
-                                    value={graphData?.mobilePhone || ""}
+                                    value={editedProfile?.PhoneNumber || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>
                             <div className="form-group mt-3">
-                                <label htmlFor="bio">Bio</label>
+                                <label htmlFor="Bio">Bio</label>
                                 <textarea
                                     className="form-control"
-                                    id="bio"
-                                    name="bio"
-                                    value={graphData?.displayName || ""}
+                                    id="Bio"
+                                    name="Bio"
+                                    value={editedProfile?.Bio || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>
