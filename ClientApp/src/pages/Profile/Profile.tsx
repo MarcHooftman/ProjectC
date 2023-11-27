@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import PersonalInfoCard from "./PersonalInfoCard";
@@ -14,6 +13,7 @@ import IForumPost from "../../interfaces/IForumPost";
 import ProfilePostCard from "./ProfilePostCard";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { callMsGraph, callMsGraphPhoto } from "../../graph";
+import useGraphData from "../../hooks/useGraphData";
 
 const Profile = () => {
   const loggedIn = useIsAuthenticated();
@@ -35,29 +35,7 @@ const Profile = () => {
     handleLogin()
   }
 
-  const [graphData, setGraphData] = useState<IGraphData | null>(null);
-  const [photo, setPhoto] = useState(null);
-
-  function RequestProfileData() {
-    // Silently acquires an access token which is then attached to a request for MS Graph data
-    instance.acquireTokenSilent({
-      ...loginRequest,
-      account: accounts[0]
-    }).then((response) => {
-      callMsGraph(response.accessToken).then(response => setGraphData(response));
-      callMsGraphPhoto(response.accessToken).then(response => setPhoto(response));
-    });
-  }
-
-
-  useEffect(() => {
-    if (loggedIn) {
-      RequestProfileData()
-      console.log(graphData)
-      console.log(photo)
-    }
-
-  }, [loggedIn])
+  const { loading, graphData, graphDataPhoto } = useGraphData();
 
   const { loading: profileLoading, data: profileData } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.userPrincipalName}`)
   const profile = profileData as IProfile | null;

@@ -13,6 +13,9 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
         totalLikes = posts?.reduce((currentTotal, post) => currentTotal + post?.likes?.length, 0) || 0
     }
 
+    const postsLength = Array.isArray(posts) ? posts.length : 0;
+    const commentsPlaced = Array.isArray(posts) ? posts.filter(_ => _.parentID != null).length : 0;
+    const helpfulComments = Array.isArray(posts) ? posts.filter(_ => _.parentID != null && _.likes.length > 10).length : 0;
 
 
     return (
@@ -25,15 +28,15 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
                     <tbody>
                         <tr>
                             <th className="blue-text">Posts geplaatst</th>
-                            <td className="blue-text">{posts?.length}</td>
+                            <td className="blue-text">{postsLength}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Comments geplaatst</th>
-                            <td className="blue-text">{posts?.filter(_ => _.parentID != null).length}</td>
+                            <td className="blue-text">{commentsPlaced}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Behulpzame comments</th>
-                            <td className="blue-text">{posts?.filter(_ => _.parentID != null && _.likes.length > 10).length}</td>
+                            <td className="blue-text">{helpfulComments}</td>
                         </tr>
                         <tr>
                             <th className="blue-text">Likes ontvangen</th>
