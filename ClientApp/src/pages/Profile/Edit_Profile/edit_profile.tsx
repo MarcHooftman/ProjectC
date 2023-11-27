@@ -1,71 +1,78 @@
-import { useState } from "react";
 import Layout from "../../../components/Layout";
 import "./edit_profile.scss";
+import { useState, useEffect } from "react";
+import { useMsal } from "@azure/msal-react";
+import { callMsGraph } from "../../../graph";
 
-import IProfile from "../../../interfaces/IProfile";
 
-// Change to the data of logged in person
 const EditProfile = () => {
-    const initialProfile: IProfile = {
-        id: 123,
-        fullName: "Voornaam Achternaam",
-        role: "Functie",
-        dateOfBirth: "2001-01-01",
-        email: "nep@anteszorg.com",
-        memberSince: "05-10-2023",
-        // phoneNumber is optional
-        phoneNumber: "",
-        bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde quod eum cumque aspernatur? Fuga est earum eos laudantium minus eligendi tempore ullam, sequi sint ab unde? Labore, provident porro. Suscipit in soluta numquam dolores maiores id, culpa sequi exercitationem nihil consequatur inventore blanditiis aliquam iste labore expedita eveniet optio velit eligendi odit dolor vero error voluptas?",
-        department: "HR",
-    };
+    const { accounts, instance } = useMsal();
 
-    // State to store the edited profile data
-    const [editedProfile, setEditedProfile] = useState<IProfile>(initialProfile);
+    const [graphData, setGraphData] = useState<any | null>(null); // Adjust 'any' based on the MS Graph response structure
+    const [editedProfile, setEditedProfile] = useState<any>({
+        // Adjust these properties based on the MS Graph response structure
+        id: 0,
+        displayName: "",
+        jobTitle: "",
+        givenName: "",
+        surname: "",
+        mail: "",
+        mobilePhone: "",
+        aboutMe: "",
+    });
 
-    // Function to handle form submission
+    useEffect(() => {
+        // Fetch the user's data from MS Graph API
+        instance
+            .acquireTokenSilent({
+                account: accounts[0],
+            })
+            .then((response: any) => {
+                callMsGraph(response.accessToken).then((graphResponse) => {
+                    setGraphData(graphResponse);
+                    setEditedProfile({
+                        // Map the properties from MS Graph response to editedProfile
+                        id: graphResponse.id,
+                        displayName: graphResponse.displayName,
+                        jobTitle: graphResponse.jobTitle,
+                        givenName: graphResponse.givenName,
+                        surname: graphResponse.surname,
+                        mail: graphResponse.mail,
+                        mobilePhone: graphResponse.mobilePhone,
+                        aboutMe: graphResponse.aboutMe,
+                    });
+                });
+            })
+            .catch((error: any) => {
+                console.error("Error fetching user data:", error);
+            });
+    }, [accounts, instance]);
+
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Send the editedProfile data to the API or update it as needed.
+        // ...
 
         ////////////////////////////////////////////////////////////////////////////
-        // This is to test, make an API request in completed version.
+        // This is to test, make an API request in the completed version.
         console.log("Edited Profile Data:", editedProfile);
         ////////////////////////////////////////////////////////////////////////////
 
-        // Commented out to test with a console.log, redirecting resets browser console.
+        // Commented out to test with a console.log, redirecting resets the browser console.
         // Redirect to the profile page after the form is submitted
-        // window.location.href = '/profile';
+        // navigate('/profile');
     };
 
-    // Function to handle input changes (both text inputs and text areas)
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const { name, value } = e.target;
 
-        setEditedProfile((prevProfile: IProfile) => {
-            if (name === 'phone') {
-                return {
-                    ...prevProfile,
-                    phoneNumber: value,
-                };
-            }
-
-            return {
-                ...prevProfile,
-                [name]: value,
-            };
-        });
+        setEditedProfile((prevProfile: any) => ({
+            ...prevProfile,
+            [name]: value,
+        }));
     };
-
-    // // Function to handle profile picture changes
-    // const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files?.[0]; // Get the selected file
-    //     if (file) {
-    //         setEditedProfile((prevProfile: IProfile) => ({
-    //             ...prevProfile,
-    //             profilePicture: file, // Set the selected file as the profile picture
-    //         }));
-    //     }
-    // };
 
     return (
         <Layout>
@@ -74,69 +81,47 @@ const EditProfile = () => {
                 <div className="card">
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
-                            {/* <div className="form-group">
-                                <label htmlFor="profilePicture">Profielfoto wijzigen:</label>
-                                <input
-                                    type="file"
-                                    className="form-control-file d-block"
-                                    id="profilePicture"
-                                    name="profilePicture"
-                                    accept="image/*" // Allow only image files
-                                    onChange={handleProfilePictureChange}
-                                />
-                            </div> */}
                             <div className="form-group mt-3">
-                                <label htmlFor="role">Functie</label>
+                                <label htmlFor="jobTitle">Functie</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="role"
-                                    name="role"
-                                    value={editedProfile.role}
+                                    id="jobTitle"
+                                    name="jobTitle"
+                                    value={editedProfile.jobTitle}
                                     onChange={handleInputChange}
                                 />
                             </div>
                             <div className="form-group mt-3">
-                                <label htmlFor="dateOfBirth">Geboortedatum</label>
-                                <input
-                                    type="date" // Use date input type
-                                    className="form-control"
-                                    id="dateOfBirth"
-                                    name="dateOfBirth"
-                                    value={editedProfile.dateOfBirth}
-                                    onChange={handleInputChange}
-                                    placeholder={editedProfile.dateOfBirth}
-                                />
-                            </div>
-                            <div className="form-group mt-3">
-                                <label htmlFor="phone">Telefoonnummer (optioneel)</label>
+                                <label htmlFor="displayName">Weergavenaam</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="phone"
-                                    name="phone"
-                                    value={editedProfile.phoneNumber || ''} // Use a default empty string if phoneNumber is null
+                                    id="displayName"
+                                    name="displayName"
+                                    value={editedProfile.displayName}
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            {/* <div className="form-group mt-3">
-                                <label htmlFor="department">Department</label>
+                            {/* Add more input fields as needed */}
+                            <div className="form-group mt-3">
+                                <label htmlFor="mobilePhone">Telefoonnummer (optioneel)</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="department"
-                                    name="department"
-                                    value={editedProfile.department}
+                                    id="mobilePhone"
+                                    name="mobilePhone"
+                                    value={editedProfile.mobilePhone || ""}
                                     onChange={handleInputChange}
                                 />
-                            </div> */}
+                            </div>
                             <div className="form-group mt-3">
-                                <label htmlFor="bio">Bio</label>
+                                <label htmlFor="aboutMe">Over mij</label>
                                 <textarea
                                     className="form-control"
-                                    id="bio"
-                                    name="bio"
-                                    value={editedProfile.bio}
+                                    id="aboutMe"
+                                    name="aboutMe"
+                                    value={editedProfile.aboutMe}
                                     onChange={handleInputChange}
                                 />
                             </div>
