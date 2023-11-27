@@ -12,7 +12,7 @@ import PopPostCard from "./PopPostCard";
 import NextTrainingCard from "./NextTrainingCard";
 import homeCover from "../../assets/home-cover.jpg";
 import Cover from "../../components/Cover/Cover";
-import { isLoggedIn } from "../../utils/isLoggedIn";
+import { AuthenticatedTemplate } from "@azure/msal-react";
 
 
 //const homeCover = require("../../assets/images/home-cover.jpg");
@@ -26,28 +26,25 @@ const Home = () => {
         </h1>
       </Cover>
     }>
-      {isLoggedIn() &&
-        <>
-          <Row>
-            <Col className="home-box mb-5">
-              <h3 className="blue-text">Populair op dit moment</h3>
-              <PopPostCard />
-            </Col>
-            <Col className="home-box mb-5">
-              <h3 className="blue-text">Eerstvolgende activiteit</h3>
-              <NextActivityCard />
-            </Col>
-          </Row>
-          <Row>
-            <Col className="home-box mb-5">
-              <h3 className="blue-text">Volgende training</h3>
-              <NextTrainingCard />
-            </Col>
-          </Row>
-        </>
-      }
-
-    </Layout>
+      <AuthenticatedTemplate>
+        <Row>
+          <Col className="home-box mb-5">
+            <h3 className="blue-text">Populair op dit moment</h3>
+            <PopPostCard />
+          </Col>
+          <Col className="home-box mb-5">
+            <h3 className="blue-text">Eerstvolgende activiteit</h3>
+            <NextActivityCard />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="home-box mb-5">
+            <h3 className="blue-text">Volgende training</h3>
+            <NextTrainingCard />
+          </Col>
+        </Row>
+      </AuthenticatedTemplate>
+    </Layout >
   );
 };
 

@@ -2,7 +2,7 @@ import { Badge, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
-import IForumPost from "../Forum/IForumPost";
+import IForumPost from "../../interfaces/IForumPost";
 
 const profilePicture = require("../../assets/profile.png");
 
@@ -13,7 +13,6 @@ const PopPostCard = () => {
     "https://localhost:7185/api/forumpost/popular"
   );
   useEffect(() => {
-    console.log(data)
     if (data) {
       setPost(data);
     }

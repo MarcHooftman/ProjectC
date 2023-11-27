@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ITraining from "./ITraining";
+import ITraining from "../../interfaces/ITraining";
 import { Modal, Card, Badge } from "react-bootstrap";
 import "./Training.scss";
 

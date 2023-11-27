@@ -5,18 +5,13 @@ import TextInputWithCounter from '../../../components/TextInputWithCounter'
 import TagInput from './TagsToevoegen'
 import { useEffect, useState } from 'react'
 import useFetch from '../../../hooks/useFetch'
-import { isLoggedIn } from '../../../utils/isLoggedIn'
 import { useNavigate } from 'react-router-dom'
-import IForumPost from '../IForumPost'
-import IProfile from '../../Profile/IProfile'
+import IForumPost from '../../../interfaces/IForumPost'
+import IProfile from '../../../interfaces/IProfile'
 
 
 const Post = () => {
 
-    const navigate = useNavigate();
-    if (!isLoggedIn()) {
-        navigate("/login");
-    }
 
     const [profile, setProfile] = useState<IProfile>();
     const [content, setContent] = useState("");

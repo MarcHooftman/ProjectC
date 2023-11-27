@@ -4,7 +4,7 @@ public class Profile
 {
     public int ID { get; set; }
     public int UserID { get; set; }
-    public User User { get; set; } = null!;
+    public User? User { get; set; }
     public string? FullName { get; set; }
     public string? Bio { get; set; }
     public DateOnly? MemberSince { get; set; }

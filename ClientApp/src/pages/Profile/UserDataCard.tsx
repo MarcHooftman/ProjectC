@@ -1,5 +1,5 @@
 import { Card, Table } from 'react-bootstrap';
-import IForumPost from '../Forum/IForumPost';
+import IForumPost from '../../interfaces/IForumPost';
 
 interface Props {
     posts: IForumPost[];

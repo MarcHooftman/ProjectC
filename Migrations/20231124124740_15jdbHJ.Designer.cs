@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace probeersel.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231124124740_15jdbHJ")]
+    partial class _15jdbHJ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace probeersel.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentPostID")
+                    b.Property<int>("ParentPostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
@@ -310,7 +313,9 @@ namespace probeersel.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", "ParentPost")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentPostID");
+                        .HasForeignKey("ParentPostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Profile", "Profile")
                         .WithMany()

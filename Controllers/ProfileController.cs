@@ -46,8 +46,6 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            profile.User.Password = "Redacted"; // hide password before returning
-
             return profile;
         }
 
@@ -66,7 +64,23 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            profile.User.Password = "Redacted"; // hide password before returning
+            return profile;
+        }
+
+        // GET: api/Profile/by-user/6
+        [HttpGet("by-email/{email}")]
+        public async Task<ActionResult<Profile>> GetProfileByEmail(string email)
+        {
+            if (_context.Profile == null)
+            {
+                return NotFound();
+            }
+            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.User.Email == email);
+
+            if (profile == null)
+            {
+                return NotFound();
+            }
 
             return profile;
         }
@@ -111,6 +125,7 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.Profile'  is null.");
             }
+            profile.User = null;
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 

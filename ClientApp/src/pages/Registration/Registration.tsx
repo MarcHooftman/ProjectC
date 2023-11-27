@@ -10,17 +10,24 @@ const Registration = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
+
   const handleSubmit = () => {
     //console.log({ email, password });
+
     fetch("https://localhost:7185/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email, password: password }),
-    });
-
-    navigate(`/create-profile/${email}`);
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        navigate(`/create-profile?userId=${data.id}`);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
