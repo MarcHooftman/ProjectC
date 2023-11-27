@@ -28,9 +28,11 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                                 <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
                             </tr>
 
-                            <tr>
-                                <th className="text-end blue-text">Geboortedatum</th><td className="blue-text">{profile?.dateOfBirth}</td>
-                            </tr>
+                            {profile?.phoneNumber &&
+                                <tr>
+                                    <th className="text-end blue-text">Geboortedatum</th><td className="blue-text">{profile?.dateOfBirth}</td>
+                                </tr>
+                            }
 
                             {profile?.phoneNumber &&
                                 <tr>

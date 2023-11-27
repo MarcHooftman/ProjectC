@@ -1,52 +1,53 @@
 import Layout from "../../../components/Layout";
 import "./edit_profile.scss";
-import { useState, useEffect } from "react";
-import { useMsal } from "@azure/msal-react";
-import { callMsGraph } from "../../../graph";
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginRequest } from "../../../authConfig";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { callMsGraph, callMsGraphPhoto } from "../../../graph";
 
 
 const EditProfile = () => {
-    const { accounts, instance } = useMsal();
+    const loggedIn = useIsAuthenticated();
+    const { instance, accounts } = useMsal();
 
-    const [graphData, setGraphData] = useState<any | null>(null); // Adjust 'any' based on the MS Graph response structure
-    const [editedProfile, setEditedProfile] = useState<any>({
-        // Adjust these properties based on the MS Graph response structure
-        id: 0,
-        displayName: "",
-        jobTitle: "",
-        givenName: "",
-        surname: "",
-        mail: "",
-        mobilePhone: "",
-        aboutMe: "",
-    });
+    const handleLogin = () => {
+        instance.loginRedirect(loginRequest).catch(e => {
+            console.log(e);
+        });
+    }
+
+    const handleLogout = () => {
+        instance.logoutRedirect({
+            postLogoutRedirectUri: "/",
+        });
+    }
+
+
+
+    const [graphData, setGraphData] = useState<IGraphData | null>(null);
+    const [photo, setPhoto] = useState(null);
+
+    function RequestProfileData() {
+        // Silently acquires an access token which is then attached to a request for MS Graph data
+        instance.acquireTokenSilent({
+            ...loginRequest,
+            account: accounts[0]
+        }).then((response) => {
+            callMsGraph(response.accessToken).then(response => setGraphData(response));
+            callMsGraphPhoto(response.accessToken).then(response => setPhoto(response));
+        });
+    }
 
     useEffect(() => {
-        // Fetch the user's data from MS Graph API
-        instance
-            .acquireTokenSilent({
-                account: accounts[0],
-            })
-            .then((response: any) => {
-                callMsGraph(response.accessToken).then((graphResponse) => {
-                    setGraphData(graphResponse);
-                    setEditedProfile({
-                        // Map the properties from MS Graph response to editedProfile
-                        id: graphResponse.id,
-                        displayName: graphResponse.displayName,
-                        jobTitle: graphResponse.jobTitle,
-                        givenName: graphResponse.givenName,
-                        surname: graphResponse.surname,
-                        mail: graphResponse.mail,
-                        mobilePhone: graphResponse.mobilePhone,
-                        aboutMe: graphResponse.aboutMe,
-                    });
-                });
-            })
-            .catch((error: any) => {
-                console.error("Error fetching user data:", error);
-            });
-    }, [accounts, instance]);
+        if (loggedIn) {
+            RequestProfileData()
+            console.log(graphData)
+            console.log(photo)
+        }
+
+    }, [loggedIn])
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -55,13 +56,15 @@ const EditProfile = () => {
 
         ////////////////////////////////////////////////////////////////////////////
         // This is to test, make an API request in the completed version.
-        console.log("Edited Profile Data:", editedProfile);
+        //console.log("Edited Profile Data:", editedProfile);
         ////////////////////////////////////////////////////////////////////////////
 
         // Commented out to test with a console.log, redirecting resets the browser console.
         // Redirect to the profile page after the form is submitted
         // navigate('/profile');
     };
+
+    const [editedProfile, setEditedProfile] = useState<any>({});
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -88,21 +91,21 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="jobTitle"
                                     name="jobTitle"
-                                    value={editedProfile.jobTitle}
+                                    value={graphData?.jobTitle || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div className="form-group mt-3">
-                                <label htmlFor="displayName">Weergavenaam</label>
+                            {/* <div className="form-group mt-3">
+                                <label htmlFor="dateOfBirth">Geboortedatum (Optioneel)</label>
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control"
-                                    id="displayName"
-                                    name="displayName"
-                                    value={editedProfile.displayName}
+                                    id="dateOfBirth"
+                                    name="dateOfBirth"
+                                    value={editedProfile.dateOfBirth}
                                     onChange={handleInputChange}
                                 />
-                            </div>
+                            </div> */}
                             {/* Add more input fields as needed */}
                             <div className="form-group mt-3">
                                 <label htmlFor="mobilePhone">Telefoonnummer (optioneel)</label>
@@ -111,17 +114,17 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="mobilePhone"
                                     name="mobilePhone"
-                                    value={editedProfile.mobilePhone || ""}
+                                    value={graphData?.mobilePhone || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>
                             <div className="form-group mt-3">
-                                <label htmlFor="aboutMe">Over mij</label>
+                                <label htmlFor="bio">Bio</label>
                                 <textarea
                                     className="form-control"
-                                    id="aboutMe"
-                                    name="aboutMe"
-                                    value={editedProfile.aboutMe}
+                                    id="bio"
+                                    name="bio"
+                                    value={graphData?.displayName || ""}
                                     onChange={handleInputChange}
                                 />
                             </div>

@@ -1,7 +1,7 @@
 // import { Media } from "reactstrap";
 
 export default interface IProfile {
-    id: number;
+    id?: number;
     fullName: string;
     role: string;
     dateOfBirth: string;
