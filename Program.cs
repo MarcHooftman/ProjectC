@@ -1,8 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 
 builder.Services.AddDbContext<AntesContext>();
 
@@ -29,7 +32,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 
 app.MapControllerRoute(
     name: "default",

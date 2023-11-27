@@ -39,16 +39,23 @@ const Forum = () => {
 
   useEffect(() => {
     if (data) {
-      let typedData = data as IForumPost[];
+      let typedData = data.$values as IForumPost[];
+      console.log(typedData)
       if (filter) {
+
         typedData = typedData.filter(post => post.tags.some(tag => tag.name.toLowerCase().includes(filter.toLowerCase())))
       }
 
-      const sortedData = typedData.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+
+
+      let sortedData = typedData;
+      if (Array.isArray(typedData)) {
+        sortedData = typedData.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+      }
 
       setForumPosts(sortedData);
     }
-  }, [filter, data]);
+  }, [filter, loading, data]);
 
 
   return (

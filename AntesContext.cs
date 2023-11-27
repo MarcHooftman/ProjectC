@@ -8,6 +8,7 @@ public class AntesContext : DbContext
     public AntesContext(DbContextOptions<AntesContext> options)
         : base(options)
     {
+        this.ChangeTracker.AutoDetectChangesEnabled = false;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

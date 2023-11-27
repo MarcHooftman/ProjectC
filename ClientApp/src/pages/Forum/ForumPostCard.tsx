@@ -48,13 +48,14 @@ const ForumPostCard = ({ post }: Props) => {
                     </Col>
                 </Row>
             </Card.Header>
-            <p className='card-body'>
+            <Card.Body>
                 {post?.content}
-            </p>
-            <Card.Footer>
                 <span className="d-flex gap-2">
                     {Array.isArray(post?.tags) && post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
                 </span>
+            </Card.Body>
+            <Card.Footer>
+
             </Card.Footer>
         </Card>
     )
