@@ -46,8 +46,6 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            profile.User.Password = "Redacted"; // hide password before returning
-
             return profile;
         }
 
@@ -66,7 +64,6 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            profile.User.Password = "Redacted"; // hide password before returning
 
             return profile;
         }
@@ -111,6 +108,8 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.Profile'  is null.");
             }
+
+            profile.User = null;
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 

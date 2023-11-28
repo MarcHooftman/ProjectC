@@ -1,61 +1,164 @@
-import { Spinner } from "react-bootstrap"
-import { isLoggedIn } from "../../utils/isLoggedIn"
-import { useNavigate, useParams } from "react-router-dom"
-import useFetch from "../../hooks/useFetch";
+import { Button, Card, Container, Spinner } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import IProfile from "../Profile/IProfile";
 import IUser from "../../interfaces/IUser";
+import useFetch from "../../hooks/useFetch";
 
 const CreateProfile = () => {
-    const { email } = useParams();
-    const [user, setUser] = useState<IUser>();
-    const navigate = useNavigate();
-    //const { loading, data } = useFetch(`https://localhost:7185/api/user/by-email/${email}`);
+  const { email } = useParams();
+  //const [user, setUser] = useState<IUser>();
+  const navigate = useNavigate();
+  const [creating, setCreating] = useState<boolean>(false);
 
-    useEffect(() => {
-        setTimeout(() => {
-            fetch(`https://localhost:7185/api/user/by-email/${email}`)
-                .then(response => response.json())
-                .then(data => setUser(data))
-                .catch(error => { throw new Error(error) })
-                .finally(() => {
-                    setTimeout(() => {
-                        if (user) {
-                            console.log(user)
-                            localStorage.setItem("user", `${user.id}`);
-                            const profile = {
-                                UserID: user.id,
-                                FullName: "Not set",
-                                Bio: "Not set",
-                                MemberSince: new Date().toISOString(),
-                                LastLogin: new Date().toISOString(),
-                                Role: "Not set",
-                                DateOfBirth: "",
-                                Department: "Not set",
-                                PhoneNumber: "",
-                            };
+  const [fullName, setFullName] = useState<string>();
+  const [phone, setPhone] = useState<string>();
+  const [dept, setDept] = useState<string>();
+  const [role, setRole] = useState<string>();
+  const [bio, setBio] = useState<string>();
 
-                            fetch("https://localhost:7185/api/profile", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify(profile),
-                            }).catch(error => { throw new Error(error) })
+  let user: IUser | null;
+  const { loading, data: userData } = useFetch(
+    `https://localhost:7185/api/user/by-email/${email}`
+  );
+  useEffect(() => {
+    user = userData;
+  }, [loading]);
 
-                            navigate("/profile")
-                        }
-                    }, 500)
+  const handleFullNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setFullName(event.target.value);
+  };
 
-                })
-        }, 500)
-    }, [user])
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setPhone(event.target.value);
+  };
 
-    return (
-        <>
-            <h1>Creating profile...</h1><Spinner></Spinner>
-        </>
-    )
-}
+  const handleDeptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setDept(event.target.value);
+  };
 
-export default CreateProfile
+  const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setRole(event.target.value);
+  };
+
+  const handleBioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setBio(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setCreating(true);
+
+    console.log(email);
+
+    console.log(user);
+    if (user) {
+      localStorage.setItem("user", `${user.id}`);
+
+      const profile = {
+        UserID: user.id,
+        User: user,
+        FullName: fullName,
+        Bio: bio,
+        MemberSince: "2023-11-11",
+        Role: role,
+        DateOfBirth: "2023-10-10",
+        Department: dept,
+        PhoneNumber: phone,
+      };
+
+      fetch("https://localhost:7185/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      }).catch((error) => {
+        throw new Error(error);
+      });
+
+      setCreating(false);
+      navigate("/profile");
+    } else {
+      console.log("nope");
+    }
+  };
+
+  return (
+    <Container>
+      <>
+        <h1 className="blue-text my-5">Creëer je profiel</h1>
+        <Card className="shadow-lg">
+          <Card.Body>
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+              <h6 className="text-dark opacity-50">
+                Let op, de informatie die u hier invult is door anderen te zien
+                op uw profiel. Vul geen informatie in die u niet openbaar wilt
+                maken.
+              </h6>
+              <div className="d-flex flex-column w-25">
+                <label htmlFor="name">
+                  Volledige naam<span className="text-danger">*</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Naam"
+                  onChange={handleFullNameChange}
+                ></input>
+              </div>
+              <div className="d-flex flex-column w-25">
+                <label htmlFor="phone">Telefoonnummer</label>
+                <input
+                  id="phone"
+                  type="text"
+                  placeholder="06 12345678"
+                  onChange={handlePhoneChange}
+                ></input>
+              </div>
+              <div className="d-flex flex-column w-25">
+                <label htmlFor="role">Functie</label>
+                <input
+                  id="role"
+                  type="text"
+                  placeholder="Functie"
+                  onChange={handleRoleChange}
+                ></input>
+              </div>
+              <div className="d-flex flex-column w-25">
+                <label htmlFor="dept">Afdeling</label>
+                <input
+                  id="dept"
+                  type="text"
+                  placeholder="Afdeling"
+                  onChange={handleDeptChange}
+                ></input>
+              </div>
+              <div className="d-flex flex-column w-25">
+                <label htmlFor="bio">Bio</label>
+                <input
+                  id="bio"
+                  type="text"
+                  placeholder="Bio"
+                  onChange={handleBioChange}
+                ></input>
+              </div>
+              <div className="d-flex flex-column">
+                <label htmlFor="bio">Bio</label>
+                <textarea id="bio" placeholder="Bio"></textarea>
+              </div>
+              <p className="text-danger">* Verplicht</p>
+              <Button type="submit">Profiel creëren</Button>
+            </form>
+          </Card.Body>
+        </Card>
+      </>
+    </Container>
+  );
+};
+
+export default CreateProfile;
