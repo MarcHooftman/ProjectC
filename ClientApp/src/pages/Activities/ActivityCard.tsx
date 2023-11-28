@@ -1,4 +1,4 @@
-import IActivity from "./IActivity";
+import IActivity from "../../interfaces/IActivity";
 import { Card, Modal } from "react-bootstrap";
 import { useState } from "react";
 

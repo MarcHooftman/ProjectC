@@ -5,20 +5,15 @@ import Layout from '../../../components/Layout';
 import PersonalInfoCard from '../PersonalInfoCard';
 import UserDataCard from '../UserDataCard';
 import ProfilePostCard from '../ProfilePostCard';
-import IProfile from '../IProfile';
-import IForumPost from '../../Forum/IForumPost';
-import { isLoggedIn } from '../../../utils/isLoggedIn';
+import IProfile from '../../../interfaces/IProfile';
+import IForumPost from '../../../interfaces/IForumPost';
 
 const ProfileByID = () => {
     const { id } = useParams();
     const [profilePicUrl, setProfilePicUrl] = useState<string>("");
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isLoggedIn()) {
-            navigate("/login")
-        }
-    }, [])
+
+
 
     const { loading: profileLoading, data: profileData } = useFetch(`https://localhost:7185/api/profile/by-user/${id}`)
     const { loading: postsLoading, data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${id}`)

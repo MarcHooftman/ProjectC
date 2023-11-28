@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import IActivity from "../Activities/IActivity";
+import IActivity from "../../interfaces/IActivity";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";

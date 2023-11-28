@@ -1,28 +1,35 @@
-import { Button, Card, Container, Spinner } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card, Container } from "react-bootstrap";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import IUser from "../../interfaces/IUser";
+
 import useFetch from "../../hooks/useFetch";
 
 const CreateProfile = () => {
-  const { email } = useParams();
-  //const [user, setUser] = useState<IUser>();
+  const [searchParams] = useSearchParams();
+  const userID = searchParams.get("userId");
+  const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
-  const [creating, setCreating] = useState<boolean>(false);
+  //const [creating, setCreating] = useState<boolean>(false);
 
-  const [fullName, setFullName] = useState<string>();
-  const [phone, setPhone] = useState<string>();
-  const [dept, setDept] = useState<string>();
-  const [role, setRole] = useState<string>();
-  const [bio, setBio] = useState<string>();
+  const [fullName, setFullName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [dept, setDept] = useState<string>("");
+  const [role, setRole] = useState<string>("");
+  const [bio, setBio] = useState<string>("");
 
-  let user: IUser | null;
-  const { loading, data: userData } = useFetch(
-    `https://localhost:7185/api/user/by-email/${email}`
-  );
   useEffect(() => {
-    user = userData;
-  }, [loading]);
+    if (userID) {
+      fetch(`https://localhost:7185/api/user/${userID}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, [userID]);
 
   const handleFullNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -44,18 +51,16 @@ const CreateProfile = () => {
     setRole(event.target.value);
   };
 
-  const handleBioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
     setBio(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setCreating(true);
-
-    console.log(email);
-
+    //setCreating(true);
     console.log(user);
+
     if (user) {
       localStorage.setItem("user", `${user.id}`);
 
@@ -81,7 +86,7 @@ const CreateProfile = () => {
         throw new Error(error);
       });
 
-      setCreating(false);
+      //setCreating(false);
       navigate("/profile");
     } else {
       console.log("nope");
@@ -138,18 +143,13 @@ const CreateProfile = () => {
                   onChange={handleDeptChange}
                 ></input>
               </div>
-              <div className="d-flex flex-column w-25">
-                <label htmlFor="bio">Bio</label>
-                <input
-                  id="bio"
-                  type="text"
-                  placeholder="Bio"
-                  onChange={handleBioChange}
-                ></input>
-              </div>
               <div className="d-flex flex-column">
                 <label htmlFor="bio">Bio</label>
-                <textarea id="bio" placeholder="Bio"></textarea>
+                <textarea
+                  id="bio"
+                  placeholder="Bio"
+                  onChange={handleBioChange}
+                ></textarea>
               </div>
               <p className="text-danger">* Verplicht</p>
               <Button type="submit">Profiel creëren</Button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Layout from "../../../components/Layout";
 import "./edit_profile.scss";
 
-import IProfile from "../IProfile";
+import IProfile from "../../../interfaces/IProfile";
 
 // Change to the data of logged in person
 const EditProfile = () => {

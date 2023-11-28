@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import IForumPost from "./IForumPost";
+import IForumPost from "../../interfaces/IForumPost";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require('../../assets/down-arrow.png');
@@ -19,6 +19,8 @@ const ForumPostCard = ({ post }: Props) => {
     if (post?.time !== undefined) {
         formattedDate = new Date(post.time).toLocaleString("nl-NL", { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
     }
+
+    console.log(post)
 
     return (
         <Card as="details" className="my-3 shadow-lg">
@@ -46,13 +48,14 @@ const ForumPostCard = ({ post }: Props) => {
                     </Col>
                 </Row>
             </Card.Header>
-            <p className='card-body'>
+            <Card.Body>
                 {post?.content}
-            </p>
-            <Card.Footer>
                 <span className="d-flex gap-2">
-                    {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag}</Badge></Link>)}
+                    {Array.isArray(post?.tags) && post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
                 </span>
+            </Card.Body>
+            <Card.Footer>
+
             </Card.Footer>
         </Card>
     )

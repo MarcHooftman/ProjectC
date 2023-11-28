@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
-import ITraining from "./ITraining";
+import ITraining from "../../interfaces/ITraining";
 import TrainingInfoCard from "./TrainingInfoCard";
 import "./Training.scss"
 

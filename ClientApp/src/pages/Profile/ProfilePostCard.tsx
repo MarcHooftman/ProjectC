@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import IForumPost from "../Forum/IForumPost";
+import IForumPost from "../../interfaces/IForumPost";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require('../../assets/down-arrow.png');
@@ -41,7 +41,7 @@ const ProfilePostCard = ({ post }: Props) => {
             </p>
             <Card.Footer>
                 <span className="d-flex gap-2">
-                    {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag}</Badge></Link>)}
+                    {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
                 </span>
             </Card.Footer>
         </Card>

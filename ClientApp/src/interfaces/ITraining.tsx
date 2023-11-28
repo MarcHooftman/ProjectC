@@ -1,4 +1,4 @@
-import IProfile from "../Profile/IProfile";
+import IProfile from "./IProfile";
 
 export default interface ITraining {
     ID: number

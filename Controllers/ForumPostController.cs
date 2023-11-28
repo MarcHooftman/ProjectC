@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.ForumPost.Include(_ => _.Profile).ToListAsync();
+            return await _context.ForumPost.Include(_ => _.Profile).Include(_ => _.Tags).ToListAsync();
         }
 
         // GET: api/ForumPost/5
@@ -39,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.FindAsync(id);
+            var forumPost = await _context.ForumPost.Include(_ => _.Tags).FirstOrDefaultAsync(_ => _.ID == id);
 
             if (forumPost == null)
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.Where(_ => _.ProfileID == profileID).ToListAsync();
+            var forumPost = await _context.ForumPost.Include(_ => _.Tags).Where(_ => _.ProfileID == profileID).ToListAsync();
 
             if (forumPost == null)
             {
@@ -77,7 +77,8 @@ namespace API.Controllers
             }
 
             var forumPost = await _context.ForumPost
-            .Include(_ => _.Profile)
+                .Include(_ => _.Profile)
+                .Include(_ => _.Tags)
                 .OrderByDescending(fp => fp.Likes.Count())
                 .FirstOrDefaultAsync();
 

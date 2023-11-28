@@ -61,7 +61,7 @@ namespace probeersel.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ParentPostID")
+                    b.Property<int?>("ParentPostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
@@ -310,9 +310,7 @@ namespace probeersel.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", "ParentPost")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentPostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ParentPostID");
 
                     b.HasOne("API.Models.Profile", "Profile")
                         .WithMany()
