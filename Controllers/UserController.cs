@@ -107,6 +107,7 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.User'  is null.");
             }
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
