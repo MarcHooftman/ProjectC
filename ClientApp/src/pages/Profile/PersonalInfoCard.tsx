@@ -25,39 +25,36 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                                 <th className="text-end blue-text">Email</th><td className="blue-text">{graphData?.userPrincipalName}</td>
                             </tr>
                             <tr>
-                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
+                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.Role}</td>
                             </tr>
 
-                            {profile?.phoneNumber &&
+                            {profile?.dateOfBirth && profile?.dateOfBirth.trim() !== "" &&
                                 <tr>
                                     <th className="text-end blue-text">Geboortedatum</th><td className="blue-text">{profile?.dateOfBirth}</td>
                                 </tr>
                             }
 
-                            {profile?.phoneNumber &&
+                            {profile?.phoneNumber && profile?.phoneNumber.trim() !== "" &&
                                 <tr>
                                     <th className="text-end blue-text">Telefoonnummer</th><td className="blue-text">{profile?.phoneNumber}</td>
                                 </tr>
                             }
 
-
-
                             <tr>
                                 <th className="text-end blue-text">Afdeling</th><td className="blue-text">{graphData?.officeLocation}</td>
                             </tr>
 
-
                             <tr>
-                                <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.memberSince}</td>
+                                <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.MemberSince}</td>
                             </tr>
                         </tbody>
                     </Table>
                 </div>
-                {profile?.bio !== '' &&
+                {profile?.Bio !== '' &&
                     <>
                         <strong>Bio</strong>
                         <p className="card-text">
-                            {profile?.bio}
+                            {profile?.Bio}
                         </p>
                     </>
                 }

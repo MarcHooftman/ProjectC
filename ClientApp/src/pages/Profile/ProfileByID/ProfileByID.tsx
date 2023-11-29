@@ -28,7 +28,7 @@ const ProfileByID = () => {
 
     return (
         <Layout>
-            <h1 className="blue-text my-5">{profile?.fullName}</h1>
+            <h1 className="blue-text my-5">{profile?.FullName}</h1>
             <div className="d-flex gap-5 mb-5">
                 <PersonalInfoCard pfp={profilePicUrl} profile={profile} />
                 <UserDataCard posts={postsData || []} />
