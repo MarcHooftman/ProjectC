@@ -6,7 +6,8 @@ export default interface IForumPost {
   title: string;
   content: string;
   tags: { id: number; name: string }[];
-  profile: IProfile;
+  profileID: number;
+  profile?: IProfile;
   time: string;
   forumPostID: number;
   comments: IForumPost[];

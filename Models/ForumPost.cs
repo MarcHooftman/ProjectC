@@ -7,7 +7,7 @@ public class ForumPost
     public string Content { get; set; } = null!;
     public IEnumerable<Tag>? Tags { get; set; }
     public int ProfileID { get; set; }
-    public Profile Profile { get; set; } = null!;
+    public Profile? Profile { get; set; }
     public DateTime Time { get; set; }
     public int? ForumPostID { get; set; }
     public IEnumerable<ForumPost>? Comments { get; set; }

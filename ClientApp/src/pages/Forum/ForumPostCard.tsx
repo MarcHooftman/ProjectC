@@ -103,7 +103,7 @@ const ForumPostCard = ({ post }: Props) => {
         title: "",
         content: comment || "",
         tags: [],
-        profile: data as IProfile,
+        profileID: data.id,
         time: new Date().toISOString(),
         forumPostID: post.id,
         comments: [],
@@ -206,11 +206,11 @@ const ForumPostCard = ({ post }: Props) => {
             onClick={handleReport}
           />
         </div>
-        <form onSubmit={handleCommentSubmit}>
+        <form onSubmit={handleCommentSubmit}
+          style={show ? { display: "block" } : { display: "none" }}>
           <input
             ref={ref}
             className="position-relative box mb-3"
-            style={show ? { display: "block" } : { display: "none" }}
             onChange={handleCommentChange}
           />
           <Button type="submit">Plaats</Button>
