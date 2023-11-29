@@ -1,24 +1,27 @@
 import { Dropdown } from "react-bootstrap";
-import { useMsal, AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import {
+  useMsal,
+  AuthenticatedTemplate,
+  UnauthenticatedTemplate,
+} from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
 
 const Hamburger = require("../../assets/hamburger.png");
 
 const NavDropDown = () => {
-
   const { instance } = useMsal();
 
   const handleLogin = () => {
-    instance.loginRedirect(loginRequest).catch(e => {
+    instance.loginRedirect(loginRequest).catch((e) => {
       console.log(e);
     });
-  }
+  };
 
   const handleLogout = () => {
     instance.logoutRedirect({
       postLogoutRedirectUri: "/",
     });
-  }
+  };
 
   return (
     <Dropdown>
@@ -46,6 +49,9 @@ const NavDropDown = () => {
             Over ons
           </Dropdown.Item>
           <Dropdown.Divider />
+          <Dropdown.Item href="/" className="fs-5 blue-text">
+            Home
+          </Dropdown.Item>
           <Dropdown.Item onClick={handleLogout} className="fs-5 blue-text">
             Uitloggen
           </Dropdown.Item>
@@ -55,6 +61,9 @@ const NavDropDown = () => {
             Over ons
           </Dropdown.Item>
           <Dropdown.Divider />
+          <Dropdown.Item href="/" className="fs-5 blue-text">
+            Home
+          </Dropdown.Item>
           <Dropdown.Item onClick={handleLogin} className="fs-5 blue-text">
             Inloggen
           </Dropdown.Item>
