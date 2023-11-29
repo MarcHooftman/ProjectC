@@ -35,16 +35,16 @@ const Forum = () => {
   const [searchParams,] = useSearchParams()
   const filter = searchParams.get('filter')
 
-  let { loading, data, error } = useFetch("https://localhost:7185/api/forumpost")
-
+  let { loading, data } = useFetch("https://localhost:7185/api/forumpost")
+  console.log(forumPosts)
   useEffect(() => {
     if (data) {
-      let typedData = data.$values as IForumPost[];
-      console.log(typedData)
+      let typedData = data as IForumPost[];
       if (filter) {
-
         typedData = typedData.filter(post => post.tags.some(tag => tag.name.toLowerCase().includes(filter.toLowerCase())))
       }
+
+      typedData = typedData.filter(post => post.forumPostID == undefined);
 
 
 
@@ -56,6 +56,7 @@ const Forum = () => {
       setForumPosts(sortedData);
     }
   }, [filter, loading, data]);
+
 
 
   return (

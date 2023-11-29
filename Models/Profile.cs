@@ -15,5 +15,5 @@ public class Profile
     public int? ProfilePictureID { get; set; }
     public Media? ProfilePicture { get; set; }
     public string? PhoneNumber { get; set; }
-    public IEnumerable<Training>? Training { get; set; }
+    public IEnumerable<Training>? TrainingsWatched { get; set; }
 }

@@ -12,3 +12,12 @@
     height: 40px;
     aspect-ratio: 1/1;
 }
+
+.action-icon {
+    height: 25px !important;
+    width: 25px !important;
+}
+
+.action-icon:hover {
+    cursor: pointer !important;
+}

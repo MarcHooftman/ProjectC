@@ -1,3 +1,4 @@
+import ILike from "./ILike";
 import IProfile from "./IProfile";
 
 export default interface IForumPost {
@@ -7,8 +8,8 @@ export default interface IForumPost {
     tags: { id: number; name: string; }[];
     profile: IProfile;
     time: string;
-    parentID: number;
+    forumPostID: number;
     comments: IForumPost[];
-    likes: IProfile[];
+    likes: ILike[];
     reports: IProfile[];
 }

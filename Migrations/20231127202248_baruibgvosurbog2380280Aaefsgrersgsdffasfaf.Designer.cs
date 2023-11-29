@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace probeersel.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231127202248_baruibgvosurbog2380280Aaefsgrersgsdffasfaf")]
+    partial class baruibgvosurbog2380280Aaefsgrersgsdffasfaf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +94,10 @@ namespace probeersel.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ForumPostID")
+                    b.Property<int?>("ForumPostID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
@@ -293,9 +299,7 @@ namespace probeersel.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Likes")
-                        .HasForeignKey("ForumPostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ForumPostID");
                 });
 
             modelBuilder.Entity("API.Models.Profile", b =>

@@ -39,27 +39,19 @@ public class AntesContext : DbContext
 
 
         modelBuilder.Entity<ForumPost>()
-            .HasOne(_ => _.ParentPost)
-            .WithMany(_ => _.Comments)
-            .HasForeignKey(_ => _.ParentPostID);
+            .HasMany(_ => _.Comments);
 
 
         modelBuilder.Entity<ForumPost>()
-            .HasMany(_ => _.Tags)
-            .WithMany(_ => _.Post)
-            .UsingEntity<PostTag>();
+            .HasMany(_ => _.Tags);
 
 
         modelBuilder.Entity<Training>()
-            .HasMany(_ => _.Tags)
-            .WithMany(_ => _.Training)
-            .UsingEntity<TrainingTag>();
+            .HasMany(_ => _.Tags);
 
 
         modelBuilder.Entity<ForumPost>()
-            .HasMany(_ => _.Likes)
-            .WithOne(_ => _.Post)
-            .HasForeignKey(_ => _.PostID);
+            .HasMany(_ => _.Likes);
 
 
         modelBuilder.Entity<ForumPost>()
@@ -69,9 +61,7 @@ public class AntesContext : DbContext
 
 
         modelBuilder.Entity<Profile>()
-            .HasMany(_ => _.Training)
-            .WithMany(_ => _.Profile)
-            .UsingEntity<TrainingProfile>();
+            .HasMany(_ => _.TrainingsWatched);
     }
 
 
@@ -81,5 +71,9 @@ public class AntesContext : DbContext
     public DbSet<Profile> Profile { get; set; } = default!;
     public DbSet<Training> Training { get; set; } = default!;
     public DbSet<User> User { get; set; } = default!;
+    public DbSet<Like> Like { get; set; } = default!;
+    public DbSet<Report> Report { get; set; } = default!;
+    public DbSet<Tag> Tag { get; set; } = default!;
+
 }
 
