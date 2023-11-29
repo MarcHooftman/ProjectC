@@ -9,8 +9,7 @@ public class ForumPost
     public int ProfileID { get; set; }
     public Profile Profile { get; set; } = null!;
     public DateTime Time { get; set; }
-    public int? ParentPostID { get; set; }
-    public ForumPost? ParentPost { get; set; }
+    public int? ForumPostID { get; set; }
     public IEnumerable<ForumPost>? Comments { get; set; }
     public IEnumerable<Like>? Likes { get; set; }
     public IEnumerable<Report>? Reports { get; set; }
