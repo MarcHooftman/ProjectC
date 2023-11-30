@@ -71,7 +71,7 @@ const PopPostCard = () => {
             <Card.Title as={"h5"}>{post?.title}</Card.Title>
             {post?.content}
             <span className="d-flex gap-2 mt-2">
-              {Array.isArray(post?.tags) && post?.tags.map((tag) => (
+              {Array.isArray(post?.tags.$values) && post?.tags.$values.map((tag) => (
                 <Link to={`/forum?filter=${tag}`}>
                   <Badge pill={true}>{tag.name}</Badge>
                 </Link>

@@ -28,7 +28,12 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.ForumPost.Include(_ => _.Profile).Include(_ => _.Tags).ToListAsync();
+            return await _context.ForumPost
+                .Include(_ => _.Profile)
+                .Include(_ => _.Tags)
+                .Include(_ => _.Likes)
+                .Include(_ => _.Comments)
+                .ToListAsync();
         }
 
         // GET: api/ForumPost/5
@@ -39,7 +44,11 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var forumPost = await _context.ForumPost.Include(_ => _.Tags).FirstOrDefaultAsync(_ => _.ID == id);
+            var forumPost = await _context.ForumPost
+                .Include(_ => _.Profile)
+                .Include(_ => _.Tags)
+                .Include(_ => _.Likes)
+                .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (forumPost == null)
             {
