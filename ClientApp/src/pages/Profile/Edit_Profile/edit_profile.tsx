@@ -121,6 +121,7 @@ const EditProfile = () => {
             if (response.ok) {
                 console.log("Profile updated successfully");
                 // Redirect to the profile page or perform any other actions as needed
+                window.location.href = '/profile';
             } else {
                 console.error('Failed to update profile:', response.statusText);
             }
