@@ -56,15 +56,45 @@ const EditProfile = () => {
         }
     }, [data]);
 
-    const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
+    // const handleInputChange = (
+    //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    // ) => {
+    //     const { name, value } = e.target;
 
-        // Update editedProfile with the existing data and the changes
-        setEditedProfile((currentProfile: any) => ({
-            ...currentProfile, // Spread the current state
-            [name]: value, // Add or update the specific field with the new value
+    //     // Update editedProfile with the existing data and the changes
+    //     setEditedProfile((currentProfile: IProfile | null) => ({
+    //         ...currentProfile!, // Use non-null assertion operator to avoid undefined
+    //         [name]: value, // Add or update the specific field with the new value
+    //     }));
+    // };
+
+    const handleRoleChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            role: value,
+        }));
+    };
+
+    const handlePhoneNumberChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            phoneNumber: value,
+        }));
+    };
+
+    const handleBioChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            bio: value,
         }));
     };
 
@@ -72,10 +102,10 @@ const EditProfile = () => {
         e.preventDefault();
         try {
             const payload = {
-                ...prevProfile,
-                Role: editedProfile?.Role,
-                PhoneNumber: editedProfile?.PhoneNumber,
-                Bio: editedProfile?.Bio,
+                ...editedProfile,
+                Role: editedProfile?.role,
+                PhoneNumber: editedProfile?.phoneNumber,
+                Bio: editedProfile?.bio,
             };
 
             console.log("Request Payload:", JSON.stringify(payload));
@@ -103,7 +133,7 @@ const EditProfile = () => {
         <Layout>
             <h1 className="blue-text my-5">Profiel bewerken</h1>
             <div className="container mt-5">
-                <div className="card">
+                <div className="card shadow-lg">
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
                             <div className="form-group mt-3">
@@ -113,8 +143,9 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="Role"
                                     name="Role"
-                                    value={editedProfile?.Role || ""}
-                                    onChange={handleInputChange}
+                                    value={editedProfile?.role || ""}
+                                    onChange={handleRoleChange}
+                                    placeholder={editedProfile?.role || ""}
                                 />
                             </div>
                             <div className="form-group mt-3">
@@ -124,8 +155,9 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="PhoneNumber"
                                     name="PhoneNumber"
-                                    value={editedProfile?.PhoneNumber || ""}
-                                    onChange={handleInputChange}
+                                    value={editedProfile?.phoneNumber || ""}
+                                    onChange={handlePhoneNumberChange}
+                                    placeholder={editedProfile?.phoneNumber || ""}
                                 />
                             </div>
                             <div className="form-group mt-3">
@@ -134,8 +166,9 @@ const EditProfile = () => {
                                     className="form-control"
                                     id="Bio"
                                     name="Bio"
-                                    value={editedProfile?.Bio || ""}
-                                    onChange={handleInputChange}
+                                    value={editedProfile?.bio || ""}
+                                    onChange={handleBioChange}
+                                    placeholder={editedProfile?.bio || ""}
                                 />
                             </div>
                             <button type="submit" className="btn btn-primary mt-4">

@@ -25,7 +25,7 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                                 <th className="text-end blue-text">Email</th><td className="blue-text">{graphData?.userPrincipalName}</td>
                             </tr>
                             <tr>
-                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.Role}</td>
+                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
                             </tr>
 
                             {profile?.dateOfBirth && profile?.dateOfBirth.trim() !== "" &&
@@ -45,16 +45,16 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                             </tr>
 
                             <tr>
-                                <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.MemberSince}</td>
+                                <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.memberSince}</td>
                             </tr>
                         </tbody>
                     </Table>
                 </div>
-                {profile?.Bio !== '' &&
+                {profile?.bio !== '' &&
                     <>
                         <strong>Bio</strong>
                         <p className="card-text">
-                            {profile?.Bio}
+                            {profile?.bio}
                         </p>
                     </>
                 }
