@@ -48,9 +48,10 @@ const PopPostCard = () => {
 
   return (
     <Link to="/forum" className="text-decoration-none">
-      {post == undefined
-        ? <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
-        : <Card className="shadow-lg">
+      {post == undefined ? (
+        <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
+      ) : (
+        <Card className="shadow-lg">
           <Card.Header className="d-flex justify-content-between align-items-center">
             <Link to="/profile" className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
@@ -71,19 +72,19 @@ const PopPostCard = () => {
             <Card.Title as={"h5"}>{post?.title}</Card.Title>
             {post?.content}
             <span className="d-flex gap-2 mt-2">
-              {Array.isArray(post?.tags.$values) && post?.tags.$values.map((tag) => (
-                <Link to={`/forum?filter=${tag}`}>
-                  <Badge pill={true}>{tag.name}</Badge>
-                </Link>
-              ))}
+              {Array.isArray(post?.tags.$values) &&
+                post?.tags.$values.map((tag) => (
+                  <Link to={`/forum?filter=${tag}`}>
+                    <Badge pill={true}>{tag.name}</Badge>
+                  </Link>
+                ))}
             </span>
           </Card.Body>
           <Card.Footer className="card-footer">
             <span className="opacity-50 text-dark">No comments yet</span>
           </Card.Footer>
         </Card>
-      }
-
+      )}
     </Link>
   );
 };

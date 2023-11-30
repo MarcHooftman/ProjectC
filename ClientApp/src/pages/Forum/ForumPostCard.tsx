@@ -1,13 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Badge,
-  Button,
-  Card,
-  Col,
-  Overlay,
-  Popover,
-  Row,
-} from "react-bootstrap";
+import { Badge, Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IForumPost from "../../interfaces/IForumPost";
 import PostComment from "./PostComment";
@@ -19,7 +11,6 @@ import useGraphData from "../../hooks/useGraphData";
 import useFetch from "../../hooks/useFetch";
 import IProfile from "../../interfaces/IProfile";
 import ILike from "../../interfaces/ILike";
-import { Tooltip } from "react-bootstrap";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require("../../assets/down-arrow.png");
@@ -31,23 +22,44 @@ interface Props {
 
 const ForumPostCard = ({ post }: Props) => {
   const [collapse, setCollapse] = useState<boolean>(true);
-  const [liked, setLiked] = useState(false);
+  const [submittedComment, setSubmittedComment] = useState<string>();
+  const [liked, setLiked] = useState<boolean>(false);
+  const [likeCount, setLikeCount] = useState<number>();
   const [initialize, setInitialize] = useState<boolean>(true);
+  const [localPost, setLocalPost] = useState<IForumPost | undefined>(post);
 
   const ref = useRef(null);
   const [show, setShow] = useState(false);
 
   const { graphData } = useGraphData();
-  const { data } = useFetch(
-    `https://localhost:7185/api/profile/by-email/${graphData?.mail}`
-  );
+  const [profile, setProfile] = useState<IProfile>();
+  useEffect(() => {
+    if (graphData) {
+      fetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`)
+        .then((response) => response.json())
+        .then((data) => setProfile(data as IProfile));
+    }
+  }, [graphData]);
 
-  //console.log(post)
+  const fetchPost = () => {
+    fetch(`https://localhost:7185/api/forumpost/${localPost?.id}`)
+      .then((response) => response.json())
+      .then((data) => setLocalPost(data as IForumPost));
+  };
+
+  useEffect(() => {
+    console.log("fetch");
+    fetchPost();
+  }, [liked, submittedComment]);
+
+  useEffect(() => {
+    setLikeCount(localPost?.likes?.length);
+  });
 
   useEffect(() => {
     if (post?.likes && post?.likes.length > 0 && initialize) {
       post?.likes.forEach((like) => {
-        if (like.profileID === (data as IProfile)?.id) {
+        if (like.profileID === profile?.id) {
           setLiked(true);
           setInitialize(false);
         }
@@ -55,13 +67,11 @@ const ForumPostCard = ({ post }: Props) => {
     }
   });
 
-  const handleLike = () => {
-    setLiked(!liked);
-
+  const addOrDeleteLike = () => {
     if (!liked) {
       const like = {
         ForumPostID: post?.id,
-        ProfileID: (data as IProfile).id,
+        ProfileID: profile?.id,
       };
 
       fetch("https://localhost:7185/api/like", {
@@ -73,7 +83,7 @@ const ForumPostCard = ({ post }: Props) => {
       });
     } else {
       const findLike = (likeArray: ILike[]) =>
-        likeArray.find((like) => like.profileID === data.id);
+        likeArray.find((like) => like.profileID === profile?.id);
       fetch(`https://localhost:7185/api/forumpost/${post?.id}`)
         .then((response) => response.json())
         .then((data) =>
@@ -82,9 +92,13 @@ const ForumPostCard = ({ post }: Props) => {
             headers: {
               "Content-Type": "application/json",
             },
-          })
+          }).then(() => fetchPost())
         );
     }
+  };
+  const handleLike = () => {
+    addOrDeleteLike();
+    setLiked(!liked);
   };
 
   const handleReport = () => {
@@ -98,12 +112,12 @@ const ForumPostCard = ({ post }: Props) => {
   };
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (post && post.id) {
+    if (post && post.id && profile?.id) {
       const commentObject: IForumPost = {
         title: "",
         content: comment || "",
         tags: [],
-        profileID: data.id,
+        profileID: profile.id,
         time: new Date().toISOString(),
         forumPostID: post.id,
         comments: [],
@@ -118,10 +132,7 @@ const ForumPostCard = ({ post }: Props) => {
         },
         body: JSON.stringify(commentObject),
       });
-
-      fetch(`https://localhost:7185/api/forumpost/${post.id}`)
-        .then((response) => response.json())
-        .then((data) => (post = data as IForumPost));
+      setSubmittedComment(comment);
     }
   };
 
@@ -190,6 +201,7 @@ const ForumPostCard = ({ post }: Props) => {
       </Card.Body>
       <Card.Footer>
         <div className="mb-3 d-flex gap-4">
+          {likeCount}
           <img
             src={liked ? LikeFillIcon : LikeIcon}
             className="action-icon"
@@ -206,8 +218,10 @@ const ForumPostCard = ({ post }: Props) => {
             onClick={handleReport}
           />
         </div>
-        <form onSubmit={handleCommentSubmit}
-          style={show ? { display: "block" } : { display: "none" }}>
+        <form
+          onSubmit={handleCommentSubmit}
+          style={show ? { display: "block" } : { display: "none" }}
+        >
           <input
             ref={ref}
             className="position-relative box mb-3"

@@ -31,33 +31,41 @@ import useFetch from "../../hooks/useFetch";
 // }
 
 const Forum = () => {
-  const [forumPosts, setForumPosts] = useState<IForumPost[]>([])
-  const [searchParams,] = useSearchParams()
-  const filter = searchParams.get('filter')
+  const [forumPosts, setForumPosts] = useState<IForumPost[]>([]);
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get("filter");
 
-  let { loading, data } = useFetch("https://localhost:7185/api/forumpost")
-  console.log(forumPosts)
+  //let { loading, data } = useFetch("https://localhost:7185/api/forumpost");
+
   useEffect(() => {
-    if (data) {
-      let typedData = data as IForumPost[];
+    fetch("https://localhost:7185/api/forumpost")
+      .then((response) => response.json())
+      .then((data) => setForumPosts(data));
+  }, [filter]);
+
+  useEffect(() => {
+    if (forumPosts) {
+      let tempData;
       if (filter) {
-        typedData = typedData.filter(post => post.tags.some(tag => tag.name.toLowerCase().includes(filter.toLowerCase())))
+        tempData = forumPosts.filter((post) =>
+          post.tags.some((tag) =>
+            tag.name.toLowerCase().includes(filter.toLowerCase())
+          )
+        );
       }
 
-      typedData = typedData.filter(post => post.forumPostID == undefined);
+      tempData = forumPosts.filter((post) => post.forumPostID == undefined);
 
-
-
-      let sortedData = typedData;
-      if (Array.isArray(typedData)) {
-        sortedData = typedData.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+      let sortedData = tempData;
+      if (Array.isArray(tempData)) {
+        sortedData = tempData.sort(
+          (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
+        );
       }
 
       setForumPosts(sortedData);
     }
-  }, [filter, loading, data]);
-
-
+  }, []);
 
   return (
     <Layout>
@@ -65,7 +73,13 @@ const Forum = () => {
         <h1 className="my-5 blue-text">Antes Forum</h1>
         <FilterDropdown />
       </span>
-      {forumPosts.length > 0 ? forumPosts.map(forumPost => <ForumPostCard key={forumPost.id} post={forumPost} />) : <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>}
+      {forumPosts.length > 0 ? (
+        forumPosts.map((forumPost) => (
+          <ForumPostCard key={forumPost.id} post={forumPost} />
+        ))
+      ) : (
+        <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>
+      )}
     </Layout>
   );
 };

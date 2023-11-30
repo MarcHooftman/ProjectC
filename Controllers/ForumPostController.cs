@@ -48,6 +48,7 @@ namespace API.Controllers
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .Include(_ => _.Likes)
+                .Include(_ => _.Comments)
                 .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (forumPost == null)
