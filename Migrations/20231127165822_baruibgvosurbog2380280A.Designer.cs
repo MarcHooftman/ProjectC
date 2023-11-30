@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace probeersel.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231127165822_baruibgvosurbog2380280A")]
+    partial class baruibgvosurbog2380280A
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +94,7 @@ namespace probeersel.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ForumPostID")
+                    b.Property<int>("PostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
@@ -99,7 +102,9 @@ namespace probeersel.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ForumPostID");
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("ProfileID");
 
                     b.ToTable("Like");
                 });
@@ -291,11 +296,21 @@ namespace probeersel.Migrations
 
             modelBuilder.Entity("API.Models.Like", b =>
                 {
-                    b.HasOne("API.Models.ForumPost", null)
+                    b.HasOne("API.Models.ForumPost", "Post")
                         .WithMany("Likes")
-                        .HasForeignKey("ForumPostID")
+                        .HasForeignKey("PostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("API.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("API.Models.Profile", b =>

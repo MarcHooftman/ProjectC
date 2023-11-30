@@ -1,0 +1,16 @@
+.comments-container>* {
+    padding-bottom: 0.5rem !important;
+}
+
+.comments-container>*:last-child {
+    padding-bottom: 0px !important;
+}
+
+.comment-action-icon {
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.comment-action-icon:hover {
+    cursor: pointer !important;
+}
