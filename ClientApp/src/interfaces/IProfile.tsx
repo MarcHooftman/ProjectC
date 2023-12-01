@@ -1,4 +1,6 @@
 // import { Media } from "reactstrap";
+import ITraining from "./ITraining";
+
 
 export default interface IProfile {
   id?: number;
@@ -16,4 +18,5 @@ export default interface IProfile {
     email: string;
   };
   // ProfilePicture: Media;
+  training: ITraining[];
 }

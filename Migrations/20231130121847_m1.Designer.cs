@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231130121847_m1")]
+    partial class m1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,6 +240,9 @@ namespace ProjectC.Migrations
                     b.Property<int>("MediaID")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -245,22 +251,9 @@ namespace ProjectC.Migrations
 
                     b.HasIndex("MediaID");
 
+                    b.HasIndex("ProfileID");
+
                     b.ToTable("Training");
-                });
-
-            modelBuilder.Entity("API.Models.TrainingProfile", b =>
-                {
-                    b.Property<int>("ProfileID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TrainingID")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ProfileID", "TrainingID");
-
-                    b.HasIndex("TrainingID");
-
-                    b.ToTable("TrainingProfile");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -363,22 +356,11 @@ namespace ProjectC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Media");
-                });
-
-            modelBuilder.Entity("API.Models.TrainingProfile", b =>
-                {
                     b.HasOne("API.Models.Profile", null)
-                        .WithMany()
-                        .HasForeignKey("ProfileID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("TrainingsWatched")
+                        .HasForeignKey("ProfileID");
 
-                    b.HasOne("API.Models.Training", null)
-                        .WithMany()
-                        .HasForeignKey("TrainingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Media");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
@@ -390,6 +372,11 @@ namespace ProjectC.Migrations
                     b.Navigation("Reports");
 
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("API.Models.Profile", b =>
+                {
+                    b.Navigation("TrainingsWatched");
                 });
 
             modelBuilder.Entity("API.Models.Training", b =>

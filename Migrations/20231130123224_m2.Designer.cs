@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231130123224_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,15 +253,25 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.TrainingProfile", b =>
                 {
-                    b.Property<int>("ProfileID")
+                    b.Property<int>("TrainingsWatchedID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TrainingID")
+                    b.Property<int>("WatchedbyID")
                         .HasColumnType("integer");
 
-                    b.HasKey("ProfileID", "TrainingID");
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TrainingID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("TrainingsWatchedID", "WatchedbyID");
+
+                    b.HasIndex("ProfileID");
 
                     b.HasIndex("TrainingID");
+
+                    b.HasIndex("WatchedbyID");
 
                     b.ToTable("TrainingProfile");
                 });
@@ -368,17 +381,29 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.TrainingProfile", b =>
                 {
-                    b.HasOne("API.Models.Profile", null)
+                    b.HasOne("API.Models.Profile", "Profile")
                         .WithMany()
-                        .HasForeignKey("ProfileID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfileID");
+
+                    b.HasOne("API.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingID");
 
                     b.HasOne("API.Models.Training", null)
                         .WithMany()
-                        .HasForeignKey("TrainingID")
+                        .HasForeignKey("TrainingsWatchedID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("API.Models.Profile", null)
+                        .WithMany()
+                        .HasForeignKey("WatchedbyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
