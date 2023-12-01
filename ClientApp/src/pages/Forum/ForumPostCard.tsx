@@ -1,157 +1,33 @@
-import { useEffect, useRef, useState } from "react";
-import { Badge, Button, Card, Col, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Badge, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IForumPost from "../../interfaces/IForumPost";
 import PostComment from "./PostComment";
-import LikeIcon from "../../assets/like.svg";
-import LikeFillIcon from "../../assets/like-fill.svg";
-import CommentIcon from "../../assets/comment.svg";
-import ReportIcon from "../../assets/report.svg";
-import useGraphData from "../../hooks/useGraphData";
-import useFetch from "../../hooks/useFetch";
-import IProfile from "../../interfaces/IProfile";
-import ILike from "../../interfaces/ILike";
+import { formatDateTime } from "../../utils/formatDate";
+import ForumPostButtons from "./ForumPostButtons/ForumPostButtons";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require("../../assets/down-arrow.png");
 const profilePicture = require("../../assets/profile.png");
 
 interface Props {
-  post?: IForumPost;
+  post: IForumPost;
 }
 
 const ForumPostCard = ({ post }: Props) => {
   const [collapse, setCollapse] = useState<boolean>(true);
-  const [submittedComment, setSubmittedComment] = useState<string>();
-  const [liked, setLiked] = useState<boolean>(false);
-  const [likeCount, setLikeCount] = useState<number>();
-  const [initialize, setInitialize] = useState<boolean>(true);
-  const [localPost, setLocalPost] = useState<IForumPost | undefined>(post);
-
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-
-  const { graphData } = useGraphData();
-  const [profile, setProfile] = useState<IProfile>();
-  useEffect(() => {
-    if (graphData) {
-      fetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`)
-        .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }
-  }, [graphData]);
+  const [_post, setPost] = useState<IForumPost>(post);
 
   const fetchPost = () => {
-    fetch(`https://localhost:7185/api/forumpost/${localPost?.id}`)
+    fetch(`https://localhost:7185/api/forumpost/${post.id}`)
       .then((response) => response.json())
-      .then((data) => setLocalPost(data as IForumPost));
-  };
+      .then((data) => setPost(data as IForumPost))
+  }
 
-  useEffect(() => {
-    console.log("fetch");
-    fetchPost();
-  }, [liked, submittedComment]);
-
-  useEffect(() => {
-    setLikeCount(localPost?.likes?.length);
-  });
-
-  useEffect(() => {
-    if (post?.likes && post?.likes.length > 0 && initialize) {
-      post?.likes.forEach((like) => {
-        if (like.profileID === profile?.id) {
-          setLiked(true);
-          setInitialize(false);
-        }
-      });
-    }
-  });
-
-  const addOrDeleteLike = () => {
-    if (!liked) {
-      const like = {
-        ForumPostID: post?.id,
-        ProfileID: profile?.id,
-      };
-
-      fetch("https://localhost:7185/api/like", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(like),
-      });
-    } else {
-      const findLike = (likeArray: ILike[]) =>
-        likeArray.find((like) => like.profileID === profile?.id);
-      fetch(`https://localhost:7185/api/forumpost/${post?.id}`)
-        .then((response) => response.json())
-        .then((data) =>
-          fetch(`https://localhost:7185/api/like/${findLike(data.likes)?.id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }).then(() => fetchPost())
-        );
-    }
-  };
-  const handleLike = () => {
-    addOrDeleteLike();
-    setLiked(!liked);
-  };
-
-  const handleReport = () => {
-    console.log("report");
-  };
-
-  const [comment, setComment] = useState<string>();
-  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setComment(e.target.value);
-  };
-  const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (post && post.id && profile?.id) {
-      const commentObject: IForumPost = {
-        title: "",
-        content: comment || "",
-        tags: [],
-        profileID: profile.id,
-        time: new Date().toISOString(),
-        forumPostID: post.id,
-        comments: [],
-        likes: [],
-        reports: [],
-      };
-
-      fetch("https://localhost:7185/api/forumpost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(commentObject),
-      });
-      setSubmittedComment(comment);
-    }
-  };
-
-  useEffect(() => {
-    if (show) {
-      (ref.current as HTMLTextAreaElement | null)?.focus();
-    }
-  }, [show]);
 
   let formattedDate = "";
-
   if (post?.time !== undefined) {
-    formattedDate = new Date(post.time).toLocaleString("nl-NL", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
+    formattedDate = formatDateTime(post.time)
   }
 
   return (
@@ -191,7 +67,7 @@ const ForumPostCard = ({ post }: Props) => {
           {post?.tags &&
             Array.isArray(post?.tags) &&
             post?.tags.map((tag) => (
-              <Link to={`/forum?filter=${tag}`}>
+              <Link to={`/forum?filter=${tag.name}`}>
                 <Badge className="badge-color" text="light" pill={true}>
                   {tag.name}
                 </Badge>
@@ -200,38 +76,9 @@ const ForumPostCard = ({ post }: Props) => {
         </span>
       </Card.Body>
       <Card.Footer>
-        <div className="mb-3 d-flex gap-4">
-          {likeCount}
-          <img
-            src={liked ? LikeFillIcon : LikeIcon}
-            className="action-icon"
-            onClick={handleLike}
-          />
-          <img
-            src={CommentIcon}
-            className="action-icon"
-            onClick={() => setShow(!show)}
-          />
-          <img
-            src={ReportIcon}
-            className="action-icon"
-            onClick={handleReport}
-          />
-        </div>
-        <form
-          onSubmit={handleCommentSubmit}
-          style={show ? { display: "block" } : { display: "none" }}
-        >
-          <input
-            ref={ref}
-            className="position-relative box mb-3"
-            onChange={handleCommentChange}
-          />
-          <Button type="submit">Plaats</Button>
-        </form>
-
-        {post?.comments && post?.comments.length > 0 ? (
-          post?.comments.map((comment) => (
+        {_post?.id ? <ForumPostButtons onClick={fetchPost} postId={_post.id} /> : <></>}
+        {_post?.comments && _post?.comments.length > 0 ? (
+          _post?.comments.map((comment) => (
             <PostComment key={comment.id} comment={comment}></PostComment>
           ))
         ) : (
