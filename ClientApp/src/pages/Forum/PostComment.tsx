@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IForumPost from "../../interfaces/IForumPost";
 import { Link } from "react-router-dom";
 import "./PostComment.scss";
@@ -10,18 +10,48 @@ import ReportIcon from "../../assets/report.svg";
 import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
 import ILike from "../../interfaces/ILike";
+import LikeButton from "./ForumPostButtons/LikeButton";
+import CommentButton from "./ForumPostButtons/CommentButton";
+import ReportButton from "./ForumPostButtons/ReportButton";
+import { Button } from "react-bootstrap";
 
 const profilePicture = require("../../assets/profile.png");
 
 interface Props {
   comment: IForumPost;
+  onClick?: () => void;
 }
 
-const PostComment = ({ comment }: Props) => {
-  const [liked, setLiked] = useState(false);
-  const [initialize, setInitialize] = useState<boolean>(true);
+const PostComment = ({ onClick = () => {}, comment }: Props) => {
+  const ref = useRef<any>(null);
+  const [show, setShow] = useState(false);
+
+  const handleCommentClick = () => {
+    setShow(!show);
+    onClick();
+  };
+
+  useEffect(() => {
+    const input = ref?.current as HTMLInputElement;
+    if (show && input) {
+      if (input.parentElement) {
+        input.parentElement.hidden = false;
+      } else {
+        input.hidden = false;
+      }
+
+      input.focus();
+    } else if (input) {
+      if (input.parentElement) {
+        input.parentElement.hidden = true;
+      } else {
+        input.hidden = true;
+      }
+    }
+  }, [show]);
 
   const { graphData } = useGraphData();
+
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
@@ -31,60 +61,42 @@ const PostComment = ({ comment }: Props) => {
     }
   }, [graphData]);
 
-  useEffect(() => {
-    if (comment?.likes && comment?.likes.length > 0 && initialize) {
-      comment?.likes.forEach((like) => {
-        if (like.profileID === profile?.id) {
-          setLiked(true);
-          setInitialize(false);
-        }
-      });
-    }
-  });
+  const [commentContent, setCommentContent] = useState<string>();
+  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setCommentContent(e.target.value);
+  };
 
-  const handleLike = () => {
-    setLiked(!liked);
-
-    if (!liked) {
-      const like = {
-        ForumPostID: comment?.id,
-        ProfileID: profile?.id,
+  const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (profile?.id && comment.id) {
+      const commentObject: IForumPost = {
+        title: "",
+        content: commentContent || "",
+        tags: [],
+        profileID: profile.id,
+        time: new Date().toISOString(),
+        forumPostID: comment.id,
+        comments: [],
+        likes: [],
+        reports: [],
       };
 
-      fetch("https://localhost:7185/api/like", {
+      fetch("https://localhost:7185/api/forumpost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(like),
-      });
-    } else {
-      const findLike = (likeArray: ILike[]) =>
-        likeArray.find((like) => like.profileID === profile?.id);
-      fetch(`https://localhost:7185/api/forumpost/${comment?.id}`)
-        .then((response) => response.json())
-        .then((data) =>
-          fetch(`https://localhost:7185/api/like/${findLike(data.likes)?.id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-        );
+        body: JSON.stringify(commentObject),
+      }).then(() => onClick());
+      setCommentContent("");
+      setShow(false);
     }
   };
 
-  const handleComment = () => {
-    console.log("comment");
-  };
-
-  const handleReport = () => {
-    console.log("report");
-  };
-
   return (
-    <div className="border-secondary ms-2 border-start ps-3">
-      <div className=" pb-2">
+    <div className="border-secondary ms-2 border-start ps-3 pb-0">
+      <div className="pb-2">
         <div className="d-flex align-items-center gap-3">
           <Link
             to="/profile"
@@ -99,32 +111,42 @@ const PostComment = ({ comment }: Props) => {
           <p className="text-dark opacity-50 mb-0">
             {formatDate(comment.time)}
           </p>
-          <div className="d-flex gap-2">
-            <img
-              src={liked ? LikeFillIcon : LikeIcon}
-              className="comment-action-icon"
-              onClick={handleLike}
-            />
-            <img
-              src={CommentIcon}
-              className="comment-action-icon"
-              onClick={handleComment}
-            />
-            <img
-              src={ReportIcon}
-              className="comment-action-icon"
-              onClick={handleReport}
-            />
-          </div>
+          {comment?.id ? (
+            <>
+              <div className="d-flex gap-2">
+                <LikeButton postId={comment.id} onClick={onClick} />
+                <CommentButton inputRef={ref} onClick={handleCommentClick} />
+                <ReportButton onClick={onClick} />
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
         <p style={{ marginLeft: "35px", marginBottom: "0px" }}>
           {comment.content}
         </p>
+        <form
+          onSubmit={handleCommentSubmit}
+          className=" border-secondary ms-2 border-start ps-3"
+        >
+          <input
+            ref={ref}
+            className="position-relative box mb-3"
+            value={commentContent}
+            onChange={handleCommentChange}
+          />
+          <Button type="submit">Plaats</Button>
+        </form>
       </div>
       {comment?.comments && comment?.comments.length > 0 && (
-        <div className="comments-container">
+        <div className="comments-container pb-2">
           {comment?.comments.map((comment) => (
-            <PostComment key={comment.id} comment={comment}></PostComment>
+            <PostComment
+              onClick={onClick}
+              key={comment.id}
+              comment={comment}
+            ></PostComment>
           ))}
         </div>
       )}

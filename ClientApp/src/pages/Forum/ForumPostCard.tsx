@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IForumPost from "../../interfaces/IForumPost";
@@ -17,17 +17,17 @@ interface Props {
 const ForumPostCard = ({ post }: Props) => {
   const [collapse, setCollapse] = useState<boolean>(true);
   const [_post, setPost] = useState<IForumPost>(post);
+  console.log(_post);
 
   const fetchPost = () => {
     fetch(`https://localhost:7185/api/forumpost/${post.id}`)
       .then((response) => response.json())
-      .then((data) => setPost(data as IForumPost))
-  }
-
+      .then((data) => setPost(data as IForumPost));
+  };
 
   let formattedDate = "";
   if (post?.time !== undefined) {
-    formattedDate = formatDateTime(post.time)
+    formattedDate = formatDateTime(post.time);
   }
 
   return (
@@ -76,11 +76,19 @@ const ForumPostCard = ({ post }: Props) => {
         </span>
       </Card.Body>
       <Card.Footer>
-        {_post?.id ? <ForumPostButtons onClick={fetchPost} postId={_post.id} /> : <></>}
+        {_post?.id && (
+          <ForumPostButtons onClick={fetchPost} postId={_post.id} />
+        )}
         {_post?.comments && _post?.comments.length > 0 ? (
-          _post?.comments.map((comment) => (
-            <PostComment key={comment.id} comment={comment}></PostComment>
-          ))
+          <div className="comments-container pb-2">
+            {_post?.comments.map((comment) => (
+              <PostComment
+                onClick={fetchPost}
+                key={comment.id}
+                comment={comment}
+              ></PostComment>
+            ))}
+          </div>
         ) : (
           <span className="opacity-50 text-dark">No comments</span>
         )}
