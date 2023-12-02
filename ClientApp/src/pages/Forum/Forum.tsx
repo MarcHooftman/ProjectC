@@ -21,10 +21,12 @@ const Forum = () => {
       .then((data) => setForumPosts(data));
   }, [filter]);
 
+
   const filterPosts = (posts: IForumPost[]) => {
     posts = filter ? filterByTag(posts, filter) : posts;
     return sortByDate(filterOnlyParent(posts));
   };
+
 
   return (
     <Layout>

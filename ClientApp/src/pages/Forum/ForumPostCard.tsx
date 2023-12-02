@@ -17,7 +17,6 @@ interface Props {
 const ForumPostCard = ({ post }: Props) => {
   const [collapse, setCollapse] = useState<boolean>(true);
   const [_post, setPost] = useState<IForumPost>(post);
-  console.log(_post);
 
   const fetchPost = () => {
     fetch(`https://localhost:7185/api/forumpost/${post.id}`)
