@@ -33,7 +33,6 @@ namespace API.Controllers
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .Include(_ => _.Likes)
-                .Include(_ => _.Comments)
                 .ToListAsync();
 
             return await forumposts.IncludeComments(_context);

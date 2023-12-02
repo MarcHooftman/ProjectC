@@ -8,12 +8,13 @@ import IForumPost from "../../interfaces/IForumPost";
 import { useEffect, useState } from "react";
 import { sortByDate, filterOnlyParent, filterByTag } from "./utils";
 
-
 const Forum = () => {
   const [forumPosts, setForumPosts] = useState<IForumPost[]>([]);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
 
+  let { loading, data } = useFetch("https://localhost:7185/api/forumpost");
+  console.log(forumPosts);
   useEffect(() => {
     fetch("https://localhost:7185/api/forumpost")
       .then((response) => response.json())
@@ -22,8 +23,8 @@ const Forum = () => {
 
   const filterPosts = (posts: IForumPost[]) => {
     posts = filter ? filterByTag(posts, filter) : posts;
-    return sortByDate(filterOnlyParent(posts))
-  }
+    return sortByDate(filterOnlyParent(posts));
+  };
 
   return (
     <Layout>
