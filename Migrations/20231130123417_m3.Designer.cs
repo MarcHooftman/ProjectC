@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231130123417_m3")]
+    partial class m3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,9 +259,19 @@ namespace ProjectC.Migrations
                     b.Property<int>("TrainingID")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("ProfileID1")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TrainingID1")
+                        .HasColumnType("integer");
+
                     b.HasKey("ProfileID", "TrainingID");
 
+                    b.HasIndex("ProfileID1");
+
                     b.HasIndex("TrainingID");
+
+                    b.HasIndex("TrainingID1");
 
                     b.ToTable("TrainingProfile");
                 });
@@ -374,11 +387,23 @@ namespace ProjectC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID1");
+
                     b.HasOne("API.Models.Training", null)
                         .WithMany()
                         .HasForeignKey("TrainingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("API.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingID1");
+
+                    b.Navigation("Profile");
+
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>

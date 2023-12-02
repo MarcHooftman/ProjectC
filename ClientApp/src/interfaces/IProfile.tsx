@@ -1,4 +1,6 @@
 // import { Media } from "reactstrap";
+import ITraining from "./ITraining";
+
 
 export default interface IProfile {
     id?: number;
@@ -6,6 +8,8 @@ export default interface IProfile {
     role: string;
     dateOfBirth: string;
     email: string;
+    // ProfilePicture: Media;
+    training: ITraining[];
     memberSince: string;
     phoneNumber: string | null;
     bio: string;
@@ -14,5 +18,4 @@ export default interface IProfile {
         id: number;
         email: string;
     }
-    // ProfilePicture: Media;
 }
