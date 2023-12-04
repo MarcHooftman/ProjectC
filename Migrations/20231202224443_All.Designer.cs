@@ -8,11 +8,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace probeersel.Migrations
+namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231127194647_baruibgvosurbog2380280Aaefsgrer")]
-    partial class baruibgvosurbog2380280Aaefsgrer
+    [Migration("20231202224443_All")]
+    partial class All
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,7 +94,7 @@ namespace probeersel.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("PostID")
+                    b.Property<int>("ForumPostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ProfileID")
@@ -102,9 +102,7 @@ namespace probeersel.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PostID");
-
-                    b.HasIndex("ProfileID");
+                    b.HasIndex("ForumPostID");
 
                     b.ToTable("Like");
                 });
@@ -242,9 +240,6 @@ namespace probeersel.Migrations
                     b.Property<int>("MediaID")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ProfileID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -252,8 +247,6 @@ namespace probeersel.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("MediaID");
-
-                    b.HasIndex("ProfileID");
 
                     b.ToTable("Training");
                 });
@@ -279,6 +272,21 @@ namespace probeersel.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("ProfileTraining", b =>
+                {
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TrainingID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProfileID", "TrainingID");
+
+                    b.HasIndex("TrainingID");
+
+                    b.ToTable("ProfileTraining");
+                });
+
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.HasOne("API.Models.ForumPost", null)
@@ -296,21 +304,11 @@ namespace probeersel.Migrations
 
             modelBuilder.Entity("API.Models.Like", b =>
                 {
-                    b.HasOne("API.Models.ForumPost", "Post")
+                    b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Likes")
-                        .HasForeignKey("PostID")
+                        .HasForeignKey("ForumPostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("API.Models.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("API.Models.Profile", b =>
@@ -368,11 +366,22 @@ namespace probeersel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.Profile", null)
-                        .WithMany("TrainingsWatched")
-                        .HasForeignKey("ProfileID");
-
                     b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("ProfileTraining", b =>
+                {
+                    b.HasOne("API.Models.Profile", null)
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Training", null)
+                        .WithMany()
+                        .HasForeignKey("TrainingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
@@ -384,11 +393,6 @@ namespace probeersel.Migrations
                     b.Navigation("Reports");
 
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("API.Models.Profile", b =>
-                {
-                    b.Navigation("TrainingsWatched");
                 });
 
             modelBuilder.Entity("API.Models.Training", b =>

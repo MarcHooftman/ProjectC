@@ -12,7 +12,6 @@ const Tutorial = () => {
   const { data } = useFetch(
     `https://localhost:7185/api/profile/by-email/${graphData?.mail}`
   );
-  console.log(data);
 
   const isToday = (isoString: string): boolean => {
     const today = new Date();
