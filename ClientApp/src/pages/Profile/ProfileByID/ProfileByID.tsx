@@ -15,8 +15,8 @@ const ProfileByID = () => {
 
 
 
-    const { loading: profileLoading, data: profileData } = useFetch(`https://localhost:7185/api/profile/by-user/${id}`)
-    const { loading: postsLoading, data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${id}`)
+    const { loading: profileLoading, data: profileData } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-user/${id}`)
+    const { loading: postsLoading, data: postsData } = useFetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${id}`)
     const profile = profileData as IProfile | null;
     const posts = postsData as IForumPost[] | null;
 

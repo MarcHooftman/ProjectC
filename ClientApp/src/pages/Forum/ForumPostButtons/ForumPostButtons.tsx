@@ -46,7 +46,7 @@ const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`)
+      fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -73,7 +73,7 @@ const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
         reports: [],
       };
 
-      fetch("https://localhost:7185/api/forumpost", {
+      fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

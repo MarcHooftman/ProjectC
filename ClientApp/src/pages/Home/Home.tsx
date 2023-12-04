@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     if (graphData) {
       fetch(
-        `https://localhost:7185/api/profile/by-email/${graphData?.mail}`
+        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
       ).then((response) => {
         if (response.status === 200) {
           setShowTutorial(false);

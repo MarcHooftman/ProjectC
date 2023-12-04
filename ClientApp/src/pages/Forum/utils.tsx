@@ -19,7 +19,7 @@ export function postLike(postId: number, profileId: number) {
         ProfileID: profileId,
     };
 
-    fetch("https://localhost:7185/api/like", {
+    fetch(`${process.env.REACT_APP_API_URL}/like`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -29,10 +29,10 @@ export function postLike(postId: number, profileId: number) {
 }
 
 export function deleteLike(postId: number, profileId: number) {
-    fetch(`https://localhost:7185/api/forumpost/${postId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
         .then((response) => response.json())
         .then((data) =>
-            fetch(`https://localhost:7185/api/like/${data.likes.find((like: ILike) => like.profileID === profileId)?.id}`, {
+            fetch(`${process.env.REACT_APP_API_URL}/like/${data.likes.find((like: ILike) => like.profileID === profileId)?.id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -36,10 +36,10 @@ const Profile = () => {
 
     const { graphData } = useGraphData();
 
-    const { data: profileData } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.userPrincipalName}`)
+    const { data: profileData } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.userPrincipalName}`)
     const profile = profileData as IProfile | null;
 
-    const { data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${profile?.id}`)
+    const { data: postsData } = useFetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile?.id}`)
     const posts = postsData as IForumPost[] | null;
 
 

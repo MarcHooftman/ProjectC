@@ -19,7 +19,7 @@ const ForumPostCard = ({ post }: Props) => {
   const [_post, setPost] = useState<IForumPost>(post);
 
   const fetchPost = () => {
-    fetch(`https://localhost:7185/api/forumpost/${post.id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${post.id}`)
       .then((response) => response.json())
       .then((data) => setPost(data as IForumPost));
   };

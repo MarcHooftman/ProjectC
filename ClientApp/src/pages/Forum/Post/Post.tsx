@@ -15,7 +15,7 @@ const Post = () => {
   const [tags, setTags] = useState<string[]>([]);
 
   const { loading, data } = useFetch(
-    `https://localhost:7185/api/profile/by-user/${localStorage.getItem("user")}`
+    `${process.env.REACT_APP_API_URL}/profile/by-user/${localStorage.getItem("user")}`
   );
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Post = () => {
 
     const post = {};
 
-    fetch("https://localhost:7185/api/forumpost", {
+    fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

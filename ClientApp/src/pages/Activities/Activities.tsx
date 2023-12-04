@@ -10,8 +10,8 @@ import AcitivitySkeleton from "./AcitivitySkeleton";
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>();
 
-  const { loading, data, error } = useFetch(
-    "https://localhost:7185/api/activity/"
+  const { loading, data } = useFetch(
+    `${process.env.REACT_APP_API_URL}/activity/`
   );
 
   useEffect(() => {

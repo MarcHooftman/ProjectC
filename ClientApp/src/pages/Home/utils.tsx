@@ -11,11 +11,8 @@ export async function createProfile(graphData: IGraphData) {
         memberSince: formattedDate,
         department: graphData?.officeLocation || "",
         email: graphData?.mail || "",
-        // user: {
-        //     email: graphData?.mail || "",
-        // },
     };
-    return await fetch("https://localhost:7185/api/profile", {
+    return await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -11,9 +11,7 @@ import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
 import Post from "./pages/Forum/Post/Post";
 import AddActivity from "./pages/Activities/AddActivity/AddActivity";
-import Registration from "./pages/Registration/Registration";
 import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
-import CreateProfile from "./pages/Registration/CreateProfile";
 import Auth from "./pages/Auth";
 //import TestAuth from "./pages/TestAuth";
 
@@ -32,8 +30,6 @@ const App = () => {
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/create-profile" element={<CreateProfile />} />
           <Route path="/training" element={<Training />} />
           <Route path="/Post" element={<Post />} />
           <Route path="/auth" element={<Auth />} />

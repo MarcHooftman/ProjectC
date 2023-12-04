@@ -26,9 +26,9 @@ const EditProfile = () => {
         });
     }
 
-    const { graphData, graphDataPhoto } = useGraphData();
+    const { graphData } = useGraphData();
 
-    const { loading, data, error } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`);
+    const { data } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`);
 
     // // Initialize prevProfile with the existing data
     // const [prevProfile, setPrevProfile] = useState({
@@ -110,7 +110,7 @@ const EditProfile = () => {
 
             console.log("Request Payload:", JSON.stringify(payload));
 
-            const response = await fetch(`https://localhost:7185/api/profile/${data?.id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/profile/${data?.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

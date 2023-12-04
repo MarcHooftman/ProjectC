@@ -9,8 +9,8 @@ const profilePicture = require("../../assets/profile.png");
 const PopPostCard = () => {
   const [post, setPost] = useState<IForumPost>();
 
-  const { loading, data, error } = useFetch(
-    "https://localhost:7185/api/forumpost/popular"
+  const { loading, data } = useFetch(
+    `${process.env.REACT_APP_API_URL}/forumpost/popular`
   );
   useEffect(() => {
     if (data) {

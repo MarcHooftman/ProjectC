@@ -11,16 +11,15 @@ const Training = () => {
     const [searchParams,] = useSearchParams()
     const filter = searchParams.get('filter')
     let Category: { id: number; name: string; }[] = []
-    // let { loading, data } = useFetch("https://localhost:7185/api/training")
 
 
     useEffect(() => {
-        fetch("https://localhost:7185/api/training")
-          .then((response) => response.json())
-          .then((data) => setTraining(data));
-      }, [filter]);
+        fetch(`${process.env.REACT_APP_API_URL}/training`)
+            .then((response) => response.json())
+            .then((data) => setTraining(data));
+    }, [filter]);
     console.log(Trainings)
-    
+
     // sets category to every first tag of trainings
     Trainings?.forEach((i) => { if (!Category.includes(i.tags[0])) Category.push(i.tags[0]) })
 
