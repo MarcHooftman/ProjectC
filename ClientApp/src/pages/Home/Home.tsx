@@ -8,10 +8,35 @@ import homeCover from "../../assets/home-cover.jpg";
 import Cover from "../../components/Cover/Cover";
 import { AuthenticatedTemplate } from "@azure/msal-react";
 import Tutorial from "./Tutorial/Tutorial";
+import { useEffect, useState } from "react";
+import useGraphData from "../../hooks/useGraphData";
+import { createProfile } from "./utils";
 
 //const homeCover = require("../../assets/images/home-cover.jpg");
 
 const Home = () => {
+  const [showTutorial, setShowTutorial] = useState<boolean>(false);
+  const { graphData } = useGraphData();
+
+  const closeTutorial = () => {
+    setShowTutorial(false);
+  }
+
+  useEffect(() => {
+    if (graphData) {
+      fetch(
+        `https://localhost:7185/api/profile/by-email/${graphData?.mail}`
+      ).then((response) => {
+        if (response.status === 200) {
+          setShowTutorial(false);
+        } else {
+          createProfile(graphData).then(() => setShowTutorial(true));
+        }
+      });
+    }
+  }, [graphData]);
+
+
   return (
     <Layout
       cover={
@@ -23,7 +48,7 @@ const Home = () => {
       }
     >
       <AuthenticatedTemplate>
-        <Tutorial />
+        <Tutorial show={showTutorial} onHide={closeTutorial} />
         <Row>
           <Col className="home-box mb-5">
             <h3 className="blue-text">Populair op dit moment</h3>

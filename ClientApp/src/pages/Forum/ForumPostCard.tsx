@@ -76,7 +76,7 @@ const ForumPostCard = ({ post }: Props) => {
       </Card.Body>
       <Card.Footer>
         {_post?.id && (
-          <ForumPostButtons onClick={fetchPost} postId={_post.id} />
+          <ForumPostButtons refresh={fetchPost} postId={_post.id} />
         )}
         {_post?.comments && _post?.comments.length > 0 ? (
           <div className="comments-container pb-2">

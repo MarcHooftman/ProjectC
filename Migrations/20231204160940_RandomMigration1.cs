@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class All : Migration
+    public partial class RandomMigration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,17 +43,30 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Profile",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
+                    FullName = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    MemberSince = table.Column<DateOnly>(type: "date", nullable: true),
+                    LastLogin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Role = table.Column<string>(type: "text", nullable: true),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
+                    Department = table.Column<string>(type: "text", nullable: true),
+                    ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.ID);
+                    table.PrimaryKey("PK_Profile", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Profile_Media_ProfilePictureID",
+                        column: x => x.ProfilePictureID,
+                        principalTable: "Media",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -73,39 +86,6 @@ namespace ProjectC.Migrations
                         name: "FK_Training_Media_MediaID",
                         column: x => x.MediaID,
                         principalTable: "Media",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Profile",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserID = table.Column<int>(type: "integer", nullable: false),
-                    FullName = table.Column<string>(type: "text", nullable: true),
-                    Bio = table.Column<string>(type: "text", nullable: true),
-                    MemberSince = table.Column<DateOnly>(type: "date", nullable: true),
-                    LastLogin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Role = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
-                    Department = table.Column<string>(type: "text", nullable: true),
-                    ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profile", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Profile_Media_ProfilePictureID",
-                        column: x => x.ProfilePictureID,
-                        principalTable: "Media",
-                        principalColumn: "ID");
-                    table.ForeignKey(
-                        name: "FK_Profile_User_UserID",
-                        column: x => x.UserID,
-                        principalTable: "User",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,22 +168,21 @@ namespace ProjectC.Migrations
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PostID = table.Column<int>(type: "integer", nullable: false),
-                    ProfileID = table.Column<int>(type: "integer", nullable: false)
+                    ForumPostID = table.Column<int>(type: "integer", nullable: false),
+                    ProfileID = table.Column<int>(type: "integer", nullable: false),
+                    Spam = table.Column<bool>(type: "boolean", nullable: false),
+                    Inappropriate = table.Column<bool>(type: "boolean", nullable: false),
+                    NotWorkRelated = table.Column<bool>(type: "boolean", nullable: false),
+                    Other = table.Column<bool>(type: "boolean", nullable: false),
+                    Elaboration = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Report", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Report_ForumPost_PostID",
-                        column: x => x.PostID,
+                        name: "FK_Report_ForumPost_ForumPostID",
+                        column: x => x.ForumPostID,
                         principalTable: "ForumPost",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Report_Profile_ProfileID",
-                        column: x => x.ProfileID,
-                        principalTable: "Profile",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -254,24 +233,14 @@ namespace ProjectC.Migrations
                 column: "ProfilePictureID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profile_UserID",
-                table: "Profile",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProfileTraining_TrainingID",
                 table: "ProfileTraining",
                 column: "TrainingID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Report_PostID",
+                name: "IX_Report_ForumPostID",
                 table: "Report",
-                column: "PostID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Report_ProfileID",
-                table: "Report",
-                column: "ProfileID");
+                column: "ForumPostID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tag_ForumPostID",
@@ -318,9 +287,6 @@ namespace ProjectC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Media");
-
-            migrationBuilder.DropTable(
-                name: "User");
         }
     }
 }

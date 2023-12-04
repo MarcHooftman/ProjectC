@@ -3,8 +3,7 @@ namespace API.Models;
 public class Profile
 {
     public int ID { get; set; }
-    public int UserID { get; set; }
-    public User? User { get; set; }
+    public string Email { get; set; } = null!;
     public string? FullName { get; set; }
     public string? Bio { get; set; }
     public DateOnly? MemberSince { get; set; }
@@ -15,7 +14,7 @@ public class Profile
     public int? ProfilePictureID { get; set; }
     public Media? ProfilePicture { get; set; }
     public string? PhoneNumber { get; set; }
-    
+
     // navigational
     public IEnumerable<Training>? Training { get; set; }
 }

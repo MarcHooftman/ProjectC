@@ -10,16 +10,16 @@ import ReportButton from "./ReportButton";
 
 interface Props {
   postId: number;
-  onClick?: () => void;
+  refresh?: () => void;
 }
 
-const ForumPostButtons = ({ postId, onClick = () => {} }: Props) => {
+const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
   const ref = useRef<any>(null);
   const [show, setShow] = useState(false);
 
   const handleCommentClick = () => {
     setShow(!show);
-    onClick();
+    refresh();
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const ForumPostButtons = ({ postId, onClick = () => {} }: Props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(commentObject),
-      }).then(() => onClick());
+      }).then(() => refresh());
       setComment("");
       setShow(false);
     }
@@ -87,19 +87,23 @@ const ForumPostButtons = ({ postId, onClick = () => {} }: Props) => {
 
   return (
     <>
-      <div className="mb-3 d-flex gap-4">
-        <LikeButton postId={postId} onClick={onClick} />
-        <CommentButton inputRef={ref} onClick={handleCommentClick} />
-        <ReportButton onClick={onClick} />
-      </div>
+      {profile?.id &&
+        <div className="mb-3 d-flex gap-4">
+          <LikeButton postId={postId} profileId={profile.id} onClick={refresh} />
+          <CommentButton inputRef={ref} onClick={handleCommentClick} />
+          <ReportButton postId={postId} profileId={profile.id} onSubmit={refresh} />
+        </div>
+      }
+
       <form onSubmit={handleCommentSubmit}>
         <input
           ref={ref}
-          className="position-relative box mb-3"
+          className="position-relative box mb-3 me-2"
           value={comment}
           onChange={handleCommentChange}
         />
-        <Button type="submit">Plaats</Button>
+        <Button size="sm" type="submit">Plaats</Button>
+
       </form>
     </>
   );

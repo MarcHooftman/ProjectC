@@ -1,6 +1,5 @@
 // import { Media } from "reactstrap";
 import ITraining from "./ITraining";
-import IUser from "./IUser";
 
 export default interface IProfile {
   id?: number;
@@ -14,5 +13,4 @@ export default interface IProfile {
   phoneNumber?: string;
   bio?: string;
   department?: string;
-  user: IUser;
 }

@@ -6,30 +6,19 @@ import HomeImage from "../../../assets/home-tutorial-page.png";
 import ForumImage from "../../../assets/forum-tutorial-page-arrow.png";
 import "./Tutorial.scss";
 
-const Tutorial = () => {
-  const [showTutorial, setShowTutorial] = React.useState<boolean>(true);
-  const { graphData } = useGraphData();
-  const { data } = useFetch(
-    `https://localhost:7185/api/profile/by-email/${graphData?.mail}`
-  );
+interface Props {
+  show: boolean;
+  onHide: () => void;
+}
 
-  const isToday = (isoString: string): boolean => {
-    const today = new Date();
-    const date = new Date(isoString);
-
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
-  };
+const Tutorial = ({ show, onHide }: Props) => {
 
   return (
     <Modal
-      show={isToday(data?.memberSince) && showTutorial}
+      show={show}
       centered={true}
       size="lg"
-      onHide={() => setShowTutorial(false)}
+      onHide={onHide}
     >
       <Modal.Header closeButton>
         <Modal.Title>Welkom bij Antes</Modal.Title>

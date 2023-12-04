@@ -1,5 +1,6 @@
 import ILike from "./ILike";
 import IProfile from "./IProfile";
+import IReport from "./IReport";
 
 export default interface IForumPost {
   id?: number;
@@ -12,5 +13,5 @@ export default interface IForumPost {
   forumPostID: number;
   comments: IForumPost[];
   likes: ILike[];
-  reports: IProfile[];
+  reports: IReport[];
 }

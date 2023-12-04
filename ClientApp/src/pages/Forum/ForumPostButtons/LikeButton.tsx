@@ -2,40 +2,27 @@ import { useEffect, useState } from "react";
 import LikeIcon from "../../../assets/like.svg";
 import LikeFillIcon from "../../../assets/like-fill.svg";
 import { deleteLike, postLike } from "../utils";
-import useGraphData from "../../../hooks/useGraphData";
-import IProfile from "../../../interfaces/IProfile";
 import IForumPost from "../../../interfaces/IForumPost";
 
 interface Props {
   postId: number;
+  profileId: number;
   onClick?: () => void;
 }
 
-const LikeButton = ({ postId, onClick = () => {} }: Props) => {
+const LikeButton = ({ postId, profileId, onClick = () => { } }: Props) => {
   const [_liked, setLiked] = useState<boolean>();
   const [likeCount, setLikeCount] = useState<number>(0);
-  //console.log(_liked);
-
-  const { graphData } = useGraphData();
-
-  const [profile, setProfile] = useState<IProfile>();
-  useEffect(() => {
-    if (graphData) {
-      fetch(`https://localhost:7185/api/profile/by-email/${graphData?.mail}`)
-        .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }
-  }, [graphData]);
 
   useEffect(() => {
     fetch(`https://localhost:7185/api/forumpost/${postId}`)
       .then((response) => response.json())
       .then((data) => {
         const post = data as IForumPost;
-        setLiked(post.likes.some((like) => like.profileID == profile?.id));
+        setLiked(post.likes.some((like) => like.profileID == profileId));
         setLikeCount(post.likes.length);
       });
-  }, [postId, profile]);
+  }, [postId, profileId]);
 
   const handleClick = () => {
     setLiked(!_liked);
@@ -44,13 +31,13 @@ const LikeButton = ({ postId, onClick = () => {} }: Props) => {
   };
 
   const addOrDeleteLike = () => {
-    if (profile?.id) {
+    if (profileId) {
       if (!_liked) {
         setLikeCount(likeCount + 1);
-        postLike(postId, profile.id);
+        postLike(postId, profileId);
       } else {
         setLikeCount(likeCount - 1);
-        deleteLike(postId, profile.id);
+        deleteLike(postId, profileId);
       }
     }
   };

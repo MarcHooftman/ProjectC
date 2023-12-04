@@ -17,7 +17,7 @@ interface Props {
   onClick?: () => void;
 }
 
-const PostComment = ({ onClick = () => {}, comment }: Props) => {
+const PostComment = ({ onClick = () => { }, comment }: Props) => {
   const ref = useRef<any>(null);
   const [show, setShow] = useState(false);
 
@@ -106,17 +106,13 @@ const PostComment = ({ onClick = () => {}, comment }: Props) => {
           <p className="text-dark opacity-50 mb-0">
             {formatDate(comment.time)}
           </p>
-          {comment?.id ? (
-            <>
-              <div className="d-flex gap-2">
-                <LikeButton postId={comment.id} onClick={onClick} />
-                <CommentButton inputRef={ref} onClick={handleCommentClick} />
-                <ReportButton onClick={onClick} />
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+          {comment?.id && profile?.id &&
+            <div className="d-flex gap-2">
+              <LikeButton postId={comment.id} profileId={profile.id} onClick={onClick} />
+              <CommentButton inputRef={ref} onClick={handleCommentClick} />
+              <ReportButton postId={comment.id} profileId={profile.id} onClick={onClick} />
+            </div>
+          }
         </div>
         <p style={{ marginLeft: "35px", marginBottom: "0px" }}>
           {comment.content}
