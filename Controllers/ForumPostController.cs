@@ -29,6 +29,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
+            
             var forumposts =  await _context.ForumPost
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)

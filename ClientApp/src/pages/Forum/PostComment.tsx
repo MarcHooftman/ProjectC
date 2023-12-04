@@ -147,6 +147,7 @@ const PostComment = ({ onClick = () => {}, comment }: Props) => {
       )}
     </div>
   );
+
 };
 
 export default PostComment;
