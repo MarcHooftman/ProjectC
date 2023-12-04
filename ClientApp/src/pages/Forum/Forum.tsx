@@ -13,8 +13,6 @@ const Forum = () => {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
 
-  let { loading, data } = useFetch("https://localhost:7185/api/forumpost");
-  console.log(forumPosts);
   useEffect(() => {
     fetch("https://localhost:7185/api/forumpost")
       .then((response) => response.json())

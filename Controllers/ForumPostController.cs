@@ -24,16 +24,16 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPost()
         {
-            
             if (_context.ForumPost == null)
             {
                 return NotFound();
             }
-            
-            var forumposts =  await _context.ForumPost
+
+            var forumposts = await _context.ForumPost
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .Include(_ => _.Likes)
+                .Include(_ => _.Reports)
                 .ToListAsync();
 
             return await forumposts.IncludeComments(_context);
@@ -51,6 +51,7 @@ namespace API.Controllers
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .Include(_ => _.Likes)
+                .Include(_ => _.Reports)
                 .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (forumPost == null)
@@ -73,7 +74,7 @@ namespace API.Controllers
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .Include(_ => _.Likes)
-                .Include(_ => _.Comments)
+                .Include(_ => _.Reports)
                 .Where(_ => _.ProfileID == profileID).ToListAsync();
 
             if (forumPost == null)

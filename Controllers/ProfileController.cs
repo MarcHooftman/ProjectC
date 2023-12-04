@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Profile.Include(_ => _.User).ToListAsync();
+            return await _context.Profile.ToListAsync();
         }
 
         // GET: api/Profile/5
@@ -39,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.ID == id);
+            var profile = await _context.Profile.FirstOrDefaultAsync(_ => _.ID == id);
 
             if (profile == null)
             {
@@ -50,22 +50,6 @@ namespace API.Controllers
         }
 
         // GET: api/Profile/by-user/6
-        [HttpGet("by-user/{userID}")]
-        public async Task<ActionResult<Profile>> GetProfileByUserID(int userID)
-        {
-            if (_context.Profile == null)
-            {
-                return NotFound();
-            }
-            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.UserID == userID);
-
-            if (profile == null)
-            {
-                return NotFound();
-            }
-
-            return profile;
-        }
 
         // GET: api/Profile/by-user/6
         [HttpGet("by-email/{email}")]
@@ -75,7 +59,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var profile = await _context.Profile.Include(_ => _.User).FirstOrDefaultAsync(_ => _.User.Email == email);
+            var profile = await _context.Profile.FirstOrDefaultAsync(_ => _.Email == email);
 
             if (profile == null)
             {
@@ -125,7 +109,7 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.Profile'  is null.");
             }
-            profile.User = null;
+            // profile.User = null;
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 

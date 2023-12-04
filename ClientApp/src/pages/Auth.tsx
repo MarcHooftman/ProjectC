@@ -1,20 +1,15 @@
-import React, { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
-    const [searchParams,] = useSearchParams();
-    console.log(searchParams)
+  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  });
 
-    const navigate = useNavigate();
-    useEffect(() => {
-        setTimeout(() => {
-            navigate("/")
-        }, 500)
-    })
-
-    return (
-        <div>params: {searchParams}</div>
-    )
-}
+  return <div>redirecting...</div>;
+};
 
 export default Auth;

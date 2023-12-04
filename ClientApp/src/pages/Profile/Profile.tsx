@@ -12,7 +12,6 @@ import { Button } from "react-bootstrap";
 import IForumPost from "../../interfaces/IForumPost";
 import ProfilePostCard from "./ProfilePostCard";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
-import { callMsGraph, callMsGraphPhoto } from "../../graph";
 import useGraphData from "../../hooks/useGraphData";
 
 const Profile = () => {
@@ -35,12 +34,12 @@ const Profile = () => {
         handleLogin()
     }
 
-    const { loading, graphData, graphDataPhoto } = useGraphData();
+    const { graphData } = useGraphData();
 
-    const { loading: profileLoading, data: profileData } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.userPrincipalName}`)
+    const { data: profileData } = useFetch(`https://localhost:7185/api/profile/by-email/${graphData?.userPrincipalName}`)
     const profile = profileData as IProfile | null;
 
-    const { loading: postsLoading, data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${profile?.ID}`)
+    const { data: postsData } = useFetch(`https://localhost:7185/api/forumpost/by-profile/${profile?.id}`)
     const posts = postsData as IForumPost[] | null;
 
 

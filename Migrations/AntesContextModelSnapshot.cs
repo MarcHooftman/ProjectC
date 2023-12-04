@@ -149,6 +149,10 @@ namespace ProjectC.Migrations
                     b.Property<string>("Department")
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("FullName")
                         .HasColumnType("text");
 
@@ -167,14 +171,9 @@ namespace ProjectC.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("integer");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ProfilePictureID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Profile");
                 });
@@ -187,17 +186,30 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("PostID")
+                    b.Property<string>("Elaboration")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ForumPostID")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("Inappropriate")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("NotWorkRelated")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Other")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("ProfileID")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Spam")
+                        .HasColumnType("boolean");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("PostID");
-
-                    b.HasIndex("ProfileID");
+                    b.HasIndex("ForumPostID");
 
                     b.ToTable("Report");
                 });
@@ -260,7 +272,7 @@ namespace ProjectC.Migrations
                     b.ToTable("Training");
                 });
 
-            modelBuilder.Entity("API.Models.TrainingProfile", b =>
+            modelBuilder.Entity("ProfileTraining", b =>
                 {
                     b.Property<int>("ProfileID")
                         .HasColumnType("integer");
@@ -272,28 +284,7 @@ namespace ProjectC.Migrations
 
                     b.HasIndex("TrainingID");
 
-                    b.ToTable("TrainingProfile");
-                });
-
-            modelBuilder.Entity("API.Models.User", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("User");
+                    b.ToTable("ProfileTraining");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
@@ -326,34 +317,16 @@ namespace ProjectC.Migrations
                         .WithMany()
                         .HasForeignKey("ProfilePictureID");
 
-                    b.HasOne("API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ProfilePicture");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Models.Report", b =>
                 {
-                    b.HasOne("API.Models.ForumPost", "Post")
+                    b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Reports")
-                        .HasForeignKey("PostID")
+                        .HasForeignKey("ForumPostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("API.Models.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("API.Models.Tag", b =>
@@ -382,7 +355,7 @@ namespace ProjectC.Migrations
                     b.Navigation("Media");
                 });
 
-            modelBuilder.Entity("API.Models.TrainingProfile", b =>
+            modelBuilder.Entity("ProfileTraining", b =>
                 {
                     b.HasOne("API.Models.Profile", null)
                         .WithMany()
