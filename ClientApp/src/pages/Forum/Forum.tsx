@@ -14,7 +14,7 @@ const Forum = () => {
   const filter = searchParams.get("filter");
 
   useEffect(() => {
-    fetch("https://localhost:7185/api/forumpost")
+    fetch(`${process.env.REACT_APP_API_URL}/forumpost`)
       .then((response) => response.json())
       .then((data) => setForumPosts(data));
   }, [filter]);
