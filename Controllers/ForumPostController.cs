@@ -24,7 +24,6 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ForumPost>>> GetForumPost()
         {
-
             if (_context.ForumPost == null)
             {
                 return NotFound();
