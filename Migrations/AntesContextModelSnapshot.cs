@@ -63,7 +63,6 @@ namespace ProjectC.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("ForumPostID")
-                    b.Property<int?>("ForumPostID")
 
                         .HasColumnType("integer");
 
@@ -96,7 +95,6 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ForumPostID")
                     b.Property<int>("ForumPostID")
 
                         .HasColumnType("integer");

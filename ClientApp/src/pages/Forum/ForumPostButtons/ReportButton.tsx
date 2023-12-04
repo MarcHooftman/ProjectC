@@ -29,7 +29,7 @@ const ReportButton = ({ postId, profileId, onClick = () => { }, onSubmit = () =>
     };
 
     const refreshReported = () => {
-        fetch(`https://localhost:7185/api/forumpost/${postId}`)
+        fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
             .then((response) => response.json())
             .then((data) => {
                 const post = data as IForumPost;
@@ -67,7 +67,7 @@ const ReportButton = ({ postId, profileId, onClick = () => { }, onSubmit = () =>
             elaboration: otherInputValue,
         }
 
-        fetch("https://localhost:7185/api/report", {
+        fetch(`${process.env.REACT_APP_API_URL}/report`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

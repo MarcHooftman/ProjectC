@@ -15,7 +15,7 @@ const LikeButton = ({ postId, profileId, onClick = () => { } }: Props) => {
   const [likeCount, setLikeCount] = useState<number>(0);
 
   useEffect(() => {
-    fetch(`https://localhost:7185/api/forumpost/${postId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
       .then((response) => response.json())
       .then((data) => {
         const post = data as IForumPost;
