@@ -27,9 +27,7 @@ const ProfileByID = () => {
             .then((data) => setPosts(data as IForumPost[]));
     }, [id])
 
-
     const { loading, graphData } = useGraphData(profile?.userPrincipalName || "");
-
 
     function sortByDate(array: IForumPost[]) {
         return array.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());

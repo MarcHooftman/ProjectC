@@ -8,7 +8,7 @@ import IProfile from "../../interfaces/IProfile";
 import LikeButton from "./ForumPostButtons/LikeButton";
 import CommentButton from "./ForumPostButtons/CommentButton";
 import ReportButton from "./ForumPostButtons/ReportButton";
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 
 const profilePicture = require("../../assets/profile.png");
 
@@ -106,17 +106,37 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
           <p className="text-dark opacity-50 mb-0">
             {formatDate(comment.time)}
           </p>
-          {comment?.id && profile?.id &&
+          {comment?.id && profile?.id && (
             <div className="d-flex gap-2">
-              <LikeButton postId={comment.id} profileId={profile.id} onClick={onClick} />
+              <LikeButton
+                postId={comment.id}
+                profileId={profile.id}
+                onClick={onClick}
+              />
               <CommentButton inputRef={ref} onClick={handleCommentClick} />
-              <ReportButton postId={comment.id} profileId={profile.id} onClick={onClick} />
+              <ReportButton
+                postId={comment.id}
+                profileId={profile.id}
+                onClick={onClick}
+              />
             </div>
-          }
+          )}
         </div>
         <p style={{ marginLeft: "35px", marginBottom: "0px" }}>
           {comment.content}
+          <span className="d-flex gap-2">
+            {comment?.tags &&
+              Array.isArray(comment?.tags) &&
+              comment?.tags.map((tag) => (
+                <Link to={`/forum?filter=${tag.name}`}>
+                  <Badge className="badge-color" text="light" pill={true}>
+                    {tag.name}
+                  </Badge>
+                </Link>
+              ))}
+          </span>
         </p>
+
         <form
           onSubmit={handleCommentSubmit}
           className=" border-secondary ms-2 border-start ps-3"
@@ -143,7 +163,6 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
       )}
     </div>
   );
-
 };
 
 export default PostComment;

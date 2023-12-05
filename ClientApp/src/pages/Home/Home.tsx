@@ -20,7 +20,7 @@ const Home = () => {
 
   const closeTutorial = () => {
     setShowTutorial(false);
-  }
+  };
 
   useEffect(() => {
     if (graphData) {
@@ -36,7 +36,6 @@ const Home = () => {
     }
   }, [graphData]);
 
-
   return (
     <Layout
       cover={
@@ -50,11 +49,11 @@ const Home = () => {
       <AuthenticatedTemplate>
         <Tutorial show={showTutorial} onHide={closeTutorial} />
         <Row>
-          <Col className="home-box mb-5">
+          <Col className="mb-5">
             <h3 className="blue-text">Populair op dit moment</h3>
             <PopPostCard />
           </Col>
-          <Col className="home-box mb-5">
+          <Col className="mb-5">
             <h3 className="blue-text">Eerstvolgende activiteit</h3>
             <NextActivityCard />
           </Col>
