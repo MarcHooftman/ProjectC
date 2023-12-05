@@ -11,7 +11,6 @@ interface Props {
 
 const CommentInput = ({ postId, ref }: Props) => {
     const [comment, setComment] = useState<string>();
-
     const { graphData } = useGraphData();
 
     const [profile, setProfile] = useState<IProfile>();
@@ -50,7 +49,6 @@ const CommentInput = ({ postId, ref }: Props) => {
                 },
                 body: JSON.stringify(commentObject),
             });
-            //setSubmittedComment(comment);
         }
     };
     return (

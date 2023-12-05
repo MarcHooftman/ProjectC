@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class RandomMigration1 : Migration
+    public partial class P019394391 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,8 @@ namespace ProjectC.Migrations
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Department = table.Column<string>(type: "text", nullable: true),
                     ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    UserPrincipalName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

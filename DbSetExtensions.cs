@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Query;
 namespace API.Models;
 
 
-public static class DbSetExtensions 
+public static class DbSetExtensions
 {
     public static async Task<ActionResult<IEnumerable<ForumPost>>> IncludeComments(this IEnumerable<ForumPost> forumPosts, AntesContext context)
     {
@@ -28,6 +28,10 @@ public static class DbSetExtensions
     {
         forumPost.Comments = await context.ForumPost
             .Where(fp => fp.ForumPostID == forumPost.ID)
+            .Include(fp => fp.Likes)
+            .Include(fp => fp.Reports)
+            .Include(fp => fp.Tags)
+            .Include(fp => fp.Profile)
             .ToListAsync();
 
         foreach (var comment in forumPost.Comments) await LoadComments(comment, context);

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231204161451_RandomMigration2")]
-    partial class RandomMigration2
+    [Migration("20231205194944_P019394391")]
+    partial class P019394391
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,6 +165,9 @@ namespace ProjectC.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Role")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserPrincipalName")
                         .HasColumnType("text");
 
                     b.HasKey("ID");

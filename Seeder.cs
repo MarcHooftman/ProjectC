@@ -65,7 +65,7 @@
 //     private static void AddProfiles(AntesContext context) 
 //     {
 //         if (context.Profile.Any()) return;
-        
+
 //         var profiles = new Profile[]
 //         {
 //             new Profile{
@@ -134,16 +134,29 @@ public static class Seeder
     {
         context.Database.EnsureCreated();
 
-        AddProfiles(context);
-        AddActivities(context);
-        AddForumPosts(context);
-        AddTags(context);
+        if (IsEmpty(context))
+        {
+            AddProfiles(context);
+            AddActivities(context);
+            AddForumPosts(context);
+        }
     }
 
-    private static void AddProfiles(AntesContext context) 
+    private static bool IsEmpty(AntesContext context)
     {
-        if (context.Profile.Any()) return;
-        
+        if (context.ForumPost.Any()) return false;
+        if (context.Profile.Any()) return false;
+        if (context.Activity.Any()) return false;
+        if (context.Media.Any()) return false;
+        if (context.Training.Any()) return false;
+        if (context.Like.Any()) return false;
+        if (context.Report.Any()) return false;
+        if (context.Tag.Any()) return false;
+        return true;
+    }
+
+    private static void AddProfiles(AntesContext context)
+    {
         var profiles = new Profile[]
         {
             new()
@@ -152,7 +165,7 @@ public static class Seeder
                 FullName="Klaas Klaassen",
                 Bio="I'm a student at Hogeschool Rotterdam",
                 MemberSince=new DateOnly(2021, 1, 1),
-                LastLogin=DateTime.Now,
+                LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
                 Department="ICT",
@@ -165,7 +178,7 @@ public static class Seeder
                 FullName="Jan Janssen",
                 Bio="I'm a student at Hogeschool Rotterdam",
                 MemberSince=new DateOnly(2021, 1, 1),
-                LastLogin=DateTime.Now,
+                LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
                 Department="ICT",
@@ -178,7 +191,7 @@ public static class Seeder
                 FullName="Frank Frankken",
                 Bio="I'm a student at Hogeschool Rotterdam",
                 MemberSince=new DateOnly(2021, 1, 1),
-                LastLogin=DateTime.Now,
+                LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
                 Department="ICT",
@@ -197,7 +210,6 @@ public static class Seeder
 
     private static void AddActivities(AntesContext context)
     {
-        if (context.Activity.Any()) return;
         var activities = new List<Activity>
         {
             new()
@@ -205,14 +217,14 @@ public static class Seeder
                 Title = "First Activity",
                 Description = "This is the first activity.",
                 Location = "Rotterdam",
-                Time = DateTime.Now
+                Time = DateTime.UtcNow
             },
             new()
             {
                 Title = "Second Activity",
                 Description = "This is the second activity.",
                 Location = "Rotterdam",
-                Time = DateTime.Now
+                Time = DateTime.UtcNow
             }
         };
 
@@ -222,7 +234,6 @@ public static class Seeder
 
     private static void AddForumPosts(AntesContext context)
     {
-        if (context.ForumPost.Any()) return;
         var forumPosts = new List<ForumPost>
         {
             new()
@@ -246,7 +257,7 @@ public static class Seeder
                 },
                 ProfileID = 1,
                 Profile = null,
-                Time = DateTime.Now,
+                Time = DateTime.UtcNow,
                 ForumPostID = null,
                 Comments = new List<ForumPost>
                 {
@@ -263,7 +274,7 @@ public static class Seeder
                         },
                         ProfileID = 2,
                         Profile = null,
-                        Time = DateTime.Now,
+                        Time = DateTime.UtcNow,
                         ForumPostID = 1,
                         Comments = new List<ForumPost>
                         {
@@ -280,7 +291,7 @@ public static class Seeder
                                 },
                                 ProfileID = 3,
                                 Profile = null,
-                                Time = DateTime.Now,
+                                Time = DateTime.UtcNow,
                                 ForumPostID = 2,
                                 Comments = new List<ForumPost>(),
                                 Likes = new List<Like>(),
@@ -297,7 +308,7 @@ public static class Seeder
                         Tags = new List<Tag>(),
                         ProfileID = 3,
                         Profile = null,
-                        Time = DateTime.Now,
+                        Time = DateTime.UtcNow,
                         ForumPostID = 1,
                         Comments = new List<ForumPost>(),
                         Likes = new List<Like>(),
@@ -314,7 +325,7 @@ public static class Seeder
                 Tags = new List<Tag>(),
                 ProfileID = 2,
                 Profile = null,
-                Time = DateTime.Now,
+                Time = DateTime.UtcNow,
                 ForumPostID = null,
                 Comments = new List<ForumPost>(),
                 Likes = new List<Like>(),
@@ -323,29 +334,6 @@ public static class Seeder
         };
 
         context.ForumPost.AddRange(forumPosts);
-        context.SaveChanges();
-    }
-
-    private static void AddTags(AntesContext context)
-    {
-        if (context.Tag.Any()) return;
-        var tags = new List<Tag>
-        {
-            new()
-            {
-                Name = "Tag 1"
-            },
-            new()
-            {
-                Name = "Tag 2"
-            },
-            new()
-            {
-                Name = "Tag 3"
-            }
-        };
-
-        context.Tag.AddRange(tags);
         context.SaveChanges();
     }
 }

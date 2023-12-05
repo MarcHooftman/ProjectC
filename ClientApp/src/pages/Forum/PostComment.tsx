@@ -17,7 +17,7 @@ interface Props {
   onClick?: () => void;
 }
 
-const PostComment = ({ onClick = () => {}, comment }: Props) => {
+const PostComment = ({ onClick = () => { }, comment }: Props) => {
   const ref = useRef<any>(null);
   const [show, setShow] = useState(false);
 
