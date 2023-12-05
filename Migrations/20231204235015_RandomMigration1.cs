@@ -57,7 +57,8 @@ namespace ProjectC.Migrations
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Department = table.Column<string>(type: "text", nullable: true),
                     ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    UserPrincipalName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

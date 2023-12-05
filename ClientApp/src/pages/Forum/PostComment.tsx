@@ -94,7 +94,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
       <div className="pb-2">
         <div className="d-flex align-items-center gap-3">
           <Link
-            to="/profile"
+            to={`/profile/${comment.profileID}`}
             className="d-flex flex-row align-items-center gap-2 text-decoration-none blue-text"
           >
             <img
