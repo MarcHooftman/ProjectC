@@ -11,6 +11,7 @@ export async function createProfile(graphData: IGraphData) {
         memberSince: formattedDate,
         department: graphData?.officeLocation || "",
         email: graphData?.mail || "",
+        userPrincipalName: graphData?.userPrincipalName || "",
     };
     return await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
         method: "POST",
