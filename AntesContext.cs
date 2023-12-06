@@ -65,6 +65,7 @@ public class AntesContext : DbContext
     public DbSet<Like> Like { get; set; } = default!;
     public DbSet<Report> Report { get; set; } = default!;
     public DbSet<Tag> Tag { get; set; } = default!;
+    public DbSet<Admin> Admin { get; set; } = default!;
 
 }
 

@@ -15,6 +15,12 @@ import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
 import Auth from "./pages/Auth";
 import TemporaryLogin from "./pages/Login/TemporaryLogin/TemporaryLogin";
 import AdminLogin from "./pages/Login/AdminLogin/AdminLogin";
+import AdminDashboard from "./admin/pages/Dashboard/AdminDashboard";
+import AdminForum from "./admin/pages/AdminForum/AdminForum";
+import AdminActivities from "./admin/pages/AdminActivities/AdminActivities";
+import AdminTrainings from "./admin/pages/AdminTrainings/AdminTrainings";
+import AdminReports from "./admin/pages/AdminReports/AdminReports";
+import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
 
 const App = () => {
   return (
@@ -36,6 +42,12 @@ const App = () => {
           <Route path="/training" element={<Training />} />
           <Route path="/Post" element={<Post />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/forum" element={<AdminForum />} />
+          <Route path="/admin/activities" element={<AdminActivities />} />
+          <Route path="/admin/trainings" element={<AdminTrainings />} />
+          <Route path="/admin/reports" element={<AdminReports />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
         </Routes>
       </Router>
     </>
