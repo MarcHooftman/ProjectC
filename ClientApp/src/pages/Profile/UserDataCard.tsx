@@ -1,5 +1,6 @@
 import { Card, Table } from 'react-bootstrap';
 import IForumPost from '../../interfaces/IForumPost';
+import { filterHelpfulComment, filterOnlyParent } from '../../utils/sortPosts';
 
 interface Props {
     posts: IForumPost[];
@@ -13,9 +14,9 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
         totalLikes = posts?.reduce((currentTotal, post) => currentTotal + post?.likes?.length, 0) || 0
     }
 
-    const postsLength = Array.isArray(posts) ? posts.length : 0;
-    const commentsPlaced = Array.isArray(posts) ? posts.filter(_ => _.parentID != null).length : 0;
-    const helpfulComments = Array.isArray(posts) ? posts.filter(_ => _.parentID != null && _.likes.length > 10).length : 0;
+    const postsLength = Array.isArray(posts) ? filterOnlyParent(posts).length : 0;
+    const commentsPlaced = Array.isArray(posts) ? posts.length - filterOnlyParent(posts).length : 0;
+    const helpfulComments = Array.isArray(posts) ? filterHelpfulComment(posts).length : 0;
 
 
     return (

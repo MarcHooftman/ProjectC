@@ -13,7 +13,8 @@ import Post from "./pages/Forum/Post/Post";
 import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
 import Auth from "./pages/Auth";
-//import TestAuth from "./pages/TestAuth";
+import TemporaryLogin from "./pages/Login/TemporaryLogin/TemporaryLogin";
+import AdminLogin from "./pages/Login/AdminLogin/AdminLogin";
 
 const App = () => {
   return (
@@ -30,6 +31,8 @@ const App = () => {
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/temp" element={<TemporaryLogin />} />
+          <Route path="/login/admin" element={<AdminLogin />} />
           <Route path="/training" element={<Training />} />
           <Route path="/Post" element={<Post />} />
           <Route path="/auth" element={<Auth />} />

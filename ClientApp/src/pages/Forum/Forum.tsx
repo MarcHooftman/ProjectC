@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import "./Forum.scss";
 import IForumPost from "../../interfaces/IForumPost";
 import { useEffect, useState } from "react";
-import { sortByDate, filterOnlyParent, filterByTag } from "./utils";
+import { filterByTag, filterOnlyParent, sortByDate } from "../../utils/sortPosts";
 
 const Forum = () => {
   const [forumPosts, setForumPosts] = useState<IForumPost[]>([]);
@@ -32,13 +32,12 @@ const Forum = () => {
         <h1 className="my-5 blue-text">Antes Forum</h1>
         <FilterDropdown />
       </span>
-      {filterPosts(forumPosts).length > 0 ? (
-        filterPosts(forumPosts).map((forumPost) => (
+      {filterPosts(forumPosts).length > 0
+        ? filterPosts(forumPosts).map((forumPost) => (
           <ForumPostCard key={forumPost.id} post={forumPost} />
         ))
-      ) : (
-        <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>
-      )}
+        : <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>
+      }
     </Layout>
   );
 };

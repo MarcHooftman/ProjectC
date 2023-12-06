@@ -12,11 +12,7 @@ const Hamburger = require("../../assets/hamburger.png");
 const NavDropDown = () => {
   const { instance } = useMsal();
 
-  const handleLogin = () => {
-    instance.loginRedirect(loginRequest).catch((e) => {
-      console.log(e);
-    });
-  };
+
 
   const handleLogout = () => {
     instance.logoutRedirect({
@@ -65,7 +61,7 @@ const NavDropDown = () => {
           <Dropdown.Item as={Link} to="/" className="fs-5 blue-text">
             Home
           </Dropdown.Item>
-          <Dropdown.Item onClick={handleLogin} className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/login" className="fs-5 blue-text">
             Inloggen
           </Dropdown.Item>
         </UnauthenticatedTemplate>
