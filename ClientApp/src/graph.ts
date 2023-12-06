@@ -20,6 +20,22 @@ export async function callMsGraph(accessToken: any) {
         .catch(error => console.log(error));
 }
 
+export async function callMsGraphUser(accessToken: any, userPrincipalName: string) {
+    const headers = new Headers();
+    const bearer = `Bearer ${accessToken}`;
+
+    headers.append("Authorization", bearer);
+
+    const options = {
+        method: "GET",
+        headers: headers
+    };
+
+    return fetch(`${graphConfig.graphUserEndpoint}/${userPrincipalName}`, options)
+        .then(response => response.json())
+        .catch(error => console.log(error));
+}
+
 export async function callMsGraphPhoto(accessToken: any) {
     const headers = new Headers();
     const bearer = `Bearer ${accessToken}`;

@@ -5,7 +5,6 @@ import IForumPost from "../../interfaces/IForumPost";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require('../../assets/down-arrow.png');
-const profilePicture = require("../../assets/profile.png");
 
 interface Props {
     post?: IForumPost;
@@ -36,14 +35,17 @@ const ProfilePostCard = ({ post }: Props) => {
                     </Col>
                 </Row>
             </Card.Header>
-            <p className='card-body'>
+            <Card.Body as="p">
                 {post?.content}
-            </p>
-            <Card.Footer>
-                <span className="d-flex gap-2">
-                    {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
-                </span>
-            </Card.Footer>
+            </Card.Body>
+            {Array.isArray(post?.tags) && (post?.tags.length || -1) > 0 &&
+                <Card.Footer>
+                    <span className="d-flex gap-2">
+                        {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
+                    </span>
+                </Card.Footer>
+            }
+
         </Card>
     )
 }

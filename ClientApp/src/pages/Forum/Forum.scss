@@ -22,6 +22,11 @@
     cursor: pointer !important;
 }
 
+.action-icon.reported:hover {
+    cursor: not-allowed !important;
+
+}
+
 .box {
     width: 50% !important;
     height: 1.5rem !important;

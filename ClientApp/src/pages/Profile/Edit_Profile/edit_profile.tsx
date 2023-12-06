@@ -1,143 +1,175 @@
-import { useState } from "react";
 import Layout from "../../../components/Layout";
 import "./edit_profile.scss";
 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginRequest } from "../../../authConfig";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { callMsGraph, callMsGraphPhoto } from "../../../graph";
+import useGraphData from "../../../hooks/useGraphData";
 import IProfile from "../../../interfaces/IProfile";
+import useFetch from "../../../hooks/useFetch";
 
-// Change to the data of logged in person
 const EditProfile = () => {
-    const initialProfile: IProfile = {
-        id: 123,
-        fullName: "Voornaam Achternaam",
-        role: "Functie",
-        dateOfBirth: "2001-01-01",
-        email: "nep@anteszorg.com",
-        memberSince: "05-10-2023",
-        // phoneNumber is optional
-        phoneNumber: "",
-        bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo unde quod eum cumque aspernatur? Fuga est earum eos laudantium minus eligendi tempore ullam, sequi sint ab unde? Labore, provident porro. Suscipit in soluta numquam dolores maiores id, culpa sequi exercitationem nihil consequatur inventore blanditiis aliquam iste labore expedita eveniet optio velit eligendi odit dolor vero error voluptas?",
-        department: "HR",
-    };
+    const loggedIn = useIsAuthenticated();
+    const { instance, accounts } = useMsal();
 
-    // State to store the edited profile data
-    const [editedProfile, setEditedProfile] = useState<IProfile>(initialProfile);
-
-    // Function to handle form submission
-    const handleFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Send the editedProfile data to the API or update it as needed.
-
-        ////////////////////////////////////////////////////////////////////////////
-        // This is to test, make an API request in completed version.
-        console.log("Edited Profile Data:", editedProfile);
-        ////////////////////////////////////////////////////////////////////////////
-
-        // Commented out to test with a console.log, redirecting resets browser console.
-        // Redirect to the profile page after the form is submitted
-        // window.location.href = '/profile';
-    };
-
-    // Function to handle input changes (both text inputs and text areas)
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        setEditedProfile((prevProfile: IProfile) => {
-            if (name === 'phone') {
-                return {
-                    ...prevProfile,
-                    phoneNumber: value,
-                };
-            }
-
-            return {
-                ...prevProfile,
-                [name]: value,
-            };
+    const handleLogin = () => {
+        instance.loginRedirect(loginRequest).catch(e => {
+            console.log(e);
         });
+    }
+
+    const handleLogout = () => {
+        instance.logoutRedirect({
+            postLogoutRedirectUri: "/",
+        });
+    }
+
+    const { graphData } = useGraphData();
+
+    const { data } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`);
+
+    // // Initialize prevProfile with the existing data
+    // const [prevProfile, setPrevProfile] = useState({
+    //     ID: data?.ID,
+    //     UserID: data?.UserID,
+    //     FullName: data?.FullName,
+    //     Bio: data?.Bio,
+    //     MemberSince: data?.MemberSince,
+    //     LastLogin: data?.LastLogin,
+    //     Role: data?.Role,
+    //     DateOfBirth: data?.DateOfBirth,
+    //     Department: data?.Department,
+    //     ProfilePictureID: data?.ProfilePictureID,
+    //     PhoneNumber: data?.PhoneNumber,
+    // });
+
+    // Initialize prevProfile and editedProfile as null
+    const [prevProfile, setPrevProfile] = useState<IProfile | null>(null);
+    const [editedProfile, setEditedProfile] = useState<IProfile | null>(null);
+
+    useEffect(() => {
+        if (data) {
+            setPrevProfile(data);
+            setEditedProfile(data);
+        }
+    }, [data]);
+
+    // const handleInputChange = (
+    //     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    // ) => {
+    //     const { name, value } = e.target;
+
+    //     // Update editedProfile with the existing data and the changes
+    //     setEditedProfile((currentProfile: IProfile | null) => ({
+    //         ...currentProfile!, // Use non-null assertion operator to avoid undefined
+    //         [name]: value, // Add or update the specific field with the new value
+    //     }));
+    // };
+
+    const handleRoleChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            role: value,
+        }));
     };
 
-    // // Function to handle profile picture changes
-    // const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = e.target.files?.[0]; // Get the selected file
-    //     if (file) {
-    //         setEditedProfile((prevProfile: IProfile) => ({
-    //             ...prevProfile,
-    //             profilePicture: file, // Set the selected file as the profile picture
-    //         }));
-    //     }
-    // };
+    const handlePhoneNumberChange = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            phoneNumber: value,
+        }));
+    };
+
+    const handleBioChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+        const { value } = e.target;
+        setEditedProfile((currentProfile: IProfile | null) => ({
+            ...currentProfile!,
+            bio: value,
+        }));
+    };
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const payload = {
+                ...editedProfile,
+                Role: editedProfile?.role,
+                PhoneNumber: editedProfile?.phoneNumber,
+                Bio: editedProfile?.bio,
+            };
+
+            console.log("Request Payload:", JSON.stringify(payload));
+
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/profile/${data?.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                console.log("Profile updated successfully");
+                // Redirect to the profile page or perform any other actions as needed
+                window.location.href = '/profile';
+            } else {
+                console.error('Failed to update profile:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
+    };
 
     return (
         <Layout>
             <h1 className="blue-text my-5">Profiel bewerken</h1>
             <div className="container mt-5">
-                <div className="card">
+                <div className="card shadow-lg">
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
-                            {/* <div className="form-group">
-                                <label htmlFor="profilePicture">Profielfoto wijzigen:</label>
-                                <input
-                                    type="file"
-                                    className="form-control-file d-block"
-                                    id="profilePicture"
-                                    name="profilePicture"
-                                    accept="image/*" // Allow only image files
-                                    onChange={handleProfilePictureChange}
-                                />
-                            </div> */}
                             <div className="form-group mt-3">
-                                <label htmlFor="role">Functie</label>
+                                <label htmlFor="Role">Functie</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="role"
-                                    name="role"
-                                    value={editedProfile.role}
-                                    onChange={handleInputChange}
+                                    id="Role"
+                                    name="Role"
+                                    value={editedProfile?.role || ""}
+                                    onChange={handleRoleChange}
+                                    placeholder={editedProfile?.role || ""}
                                 />
                             </div>
                             <div className="form-group mt-3">
-                                <label htmlFor="dateOfBirth">Geboortedatum</label>
-                                <input
-                                    type="date" // Use date input type
-                                    className="form-control"
-                                    id="dateOfBirth"
-                                    name="dateOfBirth"
-                                    value={editedProfile.dateOfBirth}
-                                    onChange={handleInputChange}
-                                    placeholder={editedProfile.dateOfBirth}
-                                />
-                            </div>
-                            <div className="form-group mt-3">
-                                <label htmlFor="phone">Telefoonnummer (optioneel)</label>
+                                <label htmlFor="PhoneNumber">Telefoonnummer (optioneel)</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="phone"
-                                    name="phone"
-                                    value={editedProfile.phoneNumber || ''} // Use a default empty string if phoneNumber is null
-                                    onChange={handleInputChange}
+                                    id="PhoneNumber"
+                                    name="PhoneNumber"
+                                    value={editedProfile?.phoneNumber || ""}
+                                    onChange={handlePhoneNumberChange}
+                                    placeholder={editedProfile?.phoneNumber || ""}
                                 />
                             </div>
-                            {/* <div className="form-group mt-3">
-                                <label htmlFor="department">Department</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="department"
-                                    name="department"
-                                    value={editedProfile.department}
-                                    onChange={handleInputChange}
-                                />
-                            </div> */}
                             <div className="form-group mt-3">
-                                <label htmlFor="bio">Bio</label>
+                                <label htmlFor="Bio">Bio</label>
                                 <textarea
                                     className="form-control"
-                                    id="bio"
-                                    name="bio"
-                                    value={editedProfile.bio}
-                                    onChange={handleInputChange}
+                                    id="Bio"
+                                    name="Bio"
+                                    value={editedProfile?.bio || ""}
+                                    onChange={handleBioChange}
+                                    placeholder={editedProfile?.bio || ""}
                                 />
                             </div>
                             <button type="submit" className="btn btn-primary mt-4">

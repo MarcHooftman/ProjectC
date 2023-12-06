@@ -10,7 +10,7 @@ const NextActivityCard = () => {
   const [activity, setActivity] = useState<IActivity>();
 
   const { loading, data } = useFetch(
-    "https://localhost:7185/api/activity/first"
+    `${process.env.REACT_APP_API_URL}/activity/first`
   );
 
   useEffect(() => {

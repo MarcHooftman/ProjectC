@@ -1,9 +1,5 @@
-import Layout from "../../components/Layout";
-import { useState } from "react";
-
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../../utils/isLoggedIn";
 
 const Login = () => {
   const navigate = useNavigate();

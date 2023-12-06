@@ -44,7 +44,7 @@ const AddActivity = () => {
       Time: new Date(`${date}T${time}`).toISOString(),
     };
 
-    fetch("https://localhost:7185/api/activity", {
+    fetch(`${process.env.REACT_APP_API_URL}/activity`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(activity),

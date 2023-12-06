@@ -52,7 +52,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: ["User.Read"]
+    scopes: ["User.Read", "User.ReadBasic.All"]
 };
 
 /**
@@ -61,5 +61,6 @@ export const loginRequest = {
  */
 export const graphConfig = {
     graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
-    graphMePhotoEndpoint: "https://graph.microsoft.com/v1.0/me/photo/$value"
+    graphMePhotoEndpoint: "https://graph.microsoft.com/v1.0/me/photo/$value",
+    graphUserEndpoint: "https://graph.microsoft.com/v1.0/users"
 };

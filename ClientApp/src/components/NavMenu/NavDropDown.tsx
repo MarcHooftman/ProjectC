@@ -5,6 +5,7 @@ import {
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
+import { Link } from "react-router-dom";
 
 const Hamburger = require("../../assets/hamburger.png");
 
@@ -30,26 +31,26 @@ const NavDropDown = () => {
       </Dropdown.Toggle>
       <Dropdown.Menu className="">
         <AuthenticatedTemplate>
-          <Dropdown.Item href="/forum" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/forum" className="fs-5 blue-text">
             Forum
           </Dropdown.Item>
-          <Dropdown.Item href="/post" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/post" className="fs-5 blue-text">
             Nieuwe post
           </Dropdown.Item>
-          <Dropdown.Item href="/activities" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/activities" className="fs-5 blue-text">
             Activiteiten
           </Dropdown.Item>
-          <Dropdown.Item href="/profile" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/profile" className="fs-5 blue-text">
             Profiel
           </Dropdown.Item>
-          <Dropdown.Item href="/training" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/training" className="fs-5 blue-text">
             Trainingen
           </Dropdown.Item>
-          <Dropdown.Item href="/about" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/about" className="fs-5 blue-text">
             Over ons
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="/" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/" className="fs-5 blue-text">
             Home
           </Dropdown.Item>
           <Dropdown.Item onClick={handleLogout} className="fs-5 blue-text">
@@ -57,11 +58,11 @@ const NavDropDown = () => {
           </Dropdown.Item>
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
-          <Dropdown.Item href="/about" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/about" className="fs-5 blue-text">
             Over ons
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item href="/" className="fs-5 blue-text">
+          <Dropdown.Item as={Link} to="/" className="fs-5 blue-text">
             Home
           </Dropdown.Item>
           <Dropdown.Item onClick={handleLogin} className="fs-5 blue-text">
