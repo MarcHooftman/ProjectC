@@ -141,6 +141,7 @@ public static class Seeder
             AddForumPosts(context);
             AddMedia(context);
             AddTraining(context);
+            AddAdmin(context);
         }
     }
 
@@ -154,6 +155,7 @@ public static class Seeder
         if (context.Like.Any()) return false;
         if (context.Report.Any()) return false;
         if (context.Tag.Any()) return false;
+        if (context.Admin.Any()) return false;
         return true;
     }
 
@@ -443,6 +445,18 @@ public static class Seeder
         };
 
         context.ForumPost.AddRange(forumPosts);
+        context.SaveChanges();
+    }
+
+    private static void AddAdmin(AntesContext context)
+    {
+        var admin = new Admin
+        {
+            Email = "admin@ad.min",
+            Password = "admin"
+        };
+
+        context.Admin.Add(admin);
         context.SaveChanges();
     }
 }

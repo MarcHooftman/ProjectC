@@ -1,0 +1,24 @@
+// Styling based on branding guidelines by microsoft (https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-branding-in-apps)
+// There are also do's and don'ts provided in the link
+
+
+.sign-in-button {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 12px 0 12px !important;
+    gap: 12px !important;
+    height: 41px !important;
+    font-family: 'Segoe UI' !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #5e5e5e !important;
+    background-color: #ffffff !important;
+    border: 1px #8c8c8c solid !important;
+}
+
+.temp-logo,
+.admin-logo {
+    width: 24px !important;
+    height: 24px !important;
+}
