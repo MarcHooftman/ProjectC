@@ -13,6 +13,7 @@ interface Props {
   refresh?: () => void;
 }
 
+
 const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
   const ref = useRef<any>(null);
   const [show, setShow] = useState(false);

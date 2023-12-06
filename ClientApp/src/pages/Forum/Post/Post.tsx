@@ -7,22 +7,27 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import IProfile from "../../../interfaces/IProfile";
+import useGraphData from "../../../hooks/useGraphData";
 
 const Post = () => {
-  const [profile, setProfile] = useState<IProfile>();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  const navigate = useNavigate();
 
-  const { loading, data } = useFetch(
-    `${process.env.REACT_APP_API_URL}/profile/by-user/${localStorage.getItem("user")}`
-  );
+  const { graphData } = useGraphData();
 
+  const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
-    if (data) {
-      setProfile(data);
+    if (graphData) {
+      fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
+        .then((response) => response.json())
+        .then((data) => setProfile(data as IProfile));
     }
-  }, [loading]);
+    console.log(profile);
+    console.log(graphData);
+  }, [graphData]);
+
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -36,16 +41,43 @@ const Post = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const post = {};
-
+  
+    if (!profile?.id) {
+      // Handle case where profile is not available
+      console.error("Profile ID not available");
+      return;
+    }
+  
+    const postObject = {
+      title: title,
+      content: content,
+      tags: tags,
+      profileID: profile.id,
+      time: new Date().toISOString(),
+      comments: [],
+      likes: [],
+      reports: []
+    };
+  
     fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify(postObject),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("Post submitted successfully");
+      } else {
+        console.error("Failed to submit post");
+      }
+    })
+    .catch(error => {
+      // Handle network errors
+      console.error("Error submitting post:", error);
     });
+    navigate("/forum");
   };
 
   return (
