@@ -139,6 +139,8 @@ public static class Seeder
             AddProfiles(context);
             AddActivities(context);
             AddForumPosts(context);
+            AddMedia(context);
+            AddTraining(context);
         }
     }
 
@@ -229,6 +231,113 @@ public static class Seeder
         };
 
         context.Activity.AddRange(activities);
+        context.SaveChanges();
+    }
+    private static void AddMedia(AntesContext context)
+    {
+        var media = new List<Media>
+        {
+            new()
+            {
+                Type = "youtube video",
+                URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6",
+            }
+        };
+
+        context.Media.AddRange(media);
+        context.SaveChanges();
+    }
+    private static void AddTraining(AntesContext context)
+    {
+        var training = new List<Training>
+        {
+            new()
+            {
+                Title = "Test training 1",
+                Description = "Dit is de eerste Test Training",
+                MediaID = 1,
+                Tags = new List<Tag>
+                {
+                    new()
+                    {
+                        Name = "Tag 1"
+                    },
+                    new()
+                    {
+                        Name = "Tag 2"
+                    },
+                    new()
+                    {
+                        Name = "Tag 3"
+                    }
+                },
+            },
+            new()
+            {
+                Title = "Test training 2",
+                Description = "Dit is de tweede Test Training",
+                MediaID = 1,
+                Tags = new List<Tag>
+                {
+                    new()
+                    {
+                        Name = "Tag 1"
+                    },
+                    new()
+                    {
+                        Name = "Tag 2"
+                    },
+                    new()
+                    {
+                        Name = "Tag 3"
+                    }
+                },
+            },
+            new()
+            {
+                Title = "Test training 3",
+                Description = "Dit is de derde Test Training",
+                MediaID = 1,
+                Tags = new List<Tag>
+                {
+                    new()
+                    {
+                        Name = "Tag 1"
+                    },
+                    new()
+                    {
+                        Name = "Tag 2"
+                    },
+                    new()
+                    {
+                        Name = "Tag 3"
+                    }
+                },
+            },
+            new()
+            {
+                Title = "Test training 4",
+                Description = "Dit is de vierde Test Training",
+                MediaID = 1,
+                Tags = new List<Tag>
+                {
+                    new()
+                    {
+                        Name = "Tag 1"
+                    },
+                    new()
+                    {
+                        Name = "Tag 2"
+                    },
+                    new()
+                    {
+                        Name = "Tag 3"
+                    }
+                },
+            },
+        };
+
+        context.Training.AddRange(training);
         context.SaveChanges();
     }
 
