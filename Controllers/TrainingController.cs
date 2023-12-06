@@ -28,7 +28,10 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Training.ToListAsync();
+            return await _context.Training
+            .Include(_ => _.Tags)
+            .Include(_ => _.Media)
+            .ToListAsync();
         }
 
         // GET: api/Training/5
