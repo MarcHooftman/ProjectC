@@ -13,4 +13,5 @@ export default interface IProfile {
   phoneNumber?: string;
   bio?: string;
   department?: string;
+  userPrincipalName?: string;
 }

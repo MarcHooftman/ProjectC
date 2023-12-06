@@ -4,12 +4,12 @@ import IProfile from "../../interfaces/IProfile";
 interface Props {
     pfp?: string;
     profile?: IProfile | null;
-    graphData?: any;
+    graphData?: IGraphData;
     className?: string;
 }
 
 const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/profile.png"), className = '' }: Props) => {
-    console.log(graphData)
+    //console.log(graphData)
     return (
         <Card className={"personalia shadow-lg d-flex".concat(" ", className)}>
             <Card.Body>
@@ -19,14 +19,18 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                     <Table className="d-flex gap-4 mx-5 justify-content-end profile-table">
                         <tbody>
                             <tr>
-                                <th className="text-end blue-text">Naam</th><td className="blue-text">{graphData?.givenName + " " + graphData?.surname}</td>
+                                <th className="text-end blue-text">Naam</th><td className="blue-text">{profile?.fullName}</td>
                             </tr>
                             <tr>
-                                <th className="text-end blue-text">Email</th><td className="blue-text">{graphData?.userPrincipalName}</td>
+                                <th className="text-end blue-text">Email</th><td className="blue-text">{profile?.email}</td>
                             </tr>
-                            <tr>
-                                <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
-                            </tr>
+
+                            {profile?.role && profile?.role.trim() !== "" &&
+                                <tr>
+                                    <th className="text-end blue-text">Functie</th><td className="blue-text">{profile?.role}</td>
+                                </tr>
+                            }
+
 
                             {profile?.dateOfBirth && profile?.dateOfBirth.trim() !== "" &&
                                 <tr>
@@ -40,9 +44,11 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                                 </tr>
                             }
 
-                            <tr>
-                                <th className="text-end blue-text">Afdeling</th><td className="blue-text">{graphData?.officeLocation}</td>
-                            </tr>
+                            {profile?.department && profile?.department.trim() !== "" &&
+                                <tr>
+                                    <th className="text-end blue-text">Afdeling</th><td className="blue-text">{profile?.department}</td>
+                                </tr>
+                            }
 
                             <tr>
                                 <th className="text-end blue-text">Lid sinds</th><td className="blue-text">{profile?.memberSince}</td>
@@ -50,7 +56,7 @@ const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/prof
                         </tbody>
                     </Table>
                 </div>
-                {profile?.bio !== '' &&
+                {profile?.bio && profile?.bio !== '' &&
                     <>
                         <strong>Bio</strong>
                         <p className="card-text">

@@ -53,11 +53,11 @@ const PopPostCard = () => {
       ) : (
         <Card className="shadow-lg">
           <Card.Header className="d-flex justify-content-between align-items-center">
-            <Link to="/profile" className="poster-pfp">
+            <Link to={`/profile/${post.profileID}`} className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
             </Link>
             <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
-              <Link to="/profile" className="text-decoration-none blue-text">
+              <Link to={`/profile/${post.profileID}`} className="text-decoration-none blue-text">
                 <h2 className="fs-5 m-0">
                   <strong>{post?.profile?.fullName}</strong>
                 </h2>

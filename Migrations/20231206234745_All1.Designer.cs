@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231206082934_Admin3")]
-    partial class Admin3
+    [Migration("20231206234745_All1")]
+    partial class All1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,7 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("ForumPostID")
+                    b.Property<int>("ForumPostID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -309,7 +309,8 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Comments")
-                        .HasForeignKey("ForumPostID");
+                        .HasForeignKey("ForumPostID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("API.Models.Profile", "Profile")
                         .WithMany()
@@ -351,7 +352,9 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Tags")
-                        .HasForeignKey("ForumPostID");
+                        .HasForeignKey("ForumPostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Training", null)
                         .WithMany("Tags")

@@ -339,7 +339,7 @@ public static class Seeder
         context.SaveChanges();
     }
 
-    private static void AddAdmin(AntesContext context) 
+    private static void AddAdmin(AntesContext context)
     {
         var admin = new Admin
         {
@@ -349,7 +349,7 @@ public static class Seeder
 
         context.Admin.Add(admin);
         context.SaveChanges();
-    }    
+    }
 }
 
 

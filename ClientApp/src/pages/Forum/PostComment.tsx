@@ -50,9 +50,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
-      )
+      fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -96,7 +94,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
       <div className="pb-2">
         <div className="d-flex align-items-center gap-3">
           <Link
-            to="/profile"
+            to={`/profile/${comment.profileID}`}
             className="d-flex flex-row align-items-center gap-2 text-decoration-none blue-text"
           >
             <img

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class P019394391 : Migration
+    public partial class All1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,21 @@ namespace ProjectC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Activity", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Admin",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Level = table.Column<int>(type: "integer", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admin", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,7 +125,8 @@ namespace ProjectC.Migrations
                         name: "FK_ForumPost_ForumPost_ForumPostID",
                         column: x => x.ForumPostID,
                         principalTable: "ForumPost",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ForumPost_Profile_ProfileID",
                         column: x => x.ProfileID,
@@ -195,7 +211,7 @@ namespace ProjectC.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ForumPostID = table.Column<int>(type: "integer", nullable: true),
+                    ForumPostID = table.Column<int>(type: "integer", nullable: false),
                     TrainingID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -205,7 +221,8 @@ namespace ProjectC.Migrations
                         name: "FK_Tag_ForumPost_ForumPostID",
                         column: x => x.ForumPostID,
                         principalTable: "ForumPost",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tag_Training_TrainingID",
                         column: x => x.TrainingID,
@@ -264,6 +281,9 @@ namespace ProjectC.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Activity");
+
+            migrationBuilder.DropTable(
+                name: "Admin");
 
             migrationBuilder.DropTable(
                 name: "Like");

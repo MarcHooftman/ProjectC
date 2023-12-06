@@ -36,17 +36,19 @@ const ForumPostCard = ({ post }: Props) => {
         className="d-flex align-items-center"
         onClick={() => setCollapse(!collapse)}
       >
-        <Link to="/profile">
+        <Link to={`/profile/${post.profileID}`}>
           <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
         </Link>
         <Row className="w-100 align-items-center">
           <Col lg={3} className="ps-4">
-            <h2 className="fs-5 m-0">
-              <strong>{post?.profile?.fullName}</strong>
-            </h2>
-            <h3 className="fs-6 m-0 opacity-50 text-dark">
-              lid sinds {post?.profile?.memberSince}
-            </h3>
+            <Link to={`/profile/${post.profileID}`} className="text-decoration-none blue-text">
+              <h2 className="fs-5 m-0">
+                <strong>{post?.profile?.fullName}</strong>
+              </h2>
+              <h3 className="fs-6 m-0 opacity-50 text-dark">
+                lid sinds {post?.profile?.memberSince}
+              </h3>
+            </Link>
           </Col>
           <Col lg={6} className="ps-4">
             <h4>{post?.title}</h4>
