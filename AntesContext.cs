@@ -33,11 +33,16 @@ public class AntesContext : DbContext
 
 
         modelBuilder.Entity<ForumPost>()
-            .HasMany(_ => _.Comments);
-
+        .HasMany(_ => _.Comments)
+        .WithOne()
+        .HasForeignKey(_ => _.ForumPostID) // Use ForumPostID to set up the relationship
+        .OnDelete(DeleteBehavior.Cascade); // Enable cascade delete
 
         modelBuilder.Entity<ForumPost>()
-            .HasMany(_ => _.Tags);
+            .HasMany(_ => _.Tags)
+            .WithOne()
+            .HasForeignKey(_ => _.ForumPostID)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
         modelBuilder.Entity<Training>()

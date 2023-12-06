@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231206233514_P019394391q1")]
+    partial class P019394391q1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,7 +245,7 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ForumPostID")
+                    b.Property<int?>("ForumPostID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -349,9 +352,7 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Tags")
-                        .HasForeignKey("ForumPostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ForumPostID");
 
                     b.HasOne("API.Models.Training", null)
                         .WithMany("Tags")

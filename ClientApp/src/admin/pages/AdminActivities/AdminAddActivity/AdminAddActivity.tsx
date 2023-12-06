@@ -1,9 +1,10 @@
 import { Button, Card } from "react-bootstrap";
-import Layout from "../../../components/Layout";
+import Layout from "../../../../components/Layout";
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 
-const AddActivity = () => {
+const AdminAddActivity = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -59,7 +60,7 @@ const AddActivity = () => {
         }
         return response.json();
       })
-      .then((_) => navigate("/activities"))
+      .then((_) => navigate("/admin/activities"))
       .catch((error) => console.error("Error:", error));
   };
 
@@ -67,9 +68,9 @@ const AddActivity = () => {
   const charsLeft = maxLength - description.length;
 
   return (
-    <Layout centered={true}>
+    <AdminLayout centered={true}>
       <h1 className="blue-text my-5">Activiteit toevoegen</h1>
-      <Card className="w-50">
+      <Card className="w-50 shadow-lg">
         <Card.Body>
           <form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
             <div className="d-flex flex-column">
@@ -133,8 +134,8 @@ const AddActivity = () => {
           </form>
         </Card.Body>
       </Card>
-    </Layout>
+    </AdminLayout>
   );
 };
 
-export default AddActivity;
+export default AdminAddActivity;

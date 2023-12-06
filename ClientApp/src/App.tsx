@@ -10,7 +10,6 @@ import Training from "./pages/Training/Training";
 import ProfileEdit from "./pages/Profile/Edit_Profile/edit_profile";
 import Login from "./pages/Login/Login";
 import Post from "./pages/Forum/Post/Post";
-import AddActivity from "./pages/Activities/AddActivity/AddActivity";
 import ProfileByID from "./pages/Profile/ProfileByID/ProfileByID";
 import Auth from "./pages/Auth";
 import TemporaryLogin from "./pages/Login/TemporaryLogin/TemporaryLogin";
@@ -21,6 +20,7 @@ import AdminActivities from "./admin/pages/AdminActivities/AdminActivities";
 import AdminTrainings from "./admin/pages/AdminTrainings/AdminTrainings";
 import AdminReports from "./admin/pages/AdminReports/AdminReports";
 import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
+import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/AdminAddActivity";
 
 const App = () => {
   return (
@@ -35,7 +35,6 @@ const App = () => {
           <Route path="/profile/:id" element={<ProfileByID />} />
           <Route path="/edit_profile" element={<ProfileEdit />} />
           <Route path="/activities" element={<Activities />} />
-          <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/temp" element={<TemporaryLogin />} />
           <Route path="/login/admin" element={<AdminLogin />} />
@@ -45,6 +44,7 @@ const App = () => {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/forum" element={<AdminForum />} />
           <Route path="/admin/activities" element={<AdminActivities />} />
+          <Route path="/admin/activities/add" element={<AdminAddActivity />} />
           <Route path="/admin/trainings" element={<AdminTrainings />} />
           <Route path="/admin/reports" element={<AdminReports />} />
           <Route path="/admin/users" element={<AdminUsers />} />

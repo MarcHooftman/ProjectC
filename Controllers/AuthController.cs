@@ -24,9 +24,9 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Authenticate(Admin user)
     {
         var foundUser = await _context.Admin.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();
-        if (foundUser == null) return NotFound("User not found");
-        if (user.Password != foundUser.Password) return BadRequest("Incorrect password");
-        
+        if (foundUser == null || user.Password != foundUser.Password)
+            return BadRequest("Invalid credentials");
+
         return Ok("Authentication successful");
     }
 }

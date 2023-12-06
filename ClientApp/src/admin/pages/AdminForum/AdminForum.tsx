@@ -9,10 +9,14 @@ const AdminForum = () => {
   const [posts, setPosts] = useState<IForumPost[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<IForumPost[]>([]);
 
-  useEffect(() => {
+  const refreshPosts = () => {
     fetch(`${process.env.REACT_APP_API_URL}/forumpost`)
       .then((response) => response.json())
       .then((data) => setPosts(data as IForumPost[]));
+  };
+
+  useEffect(() => {
+    refreshPosts();
   }, []);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ const AdminForum = () => {
       <h1 className="my-5 blue-text">Forum</h1>
 
       {filteredPosts.map((post) => (
-        <AdminForumPostCard key={post.id} post={post} />
+        <AdminForumPostCard key={post.id} post={post} onDelete={refreshPosts} />
       ))}
     </AdminLayout>
   );

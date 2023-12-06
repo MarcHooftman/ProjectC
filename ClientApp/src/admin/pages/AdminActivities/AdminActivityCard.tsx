@@ -1,13 +1,15 @@
 import { useState } from "react";
 import IActivity from "../../../interfaces/IActivity";
-import { Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal } from "react-bootstrap";
 
 interface Props {
   activity: IActivity;
+  onDelete: () => void;
 }
 
-const AdminActivityCard = ({ activity }: Props) => {
-  const [showModal, setModalstate] = useState<boolean>();
+const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
+  const [showModal, setShowModal] = useState<boolean>();
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
   let formattedDate = "";
 
@@ -22,12 +24,30 @@ const AdminActivityCard = ({ activity }: Props) => {
     });
   }
 
+  const deleteActivity = async () => {
+    setShowConfirm(false);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/activity/${activity.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete activity");
+      }
+
+      // Refresh the activities list or handle the deletion in some other way
+    } catch (error) {
+      console.error(error);
+    }
+    onDelete();
+  };
+
   return (
     <>
       <Modal
         show={showModal}
         onHide={() => {
-          setModalstate(false);
+          setShowModal(false);
         }}
         centered={true}
         dialogClassName="activity-modal"
@@ -44,10 +64,41 @@ const AdminActivityCard = ({ activity }: Props) => {
           </div>
         </Modal.Header>
         <Modal.Body>{activity?.description}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => {
+            setShowConfirm(true);
+            setShowModal(false);
+          }}>
+            Delete Activity
+          </Button>
+        </Modal.Footer>
       </Modal>
+
+      <Modal
+        show={showConfirm}
+        onHide={() => setShowConfirm(false)}
+        centered={true}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this activity?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {
+            setShowConfirm(false);
+            setShowModal(true);
+          }}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteActivity}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Card
         className="hover-pointer h-100 shadow-lg"
-        onClick={() => setModalstate(!showModal)}
+        onClick={() => setShowModal(!showModal)}
       >
         <Card.Header>
           <Card.Title>
