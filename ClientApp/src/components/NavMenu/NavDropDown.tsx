@@ -4,15 +4,12 @@ import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
-import { loginRequest } from "../../authConfig";
 import { Link } from "react-router-dom";
 
 const Hamburger = require("../../assets/hamburger.png");
 
 const NavDropDown = () => {
   const { instance } = useMsal();
-
-
 
   const handleLogout = () => {
     instance.logoutRedirect({

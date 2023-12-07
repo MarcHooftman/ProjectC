@@ -21,6 +21,7 @@ import AdminTrainings from "./admin/pages/AdminTrainings/AdminTrainings";
 import AdminReports from "./admin/pages/AdminReports/AdminReports";
 import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
 import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/AdminAddActivity";
+import AdminEditActivity from "./admin/pages/AdminActivities/AdminEditActivity/AdminEditActivity";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/admin/forum" element={<AdminForum />} />
           <Route path="/admin/activities" element={<AdminActivities />} />
           <Route path="/admin/activities/add" element={<AdminAddActivity />} />
+          <Route path="/admin/activities/edit/:id" element={<AdminEditActivity />} />
           <Route path="/admin/trainings" element={<AdminTrainings />} />
           <Route path="/admin/reports" element={<AdminReports />} />
           <Route path="/admin/users" element={<AdminUsers />} />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import IActivity from "../../../interfaces/IActivity";
 import { Button, Card, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   activity: IActivity;
@@ -10,6 +11,7 @@ interface Props {
 const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
   const [showModal, setShowModal] = useState<boolean>();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   let formattedDate = "";
 
@@ -69,8 +71,9 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
             setShowConfirm(true);
             setShowModal(false);
           }}>
-            Delete Activity
+            Verwijderen
           </Button>
+          <Button onClick={() => navigate(`/admin/activities/edit/${activity.id}`)}>Bewerken</Button>
         </Modal.Footer>
       </Modal>
 

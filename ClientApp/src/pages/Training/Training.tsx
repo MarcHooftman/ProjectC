@@ -53,6 +53,8 @@ const Training = () => {
     const filterTraining = (training: ITraining[]) => {
         training = filter ? filterByTag(training, filter) : training;
         return training;
+        training = filter ? filterByTag(training, filter) : training;
+        return training;
     };
     
     console.log(profile)
@@ -64,7 +66,7 @@ const Training = () => {
         <Layout>
             <span className="forum-header d-flex justify-content-between align-items-center">
                 <h1 className="my-5 blue-text">Antes Trainingen</h1>
-                <FilterDropdown page={"training"}/>
+                <FilterDropdown page={"training"} />
             </span>
             {filterTraining(Trainings).length > 0 ? Category.map(i => {
                 return <div key={i.id} className="ps-3">
