@@ -41,13 +41,13 @@ const TrainingInfoCard = ({ Training, Completed }: Props) => {
         }}
       >
         <Card.Header>
-          <Card.Title>
+          <Card.Title className="d-flex justify-content-between align-items-center">
             <h4>{Training?.title}</h4>
-            {(Completed == true) ? <img src={checkmark} alt="" /> : null}
+            {(Completed === true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (
-                <Badge className="badge-color" text="light" bg="" pill={true}>
+                <Badge key={i.id} className="badge-color" text="light" bg="" pill={true}>
                   {i.name}
                 </Badge>
             ))}
