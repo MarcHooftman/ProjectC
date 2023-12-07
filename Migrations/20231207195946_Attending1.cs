@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class Admin4 : Migration
+    public partial class Attending1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,6 +102,30 @@ namespace ProjectC.Migrations
                         name: "FK_Training_Media_MediaID",
                         column: x => x.MediaID,
                         principalTable: "Media",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attending",
+                columns: table => new
+                {
+                    ActivityID = table.Column<int>(type: "integer", nullable: false),
+                    ProfileID = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attending", x => new { x.ActivityID, x.ProfileID });
+                    table.ForeignKey(
+                        name: "FK_Attending_Activity_ActivityID",
+                        column: x => x.ActivityID,
+                        principalTable: "Activity",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Attending_Profile_ProfileID",
+                        column: x => x.ProfileID,
+                        principalTable: "Profile",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -227,8 +251,14 @@ namespace ProjectC.Migrations
                         name: "FK_Tag_Training_TrainingID",
                         column: x => x.TrainingID,
                         principalTable: "Training",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attending_ProfileID",
+                table: "Attending",
+                column: "ProfileID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumPost_ForumPostID",
@@ -280,10 +310,10 @@ namespace ProjectC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Activity");
+                name: "Admin");
 
             migrationBuilder.DropTable(
-                name: "Admin");
+                name: "Attending");
 
             migrationBuilder.DropTable(
                 name: "Like");
@@ -296,6 +326,9 @@ namespace ProjectC.Migrations
 
             migrationBuilder.DropTable(
                 name: "TrainingProfile");
+
+            migrationBuilder.DropTable(
+                name: "Activity");
 
             migrationBuilder.DropTable(
                 name: "ForumPost");

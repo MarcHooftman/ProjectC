@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const filterIcon = require("../../assets/filter.png");
 
@@ -17,15 +18,21 @@ const FilterDropdown = () => {
         setSearchField(search);
     }
 
+    const navigate = useNavigate();
+    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        navigate(`/forum?filter=${searchField}`)
+    }
+
     return (
         <Dropdown >
             <Dropdown.Toggle className="no-after no-border bg-transparent">
                 <img src={filterIcon} className="filter antes-blue-image" />
             </Dropdown.Toggle>
             <Dropdown.Menu align="end">
-                <form className="px-2 d-flex gap-1">
+                <form className="px-2 d-flex gap-1" onSubmit={handleSearchSubmit}>
                     <input id="forum-search" type="search" placeholder="Zoeken" onChange={onSearchChange}></input>
-                    <Button href={`/forum?filter=${searchField}`} size="sm">Zoek</Button>
+                    <Button type="submit" size="sm">Zoek</Button>
                 </form>
                 <Dropdown.Divider />
                 <Dropdown.Item href="/forum" className="fs-6 blue-text">No filter</Dropdown.Item>

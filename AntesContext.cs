@@ -64,6 +64,11 @@ public class AntesContext : DbContext
             .HasMany(_ => _.Training)
             .WithMany(_ => _.Profile)
             .UsingEntity<TrainingProfile>();
+
+        modelBuilder.Entity<Activity>()
+            .HasMany(_ => _.Attending)
+            .WithMany()
+            .UsingEntity<Attending>();
     }
 
 

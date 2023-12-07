@@ -73,6 +73,21 @@ namespace ProjectC.Migrations
                     b.ToTable("Admin");
                 });
 
+            modelBuilder.Entity("API.Models.Attending", b =>
+                {
+                    b.Property<int>("ActivityID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ActivityID", "ProfileID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("Attending");
+                });
+
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.Property<int>("ID")
@@ -300,6 +315,21 @@ namespace ProjectC.Migrations
                     b.HasIndex("TrainingID");
 
                     b.ToTable("TrainingProfile");
+                });
+
+            modelBuilder.Entity("API.Models.Attending", b =>
+                {
+                    b.HasOne("API.Models.Activity", null)
+                        .WithMany()
+                        .HasForeignKey("ActivityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Profile", null)
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>

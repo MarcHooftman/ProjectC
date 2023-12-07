@@ -221,7 +221,7 @@ public static class Seeder
                 Title = "First Activity",
                 Description = "This is the first activity.",
                 Location = "Rotterdam",
-                Time = DateTime.UtcNow
+                Time = DateTime.UtcNow,
             },
             new()
             {
