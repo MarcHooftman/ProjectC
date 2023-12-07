@@ -24,15 +24,19 @@ const Home = () => {
 
   useEffect(() => {
     if (graphData) {
-      fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
-      ).then((response) => {
-        if (response.status === 200) {
-          setShowTutorial(false);
-        } else {
-          createProfile(graphData).then(() => setShowTutorial(true));
-        }
-      });
+      setTimeout(
+        () =>
+          fetch(
+            `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+          ).then((response) => {
+            if (response.status === 200) {
+              setShowTutorial(false);
+            } else {
+              createProfile(graphData).then(() => setShowTutorial(true));
+            }
+          }),
+        250
+      );
     }
   }, [graphData]);
 

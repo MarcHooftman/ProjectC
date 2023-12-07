@@ -242,7 +242,7 @@ public static class Seeder
             new()
             {
                 Type = "youtube video",
-                URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6",
+                URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
             }
         };
 
