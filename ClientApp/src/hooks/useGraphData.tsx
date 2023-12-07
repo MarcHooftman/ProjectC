@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { loginRequest } from "../authConfig";
 import { callMsGraph, callMsGraphPhoto, callMsGraphUser } from "../graph";
 
-
 const useGraphData = (userPrincipalName?: string) => {
   const [loading, setLoading] = useState<boolean>(true);
   const loggedIn = useIsAuthenticated();
@@ -11,7 +10,6 @@ const useGraphData = (userPrincipalName?: string) => {
 
   const [graphData, setGraphData] = useState<IGraphData | null>(null);
   const [graphDataPhoto, setGraphDataPhoto] = useState(null);
-
 
   function RequestProfileData() {
     // Silently acquires an access token which is then attached to a request for MS Graph data
@@ -22,8 +20,8 @@ const useGraphData = (userPrincipalName?: string) => {
       })
       .then((response) => {
         if (userPrincipalName) {
-          callMsGraphUser(response.accessToken, userPrincipalName).then((response) =>
-            setGraphData(response)
+          callMsGraphUser(response.accessToken, userPrincipalName).then(
+            (response) => setGraphData(response)
           );
         } else {
           callMsGraph(response.accessToken).then((response) =>
@@ -31,17 +29,15 @@ const useGraphData = (userPrincipalName?: string) => {
           );
         }
         //callMsGraphPhoto(response.accessToken).then(response => setGraphDataPhoto(response));
-      }).then(_ => setLoading(false));
-
+      })
+      .then((_) => setLoading(false));
   }
-
 
   useEffect(() => {
     if (loggedIn) {
       RequestProfileData();
     }
   }, [userPrincipalName]); // Add any other dependencies here
-
 
   return { loading, graphData, graphDataPhoto };
 };

@@ -7,4 +7,5 @@ public class Activity
     public string Description { get; set; } = null!;
     public string Location { get; set; } = null!;
     public DateTime Time { get; set; }
+    public IEnumerable<Profile>? Attending { get; set; }
 }

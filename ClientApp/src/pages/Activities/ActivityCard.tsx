@@ -10,6 +10,7 @@ interface Props {
 
 const ActivityCard = ({ activity, className = "" }: Props) => {
   const [showModal, setModalstate] = useState<boolean>();
+  console.log(activity);
 
   let formattedDate = "";
 

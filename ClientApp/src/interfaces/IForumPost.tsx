@@ -6,11 +6,11 @@ export default interface IForumPost {
   id?: number;
   title: string;
   content: string;
-  tags: { id: number; name: string }[];
+  tags: { id?: number; name: string }[];
   profileID: number;
   profile?: IProfile;
   time: string;
-  forumPostID: number;
+  forumPostID: number | null;
   comments: IForumPost[];
   likes: ILike[];
   reports: IReport[];
