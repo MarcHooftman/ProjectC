@@ -46,7 +46,10 @@ public class AntesContext : DbContext
 
 
         modelBuilder.Entity<Training>()
-            .HasMany(_ => _.Tags);
+            .HasMany(_ => _.Tags)
+            .WithOne()
+            .HasForeignKey(_ => _.TrainingID)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
         modelBuilder.Entity<ForumPost>()

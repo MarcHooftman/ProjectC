@@ -13,56 +13,84 @@ import IForumPost from "../../interfaces/IForumPost";
 import ProfilePostCard from "./ProfilePostCard";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import useGraphData from "../../hooks/useGraphData";
+import { filterOnlyParent } from "../../utils/sortPosts";
 
 const Profile = () => {
-    const loggedIn = useIsAuthenticated();
-    const { instance, accounts } = useMsal();
+  const loggedIn = useIsAuthenticated();
+  const { instance, accounts } = useMsal();
 
-    const handleLogin = () => {
-        instance.loginRedirect(loginRequest).catch(e => {
-            console.log(e);
-        });
+  const handleLogin = () => {
+    instance.loginRedirect(loginRequest).catch((e) => {
+      console.log(e);
+    });
+  };
+
+  const handleLogout = () => {
+    instance.logoutRedirect({
+      postLogoutRedirectUri: "/",
+    });
+  };
+
+  if (!loggedIn) {
+    handleLogin();
+  }
+
+  const { graphData } = useGraphData();
+
+  const [profile, setProfile] = useState<IProfile>();
+  useEffect(() => {
+    if (graphData) {
+      fetch(
+        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+      )
+        .then((response) => response.json())
+        .then((data) => setProfile(data as IProfile));
     }
+  }, [graphData]);
 
-    const handleLogout = () => {
-        instance.logoutRedirect({
-            postLogoutRedirectUri: "/",
-        });
+  const [posts, setPosts] = useState<IForumPost[]>();
+  useEffect(() => {
+    if (profile) {
+      fetch(
+        `${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile.id}`
+      )
+        .then((response) => response.json())
+        .then((data) => setPosts(data as IForumPost[]));
     }
+  }, [profile]);
 
-    if (!loggedIn) {
-        handleLogin()
-    }
+  // const { data: profileData } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.userPrincipalName}`)
+  // const profile = profileData as IProfile | null;
 
-    const { graphData } = useGraphData();
+  // const { data: postsData } = useFetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile?.id}`)
+  // const posts = postsData as IForumPost[] | null;
 
-    const { data: profileData } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.userPrincipalName}`)
-    const profile = profileData as IProfile | null;
+  return (
+    <Layout>
+      <h1 className="blue-text my-5">Jouw profiel</h1>
+      <div className="d-flex gap-5">
+        <PersonalInfoCard profile={profile} />
+        <UserDataCard posts={posts || []} />
+      </div>
+      <div className="d-flex justify-content-between">
+        <Button href="/edit_profile" className="mt-3">
+          Profiel bewerken
+        </Button>
+        <Button onClick={handleLogout} className="mt-3">
+          Uitloggen
+        </Button>
+      </div>
 
-    const { data: postsData } = useFetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile?.id}`)
-    const posts = postsData as IForumPost[] | null;
-
-
-    return (
-        <Layout>
-            <h1 className="blue-text my-5">Jouw profiel</h1>
-            <div className="d-flex gap-5">
-                <PersonalInfoCard profile={profile} graphData={graphData} />
-                <UserDataCard posts={postsData || []} />
-            </div>
-            <div className="d-flex justify-content-between">
-                <Button href="/edit_profile" className="mt-3">Profiel bewerken</Button>
-                <Button onClick={handleLogout} className="mt-3">Uitloggen</Button>
-            </div>
-
-            {Array.isArray(posts) && posts.length > 0 &&
-                <>
-                    <h2 className="my-5 blue-text">Jouw posts</h2>
-                    {posts?.map((post) => <ProfilePostCard post={post} />)}
-                </>
-            }
-        </Layout>
-    );
+      {Array.isArray(posts) && filterOnlyParent(posts).length > 0 && (
+        <>
+          <h2 className="my-5 blue-text">Jouw posts</h2>
+          {filterOnlyParent(posts)?.map((post) => (
+            <ProfilePostCard post={post} />
+          ))}
+        </>
+      )}
+    </Layout>
+  );
 };
 
 export default Profile;
