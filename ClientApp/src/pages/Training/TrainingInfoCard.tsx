@@ -3,13 +3,16 @@ import ITraining from "../../interfaces/ITraining";
 import { Modal, Card, Badge} from "react-bootstrap";
 import "./Training.scss";
 
+const checkmark = require("../../assets/checkmark.png");
+
 
 interface Props {
   Training?: ITraining;
+  Completed: boolean;
 }
 
 
-const TrainingInfoCard = ({ Training }: Props) => {
+const TrainingInfoCard = ({ Training, Completed }: Props) => {
   const [showModal, setModelstate] = useState<boolean>();
   return (
     <>
@@ -40,6 +43,7 @@ const TrainingInfoCard = ({ Training }: Props) => {
         <Card.Header>
           <Card.Title>
             <h4>{Training?.title}</h4>
+            {(Completed == true) ? <img src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (
