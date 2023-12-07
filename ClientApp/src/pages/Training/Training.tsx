@@ -8,6 +8,7 @@ import ITag from "../../interfaces/ITag";
 import { filterByTag } from "../../utils/sortTraining";
 import FilterDropdown from "../../components/FilterDropdown";
 
+
 const Training = () => {
     const [Trainings, setTraining] = useState<ITraining[]>([]);
     const [searchParams] = useSearchParams()
@@ -17,23 +18,23 @@ const Training = () => {
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/training`)
-          .then((response) => response.json())
-          .then((data) => setTraining(data as ITraining[]));
-      }, [filter]);
+            .then((response) => response.json())
+            .then((data) => setTraining(data as ITraining[]));
+    }, [filter]);
+
 
     const filterTraining = (training: ITraining[]) => {
-    training = filter ? filterByTag(training, filter) : training;
-    return training;
+        training = filter ? filterByTag(training, filter) : training;
+        return training;
     };
 
-    // sets category to every first tag of trainings
     filterTraining(Trainings)?.forEach((i) => { if (!Category.some(_ => _.name.includes(i.tags[0].name))) Category.push(i.tags[0]) })
 
     return (
         <Layout>
             <span className="forum-header d-flex justify-content-between align-items-center">
                 <h1 className="my-5 blue-text">Antes Trainingen</h1>
-                <FilterDropdown page={"training"}/>
+                <FilterDropdown page={"training"} />
             </span>
             {filterTraining(Trainings).length > 0 ? Category.map(i => {
                 return <div key={i.id} className="ps-3">

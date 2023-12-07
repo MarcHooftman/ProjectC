@@ -4,8 +4,6 @@ import "./edit_profile.scss";
 import { useEffect, useState } from "react";
 import useGraphData from "../../../hooks/useGraphData";
 import IProfile from "../../../interfaces/IProfile";
-import { useIsAuthenticated, useMsal } from "@azure/msal-react";
-import { loginRequest } from "../../../authConfig";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
@@ -14,21 +12,19 @@ const EditProfile = () => {
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
-    setTimeout(() => {
-      if (graphData) {
-        fetch(
-          `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            const profileData = data as IProfile;
-            setProfile(profileData);
-            setRole(profileData.role || "");
-            setPhoneNumber(profileData.phoneNumber || "");
-            setBio(profileData.bio || "");
-          });
-      }
-    });
+    if (graphData) {
+      fetch(
+        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const profileData = data as IProfile;
+          setProfile(profileData);
+          setRole(profileData.role || "");
+          setPhoneNumber(profileData.phoneNumber || "");
+          setBio(profileData.bio || "");
+        });
+    }
   }, [graphData]);
 
   const [role, setRole] = useState<string>(profile?.role || "");
