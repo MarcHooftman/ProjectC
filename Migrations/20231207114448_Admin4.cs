@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class All1 : Migration
+    public partial class Admin4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -136,23 +136,23 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProfileTraining",
+                name: "TrainingProfile",
                 columns: table => new
                 {
-                    ProfileID = table.Column<int>(type: "integer", nullable: false),
-                    TrainingID = table.Column<int>(type: "integer", nullable: false)
+                    TrainingID = table.Column<int>(type: "integer", nullable: false),
+                    ProfileID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfileTraining", x => new { x.ProfileID, x.TrainingID });
+                    table.PrimaryKey("PK_TrainingProfile", x => new { x.ProfileID, x.TrainingID });
                     table.ForeignKey(
-                        name: "FK_ProfileTraining_Profile_ProfileID",
+                        name: "FK_TrainingProfile_Profile_ProfileID",
                         column: x => x.ProfileID,
                         principalTable: "Profile",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProfileTraining_Training_TrainingID",
+                        name: "FK_TrainingProfile_Training_TrainingID",
                         column: x => x.TrainingID,
                         principalTable: "Training",
                         principalColumn: "ID",
@@ -211,7 +211,7 @@ namespace ProjectC.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ForumPostID = table.Column<int>(type: "integer", nullable: false),
+                    ForumPostID = table.Column<int>(type: "integer", nullable: true),
                     TrainingID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -251,11 +251,6 @@ namespace ProjectC.Migrations
                 column: "ProfilePictureID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProfileTraining_TrainingID",
-                table: "ProfileTraining",
-                column: "TrainingID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Report_ForumPostID",
                 table: "Report",
                 column: "ForumPostID");
@@ -274,6 +269,11 @@ namespace ProjectC.Migrations
                 name: "IX_Training_MediaID",
                 table: "Training",
                 column: "MediaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingProfile_TrainingID",
+                table: "TrainingProfile",
+                column: "TrainingID");
         }
 
         /// <inheritdoc />
@@ -289,13 +289,13 @@ namespace ProjectC.Migrations
                 name: "Like");
 
             migrationBuilder.DropTable(
-                name: "ProfileTraining");
-
-            migrationBuilder.DropTable(
                 name: "Report");
 
             migrationBuilder.DropTable(
                 name: "Tag");
+
+            migrationBuilder.DropTable(
+                name: "TrainingProfile");
 
             migrationBuilder.DropTable(
                 name: "ForumPost");

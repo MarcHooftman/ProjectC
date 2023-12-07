@@ -98,6 +98,7 @@ namespace API.Controllers
                 .Include(_ => _.Profile)
                 .Include(_ => _.Tags)
                 .OrderByDescending(fp => fp.Likes.Count())
+                .Where(_ => _.ForumPostID == null)
                 .FirstOrDefaultAsync();
 
             if (forumPost == null)

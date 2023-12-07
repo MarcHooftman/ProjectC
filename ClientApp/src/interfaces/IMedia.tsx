@@ -1,6 +1,5 @@
-
 export default interface IMedia {
-    ID: number
-    type: string;
-    URL: string
+  ID: number;
+  type: string;
+  url: string;
 }

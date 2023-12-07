@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231206234745_All1")]
-    partial class All1
+    [Migration("20231207114448_Admin4")]
+    partial class Admin4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,7 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ForumPostID")
+                    b.Property<int?>("ForumPostID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -290,7 +290,7 @@ namespace ProjectC.Migrations
                     b.ToTable("Training");
                 });
 
-            modelBuilder.Entity("ProfileTraining", b =>
+            modelBuilder.Entity("API.Models.TrainingProfile", b =>
                 {
                     b.Property<int>("ProfileID")
                         .HasColumnType("integer");
@@ -302,7 +302,7 @@ namespace ProjectC.Migrations
 
                     b.HasIndex("TrainingID");
 
-                    b.ToTable("ProfileTraining");
+                    b.ToTable("TrainingProfile");
                 });
 
             modelBuilder.Entity("API.Models.ForumPost", b =>
@@ -353,8 +353,7 @@ namespace ProjectC.Migrations
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany("Tags")
                         .HasForeignKey("ForumPostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("API.Models.Training", null)
                         .WithMany("Tags")
@@ -372,7 +371,7 @@ namespace ProjectC.Migrations
                     b.Navigation("Media");
                 });
 
-            modelBuilder.Entity("ProfileTraining", b =>
+            modelBuilder.Entity("API.Models.TrainingProfile", b =>
                 {
                     b.HasOne("API.Models.Profile", null)
                         .WithMany()
