@@ -14,10 +14,12 @@ import ProfilePostCard from "./ProfilePostCard";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import useGraphData from "../../hooks/useGraphData";
 import { filterOnlyParent } from "../../utils/sortPosts";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const loggedIn = useIsAuthenticated();
   const { instance, accounts } = useMsal();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     instance.loginRedirect(loginRequest).catch((e) => {
@@ -59,12 +61,6 @@ const Profile = () => {
     }
   }, [profile]);
 
-  // const { data: profileData } = useFetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.userPrincipalName}`)
-  // const profile = profileData as IProfile | null;
-
-  // const { data: postsData } = useFetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile?.id}`)
-  // const posts = postsData as IForumPost[] | null;
-
   return (
     <Layout>
       <h1 className="blue-text my-5">Jouw profiel</h1>
@@ -73,7 +69,12 @@ const Profile = () => {
         <UserDataCard posts={posts || []} />
       </div>
       <div className="d-flex justify-content-between">
-        <Button href="/edit_profile" className="mt-3">
+        <Button
+          onClick={() => {
+            navigate("/edit_profile");
+          }}
+          className="mt-3"
+        >
           Profiel bewerken
         </Button>
         <Button onClick={handleLogout} className="mt-3">
