@@ -11,6 +11,7 @@ import Tutorial from "./Tutorial/Tutorial";
 import { useEffect, useState } from "react";
 import useGraphData from "../../hooks/useGraphData";
 import { createProfile } from "./utils";
+import AboutParagraph from "../../components/AboutParagraph";
 
 //const homeCover = require("../../assets/images/home-cover.jpg");
 
@@ -69,6 +70,8 @@ const Home = () => {
           </Col>
         </Row>
       </AuthenticatedTemplate>
+      <h2 className="my-4 blue-text">Over ons</h2>
+      <AboutParagraph />
     </Layout>
   );
 };
