@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231207135143_m1")]
+    partial class m1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,21 +108,6 @@ namespace ProjectC.Migrations
                     b.HasIndex("ProfileID");
 
                     b.ToTable("ForumPost");
-                });
-
-            modelBuilder.Entity("API.Models.ForumTag", b =>
-                {
-                    b.Property<int>("ForumPostId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ForumPostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ForumTag");
                 });
 
             modelBuilder.Entity("API.Models.Like", b =>
@@ -257,11 +245,21 @@ namespace ProjectC.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
+                    b.Property<int?>("ForumPostID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("TrainingID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("ForumPostID");
+
+                    b.HasIndex("TrainingID");
 
                     b.ToTable("Tag");
                 });
@@ -307,21 +305,6 @@ namespace ProjectC.Migrations
                     b.ToTable("TrainingProfile");
                 });
 
-            modelBuilder.Entity("API.Models.TrainingTag", b =>
-                {
-                    b.Property<int>("TagID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TrainingID")
-                        .HasColumnType("integer");
-
-                    b.HasKey("TagID", "TrainingID");
-
-                    b.HasIndex("TrainingID");
-
-                    b.ToTable("TrainingTag");
-                });
-
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.HasOne("API.Models.ForumPost", null)
@@ -336,21 +319,6 @@ namespace ProjectC.Migrations
                         .IsRequired();
 
                     b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("API.Models.ForumTag", b =>
-                {
-                    b.HasOne("API.Models.ForumPost", null)
-                        .WithMany()
-                        .HasForeignKey("ForumPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Models.Like", b =>
@@ -380,6 +348,19 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Models.Tag", b =>
+                {
+                    b.HasOne("API.Models.ForumPost", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("ForumPostID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("API.Models.Training", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("TrainingID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("API.Models.Training", b =>
                 {
                     b.HasOne("API.Models.Media", "Media")
@@ -406,21 +387,6 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Models.TrainingTag", b =>
-                {
-                    b.HasOne("API.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Models.Training", null)
-                        .WithMany()
-                        .HasForeignKey("TrainingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.Navigation("Comments");
@@ -428,6 +394,13 @@ namespace ProjectC.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Reports");
+
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("API.Models.Training", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

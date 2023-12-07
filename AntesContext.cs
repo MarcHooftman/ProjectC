@@ -40,16 +40,14 @@ public class AntesContext : DbContext
 
         modelBuilder.Entity<ForumPost>()
             .HasMany(_ => _.Tags)
-            .WithOne()
-            .HasForeignKey(_ => _.ForumPostID)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany()
+            .UsingEntity<ForumTag>();
 
 
         modelBuilder.Entity<Training>()
             .HasMany(_ => _.Tags)
-            .WithOne()
-            .HasForeignKey(_ => _.TrainingID)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany()
+            .UsingEntity<TrainingTag>();
 
 
         modelBuilder.Entity<ForumPost>()
@@ -60,9 +58,9 @@ public class AntesContext : DbContext
             .HasMany(_ => _.Reports);
 
 
-        modelBuilder.Entity<Profile>()
-            .HasMany(_ => _.Training)
-            .WithMany(_ => _.Profile)
+        modelBuilder.Entity<Training>()
+            .HasMany(_ => _.Profile)
+            .WithMany()
             .UsingEntity<TrainingProfile>();
     }
 

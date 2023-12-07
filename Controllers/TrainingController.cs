@@ -31,6 +31,7 @@ namespace API.Controllers
             return await _context.Training
             .Include(_ => _.Tags)
             .Include(_ => _.Media)
+            .Include(_ => _.Profile)
             .ToListAsync();
         }
 
@@ -42,7 +43,10 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var training = await _context.Training.FindAsync(id);
+            var training = await _context.Training
+            .Include(_ => _.Tags)
+            .Include(_ => _.Media)
+            .Include(_ => _.Profile).FirstOrDefaultAsync(_ => _.ID == id);
 
             if (training == null)
             {

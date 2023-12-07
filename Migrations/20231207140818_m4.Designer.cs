@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    partial class AntesContextModelSnapshot : ModelSnapshot
+    [Migration("20231207140818_m4")]
+    partial class m4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,13 +112,16 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.ForumTag", b =>
                 {
-                    b.Property<int>("ForumPostId")
+                    b.Property<int>("ForumPostID")
                         .HasColumnType("integer");
 
                     b.Property<int>("TagId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ForumPostId", "TagId");
+                    b.Property<int>("ForumId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ForumPostID", "TagId");
 
                     b.HasIndex("TagId");
 
@@ -342,7 +348,7 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.ForumPost", null)
                         .WithMany()
-                        .HasForeignKey("ForumPostId")
+                        .HasForeignKey("ForumPostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

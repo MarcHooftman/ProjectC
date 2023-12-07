@@ -8,7 +8,7 @@ export default interface IProfile {
     dateOfBirth?: string;
     email: string;
     // ProfilePicture: Media;
-    training: ITraining[];
+    // training: ITraining[];
     memberSince: string;
     phoneNumber?: string | null;
     bio?: string;

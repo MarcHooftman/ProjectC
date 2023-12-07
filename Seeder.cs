@@ -136,6 +136,7 @@ public static class Seeder
 
         if (IsEmpty(context))
         {
+            AddTags(context);
             AddProfiles(context);
             AddActivities(context);
             AddForumPosts(context);
@@ -249,8 +250,49 @@ public static class Seeder
         context.Media.AddRange(media);
         context.SaveChanges();
     }
+    
+    private static void AddTags(AntesContext context)
+    {
+        var tags = new List<Tag>
+        {
+            new()
+            {
+                ID = 1,
+                Name = "Tag 1"
+            },
+            new()
+            {
+                ID = 2,
+                Name = "Tag 2"
+            },
+            new()
+            {
+                ID = 3,
+                Name = "Tag 3"
+            },
+            new()
+            {
+                ID = 4,
+                Name = "Tag 4"
+            },
+            new()
+            {
+                ID = 5,
+                Name = "Tag 5"
+            }
+        };
+
+        context.Tag.AddRange(tags);
+        context.SaveChanges();
+    }
+    
     private static void AddTraining(AntesContext context)
     {
+        var tag1 = context.Tag.Find(1);
+        var tag2 = context.Tag.Find(2);
+        var tag3 = context.Tag.Find(3);
+        var tag4 = context.Tag.Find(4);
+        var tag5 = context.Tag.Find(5);
         var training = new List<Training>
         {
             new()
@@ -260,18 +302,9 @@ public static class Seeder
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
-                    new()
-                    {
-                        Name = "Tag 1"
-                    },
-                    new()
-                    {
-                        Name = "Tag 2"
-                    },
-                    new()
-                    {
-                        Name = "Tag 3"
-                    }
+                    tag1!,
+                    tag2!,
+                    tag3!
                 },
             },
             new()
@@ -281,18 +314,9 @@ public static class Seeder
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
-                    new()
-                    {
-                        Name = "Tag 1"
-                    },
-                    new()
-                    {
-                        Name = "Tag 2"
-                    },
-                    new()
-                    {
-                        Name = "Tag 3"
-                    }
+                    tag5!,
+                    tag1!,
+                    tag2!,
                 },
             },
             new()
@@ -302,18 +326,9 @@ public static class Seeder
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
-                    new()
-                    {
-                        Name = "Tag 1"
-                    },
-                    new()
-                    {
-                        Name = "Tag 2"
-                    },
-                    new()
-                    {
-                        Name = "Tag 3"
-                    }
+                    tag4!,
+                    tag1!,
+                    tag2!,
                 },
             },
             new()
@@ -323,18 +338,9 @@ public static class Seeder
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
-                    new()
-                    {
-                        Name = "Tag 1"
-                    },
-                    new()
-                    {
-                        Name = "Tag 2"
-                    },
-                    new()
-                    {
-                        Name = "Tag 3"
-                    }
+
+                    tag2!,
+                    tag3!,
                 },
             },
         };
@@ -345,6 +351,11 @@ public static class Seeder
 
     private static void AddForumPosts(AntesContext context)
     {
+        var tag1 = context.Tag.Find(1);
+        var tag2 = context.Tag.Find(2);
+        var tag3 = context.Tag.Find(3);
+        var tag4 = context.Tag.Find(4);
+        var tag5 = context.Tag.Find(5);
         var forumPosts = new List<ForumPost>
         {
             new()
@@ -353,18 +364,9 @@ public static class Seeder
                 Content = "This is the first post.",
                 Tags = new List<Tag>
                 {
-                    new()
-                    {
-                        Name = "Tag 1"
-                    },
-                    new()
-                    {
-                        Name = "Tag 2"
-                    },
-                    new()
-                    {
-                        Name = "Tag 3"
-                    }
+                    tag1!,
+                    tag2!,
+                    tag3!,
                 },
                 ProfileID = 1,
                 Profile = null,
@@ -377,12 +379,10 @@ public static class Seeder
                         Title = "Comment 1",
                         Content = "This is a comment on the first post.",
                         Tags = new List<Tag>
-                        {
-                            new()
                             {
-                                Name = "Tag 1"
-                            }
-                        },
+                                tag1!,
+
+                            },
                         ProfileID = 2,
                         Profile = null,
                         Time = DateTime.UtcNow,
@@ -394,12 +394,10 @@ public static class Seeder
                                 Title = "Sub Comment 1",
                                 Content = "This is a sub comment on the firstcomment.",
                                 Tags = new List<Tag>
-                                {
-                                    new()
                                     {
-                                        Name = "Tag 2"
-                                    }
-                                },
+                                        tag1!,
+
+                                    },
                                 ProfileID = 3,
                                 Profile = null,
                                 Time = DateTime.UtcNow,
