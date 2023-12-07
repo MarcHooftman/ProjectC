@@ -1,6 +1,6 @@
 import ForumPostCard from "./ForumPostCard";
 import Layout from "../../components/Layout";
-import FilterDropdown from "./FilterDropdown";
+import FilterDropdown from "../../components/FilterDropdown";
 import { useSearchParams } from "react-router-dom";
 
 import "./Forum.scss";
@@ -30,7 +30,7 @@ const Forum = () => {
     <Layout>
       <span className="forum-header d-flex justify-content-between align-items-center">
         <h1 className="my-5 blue-text">Antes Forum</h1>
-        <FilterDropdown />
+        <FilterDropdown page={"forum"}/>
       </span>
       {filterPosts(forumPosts).length > 0
         ? filterPosts(forumPosts).map((forumPost) => (
