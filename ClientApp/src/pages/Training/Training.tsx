@@ -49,14 +49,14 @@ const Training = () => {
                     <h1 className="my-5 blue-text">Antes Trainingen</h1>
                     <FilterDropdown page={"training"} />
                 </span>
-                {profile && filterTraining(Trainings).length > 0 ? Category.map((i, index) => {
+                {filterTraining(Trainings).length > 0 ? Category.map((i, index) => {
                     return <div key={index} className="ps-3">
                         <h3 className="pt-3 blue-text" >{i.name}</h3>
                         <div className="d-flex pt-3 gap-4 flex-row flex-wrap justify-content-start">
                             {filterTraining(Trainings).map((item, itemIndex) => {
                                 if (item.tags.some(t => t.name.includes(i.name))) {
                                     return <TrainingInfoCard key={itemIndex} Training={item}
-                                        Completed={item.profile.some(_ => _.email.includes(profile!.email))} />
+                                        Completed={profile?.training?.some(_ => _.id === item.id) || false} />
                                 }
                                 return null;
                             })}
