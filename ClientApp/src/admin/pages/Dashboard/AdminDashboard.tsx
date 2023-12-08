@@ -4,7 +4,6 @@ import "./AdminDashboard.scss";
 import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
-
   return (
     <AdminLayout centered={true}>
       <h1 className="my-5 blue-text">Admin dashboard</h1>
