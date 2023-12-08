@@ -11,7 +11,6 @@ import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
 import { AuthenticatedTemplate } from "@azure/msal-react";
 
-
 const Training = () => {
 
     const { graphData } = useGraphData();
@@ -20,7 +19,6 @@ const Training = () => {
     const [searchParams] = useSearchParams()
     const filter = searchParams.get('filter')
     let Category: ITag[] = []
-
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/training`)
