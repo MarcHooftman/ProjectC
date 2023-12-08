@@ -41,7 +41,6 @@ const Training = () => {
     // sets category to every first tag of trainings
     filterTraining(Trainings)?.forEach((i) => { if (!Category.some(_ => _.name.includes(i.tags[0].name))) Category.push(i.tags[0]) })
     
-    
     return (
         <Layout>
             <AuthenticatedTemplate>
