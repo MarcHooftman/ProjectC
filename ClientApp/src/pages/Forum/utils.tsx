@@ -1,4 +1,3 @@
-import IForumPost from "../../interfaces/IForumPost";
 import ILike from "../../interfaces/ILike";
 
 export function postLike(postId: number, profileId: number) {
