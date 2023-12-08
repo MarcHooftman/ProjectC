@@ -17,5 +17,5 @@ public class Profile
     public string? UserPrincipalName { get; set; }
 
     // navigational
-    // public IEnumerable<Training>? Training { get; set; }
+    public IEnumerable<Training>? Training { get; set; }
 }

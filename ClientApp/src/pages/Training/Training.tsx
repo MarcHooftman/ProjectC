@@ -55,7 +55,7 @@ const Training = () => {
                     {filterTraining(Trainings).map((item, itemIndex) => { 
                         if (item.tags.some(t => t.name.includes(i.name))) {
                             return <TrainingInfoCard key={itemIndex} Training={item} 
-                            Completed={item.profile.some(_ => _.email.includes(profile!.email))} />
+                            Completed={profile?.training?.some(_ => _.id === item.id) || false} />
                         }
                         return null;
                     })}

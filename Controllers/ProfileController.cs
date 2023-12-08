@@ -28,7 +28,9 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Profile.ToListAsync();
+            return await _context.Profile
+            .Include(_ => _.Training)
+            .ToListAsync();
         }
 
         // GET: api/Profile/5
@@ -39,7 +41,9 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var profile = await _context.Profile.FirstOrDefaultAsync(_ => _.ID == id);
+            var profile = await _context.Profile
+            .Include(_ => _.Training)
+            .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (profile == null)
             {
@@ -59,7 +63,9 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var profile = await _context.Profile.FirstOrDefaultAsync(_ => _.Email == email);
+            var profile = await _context.Profile
+            .Include(_ => _.Training)
+            .FirstOrDefaultAsync(_ => _.Email == email);
 
             if (profile == null)
             {
