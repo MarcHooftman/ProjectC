@@ -57,6 +57,7 @@ async function getGraphData() {
             })
             return result;
         })
+
     return graphData;
 }
 
