@@ -18,6 +18,7 @@ import AboutParagraph from "../../components/AboutParagraph";
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
   const { graphData } = useGraphData();
+  console.log(graphData)
 
   const closeTutorial = () => {
     setShowTutorial(false);

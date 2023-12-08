@@ -10,5 +10,5 @@ public class Training
     public Media? Media { get; set; }
     public IEnumerable<Tag>? Tags { get; set; }
 
-    public IEnumerable<Profile>? Profile { get; set; }
+    // public IEnumerable<Profile>? Profile { get; set; }
 }
