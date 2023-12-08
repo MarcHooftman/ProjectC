@@ -19,7 +19,7 @@ const Training = () => {
     const [searchParams] = useSearchParams()
     const filter = searchParams.get('filter')
     let Category: ITag[] = []
-    
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/training`)
         .then((response) => response.json())

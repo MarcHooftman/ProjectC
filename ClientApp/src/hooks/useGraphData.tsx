@@ -1,44 +1,23 @@
-import { useMsal } from "@azure/msal-react";
-import { useEffect, useState } from "react";
-import { loginRequest } from "../authConfig";
-import { callMsGraph, callMsGraphPhoto, callMsGraphUser } from "../graph";
+import { useState, useEffect } from "react";
+import { getGraphData } from "../utils/msalUtils";
+import { useIsAuthenticated } from "@azure/msal-react";
 
 const useGraphData = (userPrincipalName?: string) => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const { instance, accounts } = useMsal();
+  const [graphData, setGraphData] = useState<IGraphData>();
+  const isAuthenticated = useIsAuthenticated();
 
-  const [graphData, setGraphData] = useState<IGraphData | null>(null);
-  const [graphDataPhoto, setGraphDataPhoto] = useState(null);
-
-  function RequestProfileData() {
-    // Silently acquires an access token which is then attached to a request for MS Graph data
-    instance
-      .acquireTokenSilent({
-        ...loginRequest,
-        account: accounts[0],
-      })
-      .then((response) => {
-        console.log('Token:', response.accessToken); // Add this line
-        if (userPrincipalName) {
-          callMsGraphUser(response.accessToken, userPrincipalName).then(
-            (response) => setGraphData(response)
-          ).catch((error) => console.error('Error in callMsGraphUser:', error));;
-        } else {
-          callMsGraph(response.accessToken).then((response) =>
-            setGraphData(response)
-          ).catch((error) => console.error('Error in callMsGraph:', error));;
-        }
-        //callMsGraphPhoto(response.accessToken).then(response => setGraphDataPhoto(response));
-      })
-      .catch((error) => console.error('Error in acquireTokenSilent:', error))
-      .finally(() => setLoading(false));
+  async function fetchData() {
+    const data = await getGraphData().then(response => { return response as IGraphData });
+    setGraphData(data);
   }
 
   useEffect(() => {
-    RequestProfileData();
-  }, [userPrincipalName]); // Add any other dependencies here
+    if (isAuthenticated) {
+      fetchData();
+    }
+  }, [userPrincipalName]); // fetchData will be called when the component mounts and when userPrincipalName changes
 
-  return { loading, graphData, graphDataPhoto };
+  return { graphData };
 };
 
 export default useGraphData;

@@ -4,11 +4,10 @@ import IProfile from "../../interfaces/IProfile";
 interface Props {
     pfp?: string;
     profile?: IProfile | null;
-    graphData?: IGraphData;
     className?: string;
 }
 
-const PersonalInfoCard = ({ profile, graphData, pfp = require("../../assets/profile.png"), className = '' }: Props) => {
+const PersonalInfoCard = ({ profile, pfp = require("../../assets/profile.png"), className = '' }: Props) => {
     //console.log(graphData)
     return (
         <Card className={"personalia shadow-lg d-flex".concat(" ", className)}>
