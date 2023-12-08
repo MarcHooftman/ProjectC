@@ -10,13 +10,8 @@ import FilterDropdown from "../../components/FilterDropdown";
 import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
 import { AuthenticatedTemplate } from "@azure/msal-react";
-import IProfile from "../../interfaces/IProfile";
-import { AuthenticatedTemplate } from "@azure/msal-react";
 
 const Training = () => {
-
-    const { graphData } = useGraphData();
-    const [profile, setProfile] = useState<IProfile>();
 
     const { graphData } = useGraphData();
     const [profile, setProfile] = useState<IProfile>();
@@ -30,16 +25,8 @@ const Training = () => {
         .then((response) => response.json())
         .then((data) => setTraining(data as ITraining[]));
 
-        .then((response) => response.json())
-        .then((data) => setTraining(data as ITraining[]));
-
     }, [filter]);
 
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
-        .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }, [graphData]);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
         .then((response) => response.json())
@@ -52,13 +39,11 @@ const Training = () => {
     };
 
     // sets category to every first tag of trainings
-    // sets category to every first tag of trainings
     filterTraining(Trainings)?.forEach((i) => { if (!Category.some(_ => _.name.includes(i.tags[0].name))) Category.push(i.tags[0]) })
     
     
     return (
         <Layout>
-            <AuthenticatedTemplate>
             <AuthenticatedTemplate>
             <span className="forum-header d-flex justify-content-between align-items-center">
                 <h1 className="my-5 blue-text">Antes Trainingen</h1>
