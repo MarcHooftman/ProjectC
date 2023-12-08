@@ -19,7 +19,7 @@ interface Props {
 
 const PostComment = ({ onClick = () => { }, comment }: Props) => {
   const ref = useRef<any>(null);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
 
   const handleCommentClick = () => {
     setShow(!show);
@@ -49,6 +49,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
+    console.log(graphData?.mail)
     if (graphData) {
       fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
         .then((response) => response.json())
@@ -128,7 +129,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
             {comment?.tags &&
               Array.isArray(comment?.tags) &&
               comment?.tags.map((tag) => (
-                <Link to={`/forum?filter=${tag.name}`}>
+                <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
                   <Badge className="badge-color" text="light" pill={true}>
                     {tag.name}
                   </Badge>

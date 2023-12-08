@@ -7,6 +7,7 @@ import "./Training.scss"
 import ITag from "../../interfaces/ITag";
 import { filterByTag } from "../../utils/sortTraining";
 import FilterDropdown from "../../components/FilterDropdown";
+import useGraphData from "../../hooks/useGraphData";
 
 
 const Training = () => {
@@ -14,6 +15,9 @@ const Training = () => {
     const [searchParams] = useSearchParams()
     const filter = searchParams.get('filter')
     let Category: ITag[] = []
+
+    const { graphData } = useGraphData();
+    console.log(graphData)
 
 
     useEffect(() => {

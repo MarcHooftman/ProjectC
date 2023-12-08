@@ -68,7 +68,7 @@ const ForumPostCard = ({ post }: Props) => {
           {post?.tags &&
             Array.isArray(post?.tags) &&
             post?.tags.map((tag) => (
-              <Link to={`/forum?filter=${tag.name}`}>
+              <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
                 <Badge className="badge-color" text="light" pill={true}>
                   {tag.name}
                 </Badge>
