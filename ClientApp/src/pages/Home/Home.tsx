@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import useGraphData from "../../hooks/useGraphData";
 import { createProfile } from "./utils";
 import AboutParagraph from "../../components/AboutParagraph";
+import { getNgrokTunnels } from "../../utils/ngrokUtils";
 
 //const homeCover = require("../../assets/images/home-cover.jpg");
 
@@ -41,6 +42,9 @@ const Home = () => {
       );
     }
   }, [graphData]);
+
+  const tunnels = getNgrokTunnels();
+  console.log(tunnels)
 
   return (
     <Layout

@@ -3,11 +3,14 @@ import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
 
 function createMsalConfig(redirectUri: string = "") {
+    const currentUri = window.location.href;
+    const uri = currentUri.includes("ngrok") ? "https://8437-2a02-a212-92c8-8400-243e-df73-abaa-1a08.ngrok-free.app" : "https://localhost:44463";
+
     const msalConfig = {
         auth: {
             clientId: "fd5759c0-0d95-4c39-92e1-a83537f78e73",
             authority: "https://login.microsoftonline.com/organizations",
-            redirectUri: `https://localhost:44463${redirectUri}`
+            redirectUri: `${uri}/${redirectUri}`
         },
         cache: {
             cacheLocation: "localStorage", // This configures where your cache will be stored

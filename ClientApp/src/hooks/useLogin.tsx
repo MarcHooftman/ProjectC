@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { msalInstance } from "../utils/msalUtils";
+import { loginRequest } from "../authConfig";
 
 const useLogin = () => {
     const navigate = useNavigate()
 
     const login = async (redirectUri: string = "/") => {
         try {
-            await msalInstance.loginPopup();
+            await msalInstance.loginRedirect(loginRequest);
             // Redirect to the given URI
             setTimeout(() => navigate(redirectUri), 250);
         } catch (error) {
