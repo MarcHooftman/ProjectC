@@ -64,7 +64,6 @@ async function getGraphData() {
 }
 
 function logout() {
-
     msalInstance.logoutRedirect({
         postLogoutRedirectUri: "/",
     });

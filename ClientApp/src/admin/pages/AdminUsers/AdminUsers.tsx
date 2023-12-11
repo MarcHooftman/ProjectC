@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import IProfile from "../../../interfaces/IProfile";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
 import { Button, Card, Form, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const AdminUsers = () => {
   const [profiles, setProfiles] = useState<IProfile[]>([]);
   const [selected, setSelected] = useState<IProfile[]>([]);
   const [timedOut, setTimedOut] = useState<IProfile[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`)
@@ -33,7 +35,10 @@ const AdminUsers = () => {
 
   return (
     <AdminLayout>
-      <h1 className="my-5 blue-text">Alle gebruikers</h1>
+      <span className="forum-header d-flex justify-content-between align-items-center">
+        <h1 className="my-5 blue-text">Gebruikers</h1>
+        <Button onClick={() => navigate("create/admin")}>Admin toevoegen</Button>
+      </span>
       <Card className="shadow-lg">
         <Card.Body>
           <Form onSubmit={(e) => handleSubmit(e)}>

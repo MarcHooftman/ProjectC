@@ -54,18 +54,18 @@ const Home = () => {
     >
       <AuthenticatedTemplate>
         <Tutorial show={showTutorial} onHide={closeTutorial} />
-        <Row>
-          <Col className="mb-5">
+        <Row className="mb-5">
+          <Col className="d-flex flex-column">
             <h3 className="blue-text">Populair op dit moment</h3>
             <PopPostCard />
           </Col>
-          <Col className="mb-5">
+          <Col className="d-flex flex-column">
             <h3 className="blue-text">Eerstvolgende activiteit</h3>
             <NextActivityCard />
           </Col>
         </Row>
-        <Row>
-          <Col className="home-box mb-5">
+        <Row className="mb-5">
+          <Col>
             <h3 className="blue-text">Volgende training</h3>
             <NextTrainingCard />
           </Col>

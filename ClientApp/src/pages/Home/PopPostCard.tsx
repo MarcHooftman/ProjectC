@@ -47,16 +47,15 @@ const PopPostCard = () => {
   }
 
   return (
-    <Link to="/forum" className="text-decoration-none">
-      {post == undefined ? (
-        <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
-      ) : (
-        <Card className="shadow-lg">
-          <Card.Header className="d-flex justify-content-between align-items-center">
+    <>
+      {post == undefined
+        ? <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
+        : <Card as={Link} to="/forum" className="shadow-lg text-decoration-none flex-grow-1">
+          <Card.Header className="d-flex align-items-center">
             <Link to={`/profile/${post.profileID}`} className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
             </Link>
-            <span className="d-flex justify-content-between align-items-center flex-grow-1 ms-3">
+            <span className="d-flex flex-grow-1 justify-content-between align-items-center ms-3">
               <Link to={`/profile/${post.profileID}`} className="text-decoration-none blue-text">
                 <h2 className="fs-5 m-0">
                   <strong>{post?.profile?.fullName}</strong>
@@ -80,12 +79,8 @@ const PopPostCard = () => {
                 ))}
             </span>
           </Card.Body>
-          <Card.Footer className="card-footer">
-            <span className="opacity-50 text-dark">No comments yet</span>
-          </Card.Footer>
-        </Card>
-      )}
-    </Link>
+        </Card>}
+    </>
   );
 };
 

@@ -16,12 +16,14 @@ import AdminPostComment from "./AdminPostComment";
 import ProfileIcon from "../../../assets/profile.png";
 import StatIcon from "../../../assets/stats.svg";
 import TrashIcon from "../../../assets/trash.svg";
+import RedExclamMark from "../../../assets/exclam-mark.svg";
 
 interface Props {
   post: IForumPost;
   onDelete: () => void;
+  className?: string;
 }
-const AdminForumPostCard = ({ post, onDelete = () => { } }: Props) => {
+const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -72,19 +74,19 @@ const AdminForumPostCard = ({ post, onDelete = () => { } }: Props) => {
         centered={true}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
+          <Modal.Title>Verwijderen bevestigen</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
+        <Modal.Body>Weet je zeker dat je deze post wil verwijderen?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowConfirm(false)}>
-            Cancel
+            Annuleren
           </Button>
           <Button variant="danger" onClick={deletePost}>
-            Delete
+            Verwijderen
           </Button>
         </Modal.Footer>
       </Modal>
-      <Card className="my-3 shadow-lg">
+      <Card className={className.concat(" my-3 shadow-lg")}>
         <Card.Header className="d-flex align-items-center">
           <Row className="w-100 align-items-center">
             <Col lg={3} className="ps-4 d-flex align-items-center gap-3">
@@ -129,7 +131,10 @@ const AdminForumPostCard = ({ post, onDelete = () => { } }: Props) => {
                   </Popover>
                 }
               >
-                <img src={StatIcon} className="stat-icon" />
+                <span>
+                  <img src={StatIcon} className="stat-icon" />
+                  {post?.reports?.length > 10 && <img src={RedExclamMark} className="exclam-icon"></img>}
+                </span>
               </OverlayTrigger>
             </Col>
             <Col lg={1} className="d-flex justify-content-end">
