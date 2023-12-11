@@ -1,22 +1,14 @@
 import { Dropdown } from "react-bootstrap";
 import {
-  useMsal,
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
 import { Link } from "react-router-dom";
+import { logout } from "../../utils/msalUtils";
 
 const Hamburger = require("../../assets/hamburger.png");
 
 const NavDropDown = () => {
-  const { instance } = useMsal();
-
-  const handleLogout = () => {
-    instance.logoutRedirect({
-      postLogoutRedirectUri: "/",
-    });
-  };
-
   return (
     <Dropdown>
       <Dropdown.Toggle className="no-after bg-transparent no-border">
@@ -46,7 +38,7 @@ const NavDropDown = () => {
           <Dropdown.Item as={Link} to="/" className="fs-5 blue-text">
             Home
           </Dropdown.Item>
-          <Dropdown.Item onClick={handleLogout} className="fs-5 blue-text">
+          <Dropdown.Item onClick={() => logout()} className="fs-5 blue-text">
             Uitloggen
           </Dropdown.Item>
         </AuthenticatedTemplate>

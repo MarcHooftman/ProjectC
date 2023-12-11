@@ -8,6 +8,7 @@ import "./index.scss";
 import "./card.scss";
 import { msalInstance } from "./utils/msalUtils.tsx";
 
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <MsalProvider instance={msalInstance}>

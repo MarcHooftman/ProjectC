@@ -4,7 +4,7 @@ import "./AdminDashboard.scss";
 import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
-  console.log(localStorage.getItem("admin"))
+
   return (
     <AdminLayout centered={true}>
       <h1 className="my-5 blue-text">Admin dashboard</h1>
@@ -100,11 +100,15 @@ const AdminDashboard = () => {
         <Col
           xs={4}
           as={Link}
-          to="/admin/"
+          to="/"
           className="py-3 text-decoration-none"
         >
           <Card className="c shadow-lg p-3">
-            <Card.Title as="h2"></Card.Title>
+            <Card.Body>
+              <Card.Title className="mb-5" as="h2">Home pagina</Card.Title>
+              <h5>Terug naar de home pagina</h5>
+            </Card.Body>
+
           </Card>
         </Col>
       </Row>

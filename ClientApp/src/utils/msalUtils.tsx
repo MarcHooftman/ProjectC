@@ -43,8 +43,7 @@ function createMsalConfig() {
     return msalConfig;
 }
 
-export const msalInstance = new PublicClientApplication(createMsalConfig());
-
+export let msalInstance = new PublicClientApplication(createMsalConfig());
 
 async function getGraphData() {
     const accounts = msalInstance.getAllAccounts();
@@ -64,4 +63,13 @@ async function getGraphData() {
     return graphData;
 }
 
-export { createMsalConfig, getGraphData };
+function logout() {
+
+    msalInstance.logoutRedirect({
+        postLogoutRedirectUri: "/",
+    });
+    // Reload the page
+    window.location.reload();
+}
+
+export { createMsalConfig, getGraphData, logout };
