@@ -42,9 +42,6 @@ const Home = () => {
     }
   }, [graphData]);
 
-  const tunnels = getNgrokTunnels();
-  console.log(tunnels)
-
   return (
     <Layout
       cover={
