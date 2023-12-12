@@ -18,7 +18,6 @@ const AdminLogin = () => {
   }, [authComplete]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    localStorage.setItem("admin", email || "");
     setFeedback("");
     event.preventDefault();
     fetch(`${process.env.REACT_APP_API_URL}/auth/admin`, {
