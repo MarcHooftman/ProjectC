@@ -63,12 +63,5 @@ async function getGraphData() {
     return graphData;
 }
 
-function logout() {
-    msalInstance.logoutRedirect({
-        postLogoutRedirectUri: "/",
-    });
-    // Reload the page
-    window.location.reload();
-}
 
-export { createMsalConfig, getGraphData, logout };
+export { createMsalConfig, getGraphData };

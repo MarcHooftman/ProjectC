@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
-    [HttpPost("/admin")]
+    [HttpPost("admin")]
     public async Task<IActionResult> Authenticate(Admin user)
     {
         var foundUser = await _context.Admin.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();
@@ -29,7 +29,7 @@ public class AuthController : ControllerBase
         return Ok("Authentication successful");
     }
 
-    [HttpPost("/temp")]
+    [HttpPost("temp")]
     public async Task<IActionResult> Authenticate(TempUser user)
     {
         var foundUser = await _context.TempUser.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();

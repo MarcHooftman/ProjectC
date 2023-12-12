@@ -1,84 +1,127 @@
 import { useEffect, useState } from "react";
 import IProfile from "../../../interfaces/IProfile";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
-import { Button, Card, Form, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+
+import FilterDropdown from "../../../components/FilterDropdown";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import IAdmin from "../../../interfaces/IAdmin";
+import ITempUser from "../../../interfaces/ITempUser";
+import EmployeeTable from "./Tables/EmployeeTable";
+import AdminTable from "./Tables/AdminTable";
+import TempTable from "./Tables/TempTable";
+import { Button } from "react-bootstrap";
+
 
 const AdminUsers = () => {
-  const [profiles, setProfiles] = useState<IProfile[]>([]);
-  const [selected, setSelected] = useState<IProfile[]>([]);
-  const [timedOut, setTimedOut] = useState<IProfile[]>([]);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get("filter");
 
-  useEffect(() => {
+  const [profiles, setProfiles] = useState<IProfile[]>([]);
+  const [admins, setAdmins] = useState<IAdmin[]>([]);
+  const [tempUsers, setTempUsers] = useState<ITempUser[]>([]);
+
+  const fetchEmployees = () => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`)
       .then((response) => response.json())
-      .then((data) => setProfiles(data as IProfile[]));
-  }, []);
+      .then((data) => {
+        if (filter) {
+          data = filterData(data)
+        }
+        setProfiles(data as IProfile[])
+      });
+  }
 
-  const handleRowClick = (profile: IProfile) => {
-    if (!selected.includes(profile)) {
-      setSelected([...selected, profile]);
-    } else {
-      setSelected(
-        selected.filter((selectedProfile) => selectedProfile.id !== profile.id)
-      );
+  const fetchAdmins = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/admin`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (filter) {
+          data = filterData(data)
+        }
+        setAdmins(data as IAdmin[])
+      });
+  }
+
+  const fetchTempUsers = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/tempuser`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (filter) {
+          data = filterData(data)
+        }
+        setTempUsers(data as ITempUser[])
+      });
+  }
+
+  const filterData = (array: IAdmin[] | IProfile[] | ITempUser[]) => {
+    if (filter && !["Tijdelijk", "Personeel", "Beheerders"].includes(filter)) {
+      return array.filter(item => Object.values(item).some(value => `${value}`.toLowerCase().includes(filter.toLowerCase())))
     }
-  };
+    return array;
+  }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  useEffect(() => {
+    switch (filter) {
+      case "Beheerders":
+        fetchAdmins();
+        break;
+      case "Tijdelijk":
+        fetchTempUsers();
+        break;
+      case "Personeel":
+        fetchEmployees();
+        break;
+      default:
+        fetchEmployees();
+        fetchAdmins();
+        fetchTempUsers();
+        break;
+    }
+  }, [filter]);
 
-    setTimedOut(timedOut.concat(selected));
-    setSelected([]);
-  };
+  const removeFilter = () => {
+    navigate("/admin/users")
+  }
 
   return (
     <AdminLayout>
-      <span className="forum-header d-flex justify-content-between align-items-center">
-        <h1 className="my-5 blue-text">Gebruikers</h1>
-        <Button onClick={() => navigate("create/admin")}>Admin toevoegen</Button>
+      <span className="forum-header d-flex justify-content-between align-items-center my-5">
+        <h1 className="blue-text">Gebruikers</h1>
+        <FilterDropdown page="admin/users" options={["Beheerders", "Tijdelijk", "Personeel"]} />
       </span>
-      <Card className="shadow-lg">
-        <Card.Body>
-          <Form onSubmit={(e) => handleSubmit(e)}>
-            <Button type="submit" disabled={selected.length == 0}>
-              Time-out
-            </Button>
-          </Form>
-          <Table striped={true} borderless={true} responsive={true}>
-            <thead>
-              <tr>
-                <th className="blue-text">Naam</th>
-                <th className="blue-text">Functie</th>
-                <th className="blue-text">Email</th>
-                <th className="blue-text">Lid sinds</th>
-                <th className="blue-text">Afdeling</th>
-              </tr>
-            </thead>
-            <tbody>
-              {profiles.map((profile) => (
-                <tr
-                  key={profile.id}
-                  onClick={() => {
-                    if (!timedOut.includes(profile)) handleRowClick(profile);
-                  }}
-                  className={(timedOut.includes(profile)
-                    ? "bg-secondary "
-                    : "hover-pointer "
-                  ).concat(selected.includes(profile) ? "bg-info" : "")}
-                >
-                  <td className="blue-text">{profile.fullName}</td>
-                  <td className="blue-text">{profile.role}</td>
-                  <td className="blue-text">{profile.email}</td>
-                  <td className="blue-text">{profile.memberSince}</td>
-                  <td className="blue-text">{profile.department}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Card.Body>
-      </Card>
+
+      <div className="my-4">
+        {filter && <p className="blue-text m-0">Zoekresultaat voor <em>'{filter}'</em>:</p>}
+        {filter && <u className="text-muted hover-pointer" onClick={() => removeFilter()}>filter wissen</u>}
+      </div>
+
+      <div className="d-flex flex-column gap-4">
+        {profiles.length > 0 &&
+          <div>
+            <h4 className="blue-text">Personeel</h4>
+            <EmployeeTable profiles={profiles} />
+          </div>
+        }
+        {admins.length > 0 &&
+          <div>
+            <span className="d-flex align-items-center justify-content-between">
+              <h4 className="blue-text">Beheerders</h4>
+              <Button onClick={() => navigate("create/admin")} size="sm" className="mb-2">Beheerder toevoegen</Button>
+            </span>
+            <AdminTable admins={admins} />
+          </div>
+        }
+        {tempUsers.length > 0 &&
+          <div>
+            <span className="d-flex align-items-center justify-content-between">
+              <h4 className="blue-text">Tijdelijke gebruikers</h4>
+              <Button onClick={() => navigate("create/temp")} size="sm" className="mb-2">Tijdelijke gebruiker toevoegen</Button>
+            </span>
+            <TempTable tempUsers={tempUsers} />
+          </div>
+        }
+      </div>
     </AdminLayout>
   );
 };

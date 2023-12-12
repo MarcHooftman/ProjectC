@@ -1,10 +1,12 @@
 import { Button, Card, Form } from "react-bootstrap";
 import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminAddTempUser = () => {
   const [email, setEmail] = useState<string>("");
   const [expiryDate, setExpiryDate] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,8 +24,7 @@ const AdminAddTempUser = () => {
       },
       body: JSON.stringify(tempUser),
     }).then(() => {
-      setEmail("");
-      setExpiryDate("");
+      navigate("/admin/users");
     });
   };
   return (

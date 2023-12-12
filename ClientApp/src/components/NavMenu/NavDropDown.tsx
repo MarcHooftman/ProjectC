@@ -1,21 +1,20 @@
 import { Dropdown } from "react-bootstrap";
-import {
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-} from "@azure/msal-react";
 import { Link } from "react-router-dom";
-import { logout } from "../../utils/msalUtils";
+import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTemplate";
+import CustomUnauthenticatedTemplate from "../AuthTemplates/CustomUnauthenticatedTemplate";
+import useLogout from "../../hooks/useLogout";
 
 const Hamburger = require("../../assets/hamburger.png");
 
 const NavDropDown = () => {
+  const logout = useLogout();
   return (
     <Dropdown>
       <Dropdown.Toggle className="no-after bg-transparent no-border">
         <img src={Hamburger} className="hamburger gray-image" />
       </Dropdown.Toggle>
       <Dropdown.Menu className="">
-        <AuthenticatedTemplate>
+        <CustomAuthenticatedTemplate>
           <Dropdown.Item as={Link} to="/forum" className="fs-5 blue-text">
             Forum
           </Dropdown.Item>
@@ -41,8 +40,8 @@ const NavDropDown = () => {
           <Dropdown.Item onClick={() => logout()} className="fs-5 blue-text">
             Uitloggen
           </Dropdown.Item>
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
+        </CustomAuthenticatedTemplate>
+        <CustomUnauthenticatedTemplate>
           <Dropdown.Item as={Link} to="/about" className="fs-5 blue-text">
             Over ons
           </Dropdown.Item>
@@ -53,7 +52,7 @@ const NavDropDown = () => {
           <Dropdown.Item as={Link} to="/login" className="fs-5 blue-text">
             Inloggen
           </Dropdown.Item>
-        </UnauthenticatedTemplate>
+        </CustomUnauthenticatedTemplate>
       </Dropdown.Menu>
     </Dropdown>
   );

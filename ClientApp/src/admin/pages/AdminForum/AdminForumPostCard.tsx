@@ -25,7 +25,7 @@ interface Props {
 }
 const AdminForumPostCard = ({
   post,
-  onDelete = () => {},
+  onDelete = () => { },
   className = "",
 }: Props) => {
   const [showComments, setShowComments] = useState(false);
@@ -96,16 +96,16 @@ const AdminForumPostCard = ({
         <Card.Header className="d-flex align-items-center">
           <Row className="w-100 align-items-center">
             <Col lg={3} className="ps-4 d-flex align-items-center gap-3">
-              <Link to="/profile" className="text-decoration-none blue-text">
+              <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
                 <Card.Img src={ProfileIcon} className="poster-pfp"></Card.Img>
               </Link>
               <div>
-                <Link to="/profile" className="text-decoration-none blue-text">
+                <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
                   <h2 className="fs-5 m-0">
                     <strong>{post?.profile?.fullName}</strong>
                   </h2>
                 </Link>
-                <Link to="/profile" className="text-decoration-none blue-text">
+                <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
                   <h3 className="fs-6 m-0 opacity-50 text-dark">
                     lid sinds {post?.profile?.memberSince}
                   </h3>
@@ -188,7 +188,7 @@ const AdminForumPostCard = ({
                   className="text-dark opacity-50 hover-pointer"
                   onClick={() => setShowComments(false)}
                 >
-                  Hide comments
+                  Reacties verbergen
                 </u>
               </>
             ) : (
@@ -196,11 +196,11 @@ const AdminForumPostCard = ({
                 className="text-dark opacity-50 hover-pointer"
                 onClick={() => setShowComments(true)}
               >
-                Show comments
+                Reacties weergeven
               </u>
             )
           ) : (
-            <span className="opacity-50 text-dark">No comments</span>
+            <span className="opacity-50 text-dark">Geen reacties</span>
           )}
         </Card.Footer>
       </Card>
