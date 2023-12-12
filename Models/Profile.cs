@@ -15,6 +15,8 @@ public class Profile
     public Media? ProfilePicture { get; set; }
     public string? PhoneNumber { get; set; }
     public string? UserPrincipalName { get; set; }
+    //public ICollection<Attending> Attending { get; set; }
+
 
     // navigational
     public IEnumerable<Training>? Training { get; set; }

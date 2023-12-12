@@ -67,6 +67,19 @@ public class AntesContext : DbContext
             .HasMany(_ => _.Attending)
             .WithMany()
             .UsingEntity<Attending>();
+
+        // modelBuilder.Entity<Attending>()
+        //     .HasKey(a => new { a.ActivityID, a.ProfileID }); // If Attending uses a composite key
+
+        // modelBuilder.Entity<Attending>()
+        //     .HasOne(a => a.Activity)
+        //     .WithMany(a => a.Attending)
+        //     .HasForeignKey(a => a.ActivityID);
+
+        // modelBuilder.Entity<Attending>()
+        //     .HasOne(a => a.Profile)
+        //     .WithMany(p => p.Attending)
+        //     .HasForeignKey(a => a.ProfileID);
     }
 
 
@@ -79,6 +92,7 @@ public class AntesContext : DbContext
     public DbSet<Report> Report { get; set; } = default!;
     public DbSet<Tag> Tag { get; set; } = default!;
     public DbSet<Admin> Admin { get; set; } = default!;
+    public DbSet<Attending> Attending { get; set; } = default!;
 
 }
 
