@@ -23,10 +23,13 @@ interface Props {
   onDelete: () => void;
   className?: string;
 }
-const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Props) => {
+const AdminForumPostCard = ({
+  post,
+  onDelete = () => {},
+  className = "",
+}: Props) => {
   const [showComments, setShowComments] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
 
   let formattedDate = "";
   if (post?.time !== undefined) {
@@ -46,14 +49,17 @@ const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Prop
 
   const handleTrashClick = () => {
     setShowConfirm(true);
-  }
+  };
 
   const deletePost = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/forumpost/${post.id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/forumpost/${post.id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete post");
@@ -133,12 +139,18 @@ const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Prop
               >
                 <span>
                   <img src={StatIcon} className="stat-icon" />
-                  {post?.reports?.length > 10 && <img src={RedExclamMark} className="exclam-icon"></img>}
+                  {post?.reports?.length > 10 && (
+                    <img src={RedExclamMark} className="exclam-icon"></img>
+                  )}
                 </span>
               </OverlayTrigger>
             </Col>
             <Col lg={1} className="d-flex justify-content-end">
-              <img src={TrashIcon} className="trash-icon hover-pointer" onClick={handleTrashClick} />
+              <img
+                src={TrashIcon}
+                className="trash-icon hover-pointer"
+                onClick={handleTrashClick}
+              />
             </Col>
           </Row>
         </Card.Header>
@@ -148,7 +160,12 @@ const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Prop
             {post?.tags &&
               Array.isArray(post?.tags) &&
               post?.tags.map((tag) => (
-                <Badge key={tag.id} className="badge-color" text="light" pill={true}>
+                <Badge
+                  key={tag.id}
+                  className="badge-color"
+                  text="light"
+                  pill={true}
+                >
                   {tag.name}
                 </Badge>
               ))}
@@ -160,7 +177,11 @@ const AdminForumPostCard = ({ post, onDelete = () => { }, className = "" }: Prop
               <>
                 <div className="comments-container py-2">
                   {post?.comments.map((comment) => (
-                    <AdminPostComment key={comment.id} comment={comment} onDelete={onDelete} />
+                    <AdminPostComment
+                      key={comment.id}
+                      comment={comment}
+                      onDelete={onDelete}
+                    />
                   ))}
                 </div>
                 <u

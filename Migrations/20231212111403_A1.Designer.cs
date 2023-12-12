@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231211223000_TempUser")]
-    partial class TempUser
+    [Migration("20231212111403_A1")]
+    partial class A1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,9 +296,8 @@ namespace ProjectC.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ExpirationDate")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("VerificationCode")
                         .IsRequired()

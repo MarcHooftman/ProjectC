@@ -36,11 +36,16 @@ public class TempUserController : ControllerBase
             return BadRequest("Email already exists");
         }
 
-        Console.WriteLine(user.ExpirationDate);
-
         user.VerificationCode = new Random().Next(100000, 999999).ToString();
         _context.TempUser.Add(user);
         await _context.SaveChangesAsync();
+
+        MailSender.SendMail(
+            user.Email, 
+            "Jouw Antes inlogcode", 
+            @$"Inlogcode: {user.VerificationCode}\n
+            Verloopt op: {user.ExpirationDate.ToShortDateString()}");
+    
         return Ok(user);
     }
 }

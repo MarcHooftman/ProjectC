@@ -293,9 +293,8 @@ namespace ProjectC.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ExpirationDate")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("VerificationCode")
                         .IsRequired()
