@@ -20,12 +20,20 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
-    [HttpPost]
+    [HttpPost("admin")]
     public async Task<IActionResult> Authenticate(Admin user)
     {
         var foundUser = await _context.Admin.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();
-        if (foundUser == null || user.Password != foundUser.Password)
-            return BadRequest("Invalid credentials");
+        if (foundUser == null || user.Password != foundUser.Password) return BadRequest("Invalid credentials");
+
+        return Ok("Authentication successful");
+    }
+
+    [HttpPost("temp")]
+    public async Task<IActionResult> Authenticate(TempUser user)
+    {
+        var foundUser = await _context.TempUser.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();
+        if (foundUser == null || user.VerificationCode != foundUser.VerificationCode) return BadRequest("Invalid credentials");
 
         return Ok("Authentication successful");
     }

@@ -3,39 +3,29 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import PersonalInfoCard from "./PersonalInfoCard";
 import UserDataCard from "./UserDataCard";
-import { loginRequest } from "../../authConfig";
 import "./Profile.scss";
 
 import IProfile from "../../interfaces/IProfile";
-import useFetch from "../../hooks/useFetch";
 import { Button } from "react-bootstrap";
 import IForumPost from "../../interfaces/IForumPost";
 import ProfilePostCard from "./ProfilePostCard";
-import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { useIsAuthenticated } from "@azure/msal-react";
 import useGraphData from "../../hooks/useGraphData";
 import { filterOnlyParent } from "../../utils/sortPosts";
 import { useNavigate } from "react-router-dom";
+import useLogout from "../../hooks/useLogout";
 
 const Profile = () => {
   const loggedIn = useIsAuthenticated();
-  const { instance, accounts } = useMsal();
+  const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
   const navigate = useNavigate();
+  const logout = useLogout()
 
-  const handleLogin = () => {
-    instance.loginRedirect(loginRequest).catch((e) => {
-      console.log(e);
-    });
-  };
-
-  const handleLogout = () => {
-    instance.logoutRedirect({
-      postLogoutRedirectUri: "/",
-    });
-  };
-
-  if (!loggedIn) {
-    handleLogin();
-  }
+  useEffect(() => {
+    if (!loggedIn && !isTemporaryUser) {
+      navigate("/login")
+    }
+  }, [loggedIn, isTemporaryUser])
 
   const { graphData } = useGraphData();
 
@@ -64,20 +54,27 @@ const Profile = () => {
   return (
     <Layout>
       <h1 className="blue-text my-5">Jouw profiel</h1>
-      <div className="d-flex gap-5">
-        <PersonalInfoCard profile={profile} />
-        <UserDataCard posts={posts || []} />
-      </div>
+      {isTemporaryUser
+        ? <p className="blue-text">{"Als tijdelijke gebruiker heb je nog geen profiel :("}</p>
+        : <div className="d-flex gap-5">
+          <PersonalInfoCard profile={profile} />
+          <UserDataCard posts={posts || []} />
+        </div>
+      }
+
       <div className="d-flex justify-content-between">
-        <Button
-          onClick={() => {
-            navigate("/edit_profile");
-          }}
-          className="mt-3"
-        >
-          Profiel bewerken
-        </Button>
-        <Button onClick={handleLogout} className="mt-3">
+        {!isTemporaryUser &&
+          <Button
+            onClick={() => {
+              navigate("/edit_profile");
+            }}
+            className="mt-3"
+          >
+            Profiel bewerken
+          </Button>
+        }
+
+        <Button onClick={() => logout()} className="mt-3">
           Uitloggen
         </Button>
       </div>

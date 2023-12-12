@@ -9,7 +9,7 @@ import { filterByTag } from "../../utils/sortTraining";
 import FilterDropdown from "../../components/FilterDropdown";
 import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
-import { AuthenticatedTemplate } from "@azure/msal-react";
+import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
 
 const Training = () => {
 
@@ -29,6 +29,7 @@ const Training = () => {
     }, [filter]);
 
     useEffect(() => {
+        if (graphData?.mail === undefined) return;
         fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
             .then((response) => response.json())
             .then((data) => setProfile(data as IProfile));
@@ -44,7 +45,7 @@ const Training = () => {
 
     return (
         <Layout>
-            <AuthenticatedTemplate>
+            <CustomAuthenticatedTemplate>
                 <span className="forum-header d-flex justify-content-between align-items-center">
                     <h1 className="my-5 blue-text">Antes Trainingen</h1>
                     <FilterDropdown page={"training"} />
@@ -63,7 +64,7 @@ const Training = () => {
                         </div>
                     </div>
                 }) : <h4 className="blue-text opacity-75">Er zijn hier nog geen trainingen...</h4>}
-            </AuthenticatedTemplate>
+            </CustomAuthenticatedTemplate>
         </Layout>
     );
 };

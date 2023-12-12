@@ -130,6 +130,9 @@ namespace API;
 
 public static class Seeder
 {
+    private static readonly string Lorem1 = @"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab.";
+    private static readonly string Lorem2 = @"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab.";
+    private static readonly string Lorem3 = @"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sit temporibus, ratione id cumque ea in, at sunt odit error maiores. Nisi modi quas minus. Necessitatibus autem distinctio quasi ab.";
     public static void Initialize(AntesContext context)
     {
         context.Database.EnsureCreated();
@@ -168,7 +171,7 @@ public static class Seeder
             {
                 Email="1000000@hr.nl",
                 FullName="Klaas Klaassen",
-                Bio="I'm a student at Hogeschool Rotterdam",
+                Bio=Lorem3,
                 MemberSince=new DateOnly(2021, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
@@ -181,7 +184,7 @@ public static class Seeder
             {
                 Email="1000001@hr.nl",
                 FullName="Jan Janssen",
-                Bio="I'm a student at Hogeschool Rotterdam",
+                Bio=Lorem1,
                 MemberSince=new DateOnly(2021, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
@@ -194,7 +197,7 @@ public static class Seeder
             {
                 Email="1000002@hr.nl",
                 FullName="Frank Frankken",
-                Bio="I'm a student at Hogeschool Rotterdam",
+                Bio=Lorem2,
                 MemberSince=new DateOnly(2021, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
@@ -219,15 +222,15 @@ public static class Seeder
         {
             new()
             {
-                Title = "First Activity",
-                Description = "This is the first activity.",
+                Title = "Activiteit 1",
+                Description = Lorem3,
                 Location = "Rotterdam",
                 Time = DateTime.UtcNow,
             },
             new()
             {
-                Title = "Second Activity",
-                Description = "This is the second activity.",
+                Title = "Activiteit 2",
+                Description = Lorem1,
                 Location = "Rotterdam",
                 Time = DateTime.UtcNow
             }
@@ -250,7 +253,7 @@ public static class Seeder
         context.Media.AddRange(media);
         context.SaveChanges();
     }
-    
+
     private static void AddTags(AntesContext context)
     {
         var tags = new List<Tag>
@@ -285,7 +288,7 @@ public static class Seeder
         context.Tag.AddRange(tags);
         context.SaveChanges();
     }
-    
+
     private static void AddTraining(AntesContext context)
     {
         var tag1 = context.Tag.Find(1);
@@ -360,8 +363,8 @@ public static class Seeder
         {
             new()
             {
-                Title = "First Post",
-                Content = "This is the first post.",
+                Title = "Lorem Ipsum",
+                Content = Lorem3,
                 Tags = new List<Tag>
                 {
                     tag1!,
@@ -376,8 +379,8 @@ public static class Seeder
                 {
                     new()
                     {
-                        Title = "Comment 1",
-                        Content = "This is a comment on the first post.",
+                        Title = "",
+                        Content = Lorem1,
                         Tags = new List<Tag>
                             {
                                 tag1!,
@@ -391,8 +394,8 @@ public static class Seeder
                         {
                             new()
                             {
-                                Title = "Sub Comment 1",
-                                Content = "This is a sub comment on the firstcomment.",
+                                Title = "",
+                                Content = Lorem2,
                                 Tags = new List<Tag>
                                     {
                                         tag1!,
@@ -412,8 +415,8 @@ public static class Seeder
                     },
                     new()
                     {
-                        Title = "Comment 2",
-                        Content = "This is another comment on the first post.",
+                        Title = "",
+                        Content = Lorem1,
                         Tags = new List<Tag>(),
                         ProfileID = 3,
                         Profile = null,
@@ -424,13 +427,30 @@ public static class Seeder
                         Reports = new List<Report>()
                     }
                 },
-                Likes = new List<Like>(),
+                Likes = new List<Like>()
+                {
+                    new()
+                    {
+                        ProfileID = 1,
+                        ForumPostID = 1,
+                    },
+                    new()
+                    {
+                        ProfileID = 2,
+                        ForumPostID = 1,
+                    },
+                    new()
+                    {
+                        ProfileID = 3,
+                        ForumPostID = 1,
+                    },
+                },
                 Reports = new List<Report>()
             },
             new()
             {
-                Title = "Second Post",
-                Content = "This is the second post.",
+                Title = "Lorem",
+                Content = Lorem1,
                 Tags = new List<Tag>(),
                 ProfileID = 2,
                 Profile = null,

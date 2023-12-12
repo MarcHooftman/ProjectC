@@ -22,6 +22,8 @@ import AdminReports from "./admin/pages/AdminReports/AdminReports";
 import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
 import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/AdminAddActivity";
 import AdminEditActivity from "./admin/pages/AdminActivities/AdminEditActivity/AdminEditActivity";
+import AdminAddAdmin from "./admin/pages/AdminUsers/Add/AdminAddAdmin";
+import AdminAddTempUser from "./admin/pages/AdminUsers/Add/AdminAddTempUser";
 
 const App = () => {
   return (
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/admin/trainings" element={<AdminTrainings />} />
           <Route path="/admin/reports" element={<AdminReports />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/users/create/temp" element={<AdminAddTempUser />} />
+          <Route path="/admin/users/create/admin" element={<AdminAddAdmin />} />
         </Routes>
       </Router>
     </>
