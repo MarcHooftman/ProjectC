@@ -225,14 +225,42 @@ public static class Seeder
                 Title = "Activiteit 1",
                 Description = Lorem3,
                 Location = "Rotterdam",
-                Time = DateTime.UtcNow,
+                Time = DateTime.SpecifyKind(new DateTime(2024, 11, 28, 18, 0, 0), DateTimeKind.Utc),
             },
             new()
             {
                 Title = "Activiteit 2",
                 Description = Lorem1,
                 Location = "Rotterdam",
-                Time = DateTime.UtcNow
+                Time = DateTime.SpecifyKind(new DateTime(2024, 11, 29, 15, 0, 0), DateTimeKind.Utc),
+            },
+            new()
+            {
+                Title = "Activiteit 3",
+                Description = Lorem2,
+                Location = "Rotterdam",
+                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 16, 0, 0), DateTimeKind.Utc),
+            },
+            new()
+            {
+                Title = "Activiteit 4",
+                Description = Lorem2,
+                Location = "Rotterdam",
+                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 17, 0, 0), DateTimeKind.Utc),
+            },
+            new()
+            {
+                Title = "Activiteit 5",
+                Description = Lorem3,
+                Location = "Rotterdam",
+                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 3, 20, 0, 0), DateTimeKind.Utc),
+            },
+            new()
+            {
+                Title = "Activiteit 6",
+                Description = Lorem3,
+                Location = "Rotterdam",
+                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 3, 21, 0, 0), DateTimeKind.Utc),
             }
         };
 

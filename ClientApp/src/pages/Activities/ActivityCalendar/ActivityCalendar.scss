@@ -25,6 +25,7 @@
 
     button {
         max-width: 25%;
+        font-weight: 700;
     }
 }
 
@@ -32,6 +33,7 @@
 .react-calendar__month-view__weekdays__weekday {
     display: flex;
     justify-content: center;
+    font-weight: 700;
 }
 
 // Container van de buttons van de dagen
@@ -40,11 +42,38 @@
 
     button {
         margin-top: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        height: 4rem;
 
         // Elke button is 1/7 van de hele breedte van de parent (vandaar 100%/7)
         // Hiervoor moet de ^column-gap^ worden afgetrokken zodat de buttons niet overflowen
         width: calc(100%/7 - 0.25rem) !important;
         // Flex (grow) uit zodat de width goed kan worden toegepast
         flex: none !important;
+
+        abbr {
+            font-weight: 700;
+        }
+
+        .tile-activity-dot {
+            background-color: #760000;
+            height: 0.5rem;
+            width: 0.5rem;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .tile-activity-line {
+            height: 1rem;
+        }
+
+        .tile-activity-title {
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
