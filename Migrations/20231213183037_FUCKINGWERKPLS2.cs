@@ -5,7 +5,7 @@
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigrate : Migration
+    public partial class FUCKINGWERKPLS2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
