@@ -6,7 +6,7 @@ import ActivityCard from "./ActivityCard";
 import { Col, Row, FormGroup, Label, Input } from "reactstrap";
 import useFetch from "../../hooks/useFetch";
 import AcitivitySkeleton from "./AcitivitySkeleton";
-
+import ActivityCalendar from "./ActivityCalendar/ActivityCalendar";
 
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>();
@@ -29,13 +29,14 @@ const Activities = () => {
   }, [data]);
 
   const filteredActivities = selectedMonth
-  ? activities?.filter(activity => new Date(activity.time).getMonth().toString() === selectedMonth)
-  : activities;
+    ? activities?.filter(activity => new Date(activity.time).getMonth().toString() === selectedMonth)
+    : activities;
 
 
   return (
     <Layout>
       <h1 className="mt-5 blue-text">Activiteiten</h1>
+      <ActivityCalendar />
       <FormGroup>
         <Input
           type="select"
