@@ -17,26 +17,28 @@ import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAu
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
+  const [profileCreated, setProfileCreated] = useState<boolean>(false);
   const { graphData } = useGraphData();
-  console.log(graphData)
 
   const closeTutorial = () => {
     setShowTutorial(false);
   };
 
   useEffect(() => {
-    if (graphData) {
+    if (graphData && !profileCreated) {
       setTimeout(
         () =>
           fetch(
-            `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
-          ).then((response) => {
-            if (response.status === 200) {
-              setShowTutorial(false);
-            } else {
-              createProfile(graphData).then(() => setShowTutorial(true));
-            }
-          }),
+            `${process.env.REACT_APP_API_URL}/profile/email-exists/${graphData?.mail}`
+          ).then(response => response.json())
+            .then(emailExists => {
+              if (emailExists) {
+                setShowTutorial(false);
+              } else {
+                setProfileCreated(true);
+                createProfile(graphData).then(() => setShowTutorial(true));
+              }
+            }),
         250
       );
     }
