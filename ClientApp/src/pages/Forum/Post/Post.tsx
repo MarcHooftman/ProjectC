@@ -4,13 +4,14 @@ import { Button, Card } from "react-bootstrap";
 import TextInputWithCounter from "../../../components/TextInputWithCounter";
 import TagInput from "./TagsToevoegen";
 import { useEffect, useState } from "react";
-import useFetch from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import IProfile from "../../../interfaces/IProfile";
 import useGraphData from "../../../hooks/useGraphData";
 import IForumPost from "../../../interfaces/IForumPost";
+import CustomAuthenticatedTemplate from "../../../components/AuthTemplates/CustomAuthenticatedTemplate";
 
 const Post = () => {
+  const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
@@ -84,22 +85,28 @@ const Post = () => {
   return (
     <Layout>
       <h1 className="my-5 blue-text">Post plaatsen</h1>
-      <Card className="shadow-lg">
-        <Card.Body>
-          <Card.Title>Nieuw bericht</Card.Title>
-          <form
-            className="d-flex flex-column p-3 gap-2"
-            onSubmit={handleSubmit}
-          >
-            <input placeholder="Titel" className="" onChange={onTitleChange} />
-            <TextInputWithCounter maxLength={300} onChange={onContentChange} />
-            <TagInput onChange={(taglist) => setTags(taglist)} />
-            <Button className="w-25 mt-4" variant="primary" type="submit">
-              Post
-            </Button>
-          </form>
-        </Card.Body>
-      </Card>
+      <CustomAuthenticatedTemplate>
+        {isTemporaryUser
+          ? <p className="blue-text">{"Als tijdelijke gebruiker kun je nog geen posts plaatsen :("}</p>
+          : <Card className="shadow-lg">
+            <Card.Body>
+              <Card.Title>Nieuw bericht</Card.Title>
+              <form
+                className="d-flex flex-column p-3 gap-2"
+                onSubmit={handleSubmit}
+              >
+                <input placeholder="Titel" className="" onChange={onTitleChange} />
+                <TextInputWithCounter maxLength={300} onChange={onContentChange} />
+                <TagInput onChange={(taglist) => setTags(taglist)} />
+                <Button className="w-25 mt-4" variant="primary" type="submit">
+                  Post
+                </Button>
+              </form>
+            </Card.Body>
+          </Card>
+        }
+
+      </CustomAuthenticatedTemplate>
     </Layout>
   );
 };
