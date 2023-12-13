@@ -54,8 +54,6 @@ namespace API.Controllers
         }
 
         // GET: api/Profile/by-user/6
-
-        // GET: api/Profile/by-user/6
         [HttpGet("by-email/{email}")]
         public async Task<ActionResult<Profile>> GetProfileByEmail(string email)
         {
@@ -73,6 +71,14 @@ namespace API.Controllers
             }
 
             return profile;
+        }
+
+        // GET: api/Profile/by-user/6
+        [HttpGet("email-exists/{email}")]
+        public async Task<ActionResult<Profile>> EmailExists(string email)
+        {
+            bool exists = await _context.Profile.AnyAsync(_ => _.Email == email);
+            return Ok(exists);
         }
 
         // PUT: api/Profile/5
