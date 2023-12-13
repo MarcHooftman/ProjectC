@@ -23,6 +23,7 @@ const Footer: React.FC = () => {
                             <Link to="https://www.anteszorg.nl/disclaimer" target="_blank">Disclaimer en privacy</Link>
                             <Link to="https://www.anteszorg.nl/cookiemelding" target="_blank">Cookies</Link>
                             <Link to="https://www.anteszorg.nl/hoe-wij-helpen/jouw-rechten/kwaliteitsstatuut" target="_blank">Kwaliteitsstatuut</Link>
+                            <Link to="https://werkenbijparnassiagroep.nl/vacatures/antes" target="_blank">Vacatures</Link>
                         </div>
                     </Col>
                     <Col md={3}>
