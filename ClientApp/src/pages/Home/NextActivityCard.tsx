@@ -33,10 +33,11 @@ const NextActivityCard = () => {
   }
 
   return (
-    <Link to="/activities" className="text-decoration-none">
+    //<Link to="/activities" className="text-decoration-none">
+    <>
       {activity == undefined
         ? <h5 className="text-dark opacity-50">Geen activiteiten ingepland</h5>
-        : <Card className="shadow-lg">
+        : <Card as={Link} to="/activities" className="shadow-lg text-decoration-none flex-grow-1">
           <Card.Header className="d-flex align-items-center gap-3">
             <Card.Img src={clockIcon} className="clock-icon" />
             <div>
@@ -56,8 +57,9 @@ const NextActivityCard = () => {
           </Card.Footer>
         </Card>
       }
+    </>
 
-    </Link>
+    //</Link>
   );
 };
 

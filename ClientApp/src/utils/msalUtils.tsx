@@ -2,12 +2,15 @@ import { PublicClientApplication, LogLevel } from "@azure/msal-browser";
 import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
 
-function createMsalConfig(redirectUri: string = "") {
+function createMsalConfig() {
+    //const currentUri = window.location.href;
+    const uri = "https://localhost:44463/";
+
     const msalConfig = {
         auth: {
             clientId: "fd5759c0-0d95-4c39-92e1-a83537f78e73",
             authority: "https://login.microsoftonline.com/organizations",
-            redirectUri: `https://localhost:44463${redirectUri}`
+            redirectUri: uri
         },
         cache: {
             cacheLocation: "localStorage", // This configures where your cache will be stored
@@ -40,8 +43,7 @@ function createMsalConfig(redirectUri: string = "") {
     return msalConfig;
 }
 
-export const msalInstance = new PublicClientApplication(createMsalConfig());
-
+export let msalInstance = new PublicClientApplication(createMsalConfig());
 
 async function getGraphData() {
     const accounts = msalInstance.getAllAccounts();
@@ -60,5 +62,6 @@ async function getGraphData() {
 
     return graphData;
 }
+
 
 export { createMsalConfig, getGraphData };

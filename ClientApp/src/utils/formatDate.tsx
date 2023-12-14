@@ -6,4 +6,8 @@ function formatDate(date: string) {
     return new Date(date).toLocaleString("nl-NL", { year: 'numeric', month: 'numeric', day: 'numeric' });
 }
 
-export { formatDateTime, formatDate }
+function formatDateTimeLong(date: string) {
+    return new Date(date).toLocaleString("nl-NL", { weekday: "short", year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })
+}
+
+export { formatDateTime, formatDate, formatDateTimeLong }

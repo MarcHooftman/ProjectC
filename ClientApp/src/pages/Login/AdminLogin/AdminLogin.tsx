@@ -20,7 +20,7 @@ const AdminLogin = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setFeedback("");
     event.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/auth`, {
+    fetch(`${process.env.REACT_APP_API_URL}/auth/admin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

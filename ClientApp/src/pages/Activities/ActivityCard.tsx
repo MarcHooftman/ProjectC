@@ -3,6 +3,7 @@ import IProfile from "../../interfaces/IProfile";
 import useGraphData from "../../hooks/useGraphData";
 import { useEffect, useState } from "react";
 import { Card, Modal } from "react-bootstrap";
+import { formatDateTimeLong } from "../../utils/formatDate";
 
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const ActivityCard = ({ activity, className = "" }: Props) => {
+    const [showModal, setModalstate] = useState<boolean>();
+
     const { graphData } = useGraphData();
 
     const [profile, setProfile] = useState<IProfile>();
@@ -27,15 +30,6 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
         }
     }, [graphData]);
 
-    const [showModal, setModalstate] = useState<boolean>();
-    console.log(activity);
-
-    let formattedDate = "";
-
-    if (activity?.time !== undefined) {
-        formattedDate = new Date(activity.time).toLocaleString("nl-NL", { weekday: "short", year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' });
-    }
-
     return (
         <>
             <Modal show={showModal} onHide={() => { setModalstate(false) }} centered={true} dialogClassName="activity-modal">
@@ -43,7 +37,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
                     <div className="d-flex flex-column"><Modal.Title className="fs-2 blue-text">
                         {activity?.title}
                     </Modal.Title>
-                        <p className="fs-5 blue-text mb-0">{formattedDate}</p>
+                        <p className="fs-5 blue-text mb-0">{formatDateTimeLong(activity?.time || "0001-01-01")}</p>
                         <p className="fs-6 blue-text mb-0 text-dark opacity-50">{activity?.location}</p>
                     </div>
 
@@ -79,7 +73,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
             <Card className={className.concat(" ", "hover-pointer h-100")} onClick={() => setModalstate(!showModal)}>
                 <Card.Header>
                     <Card.Title><strong>{activity?.title}</strong></Card.Title>
-                    <Card.Subtitle>{formattedDate}</Card.Subtitle>
+                    <Card.Subtitle>{formatDateTimeLong(activity?.time || "0001-01-01")}</Card.Subtitle>
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>{activity?.description}</Card.Text>
@@ -88,6 +82,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
             </Card>
         </>
     );
+
 };
 
 export default ActivityCard;

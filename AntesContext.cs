@@ -93,6 +93,8 @@ public class AntesContext : DbContext
     public DbSet<Tag> Tag { get; set; } = default!;
     public DbSet<Admin> Admin { get; set; } = default!;
     public DbSet<Attending> Attending { get; set; } = default!;
+    public DbSet<TempUser> TempUser { get; set; } = default!;
+
 
 }
 

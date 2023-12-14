@@ -19,12 +19,10 @@ const Forum = () => {
       .then((data) => setForumPosts(data));
   }, [filter]);
 
-
   const filterPosts = (posts: IForumPost[]) => {
     posts = filter ? filterByTag(posts, filter) : posts;
     return sortByDate(filterOnlyParent(posts));
   };
-
 
   return (
     <Layout>
@@ -32,10 +30,11 @@ const Forum = () => {
         <h1 className="my-5 blue-text">Antes Forum</h1>
         <FilterDropdown page={"forum"}/>
       </span>
+      {filter && <h2 className="my-5 blue-text filter-heading">Zoek naar post met tag: {filter}</h2>}
       {filterPosts(forumPosts).length > 0
         ? filterPosts(forumPosts).map((forumPost) => (
-          <ForumPostCard key={forumPost.id} post={forumPost} />
-        ))
+            <ForumPostCard key={forumPost.id} post={forumPost} />
+          ))
         : <h4 className="blue-text opacity-75">Er zijn hier nog geen posts...</h4>
       }
     </Layout>

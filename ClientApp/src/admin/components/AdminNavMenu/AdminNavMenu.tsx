@@ -18,6 +18,32 @@ const AdminNavMenu = () => {
             Dashboard
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/admin/activities">
+            Activiteiten
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/admin/forum">
+            Forum
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/admin/trainings">
+            Trainingen
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/admin/reports">
+            Reports
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/admin/users">
+            Gebruikers
+          </NavLink>
+        </NavItem>
+
       </Nav>
     </Navbar>
   );
