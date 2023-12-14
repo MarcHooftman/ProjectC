@@ -78,7 +78,7 @@ namespace ProjectC.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "text", nullable: false),
                     VerificationCode = table.Column<string>(type: "text", nullable: false),
-                    ExpirationDate = table.Column<DateOnly>(type: "date", nullable: false)
+                    ExpirationDate = table.Column<DateOnly>(type: "date", nullable: true)
                 },
                 constraints: table =>
                 {

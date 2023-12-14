@@ -90,8 +90,24 @@ namespace ProjectC.Controllers
             {
                 return Problem("Entity set 'AntesContext.Admin'  is null.");
             }
+            bool isEmailPresent =
+                await _context.Admin.AnyAsync(a => a.Email == Admin.Email)
+                || await _context.TempUser.AnyAsync(a => a.Email == Admin.Email)
+                || await _context.Profile.AnyAsync(p => p.Email == Admin.Email);
+            if (isEmailPresent) return BadRequest("Email already exists");
+            
+            if (Admin.Password == "" || Admin.Password == null) 
+            {
+                Admin.Password = new Random().Next(1000000, 9999999).ToString();
+            }
             _context.Admin.Add(Admin);
             await _context.SaveChangesAsync();
+
+            MailSender.SendMail(
+                Admin.Email,
+                "Je bent nu beheerder!",
+                $"Goed nieuws!\nJe bent nu beheerder op antes-onboarding, je kunt inloggen met wachtwoord: {Admin.Password}."
+            );
 
             return CreatedAtAction("GetAdmin", new { id = Admin.ID }, Admin);
         }
