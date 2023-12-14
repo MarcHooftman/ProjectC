@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useGraphData from "../../hooks/useGraphData";
+import useTrainingMark from "../../hooks/useTrainingMark";
 import ITraining from "../../interfaces/ITraining";
-import { Modal, Card, Badge} from "react-bootstrap";
+import IProfile from "../../interfaces/IProfile";
+import { Modal, Card, Badge, Form} from "react-bootstrap";
 import "./Training.scss";
-
 const checkmark = require("../../assets/checkmark.png");
 
 
@@ -14,6 +16,10 @@ interface Props {
 
 const TrainingInfoCard = ({ Training, Completed }: Props) => {
   const [showModal, setModelstate] = useState<boolean>();
+  const [CompletedValue, setCompletedValue] = useState<boolean>(Completed);
+  const { setTrainingState } = useTrainingMark();
+  const [profile, setProfile] = useState<IProfile>();
+  const { graphData } = useGraphData();
   return (
     <>
       <Modal
@@ -28,10 +34,11 @@ const TrainingInfoCard = ({ Training, Completed }: Props) => {
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
             <p className="fs-5 blue-text">{Training?.description}</p>
+            <Form.Switch id="custom-switch" label="Voltooid" style={{fontSize: "20px"}} onChange={() => {setTrainingState(!CompletedValue, Training as ITraining); setCompletedValue(!CompletedValue);}} checked={CompletedValue}></Form.Switch>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe className="video" src={Training?.media.url} allowFullScreen />
+          <iframe title={Training?.title} className="video" src={Training?.media.url} allowFullScreen />
         </Modal.Body>
       </Modal>
       <Card
@@ -43,7 +50,7 @@ const TrainingInfoCard = ({ Training, Completed }: Props) => {
         <Card.Header>
           <Card.Title className="d-flex justify-content-between align-items-center">
             <h4>{Training?.title}</h4>
-            {(Completed === true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
+            {(CompletedValue === true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (

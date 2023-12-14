@@ -90,7 +90,6 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(profile).State = EntityState.Modified;
 
             try

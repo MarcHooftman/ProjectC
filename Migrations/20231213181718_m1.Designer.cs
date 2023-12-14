@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231208022233_m1")]
+    [Migration("20231213181718_m1")]
     partial class m1
     {
         /// <inheritdoc />
@@ -282,6 +282,30 @@ namespace ProjectC.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Tag");
+                });
+
+            modelBuilder.Entity("API.Models.TempUser", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateOnly?>("ExpirationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("VerificationCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TempUser");
                 });
 
             modelBuilder.Entity("API.Models.Training", b =>

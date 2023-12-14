@@ -19,7 +19,6 @@ const Training = () => {
     const filter = searchParams.get('filter')
     let Category: ITag[] = []
     const { graphData } = useGraphData();
-    console.log(graphData)
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/training`)

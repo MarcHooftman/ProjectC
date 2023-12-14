@@ -71,6 +71,21 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TempUser",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    VerificationCode = table.Column<string>(type: "text", nullable: false),
+                    ExpirationDate = table.Column<DateOnly>(type: "date", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TempUser", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Profile",
                 columns: table => new
                 {
@@ -357,6 +372,9 @@ namespace ProjectC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Report");
+
+            migrationBuilder.DropTable(
+                name: "TempUser");
 
             migrationBuilder.DropTable(
                 name: "TrainingProfile");
