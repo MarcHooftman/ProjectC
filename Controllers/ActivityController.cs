@@ -137,5 +137,28 @@ namespace API.Controllers
         {
             return (_context.Activity?.Any(e => e.ID == id)).GetValueOrDefault();
         }
+
+        // [HttpPost("{activityId}/attendees/{profileId}")]
+        // public async Task<IActionResult> AddAttendee(int activityId, int profileId)
+        // {
+        //     var activity = await _context.Activities.FindAsync(activityId);
+        //     var profile = await _context.Profiles.FindAsync(profileId);
+
+        //     if (activity == null || profile == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var attending = new Attending
+        //     {
+        //         Activity = activity,
+        //         Profile = profile
+        //     };
+
+        //     _context.Attendings.Add(attending);
+        //     await _context.SaveChangesAsync();
+
+        //     return Ok(attending);
+        // }
     }
 }

@@ -57,15 +57,8 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
                         className="btn btn-primary"
                         onClick={async () => {
                             if (profile?.id && activity?.id) {
-                                const response = await fetch(`${process.env.REACT_APP_API_URL}/attending/`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({
-                                        ActivityID: activity.id,
-                                        ProfileID: profile.id,
-                                    }),
+                                const response = await fetch(`${process.env.REACT_APP_API_URL}/activities/${activity.id}/attendees/${profile.id}`, {
+                                    method: 'PUT',
                                 });
 
                                 console.log(response);
@@ -77,6 +70,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
                                 }
                             }
                         }}
+
                     >
                         Geïnteresseerd
                     </button>
