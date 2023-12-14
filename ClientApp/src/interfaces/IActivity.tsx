@@ -6,5 +6,5 @@ export default interface IActivity {
     location: string;
     title: string;
     description: string;
-    attending?: IProfile[];
+    profiles?: IProfile[];
 }

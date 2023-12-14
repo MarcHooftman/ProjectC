@@ -2,7 +2,7 @@ import IActivity from "../../interfaces/IActivity";
 import IProfile from "../../interfaces/IProfile";
 import useGraphData from "../../hooks/useGraphData";
 import { useEffect, useState } from "react";
-import { Card, Modal } from "react-bootstrap";
+import { Card, Modal, Form } from "react-bootstrap";
 import { formatDateTimeLong } from "../../utils/formatDate";
 
 
@@ -15,6 +15,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
     const [showModal, setModalstate] = useState<boolean>();
 
     const { graphData } = useGraphData();
+    const [AttendingActivity, setAttendingActivity] = useState<boolean>(false);
 
     const [profile, setProfile] = useState<IProfile>();
     useEffect(() => {
@@ -46,28 +47,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
                     {activity?.description}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={async () => {
-                            if (profile?.id && activity?.id) {
-                                const response = await fetch(`${process.env.REACT_APP_API_URL}/activities/${activity.id}/attendees/${profile.id}`, {
-                                    method: 'PUT',
-                                });
-
-                                console.log(response);
-
-                                if (response.ok) {
-                                    console.log('Profile added to attending list');
-                                } else {
-                                    console.error('Failed to add profile to attending list:', response.statusText);
-                                }
-                            }
-                        }}
-
-                    >
-                        Geïnteresseerd
-                    </button>
+                    <Form.Switch id="customSwitch" label="Deelnemen" onChange={() => setAttendingActivity(!AttendingActivity)} checked={AttendingActivity}></Form.Switch>
                 </Modal.Footer>
             </Modal>
             <Card className={className.concat(" ", "hover-pointer h-100")} onClick={() => setModalstate(!showModal)}>

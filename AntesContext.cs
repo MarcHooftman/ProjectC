@@ -64,22 +64,11 @@ public class AntesContext : DbContext
             .UsingEntity<TrainingProfile>();
 
         modelBuilder.Entity<Activity>()
-            .HasMany(_ => _.Attending)
+            .HasMany(_ => _.Profiles)
             .WithMany()
-            .UsingEntity<Attending>();
+            .UsingEntity<ProfileActivity>();
 
-        // modelBuilder.Entity<Attending>()
-        //     .HasKey(a => new { a.ActivityID, a.ProfileID }); // If Attending uses a composite key
 
-        // modelBuilder.Entity<Attending>()
-        //     .HasOne(a => a.Activity)
-        //     .WithMany(a => a.Attending)
-        //     .HasForeignKey(a => a.ActivityID);
-
-        // modelBuilder.Entity<Attending>()
-        //     .HasOne(a => a.Profile)
-        //     .WithMany(p => p.Attending)
-        //     .HasForeignKey(a => a.ProfileID);
     }
 
 
@@ -92,8 +81,10 @@ public class AntesContext : DbContext
     public DbSet<Report> Report { get; set; } = default!;
     public DbSet<Tag> Tag { get; set; } = default!;
     public DbSet<Admin> Admin { get; set; } = default!;
-    public DbSet<Attending> Attending { get; set; } = default!;
+    // public DbSet<Attending> Attending { get; set; } = default!;
     public DbSet<TempUser> TempUser { get; set; } = default!;
+    // public DbSet<Attending> Attending { get; set; } = default!;
+    public DbSet<API.Models.ProfileActivity> ProfileActivity { get; set; } = default!;
 
 
 }

@@ -61,6 +61,8 @@ const Activities = () => {
         navigate("/activities")
     }
 
+    console.log(activities);
+
     return (
         <Layout>
             <h1 className="my-5 blue-text">Activiteiten</h1>

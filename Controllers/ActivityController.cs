@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Activity.Include(_ => _.Attending).ToListAsync();
+            return await _context.Activity.Include(_ => _.Profiles).ToListAsync();
         }
 
         // GET: api/Activity/5
@@ -39,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.Include(_ => _.Attending).FirstOrDefaultAsync(_ => _.ID == id);
+            var activity = await _context.Activity.Include(_ => _.Profiles).FirstOrDefaultAsync(_ => _.ID == id);
 
             if (activity == null)
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.OrderBy(_ => _.Time).Include(_ => _.Attending).FirstOrDefaultAsync();
+            var activity = await _context.Activity.OrderBy(_ => _.Time).Include(_ => _.Profiles).FirstOrDefaultAsync();
 
             if (activity == null)
             {
