@@ -10,16 +10,19 @@ const checkmark = require("../../assets/checkmark.png");
 
 interface Props {
   Training?: ITraining;
-  Completed: boolean;
+  profile?: IProfile;
 }
 
 
-const TrainingInfoCard = ({ Training, Completed }: Props) => {
+const TrainingInfoCard = ({ Training, profile }: Props) => {
   const [showModal, setModelstate] = useState<boolean>();
-  const [CompletedValue, setCompletedValue] = useState<boolean>(Completed);
+  const [CompletedValue, setCompletedValue] = useState<boolean>(false);
   const { setTrainingState } = useTrainingMark();
-  const [profile, setProfile] = useState<IProfile>();
-  const { graphData } = useGraphData();
+  
+  useEffect(() => {
+    setCompletedValue(profile?.training?.some(t => t.id === Training?.id)||false);
+  }, [profile?.training, Training?.id]);
+
   return (
     <>
       <Modal
@@ -50,7 +53,7 @@ const TrainingInfoCard = ({ Training, Completed }: Props) => {
         <Card.Header>
           <Card.Title className="d-flex justify-content-between align-items-center">
             <h4>{Training?.title}</h4>
-            {(CompletedValue === true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
+            {(CompletedValue == true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (
