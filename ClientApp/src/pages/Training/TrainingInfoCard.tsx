@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import useGraphData from "../../hooks/useGraphData";
 import useTrainingMark from "../../hooks/useTrainingMark";
 import ITraining from "../../interfaces/ITraining";
 import IProfile from "../../interfaces/IProfile";
