@@ -50,7 +50,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
           setModelstate(true);
         }}
       >
-        <Card.Header>
+        <Card.Body>
           <Card.Title className="d-flex justify-content-between align-items-center">
             <h4>{Training?.title}</h4>
             {(CompletedValue == true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
@@ -63,7 +63,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
             ))}
           </div>
           <Card.Text>{Training?.description}</Card.Text>
-        </Card.Header>
+        </Card.Body>
       </Card>
     </>
   );
