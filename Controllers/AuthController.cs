@@ -33,7 +33,13 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Authenticate(TempUser user)
     {
         var foundUser = await _context.TempUser.Where(_ => _.Email == user.Email).FirstOrDefaultAsync();
-        if (foundUser == null || user.VerificationCode != foundUser.VerificationCode) return BadRequest("Invalid credentials");
+        if (foundUser == null 
+            || user.VerificationCode != foundUser.VerificationCode
+            || foundUser.ExpirationDate < DateOnly.FromDateTime(DateTime.Now)
+        ) 
+        {
+            return BadRequest("Invalid credentials");
+        }
 
         return Ok("Authentication successful");
     }
