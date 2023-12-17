@@ -85,7 +85,6 @@ public class AntesContext : DbContext
     public DbSet<TempUser> TempUser { get; set; } = default!;
     // public DbSet<Attending> Attending { get; set; } = default!;
     public DbSet<API.Models.ProfileActivity> ProfileActivity { get; set; } = default!;
-
-
+    public DbSet<API.Models.TrainingProfile> TrainingProfile { get; set; } = default!;
 }
 
