@@ -30,8 +30,9 @@ const Home = () => {
         () =>
           fetch(
             `${process.env.REACT_APP_API_URL}/profile/email-exists/${graphData?.mail}`
-          ).then(response => response.json())
-            .then(emailExists => {
+          )
+            .then((response) => response.json())
+            .then((emailExists) => {
               if (emailExists) {
                 setShowTutorial(false);
               } else {
@@ -69,7 +70,7 @@ const Home = () => {
         <Row className="mb-5">
           <Col>
             <h3 className="blue-text">Volgende training</h3>
-            <NextTrainingCard />
+            <NextTrainingCard graphData={graphData} />
           </Col>
         </Row>
       </CustomAuthenticatedTemplate>

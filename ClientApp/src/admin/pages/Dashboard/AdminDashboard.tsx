@@ -1,10 +1,19 @@
 import { Card, Col, Row } from "react-bootstrap";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
 import "./AdminDashboard.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { isAdmin } from "../../../utils/isAdmin";
+import { useEffect } from "react";
 
 const AdminDashboard = () => {
-
+  const navigate = useNavigate();
+  const admin = isAdmin();
+  useEffect(() => {
+    console.log(localStorage.getItem("admin"));
+    if (!admin) {
+      navigate("/login/admin");
+    }
+  }, [admin]);
   return (
     <AdminLayout centered={true}>
       <h1 className="my-5 blue-text">Admin dashboard</h1>
@@ -102,13 +111,17 @@ const AdminDashboard = () => {
           as={Link}
           to="/"
           className="py-3 text-decoration-none"
+          onClick={() => {
+            localStorage.removeItem("admin");
+          }}
         >
           <Card className="c shadow-lg p-3">
             <Card.Body>
-              <Card.Title className="mb-5" as="h2">Home pagina</Card.Title>
-              <h5>Terug naar de home pagina</h5>
+              <Card.Title className="mb-5" as="h2">
+                Home pagina
+              </Card.Title>
+              <h5>Uitloggen als admin</h5>
             </Card.Body>
-
           </Card>
         </Col>
       </Row>
