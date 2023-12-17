@@ -19,13 +19,11 @@ const Training = () => {
     const filter = searchParams.get('filter')
     let Category: ITag[] = []
     const { graphData } = useGraphData();
-    console.log(graphData)
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/training`)
             .then((response) => response.json())
-            .then((data) => setTraining(data as ITraining[]));
-
+            .then((data) => setTraining(data as ITraining[]))
     }, [filter]);
 
     useEffect(() => {
@@ -42,7 +40,6 @@ const Training = () => {
 
     // sets category to every first tag of trainings
     filterTraining(Trainings)?.forEach((i) => { if (!Category.some(_ => _.name.includes(i.tags[0].name))) Category.push(i.tags[0]) })
-
     return (
         <Layout>
             <CustomAuthenticatedTemplate>
@@ -54,10 +51,10 @@ const Training = () => {
                     return <div key={index} className="ps-3">
                         <h3 className="pt-3 blue-text" >{i.name}</h3>
                         <div className="d-flex pt-3 gap-4 flex-row flex-wrap justify-content-start">
+                            
                             {filterTraining(Trainings).map((item, itemIndex) => {
-                                if (item.tags.some(t => t.name.includes(i.name))) {
-                                    return <TrainingInfoCard key={itemIndex} Training={item}
-                                        Completed={profile?.training?.some(_ => _.id === item.id) || false} />
+                                if (item.tags[0].name.includes(i.name)) {
+                                    return <TrainingInfoCard key={itemIndex} Training={item} profile={profile} />
                                 }
                                 return null;
                             })}
