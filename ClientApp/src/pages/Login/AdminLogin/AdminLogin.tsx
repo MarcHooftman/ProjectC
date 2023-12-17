@@ -13,6 +13,7 @@ const AdminLogin = () => {
 
   useEffect(() => {
     if (authComplete) {
+      localStorage.setItem("admin", email || "invalid");
       navigate("/admin");
     }
   }, [authComplete]);
@@ -43,7 +44,10 @@ const AdminLogin = () => {
       <h1 className="my-5 blue-text">Inloggen als beheerder</h1>
       <Card className="shadow-lg w-25">
         <Card.Body>
-          <Form className="d-flex flex-column align-items-center gap-3" onSubmit={handleSubmit}>
+          <Form
+            className="d-flex flex-column align-items-center gap-3"
+            onSubmit={handleSubmit}
+          >
             <Form.Group className="d-flex flex-column align-items-center w-100">
               <Form.Label htmlFor="admin-email">E-mailadres</Form.Label>
               <Form.Control
@@ -57,15 +61,22 @@ const AdminLogin = () => {
               <Form.Label htmlFor="admin-password">Wachtwoord</Form.Label>
               <Form.Control
                 id="admin-password"
-
                 type="password"
                 placeholder="Wachtwoord"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="d-flex flex-column align-items-center gap-2 w-100">
-              <Form.Control.Feedback as="p" type="invalid" className="d-flex justify-content-center m-0">{feedback}</Form.Control.Feedback>
-              <Button type="submit" className="w-50">Inloggen</Button>
+              <Form.Control.Feedback
+                as="p"
+                type="invalid"
+                className="d-flex justify-content-center m-0"
+              >
+                {feedback}
+              </Form.Control.Feedback>
+              <Button type="submit" className="w-50">
+                Inloggen
+              </Button>
             </Form.Group>
           </Form>
         </Card.Body>

@@ -10,9 +10,17 @@ import EmployeeTable from "./Tables/EmployeeTable";
 import AdminTable from "./Tables/AdminTable";
 import TempTable from "./Tables/TempTable";
 import { Button } from "react-bootstrap";
+import { isAdmin } from "../../../utils/isAdmin";
 
 const AdminUsers = () => {
   const navigate = useNavigate();
+  const admin = isAdmin();
+  useEffect(() => {
+    console.log(localStorage.getItem("admin"));
+    if (!admin) {
+      navigate("/login/admin");
+    }
+  }, [admin]);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
 

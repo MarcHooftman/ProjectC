@@ -1,16 +1,14 @@
 import { useState } from "react";
 import ITraining from "../../interfaces/ITraining";
-import { Modal, Card, Badge} from "react-bootstrap";
+import { Modal, Card, Badge } from "react-bootstrap";
 import "./Training.scss";
 
 const checkmark = require("../../assets/checkmark.png");
-
 
 interface Props {
   Training?: ITraining;
   Completed: boolean;
 }
-
 
 const TrainingInfoCard = ({ Training, Completed }: Props) => {
   const [showModal, setModelstate] = useState<boolean>();
@@ -40,20 +38,28 @@ const TrainingInfoCard = ({ Training, Completed }: Props) => {
           setModelstate(true);
         }}
       >
-        <Card.Header>
+        <Card.Body>
           <Card.Title className="d-flex justify-content-between align-items-center">
             <h4>{Training?.title}</h4>
-            {(Completed === true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
+            {Completed === true ? (
+              <img style={{ height: "30px" }} src={checkmark} alt="" />
+            ) : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (
-                <Badge key={i.id} className="badge-color" text="light" bg="" pill={true}>
-                  {i.name}
-                </Badge>
+              <Badge
+                key={i.id}
+                className="badge-color"
+                text="light"
+                bg=""
+                pill={true}
+              >
+                {i.name}
+              </Badge>
             ))}
           </div>
           <Card.Text>{Training?.description}</Card.Text>
-        </Card.Header>
+        </Card.Body>
       </Card>
     </>
   );
