@@ -24,10 +24,10 @@ namespace ProjectC.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProfileActivity>>> GetProfileActivity()
         {
-          if (_context.ProfileActivity == null)
-          {
-              return NotFound();
-          }
+            if (_context.ProfileActivity == null)
+            {
+                return NotFound();
+            }
             return await _context.ProfileActivity.ToListAsync();
         }
 
@@ -35,10 +35,10 @@ namespace ProjectC.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProfileActivity>> GetProfileActivity(int id)
         {
-          if (_context.ProfileActivity == null)
-          {
-              return NotFound();
-          }
+            if (_context.ProfileActivity == null)
+            {
+                return NotFound();
+            }
             var profileActivity = await _context.ProfileActivity.FindAsync(id);
 
             if (profileActivity == null)
@@ -85,10 +85,10 @@ namespace ProjectC.Controllers
         [HttpPost]
         public async Task<ActionResult<ProfileActivity>> PostProfileActivity(ProfileActivity profileActivity)
         {
-          if (_context.ProfileActivity == null)
-          {
-              return Problem("Entity set 'AntesContext.ProfileActivity'  is null.");
-          }
+            if (_context.ProfileActivity == null)
+            {
+                return Problem("Entity set 'AntesContext.ProfileActivity'  is null.");
+            }
             _context.ProfileActivity.Add(profileActivity);
             try
             {
@@ -109,17 +109,43 @@ namespace ProjectC.Controllers
             return CreatedAtAction("GetProfileActivity", new { id = profileActivity.ActivityID }, profileActivity);
         }
 
-        // DELETE: api/ProfileActivity/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProfileActivity(int id)
+        // // DELETE: api/ProfileActivity/5
+        // [HttpDelete("{id}")]
+        // public async Task<IActionResult> DeleteProfileActivity(int id)
+        // {
+        //     if (_context.ProfileActivity == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var profileActivity = await _context.ProfileActivity.FindAsync(id);
+        //     if (profileActivity == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     _context.ProfileActivity.Remove(profileActivity);
+        //     await _context.SaveChangesAsync();
+
+        //     return NoContent();
+        // }
+
+        // DELETE: api/ProfileActivity/5/5
+        [HttpDelete("{ProfileID}/{ActivityID}")]
+        public async Task<IActionResult> DeleteProfileActivity(int ProfileID, int ActivityID)
         {
             if (_context.ProfileActivity == null)
             {
+                // Console.WriteLine("ProfileActivity1 not found");
+                // Console.WriteLine("ActivityID: " + ActivityID);
+                // Console.WriteLine("ProfileID: " + ProfileID);
                 return NotFound();
             }
-            var profileActivity = await _context.ProfileActivity.FindAsync(id);
+            var profileActivity = await _context.ProfileActivity.FindAsync(ActivityID, ProfileID);
             if (profileActivity == null)
             {
+                // Console.WriteLine("ProfileActivity2 not found");
+                // Console.WriteLine("ActivityID: " + ActivityID);
+                // Console.WriteLine("ProfileID: " + ProfileID);
                 return NotFound();
             }
 
