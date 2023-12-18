@@ -18,6 +18,8 @@ import AdminDashboard from "./admin/pages/Dashboard/AdminDashboard";
 import AdminForum from "./admin/pages/AdminForum/AdminForum";
 import AdminActivities from "./admin/pages/AdminActivities/AdminActivities";
 import AdminTrainings from "./admin/pages/AdminTrainings/AdminTrainings";
+import AdminAddTrainings from "./admin/pages/AdminTrainings/AdminAddTrainings";
+import AdminEditTrainings from "./admin/pages/AdminTrainings/AdminEditTrainings";
 import AdminReports from "./admin/pages/AdminReports/AdminReports";
 import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
 import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/AdminAddActivity";
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/admin/activities/add" element={<AdminAddActivity />} />
           <Route path="/admin/activities/edit/:id" element={<AdminEditActivity />} />
           <Route path="/admin/trainings" element={<AdminTrainings />} />
+          <Route path="/admin/trainings/add" element={<AdminAddTrainings />} />
+          <Route path="/admin/trainings/edit/:id" element={<AdminEditTrainings />} />
           <Route path="/admin/reports" element={<AdminReports />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/users/create/temp" element={<AdminAddTempUser />} />

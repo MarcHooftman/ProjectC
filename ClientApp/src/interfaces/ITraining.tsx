@@ -1,10 +1,10 @@
-import IMedia from "./IMedia";
+// import IMedia from "./IMedia";
 
 export default interface ITraining {
     id?: number
     title: string;
     description: string;
-    media?: IMedia
+    url?: string
     tags: { id?: number; name: string; }[];
     // profile: IProfile[];
 }

@@ -39,7 +39,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe title={Training?.title} className="video" src={Training?.media.url} allowFullScreen />
+          <iframe title={Training?.title} className="video" src={Training?.url} allowFullScreen />
         </Modal.Body>
       </Modal>
       <Card

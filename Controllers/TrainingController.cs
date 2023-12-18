@@ -30,7 +30,6 @@ namespace API.Controllers
             }
             return await _context.Training
             .Include(_ => _.Tags)
-            .Include(_ => _.Media)
             .ToListAsync();
         }
 
@@ -44,7 +43,6 @@ namespace API.Controllers
             }
             var training = await _context.Training
             .Include(_ => _.Tags)
-            .Include(_ => _.Media)
             .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (training == null)

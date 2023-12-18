@@ -1,108 +1,49 @@
-import React from "react";
-import ITraining from "../../../interfaces/ITraining";
-import { useEffect, useState } from "react";
+import { Button } from "reactstrap"
+import AdminLayout from "../../components/AdminLayout/AdminLayout"
 import { useNavigate } from "react-router-dom";
-import IProfile from "../../../interfaces/IProfile";
-import useGraphData from "../../../hooks/useGraphData";
-import IMedia from "../../../interfaces/IMedia";
-import CustomAuthenticatedTemplate from "../../../components/AuthTemplates/CustomAuthenticatedTemplate";
-import Layout from "../../../components/Layout";
-import { Button, Card } from "react-bootstrap";
-import TagInput from "../../../pages/Forum/Post/TagsToevoegen";
-import TextInputWithCounter from "../../../components/TextInputWithCounter";
+import { isAdmin } from "../../../utils/isAdmin";
+import { useEffect, useState } from "react";
+import ITraining from "../../../interfaces/ITraining";
+import AdminTrainingCard from "./AdminTrainingCard";
 
 const AdminTrainings = () => {
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
-  const [media, setMedia] = useState<IMedia>();
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const admin = isAdmin();
+    useEffect(() => {
+        console.log(localStorage.getItem("admin"));
+        if (!admin) {
+        navigate("/login/admin");
+        }
+    }, [admin]);
 
-  const { graphData } = useGraphData();
+    const [trainings, setTrainings] = useState<ITraining[]>([]);
 
-  const [profile, setProfile] = useState<IProfile>();
-  useEffect(() => {
-    if (graphData) {
-      fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
-      )
+    const refreshTrainings = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/training`)
         .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }
-  }, [graphData]);
-
-  const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setTitle(event.target.value);
-  };
-
-  const onDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    event.preventDefault();
-    setDescription(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!profile?.id) {
-      // Handle case where profile is not available
-      console.error("Profile ID not available");
-      return;
-    }
-
-    const postObject: ITraining = {
-      title: title,
-      description: description,
-      tags: tags.map((tag) => ({ name: tag })),
-      media: media,
+        .then((data) => setTrainings(data as ITraining[]));
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/training`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postObject),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Post submitted successfully");
-        } else {
-          console.error("Failed to submit post");
-        }
-      })
-      .catch((error) => {
-        // Handle network errors
-        console.error("Error submitting post:", error);
-      });
-    setTimeout(() => navigate("/forum"), 250);
-  };
+    useEffect(() => {
+        refreshTrainings();
+    }, []);
+    
+    
+    return (
+        <AdminLayout>
+            <h1 className="my-5 blue-text">Trainingen</h1>
+            <Button href="/admin/trainings/add">Training toevoegen</Button>
+            <div className="d-flex flex-column gap-3 mt-4">
+                {trainings.map((training) => (
+                <AdminTrainingCard
+                    key={training.id}
+                    onDelete={refreshTrainings}
+                    Training={training}
+                />
+                ))}
+            </div>
+        </AdminLayout>
+    )
+}
 
-  return (
-    <Layout>
-      <h1 className="my-5 blue-text">Training aanmaken</h1>
-      <CustomAuthenticatedTemplate>
-        {<Card className="shadow-lg">
-            <Card.Body>
-              <Card.Title>Nieuw bericht</Card.Title>
-              <form
-                className="d-flex flex-column p-3 gap-2"
-                onSubmit={handleSubmit}
-              >
-                <input placeholder="Titel" className="" onChange={onTitleChange} />
-                <TextInputWithCounter maxLength={300} onChange={onDescriptionChange} />
-                <TagInput onChange={(taglist) => setTags(taglist)} />
-                <Button className="w-25 mt-4" variant="primary" type="submit">
-                  Post
-                </Button>
-              </form>
-            </Card.Body>
-          </Card>
-        }
-
-      </CustomAuthenticatedTemplate>
-    </Layout>
-  );
-};
-
-export default AdminTrainings;
+export default AdminTrainings
