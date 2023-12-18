@@ -3,8 +3,19 @@ import IActivity from "../../../interfaces/IActivity";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
 import AdminActivityCard from "./AdminActivityCard";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { isAdmin } from "../../../utils/isAdmin";
 
 const AdminActivities = () => {
+  const navigate = useNavigate();
+  const admin = isAdmin();
+  useEffect(() => {
+    console.log(localStorage.getItem("admin"));
+    if (!admin) {
+      navigate("/login/admin");
+    }
+  }, [admin]);
+
   const [activities, setActivities] = useState<IActivity[]>([]);
 
   const refreshActivities = () => {
@@ -25,7 +36,11 @@ const AdminActivities = () => {
 
       <div className="d-flex flex-column gap-3 mt-4">
         {activities.map((activity) => (
-          <AdminActivityCard key={activity.id} onDelete={refreshActivities} activity={activity} />
+          <AdminActivityCard
+            key={activity.id}
+            onDelete={refreshActivities}
+            activity={activity}
+          />
         ))}
       </div>
     </AdminLayout>

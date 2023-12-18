@@ -4,8 +4,18 @@ import IForumPost from "../../../interfaces/IForumPost";
 import AdminForumPostCard from "./AdminForumPostCard";
 import { filterOnlyParent } from "../../../utils/sortPosts";
 import "./AdminForum.scss";
+import { useNavigate } from "react-router-dom";
+import { isAdmin } from "../../../utils/isAdmin";
 
 const AdminForum = () => {
+  const navigate = useNavigate();
+  const admin = isAdmin();
+  useEffect(() => {
+    console.log(localStorage.getItem("admin"));
+    if (!admin) {
+      navigate("/login/admin");
+    }
+  }, [admin]);
   const [posts, setPosts] = useState<IForumPost[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<IForumPost[]>([]);
 
