@@ -6,6 +6,7 @@ import { Card, Modal, Form, Badge } from "react-bootstrap";
 import { formatDateTimeLong } from "../../utils/formatDate";
 import useActivityMark from "../../hooks/useActivityMark";
 
+const userIcon = require('../../assets/person-4.png');
 
 interface Props {
     activity?: IActivity;
@@ -66,12 +67,15 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
                         <p className="fs-5 blue-text mb-0">{formatDateTimeLong(activity?.time || "0001-01-01")}</p>
                         <p className="fs-6 blue-text mb-0 text-dark opacity-50">{activity?.location}</p>
                     </div>
-
                 </Modal.Header>
                 <Modal.Body>
                     {activity?.description}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="modal-footer">
+                    <p className="attendeesNumber">
+                        <img src={userIcon} alt="User Icon" className="userIcon-img" />
+                        {activity?.profiles?.length || 0} {activity?.profiles?.length === 1 ? 'deelnemer' : 'deelnemers'}
+                    </p>
                     <Form.Switch id="customSwitch" label="Deelnemen" onChange={handleSwitchChange} checked={AttendingActivity}></Form.Switch>
                 </Modal.Footer>
             </Modal>
