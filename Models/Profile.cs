@@ -16,6 +16,7 @@ public class Profile
     public string? PhoneNumber { get; set; }
     public string? UserPrincipalName { get; set; }
 
+
     // navigational
     public IEnumerable<Training>? Training { get; set; }
 }

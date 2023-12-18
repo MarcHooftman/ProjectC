@@ -62,9 +62,11 @@ public class AntesContext : DbContext
             .UsingEntity<TrainingProfile>();
 
         modelBuilder.Entity<Activity>()
-            .HasMany(_ => _.Attending)
+            .HasMany(_ => _.Profiles)
             .WithMany()
-            .UsingEntity<Attending>();
+            .UsingEntity<ProfileActivity>();
+
+
     }
 
 
@@ -77,8 +79,10 @@ public class AntesContext : DbContext
     public DbSet<Report> Report { get; set; } = default!;
     public DbSet<Tag> Tag { get; set; } = default!;
     public DbSet<Admin> Admin { get; set; } = default!;
+    // public DbSet<Attending> Attending { get; set; } = default!;
     public DbSet<TempUser> TempUser { get; set; } = default!;
+    // public DbSet<Attending> Attending { get; set; } = default!;
+    public DbSet<API.Models.ProfileActivity> ProfileActivity { get; set; } = default!;
     public DbSet<API.Models.TrainingProfile> TrainingProfile { get; set; } = default!;
-
 }
 
