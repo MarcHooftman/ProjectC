@@ -1,9 +1,10 @@
-import React from "react";
 import { Carousel, Image, Modal } from "react-bootstrap";
-import useGraphData from "../../../hooks/useGraphData";
-import useFetch from "../../../hooks/useFetch";
 import HomeImage from "../../../assets/home-tutorial-page.png";
 import ForumImage from "../../../assets/forum-tutorial-page-arrow.png";
+import ForumPageImage from "../../../assets/forum-page-tutorial.png";
+import ActivityPageImage from "../../../assets/activity-page-tutorial.png";
+import ProfilePageImage from "../../../assets/profile-page-tutorial.png";
+import TrainingPageImage from "../../../assets/training-page-tutorial.png";
 import "./Tutorial.scss";
 
 interface Props {
@@ -12,13 +13,12 @@ interface Props {
 }
 
 const Tutorial = ({ show, onHide }: Props) => {
-
   return (
     <Modal
       show={show}
       centered={true}
-      size="lg"
       onHide={onHide}
+      dialogClassName="tutorial-modal"
     >
       <Modal.Header closeButton>
         <Modal.Title>Welkom bij Antes</Modal.Title>
@@ -37,17 +37,45 @@ const Tutorial = ({ show, onHide }: Props) => {
           <Carousel.Item>
             <Image src={ForumImage} className="carousel-image" />
             <Carousel.Caption>
-              <h3>Op het forum kun je je meningen delen met je collega's</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Hier vind je alle pagina's.</h3>
+              <p>Bijvoorbeeld de forum pagina.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Image src={HomeImage} className="carousel-image" />
+            <Image src={ForumPageImage} className="carousel-image" />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
+              <h3>Dit is de forum pagina.</h3>
               <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                Hier kun je jouw meningen, ideeën en ervarigen delen met je
+                collega's.
               </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image src={ActivityPageImage} className="carousel-image" />
+            <Carousel.Caption>
+              <h3>Dit is de activiteiten pagina.</h3>
+              <p>
+                Hier kun je zien welke activiteiten gepland zijn en aangeven of
+                je aanwezig zal zijn.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image src={ProfilePageImage} className="carousel-image" />
+            <Carousel.Caption>
+              <h3>Dit is jouw profiel.</h3>
+              <p>
+                Hier kun je jouw profiel bekijken en aanpassen. Ook kun je hier
+                jouw posts bekijken.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image src={TrainingPageImage} className="carousel-image" />
+            <Carousel.Caption>
+              <h3>Dit is de Training pagina.</h3>
+              <p>Hier kun je trainingen bekijken en afleggen.</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

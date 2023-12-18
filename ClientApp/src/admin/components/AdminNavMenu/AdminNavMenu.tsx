@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Nav, NavItem, NavLink, Navbar, NavbarBrand } from "reactstrap";
+import { Nav, NavItem, Navbar, NavbarBrand } from "reactstrap";
 import LogoRed from "../../../assets/logo-red.png";
+import { Dropdown } from "react-bootstrap";
+const Hamburger = require("../../../assets/hamburger.png");
 
 const AdminNavMenu = () => {
   return (
@@ -14,36 +16,49 @@ const AdminNavMenu = () => {
       <div></div>
       <Nav>
         <NavItem>
-          <NavLink tag={Link} to="/admin">
-            Dashboard
-          </NavLink>
+          <Dropdown>
+            <Dropdown.Toggle className="no-after bg-transparent no-border">
+              <img src={Hamburger} className="hamburger gray-image" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="">
+              <Dropdown.Item
+                as={Link}
+                to="/admin/forum"
+                className="fs-5 blue-text"
+              >
+                Forum
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={Link}
+                to="/admin/activities"
+                className="fs-5 blue-text"
+              >
+                Activiteiten
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={Link}
+                to="/admin/training"
+                className="fs-5 blue-text"
+              >
+                Trainingen
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={Link}
+                to="/admin/reports"
+                className="fs-5 blue-text"
+              >
+                Reports
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={Link}
+                to="/admin/users"
+                className="fs-5 blue-text"
+              >
+                Gebruikers
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to="/admin/activities">
-            Activiteiten
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to="/admin/forum">
-            Forum
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to="/admin/trainings">
-            Trainingen
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to="/admin/reports">
-            Reports
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to="/admin/users">
-            Gebruikers
-          </NavLink>
-        </NavItem>
-
       </Nav>
     </Navbar>
   );
