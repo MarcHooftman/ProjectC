@@ -6,7 +6,6 @@ import { Modal, Card, Badge, Form} from "react-bootstrap";
 import "./Training.scss";
 const checkmark = require("../../assets/checkmark.png");
 
-
 interface Props {
   Training?: ITraining;
   profile?: IProfile;
@@ -56,9 +55,15 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i) => (
-                <Badge key={i.id} className="badge-color" text="light" bg="" pill={true}>
-                  {i.name}
-                </Badge>
+              <Badge
+                key={i.id}
+                className="badge-color"
+                text="light"
+                bg=""
+                pill={true}
+              >
+                {i.name}
+              </Badge>
             ))}
           </div>
           <Card.Text>{Training?.description}</Card.Text>
