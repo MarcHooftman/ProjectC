@@ -1,17 +1,108 @@
+import React from "react";
+import ITraining from "../../../interfaces/ITraining";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isAdmin } from "../../../utils/isAdmin";
-import { useEffect } from "react";
+import IProfile from "../../../interfaces/IProfile";
+import useGraphData from "../../../hooks/useGraphData";
+import IMedia from "../../../interfaces/IMedia";
+import CustomAuthenticatedTemplate from "../../../components/AuthTemplates/CustomAuthenticatedTemplate";
+import Layout from "../../../components/Layout";
+import { Button, Card } from "react-bootstrap";
+import TagInput from "../../../pages/Forum/Post/TagsToevoegen";
+import TextInputWithCounter from "../../../components/TextInputWithCounter";
 
 const AdminTrainings = () => {
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [media, setMedia] = useState<IMedia>();
   const navigate = useNavigate();
-  const admin = isAdmin();
+
+  const { graphData } = useGraphData();
+
+  const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
-    console.log(localStorage.getItem("admin"));
-    if (!admin) {
-      navigate("/login/admin");
+    if (graphData) {
+      fetch(
+        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+      )
+        .then((response) => response.json())
+        .then((data) => setProfile(data as IProfile));
     }
-  }, [admin]);
-  return <div>AdminTrainings</div>;
+  }, [graphData]);
+
+  const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setTitle(event.target.value);
+  };
+
+  const onDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    event.preventDefault();
+    setDescription(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!profile?.id) {
+      // Handle case where profile is not available
+      console.error("Profile ID not available");
+      return;
+    }
+
+    const postObject: ITraining = {
+      title: title,
+      description: description,
+      tags: tags.map((tag) => ({ name: tag })),
+      media: media,
+    };
+
+    fetch(`${process.env.REACT_APP_API_URL}/training`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postObject),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Post submitted successfully");
+        } else {
+          console.error("Failed to submit post");
+        }
+      })
+      .catch((error) => {
+        // Handle network errors
+        console.error("Error submitting post:", error);
+      });
+    setTimeout(() => navigate("/forum"), 250);
+  };
+
+  return (
+    <Layout>
+      <h1 className="my-5 blue-text">Training aanmaken</h1>
+      <CustomAuthenticatedTemplate>
+        {<Card className="shadow-lg">
+            <Card.Body>
+              <Card.Title>Nieuw bericht</Card.Title>
+              <form
+                className="d-flex flex-column p-3 gap-2"
+                onSubmit={handleSubmit}
+              >
+                <input placeholder="Titel" className="" onChange={onTitleChange} />
+                <TextInputWithCounter maxLength={300} onChange={onDescriptionChange} />
+                <TagInput onChange={(taglist) => setTags(taglist)} />
+                <Button className="w-25 mt-4" variant="primary" type="submit">
+                  Post
+                </Button>
+              </form>
+            </Card.Body>
+          </Card>
+        }
+
+      </CustomAuthenticatedTemplate>
+    </Layout>
+  );
 };
 
 export default AdminTrainings;
