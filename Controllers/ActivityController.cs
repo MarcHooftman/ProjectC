@@ -81,6 +81,10 @@ namespace API.Controllers
 
             try
             {
+                foreach (Profile p in activity.Profiles)
+                {
+                    MailSender.SendMail(p.Email, "Antes - Activiteit gewijzigd", $"<html>Een activiteit waar je aan deelneemt is gewijzigd.<br>Ga naar de <a href=\"https://localhost:44463\">website</a> om de veranderingen te bekijken.<br>{activity.Title}.</html>");
+                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
