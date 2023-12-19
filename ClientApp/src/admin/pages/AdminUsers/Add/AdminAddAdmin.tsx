@@ -3,6 +3,7 @@ import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 import { useState } from "react";
 import IAdmin from "../../../../interfaces/IAdmin";
 import { useNavigate } from "react-router-dom";
+import { getApiUrl } from "../../../../utils/getApiUrl";
 
 const AdminAddAdmin = () => {
   const navigate = useNavigate();
@@ -13,9 +14,10 @@ const AdminAddAdmin = () => {
       email: email,
       password: "",
     };
-    fetch(`${process.env.REACT_APP_API_URL}/admin`, {
+    fetch(`${getApiUrl()}/admin`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(admin),

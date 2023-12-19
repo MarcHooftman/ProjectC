@@ -6,20 +6,31 @@ import ProfilePostCard from '../ProfilePostCard';
 import IProfile from '../../../interfaces/IProfile';
 import IForumPost from '../../../interfaces/IForumPost';
 import { useEffect, useState } from 'react';
+import { getApiUrl } from '../../../utils/getApiUrl';
 
 const ProfileByID = () => {
     const { id } = useParams();
 
     const [profile, setProfile] = useState<IProfile>();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/profile/${id}`)
+        fetch(`${getApiUrl()}/profile/${id}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setProfile(data as IProfile));
     }, [id])
 
     const [posts, setPosts] = useState<IForumPost[]>();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/forumpost/by-profile/${id}`)
+        fetch(`${getApiUrl()}/forumpost/by-profile/${id}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setPosts(data as IForumPost[]));
     }, [id])

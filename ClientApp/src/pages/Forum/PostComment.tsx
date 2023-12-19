@@ -9,6 +9,7 @@ import LikeButton from "./ForumPostButtons/LikeButton";
 import CommentButton from "./ForumPostButtons/CommentButton";
 import ReportButton from "./ForumPostButtons/ReportButton";
 import { Badge, Button } from "react-bootstrap";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const profilePicture = require("../../assets/profile.png");
 
@@ -51,7 +52,12 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
   useEffect(() => {
     console.log(graphData?.mail)
     if (graphData) {
-      fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },)
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -78,9 +84,10 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
         reports: [],
       };
 
-      fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
+      fetch(`${getApiUrl()}/forumpost`, {
         method: "POST",
         headers: {
+          "ngrok-skip-browser-warning": "1",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(commentObject),

@@ -6,6 +6,7 @@ import ActivityCard from "./ActivityCard";
 import { Col, Row, FormGroup, Input } from "reactstrap";
 import ActivityCalendar from "./ActivityCalendar/ActivityCalendar";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const Activities = () => {
 
@@ -37,7 +38,12 @@ const Activities = () => {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/activity`)
+        fetch(`${getApiUrl()}/activity`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setActivities(data));
     }, [date, selectedMonth])
@@ -60,8 +66,6 @@ const Activities = () => {
         setSelectedMonth(e.target.value);
         navigate("/activities")
     }
-
-    console.log(activities);
 
     return (
         <Layout>

@@ -2,22 +2,27 @@ import { useEffect, useState } from "react";
 import IActivity from "../../interfaces/IActivity";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const clockIcon = require("../../assets/clock-icon.png");
 
 const NextActivityCard = () => {
   const [activity, setActivity] = useState<IActivity>();
 
-  const { loading, data } = useFetch(
-    `${process.env.REACT_APP_API_URL}/activity/first`
-  );
 
   useEffect(() => {
-    if (data) {
-      setActivity(data);
-    }
-  }, [loading]);
+    fetch(`${getApiUrl()}/activity/first`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
+      .then((response) => {
+        console.log(response);
+        return response.json()
+      })
+      .then((data) => setActivity(data as IActivity));
+  }, []);
 
   let formattedDate = activity?.time;
 

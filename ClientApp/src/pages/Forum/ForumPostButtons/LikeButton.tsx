@@ -3,6 +3,7 @@ import LikeIcon from "../../../assets/like.svg";
 import LikeFillIcon from "../../../assets/like-fill.svg";
 import { deleteLike, postLike } from "../utils";
 import IForumPost from "../../../interfaces/IForumPost";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   postId: number;
@@ -15,7 +16,12 @@ const LikeButton = ({ postId, profileId, onClick = () => { } }: Props) => {
   const [likeCount, setLikeCount] = useState<number>(0);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
+    fetch(`${getApiUrl()}/forumpost/${postId}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => {
         const post = data as IForumPost;

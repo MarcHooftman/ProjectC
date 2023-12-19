@@ -5,6 +5,7 @@ import AdminActivityCard from "./AdminActivityCard";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { isAdmin } from "../../../utils/isAdmin";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminActivities = () => {
   const navigate = useNavigate();
@@ -19,7 +20,12 @@ const AdminActivities = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
 
   const refreshActivities = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/activity`)
+    fetch(`${getApiUrl()}/activity`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => setActivities(data as IActivity[]));
   };

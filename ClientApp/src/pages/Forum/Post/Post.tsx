@@ -9,6 +9,7 @@ import IProfile from "../../../interfaces/IProfile";
 import useGraphData from "../../../hooks/useGraphData";
 import IForumPost from "../../../interfaces/IForumPost";
 import CustomAuthenticatedTemplate from "../../../components/AuthTemplates/CustomAuthenticatedTemplate";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const Post = () => {
   const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
@@ -23,7 +24,12 @@ const Post = () => {
   useEffect(() => {
     if (graphData) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
@@ -61,9 +67,10 @@ const Post = () => {
       reports: [],
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
+    fetch(`${getApiUrl()}/forumpost`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postObject),

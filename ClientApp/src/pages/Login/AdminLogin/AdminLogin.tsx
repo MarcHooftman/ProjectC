@@ -2,6 +2,7 @@ import { Button, Card, Form } from "react-bootstrap";
 import Layout from "../../../components/Layout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState<string>();
@@ -21,9 +22,10 @@ const AdminLogin = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setFeedback("");
     event.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/auth/admin`, {
+    fetch(`${getApiUrl()}/auth/admin`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -41,8 +43,8 @@ const AdminLogin = () => {
 
   return (
     <Layout centered={true}>
-      <h1 className="my-5 blue-text">Inloggen als beheerder</h1>
-      <Card className="shadow-lg w-25">
+      <h1 className="my-5 blue-text text-center">Inloggen als beheerder</h1>
+      <Card className="shadow-lg form-card">
         <Card.Body>
           <Form
             className="d-flex flex-column align-items-center gap-3"

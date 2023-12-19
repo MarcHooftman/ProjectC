@@ -3,13 +3,14 @@ import IActivity from "../../../interfaces/IActivity";
 import { Button, Card, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   activity: IActivity;
   onDelete: () => void;
 }
 
-const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
+const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
   const [showModal, setShowModal] = useState<boolean>();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -33,9 +34,14 @@ const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
     setShowConfirm(false);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/activity/${activity.id}`,
+        `${getApiUrl()}/activity/${activity.id}`,
         {
           method: "DELETE",
+
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+
         }
       );
 
@@ -84,7 +90,7 @@ const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
           </Button>
           <Button
             variant="warning"
-            onClick={() => navigate(`/admin/activities/edit/${activity.id}`)}
+            onClick={() => navigate(`/ admin / activities / edit / ${activity.id}`)}
           >
             Bewerken
           </Button>
@@ -129,7 +135,7 @@ const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
         show={showAttendeesModal}
         onHide={() => setShowAttendeesModal(false)}
         centered={true}
-        // style={{ maxWidth: "800px" }}
+      // style={{ maxWidth: "800px" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>{activity.title} Deelnemers</Modal.Title>

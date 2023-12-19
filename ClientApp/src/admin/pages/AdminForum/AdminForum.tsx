@@ -6,6 +6,7 @@ import { filterOnlyParent } from "../../../utils/sortPosts";
 import "./AdminForum.scss";
 import { useNavigate } from "react-router-dom";
 import { isAdmin } from "../../../utils/isAdmin";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminForum = () => {
   const navigate = useNavigate();
@@ -20,7 +21,12 @@ const AdminForum = () => {
   const [filteredPosts, setFilteredPosts] = useState<IForumPost[]>([]);
 
   const refreshPosts = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/forumpost`)
+    fetch(`${getApiUrl()}/forumpost`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => setPosts(data as IForumPost[]));
   };

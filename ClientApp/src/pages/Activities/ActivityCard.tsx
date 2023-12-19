@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Card, Modal, Form, Badge } from "react-bootstrap";
 import { formatDateTimeLong } from "../../utils/formatDate";
 import useActivityMark from "../../hooks/useActivityMark";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const userIcon = require('../../assets/person-4.png');
 
@@ -24,7 +25,12 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
     useEffect(() => {
         if (graphData) {
             fetch(
-                `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+                `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+                {
+                    headers: {
+                        "ngrok-skip-browser-warning": "1",
+                    }
+                },
             )
                 .then((response) => response.json())
                 .then((data) => {

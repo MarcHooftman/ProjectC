@@ -2,6 +2,7 @@ import { Button, Card } from "react-bootstrap";
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../../components/AdminLayout/AdminLayout";
+import { getApiUrl } from "../../../../utils/getApiUrl";
 
 const AdminAddActivity = () => {
   const [title, setTitle] = useState("");
@@ -44,9 +45,9 @@ const AdminAddActivity = () => {
       Time: new Date(`${date}T${time}`).toISOString(),
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/activity`, {
+    fetch(`${getApiUrl()}/activity`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "ngrok-skip-browser-warning": "1", "Content-Type": "application/json" },
       body: JSON.stringify(activity),
     })
       .then((response) => {

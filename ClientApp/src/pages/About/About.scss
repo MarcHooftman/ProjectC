@@ -7,9 +7,9 @@
 }
 
 .general-info-card {
-    flex: 2;
+    min-width: 20rem !important;
 }
 
 .unknown-card {
-    flex: 3;
+    min-width: 15rem !important;
 }

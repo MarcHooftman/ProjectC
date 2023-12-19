@@ -10,6 +10,7 @@ import FilterDropdown from "../../components/FilterDropdown";
 import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
 import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const Training = () => {
 
@@ -21,14 +22,24 @@ const Training = () => {
     const { graphData } = useGraphData();
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/training`)
+        fetch(`${getApiUrl()}/training`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setTraining(data as ITraining[]))
     }, [filter]);
 
     useEffect(() => {
         if (graphData?.mail === undefined) return;
-        fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
+        fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setProfile(data as IProfile));
     }, [graphData]);
@@ -51,7 +62,7 @@ const Training = () => {
                     return <div key={index} className="ps-3">
                         <h3 className="pt-3 blue-text" >{i.name}</h3>
                         <div className="d-flex pt-3 gap-4 flex-row flex-wrap justify-content-start">
-                            
+
                             {filterTraining(Trainings).map((item, itemIndex) => {
                                 if (item.tags[0].name.includes(i.name)) {
                                     return <TrainingInfoCard key={itemIndex} Training={item} profile={profile} />

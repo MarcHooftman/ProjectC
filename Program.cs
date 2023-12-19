@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AntesContext>();
+builder.Services.AddCors();
 
 
 var app = builder.Build();
@@ -18,6 +19,14 @@ if (!app.Environment.IsDevelopment())
 
 app.Use(async (context, next) =>
 {
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+    await next.Invoke();
+});
+
+app.Use(async (context, next) =>
+{
     Console.WriteLine($"Using {context.Request.Path}");
     await next.Invoke();
 });
@@ -25,12 +34,15 @@ app.Use(async (context, next) =>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseRouting();
+
 app.UseCors(builder => builder
     .WithOrigins("https://localhost:44463")
     .AllowAnyHeader()
-    .AllowAnyMethod());
+    .AllowAnyMethod()
+    .AllowCredentials());
 
-app.UseRouting();
+
 
 app.UseEndpoints(endpoints =>
 {
