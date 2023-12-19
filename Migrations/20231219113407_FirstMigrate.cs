@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class m1 : Migration
+    public partial class FirstMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,13 +61,11 @@ namespace ProjectC.Migrations
                 name: "Tag",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.ID);
+                    table.PrimaryKey("PK_Tag", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,30 +133,6 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attending",
-                columns: table => new
-                {
-                    ActivityID = table.Column<int>(type: "integer", nullable: false),
-                    ProfileID = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attending", x => new { x.ActivityID, x.ProfileID });
-                    table.ForeignKey(
-                        name: "FK_Attending_Activity_ActivityID",
-                        column: x => x.ActivityID,
-                        principalTable: "Activity",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Attending_Profile_ProfileID",
-                        column: x => x.ProfileID,
-                        principalTable: "Profile",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ForumPost",
                 columns: table => new
                 {
@@ -181,6 +155,30 @@ namespace ProjectC.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ForumPost_Profile_ProfileID",
+                        column: x => x.ProfileID,
+                        principalTable: "Profile",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProfileActivity",
+                columns: table => new
+                {
+                    ActivityID = table.Column<int>(type: "integer", nullable: false),
+                    ProfileID = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProfileActivity", x => new { x.ActivityID, x.ProfileID });
+                    table.ForeignKey(
+                        name: "FK_ProfileActivity_Activity_ActivityID",
+                        column: x => x.ActivityID,
+                        principalTable: "Activity",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProfileActivity_Profile_ProfileID",
                         column: x => x.ProfileID,
                         principalTable: "Profile",
                         principalColumn: "ID",
@@ -216,16 +214,16 @@ namespace ProjectC.Migrations
                 columns: table => new
                 {
                     TrainingID = table.Column<int>(type: "integer", nullable: false),
-                    TagID = table.Column<int>(type: "integer", nullable: false)
+                    TagName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainingTag", x => new { x.TagID, x.TrainingID });
+                    table.PrimaryKey("PK_TrainingTag", x => new { x.TagName, x.TrainingID });
                     table.ForeignKey(
-                        name: "FK_TrainingTag_Tag_TagID",
-                        column: x => x.TagID,
+                        name: "FK_TrainingTag_Tag_TagName",
+                        column: x => x.TagName,
                         principalTable: "Tag",
-                        principalColumn: "ID",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TrainingTag_Training_TrainingID",
@@ -240,11 +238,11 @@ namespace ProjectC.Migrations
                 columns: table => new
                 {
                     ForumPostId = table.Column<int>(type: "integer", nullable: false),
-                    TagId = table.Column<int>(type: "integer", nullable: false)
+                    TagName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForumTag", x => new { x.ForumPostId, x.TagId });
+                    table.PrimaryKey("PK_ForumTag", x => new { x.ForumPostId, x.TagName });
                     table.ForeignKey(
                         name: "FK_ForumTag_ForumPost_ForumPostId",
                         column: x => x.ForumPostId,
@@ -252,10 +250,10 @@ namespace ProjectC.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ForumTag_Tag_TagId",
-                        column: x => x.TagId,
+                        name: "FK_ForumTag_Tag_TagName",
+                        column: x => x.TagName,
                         principalTable: "Tag",
-                        principalColumn: "ID",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -305,11 +303,6 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attending_ProfileID",
-                table: "Attending",
-                column: "ProfileID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ForumPost_ForumPostID",
                 table: "ForumPost",
                 column: "ForumPostID");
@@ -320,9 +313,9 @@ namespace ProjectC.Migrations
                 column: "ProfileID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumTag_TagId",
+                name: "IX_ForumTag_TagName",
                 table: "ForumTag",
-                column: "TagId");
+                column: "TagName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Like_ForumPostID",
@@ -333,6 +326,11 @@ namespace ProjectC.Migrations
                 name: "IX_Profile_ProfilePictureID",
                 table: "Profile",
                 column: "ProfilePictureID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProfileActivity_ProfileID",
+                table: "ProfileActivity",
+                column: "ProfileID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Report_ForumPostID",
@@ -362,13 +360,13 @@ namespace ProjectC.Migrations
                 name: "Admin");
 
             migrationBuilder.DropTable(
-                name: "Attending");
-
-            migrationBuilder.DropTable(
                 name: "ForumTag");
 
             migrationBuilder.DropTable(
                 name: "Like");
+
+            migrationBuilder.DropTable(
+                name: "ProfileActivity");
 
             migrationBuilder.DropTable(
                 name: "Report");

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231214143211_FUCKINGWERKPLS3")]
-    partial class FUCKINGWERKPLS3
+    [Migration("20231219113407_FirstMigrate")]
+    partial class FirstMigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,12 +115,12 @@ namespace ProjectC.Migrations
                     b.Property<int>("ForumPostId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TagId")
-                        .HasColumnType("integer");
+                    b.Property<string>("TagName")
+                        .HasColumnType("text");
 
-                    b.HasKey("ForumPostId", "TagId");
+                    b.HasKey("ForumPostId", "TagName");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("TagName");
 
                     b.ToTable("ForumTag");
                 });
@@ -269,17 +269,10 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.Tag", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("ID");
+                    b.HasKey("Name");
 
                     b.ToTable("Tag");
                 });
@@ -351,13 +344,13 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.TrainingTag", b =>
                 {
-                    b.Property<int>("TagID")
-                        .HasColumnType("integer");
+                    b.Property<string>("TagName")
+                        .HasColumnType("text");
 
                     b.Property<int>("TrainingID")
                         .HasColumnType("integer");
 
-                    b.HasKey("TagID", "TrainingID");
+                    b.HasKey("TagName", "TrainingID");
 
                     b.HasIndex("TrainingID");
 
@@ -390,7 +383,7 @@ namespace ProjectC.Migrations
 
                     b.HasOne("API.Models.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagId")
+                        .HasForeignKey("TagName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -467,7 +460,7 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagID")
+                        .HasForeignKey("TagName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

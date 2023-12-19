@@ -288,27 +288,22 @@ public static class Seeder
         {
             new()
             {
-                ID = 1,
                 Name = "Tag 1"
             },
             new()
             {
-                ID = 2,
                 Name = "Tag 2"
             },
             new()
             {
-                ID = 3,
                 Name = "Tag 3"
             },
             new()
             {
-                ID = 4,
                 Name = "Tag 4"
             },
             new()
             {
-                ID = 5,
                 Name = "Tag 5"
             }
         };
