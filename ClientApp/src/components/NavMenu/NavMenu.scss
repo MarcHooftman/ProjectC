@@ -1,8 +1,33 @@
-﻿.navbar-logo {
+﻿.nav-container {
+  justify-content: space-around !important;
+}
+
+.navbar-logo {
   height: 50px;
 }
 
 .hamburger,
 .profile-image {
   width: 3rem;
+}
+
+@media (max-width: 400px) {
+  .profile-icon-container {
+    width: 0px;
+
+    .profile-image {
+
+      display: none !important;
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .navbar-logo {
+    display: none;
+  }
+
+  .nav-container {
+    justify-content: start !important;
+  }
 }

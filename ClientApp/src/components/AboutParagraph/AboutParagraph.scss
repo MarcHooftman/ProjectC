@@ -1,0 +1,12 @@
+@media (max-width: 770px) {
+    .about-paragraph-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .antes-picture {
+            width: 100%;
+            margin: 1rem 0 2rem 0 !important;
+        }
+    }
+}

@@ -4,6 +4,10 @@
     position: relative;
 }
 
+.cover-container {
+    display: flex !important;
+}
+
 .cover-container::after {
     content: "" !important;
     position: absolute !important;

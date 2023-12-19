@@ -12,7 +12,7 @@ const Layout = ({ children, cover, centered = false, }: Props) => {
   return (
     <>
 
-      <div className="bg-color pb-5">
+      <div className="bg-color pb-5 vw-100">
         <NavMenu />
         {cover || <></>}
         <Container tag="main" className={centered ? " d-flex flex-column align-items-center" : ""}>{children}</Container>

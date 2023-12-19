@@ -2,3 +2,14 @@
     height: 60px;
     width: 60px !important;
 }
+
+.home-col {
+    min-width: 25rem;
+}
+
+@media (max-width: 450px) {
+    .home-col {
+        min-width: 100%;
+    }
+
+}

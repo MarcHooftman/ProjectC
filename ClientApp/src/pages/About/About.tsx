@@ -1,4 +1,4 @@
-import AboutParagraph from "../../components/AboutParagraph";
+import AboutParagraph from "../../components/AboutParagraph/AboutParagraph";
 import Layout from "../../components/Layout";
 
 import "./About.scss";
