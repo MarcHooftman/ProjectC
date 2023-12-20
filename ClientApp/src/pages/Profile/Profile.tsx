@@ -6,7 +6,7 @@ import UserDataCard from "./UserDataCard";
 import "./Profile.scss";
 
 import IProfile from "../../interfaces/IProfile";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import IForumPost from "../../interfaces/IForumPost";
 import ProfilePostCard from "./ProfilePostCard";
 import { useIsAuthenticated } from "@azure/msal-react";
@@ -67,10 +67,10 @@ const Profile = () => {
       <h1 className="blue-text my-5">Jouw profiel</h1>
       {isTemporaryUser
         ? <p className="blue-text">{"Als tijdelijke gebruiker heb je nog geen profiel :("}</p>
-        : <div className="d-flex gap-5">
-          <PersonalInfoCard profile={profile} />
-          <UserDataCard posts={posts || []} />
-        </div>
+        : <Row className="d-flex gap-5">
+          <Col as={PersonalInfoCard} profile={profile} />
+          <Col as={UserDataCard} posts={posts || []} />
+        </Row>
       }
 
       <div className="d-flex justify-content-between">

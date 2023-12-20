@@ -5,10 +5,25 @@
 
 .personalia {
     flex: 3;
+    min-width: 525px !important;
 }
 
 .user-data {
     flex: 1;
+    min-width: 525px !important;
+}
+
+@media (max-width: 525px) {
+    .personalia {
+        flex: 1;
+        min-width: 250px !important;
+    }
+
+    .user-data {
+        flex: 1;
+        min-width: 250px !important;
+    }
+
 }
 
 .profile-table>*>* {
@@ -21,5 +36,14 @@
 
     th {
         padding-right: 1rem !important;
+    }
+}
+
+@media (max-width: 525px) {
+    .personalia {
+        .pfp {
+            display: none;
+            width: 0;
+        }
     }
 }
