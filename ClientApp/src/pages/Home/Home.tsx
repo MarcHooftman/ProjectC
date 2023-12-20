@@ -12,6 +12,7 @@ import useGraphData from "../../hooks/useGraphData";
 import { createProfile } from "./utils";
 import AboutParagraph from "../../components/AboutParagraph/AboutParagraph";
 import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
@@ -27,7 +28,12 @@ const Home = () => {
       setTimeout(
         () =>
           fetch(
-            `${process.env.REACT_APP_API_URL}/profile/email-exists/${graphData?.mail}`
+            `${getApiUrl()}/profile/email-exists/${graphData?.mail}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "1",
+              }
+            },
           )
             .then((response) => response.json())
             .then((emailExists) => {

@@ -1,4 +1,5 @@
 import IProfile from '../../interfaces/IProfile';
+import { getApiUrl } from '../../utils/getApiUrl';
 
 
 export async function createProfile(graphData: IGraphData) {
@@ -14,9 +15,10 @@ export async function createProfile(graphData: IGraphData) {
         training: [],
         userPrincipalName: graphData?.userPrincipalName || "",
     };
-    return await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
+    return await fetch(`${getApiUrl()}/profile`, {
         method: "POST",
         headers: {
+            "ngrok-skip-browser-warning": "1",
             "Content-Type": "application/json",
         },
         body: JSON.stringify(profile),

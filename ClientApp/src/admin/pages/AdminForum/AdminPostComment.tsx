@@ -5,6 +5,7 @@ import { formatDate } from "../../../utils/formatDate";
 import ProfileIcon from "../../../assets/profile.png";
 import { useState } from "react";
 import TrashIcon from "../../../assets/trash.svg";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   comment: IForumPost;
@@ -20,8 +21,13 @@ const AdminPostComment = ({ comment, onDelete = () => { } }: Props) => {
   const deleteComment = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/forumpost/${comment.id}`, {
+      const response = await fetch(`${getApiUrl()}/forumpost/${comment.id}`, {
         method: "DELETE",
+
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+
       });
 
       if (!response.ok) {

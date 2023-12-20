@@ -5,6 +5,7 @@ import IForumPost from "../../interfaces/IForumPost";
 import PostComment from "./PostComment";
 import { formatDateTime } from "../../utils/formatDate";
 import ForumPostButtons from "./ForumPostButtons/ForumPostButtons";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require("../../assets/down-arrow.png");
@@ -19,7 +20,12 @@ const ForumPostCard = ({ post }: Props) => {
   const [_post, setPost] = useState<IForumPost>(post);
 
   const fetchPost = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${post.id}`)
+    fetch(`${getApiUrl()}/forumpost/${post.id}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => setPost(data as IForumPost));
   };
@@ -30,18 +36,20 @@ const ForumPostCard = ({ post }: Props) => {
   }
 
   return (
-    <Card as="details" className="my-3 shadow-lg">
+    <Card as="details" className="my-3 shadow-lg forum-post-card">
       <Card.Header
         as="summary"
-        className="d-flex align-items-center"
+        className="d-flex align-items-center w-100"
         onClick={() => setCollapse(!collapse)}
       >
-        <Link to={`/profile/${post.profileID}`}>
-          <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
-        </Link>
-        <Row className="w-100 align-items-center">
-          <Col lg={3} className="ps-4">
-            <Link to={`/profile/${post.profileID}`} className="text-decoration-none blue-text">
+        <Row className="d-flex justify-content-between w-100 align-items-center header-row mx-0">
+          <Col className="d-flex align-items-center profile-section">
+
+            <Link to={`/ profile / ${post.profileID}`}>
+              <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
+            </Link>
+
+            <Link to={`/ profile / ${post.profileID}`} className="text-decoration-none blue-text profile-section-info">
               <h2 className="fs-5 m-0">
                 <strong>{post?.profile?.fullName}</strong>
               </h2>
@@ -49,16 +57,14 @@ const ForumPostCard = ({ post }: Props) => {
                 lid sinds {post?.profile?.memberSince}
               </h3>
             </Link>
-          </Col>
-          <Col lg={6} className="ps-4">
-            <h4>{post?.title}</h4>
-          </Col>
 
-          <Col lg={2} className="ps-5">
-            <span className="opacity-50 text-dark">{formattedDate}</span>
           </Col>
-          <Col lg={1} className="ps-5">
-            <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
+          <Col className="d-flex justify-content-between align-items-center info-section px-0">
+            <h4>{post?.title}</h4>
+            <div className="d-flex justify-content-between align-items-center gap-3 time-and-arrow">
+              <div className="opacity-50 text-dark">{formattedDate}</div>
+              <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
+            </div>
           </Col>
         </Row>
       </Card.Header>
@@ -68,7 +74,7 @@ const ForumPostCard = ({ post }: Props) => {
           {post?.tags &&
             Array.isArray(post?.tags) &&
             post?.tags.map((tag) => (
-              <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
+              <Link to={`/ forum ? filter = ${tag.name}`} key={tag.id}>
                 <Badge className="badge-color" text="light" pill={true}>
                   {tag.name}
                 </Badge>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getApiUrl } from "../utils/getApiUrl";
 
 const useFetch = (url: string) => {
   const [data, setData] = useState<any>(null);
@@ -7,7 +8,12 @@ const useFetch = (url: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      fetch(url)
+      fetch(`${getApiUrl()}/${url}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },)
         .then((response) => response.json())
         .then((json) => {
           if (json.traceId) {

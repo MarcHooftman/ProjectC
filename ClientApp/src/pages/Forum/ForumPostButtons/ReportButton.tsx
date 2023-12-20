@@ -4,6 +4,7 @@ import ReportFillIcon from "../../../assets/report-fill.svg";
 import { Button, Form, Modal } from "react-bootstrap";
 import IReport from "../../../interfaces/IReport";
 import IForumPost from "../../../interfaces/IForumPost";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
     postId: number;
@@ -29,7 +30,12 @@ const ReportButton = ({ postId, profileId, onClick = () => { }, onSubmit = () =>
     };
 
     const refreshReported = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
+        fetch(`${getApiUrl()}/forumpost/${postId}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => {
                 const post = data as IForumPost;
@@ -67,9 +73,10 @@ const ReportButton = ({ postId, profileId, onClick = () => { }, onSubmit = () =>
             elaboration: otherInputValue,
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/report`, {
+        fetch(`${getApiUrl()}/report`, {
             method: "POST",
             headers: {
+                "ngrok-skip-browser-warning": "1",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(report),

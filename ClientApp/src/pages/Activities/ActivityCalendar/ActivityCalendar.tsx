@@ -34,9 +34,9 @@ function ActivityCalendar({ activities = [] }: Props) {
             activitiesOnThisDay = activitiesOnThisDay.slice(0, 2);
         }
 
-        return activitiesOnThisDay.map(activity => {
+        return activitiesOnThisDay.map((activity, index) => {
             return (
-                <span className="d-flex align-items-center gap-1 tile-activity-line">
+                <span key={index} className="d-flex align-items-center gap-1 tile-activity-line">
                     <div className="tile-activity-dot"></div>
                     <b key={activity.id} className="tile-activity-title">{activity.title}</b>
                 </span>

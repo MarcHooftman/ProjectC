@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useGraphData from "../../../hooks/useGraphData";
 import IProfile from "../../../interfaces/IProfile";
 import { useNavigate } from "react-router-dom";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const EditProfile = () => {
   const { graphData } = useGraphData();
@@ -14,7 +15,12 @@ const EditProfile = () => {
   useEffect(() => {
     if (graphData) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => {
@@ -58,10 +64,11 @@ const EditProfile = () => {
       console.log("Request Payload:", JSON.stringify(payload));
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/profile/${profile?.id}`,
+        `${getApiUrl()}/profile/${profile?.id}`,
         {
           method: "PUT",
           headers: {
+            "ngrok-skip-browser-warning": "1",
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),

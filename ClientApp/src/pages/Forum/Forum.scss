@@ -1,3 +1,7 @@
+.forum-post-card {
+    min-width: 21rem !important;
+}
+
 .filter {
     height: 40px;
     aspect-ratio: 1/1;
@@ -31,4 +35,47 @@
     width: 50% !important;
     height: 1.5rem !important;
     background-color: #fff;
+}
+
+.profile-section {
+    gap: 1rem;
+    flex: 1 !important;
+}
+
+.info-section {
+    flex: 2 !important;
+}
+
+@media (max-width: 575px) {
+    .profile-section {
+        gap: 0;
+    }
+
+    .poster-pfp {
+        display: none;
+    }
+
+    .header-row {
+        flex-direction: column;
+
+        .profile-section-info {
+            width: 100%;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+
+        .time-and-arrow {
+            width: 100% !important;
+        }
+    }
+
 }

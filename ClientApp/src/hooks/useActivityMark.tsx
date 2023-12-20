@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import IActivity from "../interfaces/IActivity";
 import useGraphData from "./useGraphData";
 import IProfile from "../interfaces/IProfile";
+import { getApiUrl } from "../utils/getApiUrl";
 
 const useActivityMark = () => {
     const [profile, setProfile] = useState<IProfile>();
@@ -10,16 +11,22 @@ const useActivityMark = () => {
     useEffect(() => {
         if (graphData?.mail === undefined) return;
 
-        fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
+        fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+            {
+                headers: {
+                    "ngrok-skip-browser-warning": "1",
+                }
+            },)
             .then((response) => response.json())
             .then((data) => setProfile(data as IProfile));
     }, [graphData]);
 
     const setActivityState = (value: boolean, activity: IActivity) => {
         if (value === true) {
-            fetch(`${process.env.REACT_APP_API_URL}/profileactivity/`, {
+            fetch(`${getApiUrl()}/profileactivity/`, {
                 method: "POST",
                 headers: {
+                    "ngrok-skip-browser-warning": "1",
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
@@ -29,16 +36,18 @@ const useActivityMark = () => {
             });
         } else {
             fetch(
-                `${process.env.REACT_APP_API_URL}/profileactivity/${profile?.id}/${activity.id}`,
+                `${getApiUrl()}/profileactivity/${profile?.id}/${activity.id}`,
                 {
                     method: "DELETE",
                     headers: {
+                        "ngrok-skip-browser-warning": "1",
                         "Content-Type": "application/json",
                     },
                 }
             );
         }
     };
+
 
     return { setActivityState };
 };

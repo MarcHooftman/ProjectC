@@ -17,6 +17,7 @@ import ProfileIcon from "../../../assets/profile.png";
 import StatIcon from "../../../assets/stats.svg";
 import TrashIcon from "../../../assets/trash.svg";
 import RedExclamMark from "../../../assets/exclam-mark.svg";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   post: IForumPost;
@@ -55,8 +56,13 @@ const AdminForumPostCard = ({
     setShowConfirm(false);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/forumpost/${post.id}`,
+        `${getApiUrl()}/forumpost/${post.id}`,
         {
+
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          },
+
           method: "DELETE",
         }
       );
@@ -96,16 +102,16 @@ const AdminForumPostCard = ({
         <Card.Header className="d-flex align-items-center">
           <Row className="w-100 align-items-center">
             <Col lg={3} className="ps-4 d-flex align-items-center gap-3">
-              <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
+              <Link to={`/ admin / users ? filter = ${post?.profile?.email}`} className="text-decoration-none blue-text">
                 <Card.Img src={ProfileIcon} className="poster-pfp"></Card.Img>
               </Link>
               <div>
-                <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
+                <Link to={`/ admin / users ? filter = ${post?.profile?.email}`} className="text-decoration-none blue-text">
                   <h2 className="fs-5 m-0">
                     <strong>{post?.profile?.fullName}</strong>
                   </h2>
                 </Link>
-                <Link to={`/admin/users?filter=${post?.profile?.email}`} className="text-decoration-none blue-text">
+                <Link to={`/ admin / users ? filter = ${post?.profile?.email}`} className="text-decoration-none blue-text">
                   <h3 className="fs-6 m-0 opacity-50 text-dark">
                     lid sinds {post?.profile?.memberSince}
                   </h3>

@@ -8,6 +8,7 @@ import "./index.scss";
 import "./card.scss";
 import { msalInstance } from "./utils/msalUtils.tsx";
 
+const initialUrl = window.location.href;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -16,3 +17,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     </MsalProvider>
   </React.StrictMode>
 );
+
+export { initialUrl };
