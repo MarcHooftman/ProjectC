@@ -37,7 +37,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463")
+    .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());
