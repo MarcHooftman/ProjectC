@@ -22,13 +22,10 @@ public class AntesContext : DbContext
             .WithMany()
             .HasForeignKey(_ => _.ProfileID);
 
-
-
         modelBuilder.Entity<Training>()
             .HasOne(_ => _.Media)
             .WithMany()
             .HasForeignKey(_ => _.MediaID);
-
 
         modelBuilder.Entity<ForumPost>()
         .HasMany(_ => _.Comments)
@@ -41,12 +38,10 @@ public class AntesContext : DbContext
             .WithMany()
             .UsingEntity<ForumTag>();
 
-
         modelBuilder.Entity<Training>()
             .HasMany(_ => _.Tags)
             .WithMany()
             .UsingEntity<TrainingTag>();
-
 
         modelBuilder.Entity<ForumPost>()
             .HasMany(_ => _.Likes);
