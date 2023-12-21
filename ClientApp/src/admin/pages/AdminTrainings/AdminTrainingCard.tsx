@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Badge, Button, Card, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ITraining from "../../../interfaces/ITraining";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   Training: ITraining;
@@ -15,7 +16,7 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
   const navigate = useNavigate();
 
   const getViews = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/trainingprofile`)
+    fetch(`${getApiUrl()}/trainingprofile`)
     .then((response) => response.json())
     .then((data) => {console.log(data); setViews(data.filter((i: any) => i.trainingID === Training.id).length);});
 };
@@ -23,7 +24,7 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
   const deleteTraining = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/training/${Training.id}`, {
+      const response = await fetch(`${getApiUrl()}/training/${Training.id}`, {
         method: "DELETE",
       });
 
@@ -104,9 +105,9 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
             <strong>{Training?.title}</strong>
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
-            {Training?.tags.map((i) => (
+            {Training?.tags.map((i, index) => (
               <Badge
-                key={i.id}
+                key={index}
                 className="badge-color"
                 text="light"
                 bg=""

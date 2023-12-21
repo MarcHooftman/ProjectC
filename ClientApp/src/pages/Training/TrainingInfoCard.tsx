@@ -54,9 +54,9 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
             {(CompletedValue == true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
-            {Training?.tags.map((i) => (
+            {Training?.tags.map((i, index) => (
               <Badge
-                key={i.id}
+                key={index}
                 className="badge-color"
                 text="light"
                 bg=""

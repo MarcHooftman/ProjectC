@@ -7,11 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Migrations/20231218191916_m22.cs
-    public partial class m22 : Migration
-========
-    public partial class A1 : Migration
->>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63:Migrations/20231219235719_A1.cs
+    public partial class m1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -302,19 +298,11 @@ namespace ProjectC.Migrations
                 column: "ForumPostID");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Migrations/20231218191916_m22.cs
-========
-                name: "IX_Profile_ProfilePictureID",
-                table: "Profile",
-                column: "ProfilePictureID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProfileActivity_ProfileID",
                 table: "ProfileActivity",
                 column: "ProfileID");
 
             migrationBuilder.CreateIndex(
->>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63:Migrations/20231219235719_A1.cs
                 name: "IX_Report_ForumPostID",
                 table: "Report",
                 column: "ForumPostID");

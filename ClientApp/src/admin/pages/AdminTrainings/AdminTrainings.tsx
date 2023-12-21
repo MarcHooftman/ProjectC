@@ -5,6 +5,7 @@ import { isAdmin } from "../../../utils/isAdmin";
 import { useEffect, useState } from "react";
 import ITraining from "../../../interfaces/ITraining";
 import AdminTrainingCard from "./AdminTrainingCard";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminTrainings = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const AdminTrainings = () => {
     const [trainings, setTrainings] = useState<ITraining[]>([]);
 
     const refreshTrainings = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/training`)
+        fetch(`${getApiUrl()}/training`)
         .then((response) => response.json())
         .then((data) => setTrainings(data as ITraining[]));
     };

@@ -11,13 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-<<<<<<<< HEAD:Migrations/20231218191916_m22.Designer.cs
-    [Migration("20231218191916_m22")]
-    partial class m22
-========
-    [Migration("20231219235719_A1")]
-    partial class A1
->>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63:Migrations/20231219235719_A1.Designer.cs
+    [Migration("20231221115053_m1")]
+    partial class m1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -377,17 +372,6 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
-<<<<<<<< HEAD:Migrations/20231218191916_m22.Designer.cs
-========
-            modelBuilder.Entity("API.Models.Profile", b =>
-                {
-                    b.HasOne("API.Models.Media", "ProfilePicture")
-                        .WithMany()
-                        .HasForeignKey("ProfilePictureID");
-
-                    b.Navigation("ProfilePicture");
-                });
-
             modelBuilder.Entity("API.Models.ProfileActivity", b =>
                 {
                     b.HasOne("API.Models.Activity", null)
@@ -403,7 +387,6 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
->>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63:Migrations/20231219235719_A1.Designer.cs
             modelBuilder.Entity("API.Models.Report", b =>
                 {
                     b.HasOne("API.Models.ForumPost", null)
