@@ -11,14 +11,14 @@ import ReportButton from "./ForumPostButtons/ReportButton";
 import { Badge, Button } from "react-bootstrap";
 import { getApiUrl } from "../../utils/getApiUrl";
 
-const profilePicture = require("../../assets/profile.png");
+const profilePicture = require("../../assets/profile-icon.svg");
 
 interface Props {
   comment: IForumPost;
   onClick?: () => void;
 }
 
-const PostComment = ({ onClick = () => { }, comment }: Props) => {
+const PostComment = ({ onClick = () => {}, comment }: Props) => {
   const ref = useRef<any>(null);
   const [show, setShow] = useState<boolean>(false);
 
@@ -50,14 +50,13 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
-    console.log(graphData?.mail)
+    console.log(graphData?.mail);
     if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
-        },)
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
+      })
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }

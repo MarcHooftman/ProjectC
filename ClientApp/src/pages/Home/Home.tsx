@@ -13,6 +13,7 @@ import { createProfile } from "./utils";
 import AboutParagraph from "../../components/AboutParagraph/AboutParagraph";
 import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
 import { getApiUrl } from "../../utils/getApiUrl";
+import CoverCard from "../../components/CoverCard/CoverCard";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
@@ -27,14 +28,11 @@ const Home = () => {
     if (graphData && !profileCreated) {
       setTimeout(
         () =>
-          fetch(
-            `${getApiUrl()}/profile/email-exists/${graphData?.mail}`,
-            {
-              headers: {
-                "ngrok-skip-browser-warning": "1",
-              }
+          fetch(`${getApiUrl()}/profile/email-exists/${graphData?.mail}`, {
+            headers: {
+              "ngrok-skip-browser-warning": "1",
             },
-          )
+          })
             .then((response) => response.json())
             .then((emailExists) => {
               if (emailExists) {
@@ -51,14 +49,15 @@ const Home = () => {
 
   return (
     <Layout
-      cover={
-        <Cover src={homeCover} className="mb-5">
-          <h1 className="py-5 text-white">
-            Welkom bij de Onboarding-App van Antes
-          </h1>
-        </Cover>
-      }
+    // cover={
+    //   <Cover src={homeCover} className="mb-5">
+    //     <h1 className="py-5 text-white">
+    //       Welkom bij de Onboarding-App van Antes
+    //     </h1>
+    //   </Cover>
+    // }
     >
+      <CoverCard />
       <CustomAuthenticatedTemplate>
         <Tutorial show={showTutorial} onHide={closeTutorial} />
         <Row className="mx-0 gap-4">

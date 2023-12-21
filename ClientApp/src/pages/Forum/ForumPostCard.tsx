@@ -9,7 +9,7 @@ import { getApiUrl } from "../../utils/getApiUrl";
 
 const upArrow = require("../../assets/up-arrow.png");
 const downArrow = require("../../assets/down-arrow.png");
-const profilePicture = require("../../assets/profile.png");
+const profilePicture = require("../../assets/profile-icon.svg");
 
 interface Props {
   post: IForumPost;
@@ -20,12 +20,11 @@ const ForumPostCard = ({ post }: Props) => {
   const [_post, setPost] = useState<IForumPost>(post);
 
   const fetchPost = () => {
-    fetch(`${getApiUrl()}/forumpost/${post.id}`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/forumpost/${post.id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setPost(data as IForumPost));
   };
@@ -44,12 +43,14 @@ const ForumPostCard = ({ post }: Props) => {
       >
         <Row className="d-flex justify-content-between w-100 align-items-center header-row mx-0">
           <Col className="d-flex align-items-center profile-section">
-
             <Link to={`/ profile / ${post.profileID}`}>
               <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
             </Link>
 
-            <Link to={`/ profile / ${post.profileID}`} className="text-decoration-none blue-text profile-section-info">
+            <Link
+              to={`/ profile / ${post.profileID}`}
+              className="text-decoration-none blue-text profile-section-info"
+            >
               <h2 className="fs-5 m-0">
                 <strong>{post?.profile?.fullName}</strong>
               </h2>
@@ -57,13 +58,15 @@ const ForumPostCard = ({ post }: Props) => {
                 lid sinds {post?.profile?.memberSince}
               </h3>
             </Link>
-
           </Col>
           <Col className="d-flex justify-content-between align-items-center info-section px-0">
             <h4>{post?.title}</h4>
             <div className="d-flex justify-content-between align-items-center gap-3 time-and-arrow">
               <div className="opacity-50 text-dark">{formattedDate}</div>
-              <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
+              <img
+                className="arrow-icon"
+                src={collapse ? upArrow : downArrow}
+              />
             </div>
           </Col>
         </Row>

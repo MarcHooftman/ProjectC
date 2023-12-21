@@ -20,27 +20,24 @@ const Profile = () => {
   const loggedIn = useIsAuthenticated();
   const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
   const navigate = useNavigate();
-  const logout = useLogout()
+  const logout = useLogout();
 
   useEffect(() => {
     if (!loggedIn && !isTemporaryUser) {
-      navigate("/login")
+      navigate("/login");
     }
-  }, [loggedIn, isTemporaryUser])
+  }, [loggedIn, isTemporaryUser]);
 
   const { graphData } = useGraphData();
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(
-        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
         },
-      )
+      })
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -49,14 +46,11 @@ const Profile = () => {
   const [posts, setPosts] = useState<IForumPost[]>();
   useEffect(() => {
     if (profile) {
-      fetch(
-        `${getApiUrl()}/forumpost/by-profile/${profile.id}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
+      fetch(`${getApiUrl()}/forumpost/by-profile/${profile.id}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
         },
-      )
+      })
         .then((response) => response.json())
         .then((data) => setPosts(data as IForumPost[]));
     }
@@ -65,30 +59,38 @@ const Profile = () => {
   return (
     <Layout>
       <h1 className="blue-text my-5">Jouw profiel</h1>
-      {isTemporaryUser
-        ? <p className="blue-text">{"Als tijdelijke gebruiker heb je nog geen profiel :("}</p>
-        : <Row className="d-flex gap-5">
+      {isTemporaryUser ? (
+        <p className="blue-text">
+          {"Als tijdelijke gebruiker heb je nog geen profiel :("}
+        </p>
+      ) : (
+        <Row className="d-flex gap-5 mx-0">
           <Col as={PersonalInfoCard} profile={profile} />
           <Col as={UserDataCard} posts={posts || []} />
         </Row>
-      }
+      )}
 
-      <div className="d-flex justify-content-between">
-        {!isTemporaryUser &&
-          <Button
+      <Row className="mx-0">
+        {!isTemporaryUser && (
+          <Col
+            as={Button}
             onClick={() => {
               navigate("/edit_profile");
             }}
-            className="mt-3"
+            className="mt-3 profile-button"
           >
             Profiel bewerken
-          </Button>
-        }
+          </Col>
+        )}
 
-        <Button onClick={() => logout()} className="mt-3">
+        <Col
+          as={Button}
+          onClick={() => logout()}
+          className="mt-3 profile-button"
+        >
           Uitloggen
-        </Button>
-      </div>
+        </Col>
+      </Row>
 
       {Array.isArray(posts) && filterOnlyParent(posts).length > 0 && (
         <>

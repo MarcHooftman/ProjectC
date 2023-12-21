@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import IForumPost from "../../interfaces/IForumPost";
 import { getApiUrl } from "../../utils/getApiUrl";
-
-const profilePicture = require("../../assets/profile.png");
+import profilePicture from "../../assets/profile-icon.svg";
 
 const PopPostCard = () => {
   const [post, setPost] = useState<IForumPost>();
 
   useEffect(() => {
-    fetch(`${getApiUrl()}/forumpost/popular`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      }).then(response => response.json())
-      .then(data => setPost(data as IForumPost));
+    fetch(`${getApiUrl()}/forumpost/popular`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setPost(data as IForumPost));
   }, []);
 
   let formattedDate;
@@ -49,38 +48,51 @@ const PopPostCard = () => {
 
   return (
     <>
-      {post == undefined
-        ? <h5 className="text-dark opacity-50">Geen post beschikbaar</h5>
-        : <Card as={Link} to="/forum" className="shadow-lg text-decoration-none flex-grow-1">
+      {post == undefined ? (
+        <h5 className="">Geen post beschikbaar</h5>
+      ) : (
+        <Card
+          as={Link}
+          to="/forum"
+          className="shadow-lg text-decoration-none flex-grow-1"
+        >
           <Card.Header className="d-flex align-items-center">
-            <Link to={`/ profile / ${post.profileID}`} className="poster-pfp">
+            <Link to={`/profile/${post.profileID}`} className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
             </Link>
             <span className="d-flex flex-grow-1 justify-content-between align-items-center ms-3">
-              <Link to={`/ profile / ${post.profileID}`} className="text-decoration-none blue-text">
-                <h2 className="fs-5 m-0">
-                  <strong>{post?.profile?.fullName}</strong>
+              <Link
+                to={`/profile/${post.profileID}`}
+                className="text-decoration-none"
+              >
+                <h2 className="fs-5 m-0 text-light fw-bolder">
+                  {post?.profile?.fullName}
                 </h2>
-                <h3 className="fs-6 m-0 opacity-50 text-dark">
+                <h3 className="fs-6 m-0 antes-secondary">
                   lid sinds {post?.profile?.memberSince}
                 </h3>
               </Link>
-              <span className="opacity-50 text-dark">{formattedDate}</span>
+              <span className="">{formattedDate}</span>
             </span>
           </Card.Header>
           <Card.Body>
-            <Card.Title as={"h5"}>{post?.title}</Card.Title>
+            <Card.Title as={"h5"} className="fw-bolder">
+              {post?.title}
+            </Card.Title>
             {post?.content}
-            <span className="d-flex gap-2 mt-2">
+            <span className="d-flex gap-2 mt-3">
               {Array.isArray(post?.tags) &&
                 post?.tags.map((tag) => (
-                  <Link to={`/ forum ? filter = ${tag.name}`} key={tag.id}>
-                    <Badge pill={true}>{tag.name}</Badge>
+                  <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
+                    <Badge pill={true} className="bg-antes-secondary fs-6">
+                      {tag.name}
+                    </Badge>
                   </Link>
                 ))}
             </span>
           </Card.Body>
-        </Card>}
+        </Card>
+      )}
     </>
   );
 };

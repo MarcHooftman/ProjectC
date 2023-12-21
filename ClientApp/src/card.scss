@@ -1,7 +1,12 @@
+.card-body,
 .card {
-    background-color: #f6e6e9 !important;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #0036a0;
+  background-color: #0036a0;
+  color: white;
+}
+
+.card {
+    overflow: hidden;
+  border-radius: 0 0 3rem 0;
 }
 
 // .card-title {
