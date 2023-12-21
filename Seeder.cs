@@ -288,27 +288,22 @@ public static class Seeder
         {
             new()
             {
-                ID = 1,
                 Name = "Tag 1"
             },
             new()
             {
-                ID = 2,
                 Name = "Tag 2"
             },
             new()
             {
-                ID = 3,
                 Name = "Tag 3"
             },
             new()
             {
-                ID = 4,
                 Name = "Tag 4"
             },
             new()
             {
-                ID = 5,
                 Name = "Tag 5"
             }
         };
@@ -319,11 +314,11 @@ public static class Seeder
 
     private static void AddTraining(AntesContext context)
     {
-        var tag1 = context.Tag.Find(1);
-        var tag2 = context.Tag.Find(2);
-        var tag3 = context.Tag.Find(3);
-        var tag4 = context.Tag.Find(4);
-        var tag5 = context.Tag.Find(5);
+        var tag1 = context.Tag.Find("Tag 1");
+        var tag2 = context.Tag.Find("Tag 2");
+        var tag3 = context.Tag.Find("Tag 3");
+        var tag4 = context.Tag.Find("Tag 4");
+        var tag5 = context.Tag.Find("Tag 5");
         var training = new List<Training>
         {
             new()
@@ -382,11 +377,11 @@ public static class Seeder
 
     private static void AddForumPosts(AntesContext context)
     {
-        var tag1 = context.Tag.Find(1);
-        var tag2 = context.Tag.Find(2);
-        var tag3 = context.Tag.Find(3);
-        var tag4 = context.Tag.Find(4);
-        var tag5 = context.Tag.Find(5);
+        var tag1 = context.Tag.Find("Tag 1");
+        var tag2 = context.Tag.Find("Tag 2");
+        var tag3 = context.Tag.Find("Tag 3");
+        var tag4 = context.Tag.Find("Tag 4");
+        var tag5 = context.Tag.Find("Tag 5");
         var forumPosts = new List<ForumPost>
         {
             new()

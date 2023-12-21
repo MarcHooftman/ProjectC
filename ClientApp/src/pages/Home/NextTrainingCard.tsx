@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ITraining from "../../interfaces/ITraining";
 import { useEffect, useState } from "react";
 import IProfile from "../../interfaces/IProfile";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 interface Props {
   graphData?: IGraphData | null;
@@ -17,14 +18,24 @@ const NextTrainingCard = ({ graphData }: Props) => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/training`)
+    fetch(`${getApiUrl()}/training`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => setTraining(getNextTraining(data)));
   }, [profile]);
   useEffect(() => {
     if (graphData?.mail) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => setProfile(data));
@@ -37,7 +48,7 @@ const NextTrainingCard = ({ graphData }: Props) => {
         <Card.Title className="mb-0">{training?.title}</Card.Title>
         <div className="d-flex gap-2">
           {training?.tags.map((tag, index) => (
-            <Link to={`/training?filter=${tag.name}`} key={index}>
+            <Link to={`/ training ? filter = ${tag.name}`} key={index}>
               <Badge className="badge-color" text="light" pill={true}>
                 {tag.name}
               </Badge>

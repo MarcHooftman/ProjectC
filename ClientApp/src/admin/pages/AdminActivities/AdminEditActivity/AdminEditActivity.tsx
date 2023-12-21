@@ -3,6 +3,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 import IActivity from "../../../../interfaces/IActivity";
+import { getApiUrl } from "../../../../utils/getApiUrl";
 
 const AdminEditActivity = () => {
   const { id } = useParams();
@@ -14,7 +15,12 @@ const AdminEditActivity = () => {
   const [location, setLocation] = useState<string>("");
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/activity/${id}`)
+    fetch(`${getApiUrl()}/activity/${id}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => {
         const activity = data as IActivity;
@@ -65,16 +71,18 @@ const AdminEditActivity = () => {
       time: new Date(`${date}T${time}`).toISOString(),
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/activity/${newActivity.id}`, {
+    fetch(`${getApiUrl()}/activity/${newActivity.id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "ngrok-skip-browser-warning": "1", "Content-Type": "application/json"
+      },
       body: JSON.stringify(newActivity),
     })
       .then((response) => {
         if (!response.ok) {
           return response.text().then((text) => {
             throw new Error(
-              `Request failed with status ${response.status}: ${text}`
+              `Request failed with status ${response.status}: ${text} `
             );
           });
         }

@@ -11,6 +11,7 @@ import AdminTable from "./Tables/AdminTable";
 import TempTable from "./Tables/TempTable";
 import { Button } from "react-bootstrap";
 import { isAdmin } from "../../../utils/isAdmin";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminUsers = () => {
   const navigate = useNavigate();
@@ -29,7 +30,12 @@ const AdminUsers = () => {
   const [tempUsers, setTempUsers] = useState<ITempUser[]>([]);
 
   const fetchEmployees = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/profile`)
+    fetch(`${getApiUrl()}/profile`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => {
         if (filter) {
@@ -40,9 +46,15 @@ const AdminUsers = () => {
   };
 
   const fetchAdmins = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/admin`)
+    fetch(`${getApiUrl()}/admin`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (filter) {
           data = filterAdmins(data);
         }
@@ -51,7 +63,12 @@ const AdminUsers = () => {
   };
 
   const fetchTempUsers = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/tempuser`)
+    fetch(`${getApiUrl()}/tempuser`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => {
         if (filter) {
@@ -65,7 +82,7 @@ const AdminUsers = () => {
     if (!filter) return array;
     return array.filter((item) => {
       let values = Object.values(item);
-      values = values.filter((v) => v !== null && `${v}`.length < 20);
+      values = values.filter((v) => v !== null);
       return values.some((value) =>
         `${value}`.toLowerCase().includes(filter.toLowerCase())
       );

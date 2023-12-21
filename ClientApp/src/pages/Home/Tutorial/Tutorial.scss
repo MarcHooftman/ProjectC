@@ -1,6 +1,11 @@
 .carousel-image {
-    width: 100% !important;
+    width: 60vw !important;
     //max-width: fit-content !important;
     object-fit: cover !important;
     filter: brightness(0.5);
+}
+
+.tutorial-modal {
+    // width: 90vw !important;
+    max-width: 60vw !important;
 }

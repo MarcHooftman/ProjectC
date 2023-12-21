@@ -150,15 +150,24 @@ namespace API.Controllers
                 return Problem("Entity set 'AntesContext.ForumPost'  is null.");
             }
 
-            // if (forumPost.Profile == null)
-            // {
-            //     return Problem("Post has no profile attached");
-            // }
+            var newTags = new List<Tag>();
 
-            // // prevent Entity Framework from adding the profile to the Profile table
-            // // by setting it as null
-            // forumPost.ProfileID = forumPost.Profile.ID;
-            // forumPost.Profile = null;
+            foreach (var tag in forumPost.Tags)
+            {
+                var existingTag = await _context.Tag.FindAsync(tag.Name);
+
+                if (existingTag != null)
+                {
+                    newTags.Add(existingTag);
+                }
+                else
+                {
+                    _context.Tag.Add(tag);
+                    newTags.Add(tag);
+                }
+            }
+
+            forumPost.Tags = newTags;
 
             _context.ForumPost.Add(forumPost);
             await _context.SaveChangesAsync();

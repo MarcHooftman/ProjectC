@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap"
 
 const GeneralInfoCard = () => {
     return (
-        <Card className="p-4 my-5 general-info-card shadow">
+        <Card className="p-4 general-info-card shadow">
             <Card.Title className="fs-2">Algemene informatie</Card.Title>
             <Table className="my-2">
                 <tbody>
@@ -22,14 +22,14 @@ const GeneralInfoCard = () => {
                         <th className="no-border p-1 blue-text" scope="row">
                             Adres
                         </th>
-                        <td className="no-border p-1 blue-text">Nepstraat 123a, Rotterdam</td>
+                        <td className="no-border p-1 blue-text">Loremstraat 123a, Rotterdam</td>
                     </tr>
                     <tr>
                         <th className="no-border p-1 blue-text" scope="row">
                             Postadres
                         </th>
                         <td className="no-border p-1 blue-text">
-                            Postbus 8549, 3009 AM Rotterdam
+                            Postbus 1234, 3000 AB Rotterdam
                         </td>
                     </tr>
                 </tbody>

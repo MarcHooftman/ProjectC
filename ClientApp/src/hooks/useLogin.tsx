@@ -4,8 +4,8 @@ import { loginRequest } from "../authConfig";
 
 const useLogin = () => {
     const navigate = useNavigate()
-
-    const login = async (redirectUri: string = "/") => {
+    const originUrl = window.location.href;
+    const login = async (redirectUri: string = originUrl) => {
         try {
             await msalInstance.loginRedirect(loginRequest);
             // Redirect to the given URI

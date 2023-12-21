@@ -2,6 +2,7 @@ import { Button, Card, Form } from "react-bootstrap";
 import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getApiUrl } from "../../../../utils/getApiUrl";
 
 const AdminAddTempUser = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,9 +18,11 @@ const AdminAddTempUser = () => {
       verificationCode: "00000000",
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/tempuser`, {
+    fetch(`${getApiUrl()}/tempuser`, {
       method: "POST",
       headers: {
+
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(tempUser),

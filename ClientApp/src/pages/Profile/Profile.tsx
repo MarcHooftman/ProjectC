@@ -14,6 +14,7 @@ import useGraphData from "../../hooks/useGraphData";
 import { filterOnlyParent } from "../../utils/sortPosts";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const Profile = () => {
   const loggedIn = useIsAuthenticated();
@@ -33,7 +34,12 @@ const Profile = () => {
   useEffect(() => {
     if (graphData) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
@@ -44,7 +50,12 @@ const Profile = () => {
   useEffect(() => {
     if (profile) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/forumpost/by-profile/${profile.id}`
+        `${getApiUrl()}/forumpost/by-profile/${profile.id}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => setPosts(data as IForumPost[]));

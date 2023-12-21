@@ -1,4 +1,5 @@
 import ILike from "../../interfaces/ILike";
+import { getApiUrl } from "../../utils/getApiUrl";
 
 export function postLike(postId: number, profileId: number) {
     const like = {
@@ -6,9 +7,10 @@ export function postLike(postId: number, profileId: number) {
         ProfileID: profileId,
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/like`, {
+    fetch(`${getApiUrl()}/like`, {
         method: "POST",
         headers: {
+            "ngrok-skip-browser-warning": "1",
             "Content-Type": "application/json",
         },
         body: JSON.stringify(like),
@@ -16,12 +18,18 @@ export function postLike(postId: number, profileId: number) {
 }
 
 export function deleteLike(postId: number, profileId: number) {
-    fetch(`${process.env.REACT_APP_API_URL}/forumpost/${postId}`)
+    fetch(`${getApiUrl()}/forumpost/${postId}`,
+        {
+            headers: {
+                "ngrok-skip-browser-warning": "1",
+            }
+        },)
         .then((response) => response.json())
         .then((data) =>
-            fetch(`${process.env.REACT_APP_API_URL}/like/${data.likes.find((like: ILike) => like.profileID === profileId)?.id}`, {
+            fetch(`${getApiUrl()}/like/${data.likes.find((like: ILike) => like.profileID === profileId)?.id}`, {
                 method: "DELETE",
                 headers: {
+                    "ngrok-skip-browser-warning": "1",
                     "Content-Type": "application/json",
                 },
             })

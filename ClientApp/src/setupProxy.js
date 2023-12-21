@@ -1,11 +1,8 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
+require('dotenv').config();
 const { env } = require('process');
 
-const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:2834';
-
-//const target = 'https://localhost:7185';
-
+const target = env.REACT_APP_LOCAL_API === "true" ? "https://localhost:7185" : "https://5344-2a02-a212-92c8-8400-a99d-7185-f1f5-8289.ngrok-free.app/api"
 
 const context = [
   "activity",
@@ -26,9 +23,19 @@ module.exports = function (app) {
     // Uncomment this line to add support for proxying websockets
     //ws: true, 
     headers: {
-      Connection: 'Keep-Alive'
+      Connection: 'Keep-Alive',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
+      "Access-Control-Allow-Headers": "Content-Type",
     }
   });
+
+  // app.use((req, res, next) => {
+  //   res.header('Access-Control-Allow-Origin', 'https://localhost:44463');
+  //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  //   res.header('Access-Control-Allow-Headers', 'Content-Type');
+  //   next();
+  // });
 
   app.use(appProxy);
 };

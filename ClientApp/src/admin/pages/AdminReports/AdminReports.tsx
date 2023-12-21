@@ -7,6 +7,7 @@ import AdminForumPostCard from "../AdminForum/AdminForumPostCard";
 import "./AdminReports.scss";
 import { useNavigate } from "react-router-dom";
 import { isAdmin } from "../../../utils/isAdmin";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminReports = () => {
   const navigate = useNavigate();
@@ -22,7 +23,12 @@ const AdminReports = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const refreshReports = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/report`)
+    fetch(`${getApiUrl()}/report`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        }
+      },)
       .then((response) => response.json())
       .then((data) => setReports(data as IReport[]));
   };
@@ -31,7 +37,12 @@ const AdminReports = () => {
   useEffect(() => {
     if (selectedReport) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/forumpost/${selectedReport.forumPostID}`
+        `${getApiUrl()}/forumpost/${selectedReport.forumPostID}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },
       )
         .then((response) => response.json())
         .then((data) => setSelectedReportPost(data));
@@ -56,8 +67,13 @@ const AdminReports = () => {
     console.log(selectedReportPost);
     if (selectedReportPost?.id) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/forumpost/${selectedReportPost.id}`,
+        `${getApiUrl()}/forumpost/${selectedReportPost.id}`,
         {
+
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+
+          },
           method: "DELETE",
         }
       ).then(() => {
@@ -69,7 +85,12 @@ const AdminReports = () => {
 
   const handleDismissReport = () => {
     if (selectedReport) {
-      fetch(`${process.env.REACT_APP_API_URL}/report/${selectedReport.id}`, {
+      fetch(`${getApiUrl()}/report/${selectedReport.id}`, {
+
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+
+        },
         method: "DELETE",
       }).then(() => {
         refreshReports();

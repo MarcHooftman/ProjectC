@@ -9,18 +9,16 @@ interface Props {
 
 const AdminLayout = ({ children, cover, centered = false }: Props) => {
   return (
-    <>
-      <div className="bg-color pb-5">
-        <AdminNavMenu />
-        {cover || <></>}
-        <Container
-          tag="main"
-          className={centered ? " d-flex flex-column align-items-center" : ""}
-        >
-          {children}
-        </Container>
-      </div>
-    </>
+    <div className="bg-color pb-5">
+      <AdminNavMenu />
+      {cover || <></>}
+      <Container
+        tag="main"
+        className={centered ? " d-flex flex-column align-items-center" : ""}
+      >
+        {children}
+      </Container>
+    </div>
   );
 };
 

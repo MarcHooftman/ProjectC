@@ -101,7 +101,8 @@ const AdminDashboard = () => {
                 Gebruikers beheren
               </Card.Title>
               <h5>Gebruikers bekijken</h5>
-              <h5>Gebruikers time-out geven</h5>
+              <h5>Tijdelijke gebruiker toevoegen</h5>
+              <h5>Admin toevoegen</h5>
             </Card.Body>
           </Card>
         </Col>

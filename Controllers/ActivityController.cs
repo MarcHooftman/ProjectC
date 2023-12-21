@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Activity.Include(_ => _.Attending).ToListAsync();
+            return await _context.Activity.Include(_ => _.Profiles).ToListAsync();
         }
 
         // GET: api/Activity/5
@@ -39,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.Include(_ => _.Attending).FirstOrDefaultAsync(_ => _.ID == id);
+            var activity = await _context.Activity.Include(_ => _.Profiles).FirstOrDefaultAsync(_ => _.ID == id);
 
             if (activity == null)
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.OrderBy(_ => _.Time).Include(_ => _.Attending).FirstOrDefaultAsync();
+            var activity = await _context.Activity.OrderBy(_ => _.Time).Include(_ => _.Profiles).FirstOrDefaultAsync();
 
             if (activity == null)
             {
@@ -81,6 +81,10 @@ namespace API.Controllers
 
             try
             {
+                foreach (Profile p in activity.Profiles)
+                {
+                    MailSender.SendMail(p.Email, "Antes - Activiteit gewijzigd", $"<html>Een activiteit waar je aan deelneemt is gewijzigd.<br>Ga naar de <a href=\"https://localhost:44463\">website</a> om de veranderingen te bekijken.<br>{activity.Title}.</html>");
+                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -137,5 +141,28 @@ namespace API.Controllers
         {
             return (_context.Activity?.Any(e => e.ID == id)).GetValueOrDefault();
         }
+
+        // [HttpPost("{activityId}/attendees/{profileId}")]
+        // public async Task<IActionResult> AddAttendee(int activityId, int profileId)
+        // {
+        //     var activity = await _context.Activities.FindAsync(activityId);
+        //     var profile = await _context.Profiles.FindAsync(profileId);
+
+        //     if (activity == null || profile == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var attending = new Attending
+        //     {
+        //         Activity = activity,
+        //         Profile = profile
+        //     };
+
+        //     _context.Attendings.Add(attending);
+        //     await _context.SaveChangesAsync();
+
+        //     return Ok(attending);
+        // }
     }
 }

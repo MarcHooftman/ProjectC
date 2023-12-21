@@ -5,8 +5,12 @@
 }
 
 @media (max-width: 575px) {
+
+  html,
   body {
     position: absolute;
+    width: 100vw;
+    overflow-x: clip;
   }
 }
 

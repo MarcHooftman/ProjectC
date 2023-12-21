@@ -3,14 +3,18 @@ import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
 
 function createMsalConfig() {
-    //const currentUri = window.location.href;
-    const uri = "https://localhost:44463/";
+    const currentUri = window.location.href;
+    let currentBaseUri = currentUri;
+    if (currentBaseUri.endsWith("login")) {
+        currentBaseUri = currentBaseUri.replace("login", "");
+    }
+    //const uri = "https://localhost:44463/";
 
     const msalConfig = {
         auth: {
             clientId: "fd5759c0-0d95-4c39-92e1-a83537f78e73",
             authority: "https://login.microsoftonline.com/organizations",
-            redirectUri: uri
+            redirectUri: currentBaseUri
         },
         cache: {
             cacheLocation: "localStorage", // This configures where your cache will be stored

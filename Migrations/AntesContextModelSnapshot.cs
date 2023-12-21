@@ -73,6 +73,7 @@ namespace ProjectC.Migrations
                     b.ToTable("Admin");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("API.Models.Attending", b =>
                 {
                     b.Property<int>("ActivityID")
@@ -88,6 +89,8 @@ namespace ProjectC.Migrations
                     b.ToTable("Attending");
                 });
 
+=======
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.Property<int>("ID")
@@ -127,12 +130,21 @@ namespace ProjectC.Migrations
                     b.Property<int>("ForumPostId")
                         .HasColumnType("integer");
 
+<<<<<<< HEAD
                     b.Property<int>("TagId")
                         .HasColumnType("integer");
 
                     b.HasKey("ForumPostId", "TagId");
 
                     b.HasIndex("TagId");
+=======
+                    b.Property<string>("TagName")
+                        .HasColumnType("text");
+
+                    b.HasKey("ForumPostId", "TagName");
+
+                    b.HasIndex("TagName");
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
 
                     b.ToTable("ForumTag");
                 });
@@ -158,6 +170,30 @@ namespace ProjectC.Migrations
                     b.ToTable("Like");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("API.Models.Media", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Media");
+                });
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.Profile", b =>
                 {
                     b.Property<int>("ID")
@@ -202,9 +238,32 @@ namespace ProjectC.Migrations
 
                     b.HasKey("ID");
 
+<<<<<<< HEAD
                     b.ToTable("Profile");
                 });
 
+=======
+                    b.HasIndex("ProfilePictureID");
+
+                    b.ToTable("Profile");
+                });
+
+            modelBuilder.Entity("API.Models.ProfileActivity", b =>
+                {
+                    b.Property<int>("ActivityID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProfileID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ActivityID", "ProfileID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("ProfileActivity");
+                });
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.Report", b =>
                 {
                     b.Property<int>("ID")
@@ -243,6 +302,7 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.Tag", b =>
                 {
+<<<<<<< HEAD
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
@@ -254,6 +314,12 @@ namespace ProjectC.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ID");
+=======
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Name");
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
 
                     b.ToTable("Tag");
                 });
@@ -294,15 +360,28 @@ namespace ProjectC.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+<<<<<<< HEAD
+=======
+                    b.Property<int>("MediaID")
+                        .HasColumnType("integer");
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
+<<<<<<< HEAD
                     b.Property<string>("Url")
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
+=======
+                    b.HasKey("ID");
+
+                    b.HasIndex("MediaID");
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
                     b.ToTable("Training");
                 });
 
@@ -323,19 +402,29 @@ namespace ProjectC.Migrations
 
             modelBuilder.Entity("API.Models.TrainingTag", b =>
                 {
+<<<<<<< HEAD
                     b.Property<int>("TagID")
                         .HasColumnType("integer");
+=======
+                    b.Property<string>("TagName")
+                        .HasColumnType("text");
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
 
                     b.Property<int>("TrainingID")
                         .HasColumnType("integer");
 
+<<<<<<< HEAD
                     b.HasKey("TagID", "TrainingID");
+=======
+                    b.HasKey("TagName", "TrainingID");
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
 
                     b.HasIndex("TrainingID");
 
                     b.ToTable("TrainingTag");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("API.Models.Attending", b =>
                 {
                     b.HasOne("API.Models.Activity", null)
@@ -351,6 +440,8 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
+=======
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.ForumPost", b =>
                 {
                     b.HasOne("API.Models.ForumPost", null)
@@ -377,7 +468,11 @@ namespace ProjectC.Migrations
 
                     b.HasOne("API.Models.Tag", null)
                         .WithMany()
+<<<<<<< HEAD
                         .HasForeignKey("TagId")
+=======
+                        .HasForeignKey("TagName")
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -391,6 +486,33 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("API.Models.Profile", b =>
+                {
+                    b.HasOne("API.Models.Media", "ProfilePicture")
+                        .WithMany()
+                        .HasForeignKey("ProfilePictureID");
+
+                    b.Navigation("ProfilePicture");
+                });
+
+            modelBuilder.Entity("API.Models.ProfileActivity", b =>
+                {
+                    b.HasOne("API.Models.Activity", null)
+                        .WithMany()
+                        .HasForeignKey("ActivityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Profile", null)
+                        .WithMany()
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.Report", b =>
                 {
                     b.HasOne("API.Models.ForumPost", null)
@@ -400,6 +522,20 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("API.Models.Training", b =>
+                {
+                    b.HasOne("API.Models.Media", "Media")
+                        .WithMany()
+                        .HasForeignKey("MediaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Media");
+                });
+
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
             modelBuilder.Entity("API.Models.TrainingProfile", b =>
                 {
                     b.HasOne("API.Models.Profile", null)
@@ -419,7 +555,11 @@ namespace ProjectC.Migrations
                 {
                     b.HasOne("API.Models.Tag", null)
                         .WithMany()
+<<<<<<< HEAD
                         .HasForeignKey("TagID")
+=======
+                        .HasForeignKey("TagName")
+>>>>>>> 541288ae7815d7e3404304eea6e2a06b7a2d3b63
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

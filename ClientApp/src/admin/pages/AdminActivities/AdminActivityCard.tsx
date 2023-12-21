@@ -2,6 +2,8 @@ import { useState } from "react";
 import IActivity from "../../../interfaces/IActivity";
 import { Button, Card, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Table from "react-bootstrap/Table";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   activity: IActivity;
@@ -12,6 +14,8 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
   const [showModal, setShowModal] = useState<boolean>();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const [showAttendeesModal, setShowAttendeesModal] = useState<boolean>(false);
 
   let formattedDate = "";
 
@@ -29,9 +33,17 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
   const deleteActivity = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/activity/${activity.id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${getApiUrl()}/activity/${activity.id}`,
+        {
+          method: "DELETE",
+
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete activity");
@@ -67,13 +79,29 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         </Modal.Header>
         <Modal.Body>{activity?.description}</Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={() => {
-            setShowConfirm(true);
-            setShowModal(false);
-          }}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setShowConfirm(true);
+              setShowModal(false);
+            }}
+          >
             Verwijderen
           </Button>
-          <Button onClick={() => navigate(`/admin/activities/edit/${activity.id}`)}>Bewerken</Button>
+          <Button
+            variant="warning"
+            onClick={() => navigate(`/ admin / activities / edit / ${activity.id}`)}
+          >
+            Bewerken
+          </Button>
+          <Button
+            onClick={() => {
+              setShowModal(false);
+              setShowAttendeesModal(true);
+            }}
+          >
+            Deelnemers
+          </Button>
         </Modal.Footer>
       </Modal>
 
@@ -87,10 +115,13 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this activity?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => {
-            setShowConfirm(false);
-            setShowModal(true);
-          }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowConfirm(false);
+              setShowModal(true);
+            }}
+          >
             Cancel
           </Button>
           <Button variant="danger" onClick={deleteActivity}>
@@ -99,6 +130,41 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         </Modal.Footer>
       </Modal>
 
+      {/* Deelnemers modal */}
+      <Modal
+        show={showAttendeesModal}
+        onHide={() => setShowAttendeesModal(false)}
+        centered={true}
+      // style={{ maxWidth: "800px" }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{activity.title} Deelnemers</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {activity?.profiles?.length ?? 0 > 0 ? (
+            <Table striped={true} borderless={true} responsive={true}>
+              <thead>
+                <tr>
+                  <th className="blue-text">Naam</th>
+                  <th className="blue-text">Email</th>
+                  <th className="blue-text">Afdeling</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activity?.profiles?.map((profile, index) => (
+                  <tr key={index}>
+                    <td className="blue-text">{profile.fullName}</td>
+                    <td className="blue-text">{profile.email}</td>
+                    <td className="blue-text">{profile.department}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          ) : (
+            <p>Nog niemand heeft deelgenomen aan deze activiteit.</p>
+          )}
+        </Modal.Body>
+      </Modal>
       <Card
         className="hover-pointer h-100 shadow-lg"
         onClick={() => setShowModal(!showModal)}

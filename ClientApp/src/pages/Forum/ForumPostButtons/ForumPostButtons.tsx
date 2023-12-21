@@ -7,6 +7,7 @@ import IForumPost from "../../../interfaces/IForumPost";
 import LikeButton from "./LikeButton";
 import CommentButton from "./CommentButton";
 import ReportButton from "./ReportButton";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 interface Props {
   postId: number;
@@ -46,7 +47,12 @@ const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(`${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`)
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          }
+        },)
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -73,9 +79,10 @@ const ForumPostButtons = ({ postId, refresh = () => { } }: Props) => {
         reports: [],
       };
 
-      fetch(`${process.env.REACT_APP_API_URL}/forumpost`, {
+      fetch(`${getApiUrl()}/forumpost`, {
         method: "POST",
         headers: {
+          "ngrok-skip-browser-warning": "1",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(commentObject),

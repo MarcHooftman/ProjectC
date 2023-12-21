@@ -1,8 +1,9 @@
-const empty = require("../assets/empty.jpg");
+import "./AboutParagraph.scss"
+const empty = require("../../assets/empty.jpg");
 
 const AboutParagraph = () => {
   return (
-    <div>
+    <div className="about-paragraph-container">
       <img className="antes-picture float-end m-3" src={empty} />
       <p className="blue-text">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus

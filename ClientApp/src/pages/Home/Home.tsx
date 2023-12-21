@@ -10,10 +10,9 @@ import Tutorial from "./Tutorial/Tutorial";
 import { useEffect, useState } from "react";
 import useGraphData from "../../hooks/useGraphData";
 import { createProfile } from "./utils";
-import AboutParagraph from "../../components/AboutParagraph";
+import AboutParagraph from "../../components/AboutParagraph/AboutParagraph";
 import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
-
-//const homeCover = require("../../assets/images/home-cover.jpg");
+import { getApiUrl } from "../../utils/getApiUrl";
 
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
@@ -29,7 +28,12 @@ const Home = () => {
       setTimeout(
         () =>
           fetch(
-            `${process.env.REACT_APP_API_URL}/profile/email-exists/${graphData?.mail}`
+            `${getApiUrl()}/profile/email-exists/${graphData?.mail}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "1",
+              }
+            },
           )
             .then((response) => response.json())
             .then((emailExists) => {
@@ -57,24 +61,24 @@ const Home = () => {
     >
       <CustomAuthenticatedTemplate>
         <Tutorial show={showTutorial} onHide={closeTutorial} />
-        <Row className="mb-5">
-          <Col className="d-flex flex-column">
+        <Row className="mx-0 gap-4">
+          <Col className="d-flex flex-column px-0 mb-4 home-col">
             <h3 className="blue-text">Populair op dit moment</h3>
             <PopPostCard />
           </Col>
-          <Col className="d-flex flex-column">
+          <Col className="d-flex flex-column px-0 mb-4 home-col">
             <h3 className="blue-text">Eerstvolgende activiteit</h3>
             <NextActivityCard />
           </Col>
         </Row>
-        <Row className="mb-5">
-          <Col>
+        <Row className="mx-0 mt-3">
+          <Col className="px-0 mb-4 home-col">
             <h3 className="blue-text">Volgende training</h3>
             <NextTrainingCard graphData={graphData} />
           </Col>
         </Row>
       </CustomAuthenticatedTemplate>
-      <h2 className="my-4 blue-text">Over ons</h2>
+      <h2 className="mt-4 blue-text">Over ons</h2>
       <AboutParagraph />
     </Layout>
   );

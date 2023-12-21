@@ -93,6 +93,26 @@ namespace API.Controllers
             {
                 return Problem("Entity set 'AntesContext.Training'  is null.");
             }
+
+            var newTags = new List<Tag>();
+
+            foreach (var tag in training.Tags)
+            {
+                var existingTag = await _context.Tag.FindAsync(tag.Name);
+
+                if (existingTag != null)
+                {
+                    newTags.Add(existingTag);
+                }
+                else
+                {
+                    _context.Tag.Add(tag);
+                    newTags.Add(tag);
+                }
+            }
+            
+            training.Tags = newTags;
+
             _context.Training.Add(training);
             await _context.SaveChangesAsync();
 

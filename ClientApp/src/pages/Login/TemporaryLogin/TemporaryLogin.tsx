@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import VerificationInput from "react-verification-input";
 import "./TemporaryLogin.scss";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const TemporaryLogin = () => {
   const [email, setEmail] = useState<string>();
@@ -27,9 +28,10 @@ const TemporaryLogin = () => {
       verificationCode: code,
     };
     console.log(tempUser);
-    fetch(`${process.env.REACT_APP_API_URL}/auth/temp`, {
+    fetch(`${getApiUrl()}/auth/temp`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(tempUser),
@@ -48,8 +50,8 @@ const TemporaryLogin = () => {
 
   return (
     <Layout centered={true}>
-      <h1 className="my-5 blue-text">Inloggen met verificatie code</h1>
-      <Card className="shadow-lg w-25">
+      <h1 className="my-5 blue-text text-center">Inloggen met verificatie code</h1>
+      <Card className="shadow-lg form-card">
         <Card.Body>
           <Form
             className="d-flex flex-column align-items-center gap-3"

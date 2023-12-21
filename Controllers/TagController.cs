@@ -24,22 +24,18 @@ namespace ProjectC.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTag()
         {
-          if (_context.Tag == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tag == null)
+            {
+                return NotFound();
+            }
             return await _context.Tag.ToListAsync();
         }
 
         // GET: api/Tag/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(int id)
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Tag>> GetTag(string name)
         {
-          if (_context.Tag == null)
-          {
-              return NotFound();
-          }
-            var tag = await _context.Tag.FindAsync(id);
+            var tag = await _context.Tag.FindAsync(name);
 
             if (tag == null)
             {
@@ -48,31 +44,31 @@ namespace ProjectC.Controllers
 
             return tag;
         }
-        
-        // GET: api/Tag/tagName
-        [HttpGet("{tagName}")]
-        public async Task<ActionResult<Tag>> GetTag(string tagName)
-        {
-          if (_context.Tag == null)
-          {
-              return NotFound();
-          }
-            var tag = await _context.Tag.FindAsync(tagName);
 
-            if (tag == null)
-            {
-                return NotFound();
-            }
+        // // GET: api/Tag/tagName
+        // [HttpGet("{tagName}")]
+        // public async Task<ActionResult<Tag>> GetTag(string tagName)
+        // {
+        //     if (_context.Tag == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var tag = await _context.Tag.FindAsync(tagName);
 
-            return tag;
-        }
+        //     if (tag == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return tag;
+        // }
 
         // PUT: api/Tag/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, Tag tag)
+        [HttpPut("{name}")]
+        public async Task<IActionResult> PutTag(string name, Tag tag)
         {
-            if (id != tag.ID)
+            if (name != tag.Name)
             {
                 return BadRequest();
             }
@@ -85,7 +81,7 @@ namespace ProjectC.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(id))
+                if (!TagExists(name))
                 {
                     return NotFound();
                 }
@@ -103,25 +99,28 @@ namespace ProjectC.Controllers
         [HttpPost]
         public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
-          if (_context.Tag == null)
-          {
-              return Problem("Entity set 'AntesContext.Tag'  is null.");
-          }
+            if (_context.Tag == null)
+            {
+                return Problem("Entity set 'AntesContext.Tag'  is null.");
+            }
+
+            // Check if a tag with the same name already exists
+            if (_context.Tag.Any(t => t.Name == tag.Name))
+            {
+                return Conflict("A tag with the same name already exists.");
+            }
+
             _context.Tag.Add(tag);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTag", new { id = tag.ID }, tag);
+            return CreatedAtAction("GetTag", new { name = tag.Name }, tag);
         }
 
         // DELETE: api/Tag/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTag(int id)
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> DeleteTag(string name)
         {
-            if (_context.Tag == null)
-            {
-                return NotFound();
-            }
-            var tag = await _context.Tag.FindAsync(id);
+            var tag = await _context.Tag.FindAsync(name);
             if (tag == null)
             {
                 return NotFound();
@@ -133,9 +132,9 @@ namespace ProjectC.Controllers
             return NoContent();
         }
 
-        private bool TagExists(int id)
+        private bool TagExists(string name)
         {
-            return (_context.Tag?.Any(e => e.ID == id)).GetValueOrDefault();
+            return _context.Tag.Any(e => e.Name == name);
         }
     }
 }
