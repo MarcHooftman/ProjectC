@@ -4,7 +4,7 @@ import React from 'react'
 
 const AntesMap = () => {
     return (
-        <div className="ratio ratio-16x9">
+        <div className="ratio ratio-16x9 my-5">
             <iframe className="map shadow-lg"
                 loading="lazy"
                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDpXbqN-HJdxw5YFgPKMfLhY8ZpRIycAnw

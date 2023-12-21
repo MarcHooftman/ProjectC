@@ -11,6 +11,8 @@ import useGraphData from "../../hooks/useGraphData";
 import IProfile from "../../interfaces/IProfile";
 import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAuthenticatedTemplate";
 import { getApiUrl } from "../../utils/getApiUrl";
+import { Card } from "react-bootstrap";
+
 
 const Training = () => {
 
@@ -55,12 +57,15 @@ const Training = () => {
         <Layout>
             <CustomAuthenticatedTemplate>
                 <span className="forum-header d-flex justify-content-between align-items-center">
-                    <h1 className="my-5 blue-text">Antes Trainingen</h1>
+                    <h1 className="my-5 blue-text fw-bolder">Antes Trainingen</h1>
                     <FilterDropdown page={"training"} />
                 </span>
                 {filterTraining(Trainings).length > 0 ? Category.map((i, index) => {
-                    return <div key={index} className="ps-3">
-                        <h3 className="pt-3 blue-text" >{i.name}</h3>
+                    return <div key={index} className="ps-3 mb-5">
+                        <Card className="category-card bg-antes-red">
+                            <h3 className="p-2 px-4 fw-bold" >{i.name}</h3>
+                        </Card>
+
                         <div className="d-flex pt-3 gap-4 flex-row flex-wrap justify-content-start">
 
                             {filterTraining(Trainings).map((item, itemIndex) => {

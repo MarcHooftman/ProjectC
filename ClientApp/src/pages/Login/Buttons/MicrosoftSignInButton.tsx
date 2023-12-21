@@ -23,7 +23,7 @@ export const MicrosoftSignInButton = () => {
 
     return (
         <div>
-            <h6 className="text-dark opacity-50">Inloggen met werk account</h6>
+            <h6 className="antes-secondary">Inloggen met werk account</h6>
             <button className="sign-in-button" onClick={() => login()}>
                 <img src={MicrosoftLogo} className="microsoft-logo" />
                 Inloggen met Microsoft

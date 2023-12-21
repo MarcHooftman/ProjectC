@@ -6,9 +6,11 @@
   height: 50px;
 }
 
-.hamburger,
-.profile-image {
+.hamburger {
   width: 3rem;
+}
+.profile-image {
+  width: 4rem;
 }
 
 @media (max-width: 400px) {

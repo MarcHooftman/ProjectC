@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IForumPost from "../../interfaces/IForumPost";
-
-const upArrow = require("../../assets/up-arrow.png");
-const downArrow = require('../../assets/down-arrow.png');
+import arrowUp from "../../assets/arrow-up.svg";
+import arrowDown from "../../assets/arrow-down.svg";
 
 interface Props {
     post?: IForumPost;
@@ -20,18 +19,16 @@ const ProfilePostCard = ({ post }: Props) => {
     }
 
     return (
-        <Card as="details" className="my-3 shadow-lg">
+        <Card as="details" className="my-3 shadow-lg bg-antes-primary">
             <Card.Header as="summary" className="d-flex align-items-center" onClick={() => setCollapse(!collapse)}>
-                <Row className="w-100 align-items-center">
-                    <Col lg={9} className="ps-4">
+                <Row className="w-100 d-flex align-items-center profile-post-card-header-row mx-0">
+                    <Col className="w-100 post-title">
                         <h4>{post?.title}</h4>
                     </Col>
 
-                    <Col lg={2} className="ps-5">
-                        <span className="opacity-50 text-dark">{formattedDate}</span>
-                    </Col>
-                    <Col lg={1} className="ps-5">
-                        <img className="arrow-icon" src={collapse ? upArrow : downArrow} />
+                    <Col className="w-100 d-flex align-items-center gap-2 post-details">
+                        <span className="antes-secondary">{formattedDate}</span>
+                        <img className="arrow-icon" src={collapse ? arrowUp : arrowDown} />
                     </Col>
                 </Row>
             </Card.Header>
@@ -40,8 +37,8 @@ const ProfilePostCard = ({ post }: Props) => {
             </Card.Body>
             {Array.isArray(post?.tags) && (post?.tags.length || -1) > 0 &&
                 <Card.Footer>
-                    <span className="d-flex gap-2">
-                        {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="badge-color" text="light" pill={true}>{tag.name}</Badge></Link>)}
+                    <span className="d-flex gap-2 mb-2">
+                        {post?.tags.map(tag => <Link to={`/forum?filter=${tag}`}><Badge className="bg-antes-secondary fw-bold fs-6" text="light" pill={true}>{tag.name}</Badge></Link>)}
                     </span>
                 </Card.Footer>
             }

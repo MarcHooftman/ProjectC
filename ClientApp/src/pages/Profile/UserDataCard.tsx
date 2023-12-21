@@ -20,7 +20,7 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
 
 
     return (
-        <Card className={"user-data shadow-lg".concat(' ', className)}>
+        <Card className={"user-data shadow-lg bg-antes-primary".concat(' ', className)}>
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="text-center">
                     <strong>Overzicht</strong>
@@ -28,20 +28,20 @@ const UserDataCard = ({ posts, className = "" }: Props) => {
                 <Table className="profile-table">
                     <tbody>
                         <tr>
-                            <th className="blue-text">Posts geplaatst</th>
-                            <td className="blue-text">{postsLength}</td>
+                            <th className="text-light">Posts geplaatst</th>
+                            <td className="text-light">{postsLength}</td>
                         </tr>
                         <tr>
-                            <th className="blue-text">Comments geplaatst</th>
-                            <td className="blue-text">{commentsPlaced}</td>
+                            <th className="text-light">Comments geplaatst</th>
+                            <td className="text-light">{commentsPlaced}</td>
                         </tr>
                         <tr>
-                            <th className="blue-text">Behulpzame comments</th>
-                            <td className="blue-text">{helpfulComments}</td>
+                            <th className="text-light">Behulpzame comments</th>
+                            <td className="text-light">{helpfulComments}</td>
                         </tr>
                         <tr>
-                            <th className="blue-text">Likes ontvangen</th>
-                            <td className="blue-text">{totalLikes}</td>
+                            <th className="text-light">Likes ontvangen</th>
+                            <td className="text-light">{totalLikes}</td>
                         </tr>
                     </tbody>
                 </Table>

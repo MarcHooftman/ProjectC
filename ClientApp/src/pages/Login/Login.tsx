@@ -4,21 +4,26 @@ import "./Login.scss";
 import { MicrosoftSignInButton } from "./Buttons/MicrosoftSignInButton";
 import AdminSignInButton from "./Buttons/AdminSignInButton";
 import TemporarySignInButton from "./Buttons/TemporarySignInButton";
+import loginPicture from "../../assets/Zorgboulevard.jpg"
 
 const Login = () => {
 
   return (
     <Layout centered={true}>
-      <h1 className="my-5 blue-text">Inloggen</h1>
-      <Card className="shadow-lg">
-        <Card.Body className="p-4">
+      <h1 className="my-5 blue-text fw-bolder">Inloggen</h1>
+      <Card className="shadow-lg d-flex flex-row login-card">
+        <img src={loginPicture} className="object-fit-cover login-picture" />
+        <Card.Body className="p-4 d-flex flex-column justify-content-center align-items-center">
+
           <MicrosoftSignInButton />
+          <div className="d-flex flex-column mt-4 gap-1">
+            <div>
+              <h6 className="antes-secondary">Andere inlog-opties</h6>
+              <TemporarySignInButton />
+            </div>
+            <AdminSignInButton />
+          </div>
         </Card.Body>
-        <Card.Footer className="p-4 d-flex flex-column gap-1">
-          <h6 className="text-dark opacity-50">Andere inlog-opties</h6>
-          <TemporarySignInButton />
-          <AdminSignInButton />
-        </Card.Footer>
       </Card>
     </Layout>
   )

@@ -7,6 +7,8 @@ import IProfile from '../../../interfaces/IProfile';
 import IForumPost from '../../../interfaces/IForumPost';
 import { useEffect, useState } from 'react';
 import { getApiUrl } from '../../../utils/getApiUrl';
+import { Col, Row } from 'react-bootstrap';
+
 
 const ProfileByID = () => {
     const { id } = useParams();
@@ -51,12 +53,16 @@ const ProfileByID = () => {
 
     return (
         <Layout>
-            <h1 className="blue-text my-5">{profile?.fullName}</h1>
-            <div className="d-flex gap-5 mb-5">
-                <PersonalInfoCard profile={profile} />
-                <UserDataCard posts={posts || []} />
-            </div>
-            {Array.isArray(filterPosts(posts)) && filterPosts(posts)?.map((post) => <ProfilePostCard post={post} />)}
+            <h1 className="blue-text my-5 fw-bolder">{profile?.fullName}</h1>
+            <Row className="d-flex gap-5 mx-0 mb-5">
+                <Col as={PersonalInfoCard} profile={profile} />
+                <Col as={UserDataCard} posts={posts || []} />
+            </Row>
+
+            {Array.isArray(filterPosts(posts)) && <>
+                <h2 className="blue-text fw-bold">Posts van {profile?.fullName}</h2>
+                {filterPosts(posts)?.map((post) => <ProfilePostCard post={post} />)}
+            </>}
         </Layout>
     )
 }

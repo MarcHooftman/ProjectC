@@ -18,38 +18,38 @@ const NextTrainingCard = ({ graphData }: Props) => {
   };
 
   useEffect(() => {
-    fetch(`${getApiUrl()}/training`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/training`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setTraining(getNextTraining(data)));
   }, [profile]);
   useEffect(() => {
     if (graphData?.mail) {
-      fetch(
-        `${getApiUrl()}/profile/by-email/${graphData?.mail}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
         },
-      )
+      })
         .then((response) => response.json())
         .then((data) => setProfile(data));
     }
   }, [graphData]);
 
   return (
-    <Card as={Link} to="/training" className="shadow-lg text-decoration-none">
-      <Card.Header className="d-flex align-items-center justify-content-between">
+    <Card as={Link} to="/training" className="shadow-lg text-decoration-none bg-antes-primary">
+      <Card.Header className="d-flex align-items-center justify-content-between py-3">
         <Card.Title className="mb-0">{training?.title}</Card.Title>
         <div className="d-flex gap-2">
           {training?.tags.map((tag, index) => (
-            <Link to={`/ training ? filter = ${tag.name}`} key={index}>
-              <Badge className="badge-color" text="light" pill={true}>
+            <Link to={`/training?filter=${tag.name}`} key={index}>
+              <Badge
+                className="bg-antes-secondary fs-6"
+                text="light"
+                pill={true}
+              >
                 {tag.name}
               </Badge>
             </Link>

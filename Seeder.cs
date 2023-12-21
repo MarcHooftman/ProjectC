@@ -323,8 +323,8 @@ public static class Seeder
         {
             new()
             {
-                Title = "Test training 1",
-                Description = "Dit is de eerste Test Training",
+                Title = "Training 1",
+                Description = Lorem2,
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
@@ -335,8 +335,8 @@ public static class Seeder
             },
             new()
             {
-                Title = "Test training 2",
-                Description = "Dit is de tweede Test Training",
+                Title = "Training 2",
+                Description = Lorem1,
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
@@ -347,8 +347,8 @@ public static class Seeder
             },
             new()
             {
-                Title = "Test training 3",
-                Description = "Dit is de derde Test Training",
+                Title = "Training 3",
+                Description = Lorem3,
                 MediaID = 1,
                 Tags = new List<Tag>
                 {
@@ -359,8 +359,8 @@ public static class Seeder
             },
             new()
             {
-                Title = "Test training 4",
-                Description = "Dit is de vierde Test Training",
+                Title = "Training 4",
+                Description = Lorem1,
                 MediaID = 1,
                 Tags = new List<Tag>
                 {

@@ -45,7 +45,7 @@ const TagInput = ({ onChange = () => { } }: Props) => {
                     value={input}
                     onChange={handleInputChange}
                 />
-                <Button size="sm" className='' onClick={handleAddTag}>Voeg tag toe</Button>
+                <Button size="sm" className='fw-bold' onClick={handleAddTag}>Voeg tag toe</Button>
             </div>
 
         </>
