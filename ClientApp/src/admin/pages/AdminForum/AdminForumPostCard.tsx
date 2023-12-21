@@ -55,13 +55,17 @@ const AdminForumPostCard = ({
   const deletePost = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(`${getApiUrl()}/forumpost/${post.id}`, {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        },
+      const response = await fetch(
+        `${getApiUrl()}/forumpost/${post.id}`,
+        {
 
-        method: "DELETE",
-      });
+          headers: {
+            "ngrok-skip-browser-warning": "1",
+          },
+
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete post");
@@ -99,14 +103,14 @@ const AdminForumPostCard = ({
           <Row className="w-100 align-items-center">
             <Col lg={3} className="ps-4 d-flex align-items-center gap-3">
               <Link
-                to={`/ admin / users ? filter = ${post?.profile?.email}`}
+                to={`/admin/users?filter=${post?.profile?.email}`}
                 className="text-decoration-none blue-text"
               >
                 <Card.Img src={ProfileIcon} className="poster-pfp"></Card.Img>
               </Link>
               <div>
                 <Link
-                  to={`/ admin / users ? filter = ${post?.profile?.email}`}
+                  to={`/admin/users?filter=${post?.profile?.email}`}
                   className="text-decoration-none blue-text"
                 >
                   <h2 className="fs-5 m-0">
@@ -114,7 +118,7 @@ const AdminForumPostCard = ({
                   </h2>
                 </Link>
                 <Link
-                  to={`/ admin / users ? filter = ${post?.profile?.email}`}
+                  to={`/admin/users?filter=${post?.profile?.email}`}
                   className="text-decoration-none blue-text"
                 >
                   <h3 className="fs-6 m-0 opacity-50 text-dark">

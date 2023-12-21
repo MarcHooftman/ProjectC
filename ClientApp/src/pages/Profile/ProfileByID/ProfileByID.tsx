@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { getApiUrl } from '../../../utils/getApiUrl';
 import { Col, Row } from 'react-bootstrap';
 
+
 const ProfileByID = () => {
     const { id } = useParams();
 

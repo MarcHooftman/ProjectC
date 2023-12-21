@@ -10,6 +10,7 @@ import profilePicture from "../../assets/profile-icon.svg";
 import arrowUp from "../../assets/arrow-up.svg";
 import arrowDown from "../../assets/arrow-down.svg";
 
+
 interface Props {
   post: IForumPost;
 }
@@ -57,6 +58,7 @@ const ForumPostCard = ({ post }: Props) => {
                 lid sinds {post?.profile?.memberSince}
               </h3>
             </Link>
+
           </Col>
           <Col className="d-flex justify-content-between align-items-center info-section px-0">
             <h4>{post?.title}</h4>

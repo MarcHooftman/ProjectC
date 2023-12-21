@@ -5,6 +5,7 @@ import IForumPost from "../../interfaces/IForumPost";
 import { getApiUrl } from "../../utils/getApiUrl";
 import profilePicture from "../../assets/profile-icon.svg";
 
+
 const PopPostCard = () => {
   const [post, setPost] = useState<IForumPost>();
 
@@ -57,7 +58,7 @@ const PopPostCard = () => {
           className="shadow-lg text-decoration-none flex-grow-1 bg-antes-primary"
         >
           <Card.Header className="d-flex align-items-center">
-            <Link to={`/profile/${post.profileID}`} className="poster-pfp">
+            <Link to={`/ profile / ${post.profileID}`} className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
             </Link>
             <span className="d-flex flex-grow-1 justify-content-between align-items-center ms-3">
