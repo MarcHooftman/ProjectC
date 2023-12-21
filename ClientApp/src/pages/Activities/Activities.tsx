@@ -25,9 +25,9 @@ const Activities = () => {
   const filterByMonth = () => {
     const filtered = selectedMonth
       ? activities?.filter(
-          (activity) =>
-            new Date(activity.time).getMonth().toString() === selectedMonth
-        )
+        (activity) =>
+          new Date(activity.time).getMonth().toString() === selectedMonth
+      )
       : activities;
     setFilteredActivities(sortActivities(filtered));
   };
@@ -35,10 +35,10 @@ const Activities = () => {
   const filterByDate = () => {
     const filtered = date
       ? activities?.filter(
-          (activity) =>
-            activity.time &&
-            new Date(activity.time).toLocaleDateString() === date
-        )
+        (activity) =>
+          activity.time &&
+          new Date(activity.time).toLocaleDateString() === date
+      )
       : activities;
     setFilteredActivities(sortActivities(filtered));
   };
@@ -72,10 +72,10 @@ const Activities = () => {
 
   return (
     <Layout>
-      <h1 className="my-5 blue-text">Activiteiten</h1>
+      <h1 className="my-5 blue-text fw-bolder">Activiteiten</h1>
       <ActivityCalendar activities={activities} />
       <span className="d-flex align-items-center justify-content-between mt-5 mb-4">
-        <h2 className="blue-text">Activiteiten</h2>
+        <h2 className="blue-text fw-bolder">Activiteiten</h2>
         <FormGroup noMargin>
           <Input
             type="select"
@@ -106,7 +106,7 @@ const Activities = () => {
         <p className="text-muted">Zoekresultaat voor '{selectedMonth}':</p>
       )}
       {filteredActivities?.length == undefined ||
-      filteredActivities?.length > 0 ? (
+        filteredActivities?.length > 0 ? (
         <Row xl="2" xs="1" className="mx-0">
           {filteredActivities?.map((item) => (
             <Col key={item.id} className="mb-3 px-0 px-2">

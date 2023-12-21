@@ -54,7 +54,7 @@ const PopPostCard = () => {
         <Card
           as={Link}
           to="/forum"
-          className="shadow-lg text-decoration-none flex-grow-1"
+          className="shadow-lg text-decoration-none flex-grow-1 bg-antes-primary"
         >
           <Card.Header className="d-flex align-items-center">
             <Link to={`/profile/${post.profileID}`} className="poster-pfp">

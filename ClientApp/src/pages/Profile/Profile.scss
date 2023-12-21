@@ -3,31 +3,44 @@
     aspect-ratio: 1/1;
 }
 
+.profile-button {
+    max-width: 12rem !important;
+}
+
 .personalia {
-    flex: 3;
     min-width: 525px !important;
 }
 
 .user-data {
-    flex: 1;
     min-width: 525px !important;
 }
 
 @media (max-width: 525px) {
     .personalia {
-        flex: 1;
         min-width: 250px !important;
     }
 
     .user-data {
-        flex: 1;
         min-width: 250px !important;
     }
 
 }
 
+
+.card-header .profile-post-card-header-row .post-details {
+    justify-content: flex-end;
+    min-width: 200px !important;
+}
+
+.post-title {
+    min-width: 250px !important;
+}
+
+// .profile-post-card-header-row {
+//     flex-direction: column !important;
+// }
+
 .profile-table>*>* {
-    color: #0036a0;
 
     >* {
         border: none !important;
@@ -45,5 +58,11 @@
             display: none;
             width: 0;
         }
+    }
+}
+
+@media (max-width: 505px) {
+    .card-header .profile-post-card-header-row .post-details {
+        justify-content: space-between;
     }
 }

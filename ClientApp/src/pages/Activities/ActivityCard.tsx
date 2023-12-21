@@ -98,21 +98,21 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
         </Modal.Footer>
       </Modal>
       <Card
-        className={className.concat(" ", "hover-pointer h-100")}
+        className={className.concat(" ", "hover-pointer h-100 bg-antes-primary p-2")}
         onClick={() => setModalstate(!showModal)}
       >
         <Card.Header>
-          <Card.Title>
-            <strong>{activity?.title}</strong>
+          <Card.Title as="h3" className="fw-bolder">
+            {activity?.title}
           </Card.Title>
-          <Card.Subtitle>
+          <Card.Subtitle className="antes-secondary">
             {formatDateTimeLong(activity?.time || "0001-01-01")}
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
           <Card.Text>{activity?.description}</Card.Text>
         </Card.Body>
-        <Card.Footer className="text-dark opacity-50">
+        <Card.Footer className="antes-secondary fw-bold">
           {activity?.location}
         </Card.Footer>
       </Card>

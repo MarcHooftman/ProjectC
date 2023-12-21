@@ -1,20 +1,19 @@
 import { Card, Table } from "react-bootstrap";
 import IProfile from "../../interfaces/IProfile";
+import pfp from "../../assets/profile-icon.svg";
 
 interface Props {
-  pfp?: string;
   profile?: IProfile | null;
   className?: string;
 }
 
 const PersonalInfoCard = ({
   profile,
-  pfp = require("../../assets/profile-icon.svg"),
   className = "",
 }: Props) => {
   //console.log(graphData)
   return (
-    <Card className={"personalia shadow-lg d-flex px-0".concat(" ", className)}>
+    <Card className={"personalia shadow-lg d-flex px-0 bg-antes-primary".concat(" ", className)}>
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <img className="pfp" src={pfp} alt="profile picture" />
@@ -22,45 +21,45 @@ const PersonalInfoCard = ({
           <Table className="d-flex gap-4 mx-5 profile-table justify-content-center align-items-center">
             <tbody>
               <tr>
-                <th className="text-end blue-text">Naam</th>
-                <td className="blue-text">{profile?.fullName}</td>
+                <th className="text-end text-light">Naam</th>
+                <td className="text-light">{profile?.fullName}</td>
               </tr>
               <tr>
-                <th className="text-end blue-text">Email</th>
-                <td className="blue-text">{profile?.email}</td>
+                <th className="text-end text-light">Email</th>
+                <td className="text-light">{profile?.email}</td>
               </tr>
 
               {profile?.role && profile?.role.trim() !== "" && (
                 <tr>
-                  <th className="text-end blue-text">Functie</th>
-                  <td className="blue-text">{profile?.role}</td>
+                  <th className="text-end text-light">Functie</th>
+                  <td className="text-light">{profile?.role}</td>
                 </tr>
               )}
 
               {profile?.dateOfBirth && profile?.dateOfBirth.trim() !== "" && (
                 <tr>
-                  <th className="text-end blue-text">Geboortedatum</th>
-                  <td className="blue-text">{profile?.dateOfBirth}</td>
+                  <th className="text-end text-light">Geboortedatum</th>
+                  <td className="text-light">{profile?.dateOfBirth}</td>
                 </tr>
               )}
 
               {profile?.phoneNumber && profile?.phoneNumber.trim() !== "" && (
                 <tr>
-                  <th className="text-end blue-text">Telefoonnummer</th>
-                  <td className="blue-text">{profile?.phoneNumber}</td>
+                  <th className="text-end text-light">Telefoonnummer</th>
+                  <td className="text-light">{profile?.phoneNumber}</td>
                 </tr>
               )}
 
               {profile?.department && profile?.department.trim() !== "" && (
                 <tr>
-                  <th className="text-end blue-text">Afdeling</th>
-                  <td className="blue-text">{profile?.department}</td>
+                  <th className="text-end text-light">Afdeling</th>
+                  <td className="text-light">{profile?.department}</td>
                 </tr>
               )}
 
               <tr>
-                <th className="text-end blue-text">Lid sinds</th>
-                <td className="blue-text">{profile?.memberSince}</td>
+                <th className="text-end text-light">Lid sinds</th>
+                <td className="text-light">{profile?.memberSince}</td>
               </tr>
             </tbody>
           </Table>

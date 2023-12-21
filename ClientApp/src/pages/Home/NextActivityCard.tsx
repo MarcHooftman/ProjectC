@@ -43,7 +43,7 @@ const NextActivityCard = () => {
         <Card
           as={Link}
           to="/activities"
-          className="shadow-lg text-decoration-none flex-grow-1"
+          className="shadow-lg text-decoration-none flex-grow-1 bg-antes-primary"
         >
           <Card.Header className="d-flex align-items-center gap-3">
             <Card.Img src={clockIcon} className="clock-icon" />

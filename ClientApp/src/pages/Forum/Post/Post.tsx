@@ -91,21 +91,21 @@ const Post = () => {
 
   return (
     <Layout>
-      <h1 className="my-5 blue-text">Post plaatsen</h1>
+      <h1 className="my-5 blue-text fw-bolder">Post plaatsen</h1>
       <CustomAuthenticatedTemplate>
         {isTemporaryUser
           ? <p className="blue-text">{"Als tijdelijke gebruiker kun je nog geen posts plaatsen :("}</p>
-          : <Card className="shadow-lg">
-            <Card.Body>
-              <Card.Title>Nieuw bericht</Card.Title>
+          : <Card className="shadow-lg bg-antes-primary">
+            <Card.Body className="p-4">
+              <Card.Title as="h3">Nieuw bericht</Card.Title>
               <form
-                className="d-flex flex-column p-3 gap-2"
+                className="d-flex flex-column py-3 gap-2"
                 onSubmit={handleSubmit}
               >
                 <input placeholder="Titel" className="" onChange={onTitleChange} />
                 <TextInputWithCounter maxLength={300} onChange={onContentChange} />
                 <TagInput onChange={(taglist) => setTags(taglist)} />
-                <Button className="w-25 mt-4" variant="primary" type="submit">
+                <Button className="mt-4 fw-bold post-button" variant="primary" type="submit">
                   Post
                 </Button>
               </form>

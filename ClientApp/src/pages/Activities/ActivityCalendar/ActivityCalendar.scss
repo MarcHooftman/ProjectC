@@ -1,21 +1,25 @@
+.calendar-card {
+    padding: 1rem 0 3rem 0;
+    border-radius: 6rem 0 6rem 0 !important;
+    background-color: #0036a0 !important;
+}
 
 // Alle buttons in de Calendar
 .react-calendar {
-
     button {
-        background: #f6e6e9;
-        color: #0036a0;
-        box-shadow: 0 1rem 3rem rgba(#000, .175);
+        background-color: #ffffff;
+        color: #0036a0 !important;
+        //box-shadow: 0 1rem 3rem rgba(#65c2c8, .25);
         border-radius: 5px;
 
         // borders voor alle buttons in de Calendar
-        border: 1px solid #0036a0;
+        border: 1px solid #083da7;
         //border: none;
 
         &:hover {
             background: #0036a0;
-            color: #f6e6e9;
-            border: 1px solid #0036a0;
+            color: #ffffff !important;
+            border: none;
         }
     }
 }
@@ -68,7 +72,7 @@
         }
 
         .tile-activity-dot {
-            background-color: #760000;
+            background-color: #ab0909;
             height: 0.5rem;
             width: 0.5rem;
             border-radius: 50%;
@@ -93,5 +97,10 @@
         .tile-activity-line {
             display: none !important;
         }
+    }
+
+    .calendar-card {
+        border-radius: 0 !important;
+        padding: 0;
     }
 }

@@ -58,7 +58,7 @@ const Profile = () => {
 
   return (
     <Layout>
-      <h1 className="blue-text my-5">Jouw profiel</h1>
+      <h1 className="blue-text my-5 fw-bolder">Jouw profiel</h1>
       {isTemporaryUser ? (
         <p className="blue-text">
           {"Als tijdelijke gebruiker heb je nog geen profiel :("}
@@ -70,14 +70,14 @@ const Profile = () => {
         </Row>
       )}
 
-      <Row className="mx-0">
+      <Row className="mx-0 justify-content-between">
         {!isTemporaryUser && (
           <Col
             as={Button}
             onClick={() => {
               navigate("/edit_profile");
             }}
-            className="mt-3 profile-button"
+            className="mt-3 profile-button fw-bold"
           >
             Profiel bewerken
           </Col>
@@ -86,7 +86,7 @@ const Profile = () => {
         <Col
           as={Button}
           onClick={() => logout()}
-          className="mt-3 profile-button"
+          className="mt-3 profile-button fw-bold"
         >
           Uitloggen
         </Col>
@@ -94,7 +94,7 @@ const Profile = () => {
 
       {Array.isArray(posts) && filterOnlyParent(posts).length > 0 && (
         <>
-          <h2 className="my-5 blue-text">Jouw posts</h2>
+          <h2 className="my-5 blue-text fw-bold">Jouw posts</h2>
           {filterOnlyParent(posts)?.map((post) => (
             <ProfilePostCard post={post} />
           ))}

@@ -39,7 +39,7 @@ const NextTrainingCard = ({ graphData }: Props) => {
   }, [graphData]);
 
   return (
-    <Card as={Link} to="/training" className="shadow-lg text-decoration-none">
+    <Card as={Link} to="/training" className="shadow-lg text-decoration-none bg-antes-primary">
       <Card.Header className="d-flex align-items-center justify-content-between py-3">
         <Card.Title className="mb-0">{training?.title}</Card.Title>
         <div className="d-flex gap-2">

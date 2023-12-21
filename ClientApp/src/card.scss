@@ -1,30 +1,31 @@
 .card-body,
 .card {
-  background-color: #0036a0;
+  //background-color: #0036a0;
   color: white;
 }
 
 .card {
-    overflow: hidden;
+  overflow: hidden;
   border-radius: 0 0 3rem 0;
 }
 
-// .card-title {
-//     font-size: 24px;
-//     color: #0036a0;
-// }
 
 .card-footer {
-    background-color: inherit !important;
-    //border-top: 1px solid rgba(0, 0, 0, 0.1);
-
+  background-color: inherit;
 }
 
 .card-body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 
 .card-header {
-    background-color: inherit !important;
+  background-color: inherit;
+}
+
+.card,
+.card-footer,
+.card-header,
+.card-body {
+  border: none;
 }

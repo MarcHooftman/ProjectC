@@ -91,7 +91,7 @@ const EditProfile = () => {
     <Layout>
       <h1 className="blue-text my-5">Profiel bewerken</h1>
       <div className="container mt-5">
-        <div className="card shadow-lg">
+        <div className="card shadow-lg bg-antes-primary">
           <div className="card-body">
             <form onSubmit={handleFormSubmit}>
               <div className="form-group mt-3">
@@ -129,7 +129,7 @@ const EditProfile = () => {
                   placeholder={bio || ""}
                 />
               </div>
-              <button type="submit" className="btn btn-primary mt-4">
+              <button type="submit" className="btn btn-primary mt-4 fw-bold">
                 Wijzigingen opslaan
               </button>
             </form>

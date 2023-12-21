@@ -6,10 +6,9 @@ import PostComment from "./PostComment";
 import { formatDateTime } from "../../utils/formatDate";
 import ForumPostButtons from "./ForumPostButtons/ForumPostButtons";
 import { getApiUrl } from "../../utils/getApiUrl";
-
-const upArrow = require("../../assets/up-arrow.png");
-const downArrow = require("../../assets/down-arrow.png");
-const profilePicture = require("../../assets/profile-icon.svg");
+import profilePicture from "../../assets/profile-icon.svg";
+import arrowUp from "../../assets/arrow-up.svg";
+import arrowDown from "../../assets/arrow-down.svg";
 
 interface Props {
   post: IForumPost;
@@ -35,7 +34,7 @@ const ForumPostCard = ({ post }: Props) => {
   }
 
   return (
-    <Card as="details" className="my-3 shadow-lg forum-post-card">
+    <Card as="details" className="my-4 shadow-lg forum-post-card bg-antes-primary">
       <Card.Header
         as="summary"
         className="d-flex align-items-center w-100"
@@ -43,18 +42,18 @@ const ForumPostCard = ({ post }: Props) => {
       >
         <Row className="d-flex justify-content-between w-100 align-items-center header-row mx-0">
           <Col className="d-flex align-items-center profile-section">
-            <Link to={`/ profile / ${post.profileID}`}>
+            <Link to={`/profile/${post.profileID}`}>
               <Card.Img src={profilePicture} className="poster-pfp"></Card.Img>
             </Link>
 
             <Link
-              to={`/ profile / ${post.profileID}`}
-              className="text-decoration-none blue-text profile-section-info"
+              to={`/profile/${post.profileID}`}
+              className="text-decoration-none profile-section-info"
             >
-              <h2 className="fs-5 m-0">
+              <h2 className="fs-5 m-0 text-light">
                 <strong>{post?.profile?.fullName}</strong>
               </h2>
-              <h3 className="fs-6 m-0 opacity-50 text-dark">
+              <h3 className="fs-6 m-0 antes-secondary">
                 lid sinds {post?.profile?.memberSince}
               </h3>
             </Link>
@@ -62,10 +61,10 @@ const ForumPostCard = ({ post }: Props) => {
           <Col className="d-flex justify-content-between align-items-center info-section px-0">
             <h4>{post?.title}</h4>
             <div className="d-flex justify-content-between align-items-center gap-3 time-and-arrow">
-              <div className="opacity-50 text-dark">{formattedDate}</div>
+              <div className="antes-secondary">{formattedDate}</div>
               <img
                 className="arrow-icon"
-                src={collapse ? upArrow : downArrow}
+                src={collapse ? arrowUp : arrowDown}
               />
             </div>
           </Col>
@@ -77,8 +76,8 @@ const ForumPostCard = ({ post }: Props) => {
           {post?.tags &&
             Array.isArray(post?.tags) &&
             post?.tags.map((tag) => (
-              <Link to={`/ forum ? filter = ${tag.name}`} key={tag.id}>
-                <Badge className="badge-color" text="light" pill={true}>
+              <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
+                <Badge className="bg-antes-secondary fw-bold fs-6" text="light" pill={true}>
                   {tag.name}
                 </Badge>
               </Link>
@@ -100,7 +99,7 @@ const ForumPostCard = ({ post }: Props) => {
             ))}
           </div>
         ) : (
-          <span className="opacity-50 text-dark">No comments</span>
+          <span className="antes-secondary">Nog geen reacties</span>
         )}
       </Card.Footer>
     </Card>

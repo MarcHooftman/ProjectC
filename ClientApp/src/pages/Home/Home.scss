@@ -12,3 +12,9 @@
         min-width: 100%;
     }
 }
+
+@media (max-width: 576px) {
+    .d-flex.cover-card {
+        display: none !important;
+    }
+}

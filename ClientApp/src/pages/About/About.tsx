@@ -9,11 +9,11 @@ import GeneralInfoCard from "./GeneralInfoCard";
 const About = () => {
   return (
     <Layout>
-      <h1 className="blue-text mt-5 mb-4">Over Antes</h1>
+      <h1 className="blue-text mt-5 mb-4">Wie zijn wij</h1>
       <AboutParagraph />
       <Row className="gap-4 mx-0">
         <Col className="my-4 px-0"><GeneralInfoCard /></Col>
-        <Col className="my-4 px-0"><Card className="h-100 unknown-card shadow"></Card></Col>
+        <Col className="my-4 px-0"><Card className="h-100 unknown-card shadow bg-antes-primary"></Card></Col>
       </Row>
       <AntesMap />
     </Layout>
