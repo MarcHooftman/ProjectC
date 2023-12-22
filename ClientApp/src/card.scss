@@ -23,9 +23,13 @@
   background-color: inherit;
 }
 
-.card,
-.card-footer,
-.card-header,
-.card-body {
-  border: none;
+// .card,
+// .card-footer,
+// .card-header,
+.card-header {
+  border-bottom: 1px solid #65c1c85c !important;
+}
+
+.card-footer {
+  border-top: 1px solid #65c2c85c !important;
 }
