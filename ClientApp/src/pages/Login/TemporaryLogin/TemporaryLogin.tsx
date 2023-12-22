@@ -6,6 +6,7 @@ import VerificationInput from "react-verification-input";
 import "./TemporaryLogin.scss";
 import { getApiUrl } from "../../../utils/getApiUrl";
 import loginPicture from "../../../assets/Zorgboulevard.jpg"
+        
 
 const TemporaryLogin = () => {
   const [email, setEmail] = useState<string>();

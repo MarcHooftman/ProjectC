@@ -13,6 +13,7 @@ import CustomAuthenticatedTemplate from "../../components/AuthTemplates/CustomAu
 import { getApiUrl } from "../../utils/getApiUrl";
 import { Card } from "react-bootstrap";
 
+
 const Training = () => {
 
     const [profile, setProfile] = useState<IProfile>();

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getApiUrl } from "../../utils/getApiUrl";
 import clockIcon from "../../assets/clock.svg";
 
+
 const NextActivityCard = () => {
   const [activity, setActivity] = useState<IActivity>();
 

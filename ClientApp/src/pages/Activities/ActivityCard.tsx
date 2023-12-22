@@ -32,7 +32,6 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
         .then((data) => {
           const profileData = data as IProfile;
           setProfile(profileData);
-
           // Check if the current profile is in the activity's profiles
           setAttendingActivity(
             activity?.profiles?.some((p) => p.id === profileData.id) || false
@@ -40,6 +39,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
         });
     }
   }, [graphData, activity?.profiles]);
+
 
   // Handle switch change
   const handleSwitchChange = () => {
