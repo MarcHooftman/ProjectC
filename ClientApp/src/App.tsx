@@ -24,11 +24,13 @@ import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/Adm
 import AdminEditActivity from "./admin/pages/AdminActivities/AdminEditActivity/AdminEditActivity";
 import AdminAddAdmin from "./admin/pages/AdminUsers/Add/AdminAddAdmin";
 import AdminAddTempUser from "./admin/pages/AdminUsers/Add/AdminAddTempUser";
+import ScrollToTop from "./ScrollToTop";
 
 const App = () => {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
