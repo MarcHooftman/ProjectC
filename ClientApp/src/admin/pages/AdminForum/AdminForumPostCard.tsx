@@ -55,17 +55,13 @@ const AdminForumPostCard = ({
   const deletePost = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(
-        `${getApiUrl()}/forumpost/${post.id}`,
-        {
+      const response = await fetch(`${getApiUrl()}/forumpost/${post.id}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
 
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          },
-
-          method: "DELETE",
-        }
-      );
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete post");
@@ -98,7 +94,7 @@ const AdminForumPostCard = ({
           </Button>
         </Modal.Footer>
       </Modal>
-      <Card className={className.concat(" my-3 shadow-lg")}>
+      <Card className={className.concat(" my-3 shadow-lg bg-antes-primary")}>
         <Card.Header className="d-flex align-items-center">
           <Row className="w-100 align-items-center">
             <Col lg={3} className="ps-4 d-flex align-items-center gap-3">
@@ -111,7 +107,7 @@ const AdminForumPostCard = ({
               <div>
                 <Link
                   to={`/admin/users?filter=${post?.profile?.email}`}
-                  className="text-decoration-none blue-text"
+                  className="text-decoration-none text-light"
                 >
                   <h2 className="fs-5 m-0">
                     <strong>{post?.profile?.fullName}</strong>
@@ -121,7 +117,7 @@ const AdminForumPostCard = ({
                   to={`/admin/users?filter=${post?.profile?.email}`}
                   className="text-decoration-none blue-text"
                 >
-                  <h3 className="fs-6 m-0 opacity-50 text-dark">
+                  <h3 className="fs-6 m-0 antes-secondary">
                     lid sinds {post?.profile?.memberSince}
                   </h3>
                 </Link>
@@ -132,7 +128,7 @@ const AdminForumPostCard = ({
             </Col>
 
             <Col lg={2} className="ps-5">
-              <span className="opacity-50 text-dark">{formattedDate}</span>
+              <span className="antes-secondary">{formattedDate}</span>
             </Col>
 
             <Col lg={1} className="d-flex justify-content-end">
@@ -176,8 +172,8 @@ const AdminForumPostCard = ({
               Array.isArray(post?.tags) &&
               post?.tags.map((tag) => (
                 <Badge
-                  key={tag.id}
-                  className="badge-color"
+                  key={tag.name}
+                  className="bg-antes-secondary fw-bold fs-6"
                   text="light"
                   pill={true}
                 >
@@ -200,7 +196,7 @@ const AdminForumPostCard = ({
                   ))}
                 </div>
                 <u
-                  className="text-dark opacity-50 hover-pointer"
+                  className="text-white-50 hover-pointer"
                   onClick={() => setShowComments(false)}
                 >
                   Reacties verbergen
@@ -208,14 +204,14 @@ const AdminForumPostCard = ({
               </>
             ) : (
               <u
-                className="text-dark opacity-50 hover-pointer"
+                className="text-white-50 hover-pointer"
                 onClick={() => setShowComments(true)}
               >
                 Reacties weergeven
               </u>
             )
           ) : (
-            <span className="opacity-50 text-dark">Geen reacties</span>
+            <span className="text-white-50">Geen reacties</span>
           )}
         </Card.Footer>
       </Card>

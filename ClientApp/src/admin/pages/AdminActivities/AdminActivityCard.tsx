@@ -10,7 +10,7 @@ interface Props {
   onDelete: () => void;
 }
 
-const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
+const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
   const [showModal, setShowModal] = useState<boolean>();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -33,17 +33,13 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
   const deleteActivity = async () => {
     setShowConfirm(false);
     try {
-      const response = await fetch(
-        `${getApiUrl()}/activity/${activity.id}`,
-        {
-          method: "DELETE",
+      const response = await fetch(`${getApiUrl()}/activity/${activity.id}`, {
+        method: "DELETE",
 
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
-
-        }
-      );
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete activity");
@@ -80,6 +76,7 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         <Modal.Body>{activity?.description}</Modal.Body>
         <Modal.Footer>
           <Button
+            className="text-light fw-bold"
             variant="danger"
             onClick={() => {
               setShowConfirm(true);
@@ -89,12 +86,14 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
             Verwijderen
           </Button>
           <Button
+            className="text-light fw-bold"
             variant="warning"
-            onClick={() => navigate(`/ admin / activities / edit / ${activity.id}`)}
+            onClick={() => navigate(`/admin/activities/edit/${activity.id}`)}
           >
             Bewerken
           </Button>
           <Button
+            className="text-light fw-bold bg-danger"
             onClick={() => {
               setShowModal(false);
               setShowAttendeesModal(true);
@@ -135,7 +134,7 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         show={showAttendeesModal}
         onHide={() => setShowAttendeesModal(false)}
         centered={true}
-      // style={{ maxWidth: "800px" }}
+        // style={{ maxWidth: "800px" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>{activity.title} Deelnemers</Modal.Title>
@@ -166,7 +165,7 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         </Modal.Body>
       </Modal>
       <Card
-        className="hover-pointer h-100 shadow-lg"
+        className="hover-pointer h-100 shadow-lg bg-antes-primary"
         onClick={() => setShowModal(!showModal)}
       >
         <Card.Header>
@@ -178,7 +177,7 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
         <Card.Body>
           <Card.Text>{activity?.description}</Card.Text>
         </Card.Body>
-        <Card.Footer className="text-dark opacity-50">
+        <Card.Footer className="text-white-50">
           {activity?.location}
         </Card.Footer>
       </Card>

@@ -15,12 +15,11 @@ const AdminEditActivity = () => {
   const [location, setLocation] = useState<string>("");
 
   useEffect(() => {
-    fetch(`${getApiUrl()}/activity/${id}`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/activity/${id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         const activity = data as IActivity;
@@ -74,7 +73,8 @@ const AdminEditActivity = () => {
     fetch(`${getApiUrl()}/activity/${newActivity.id}`, {
       method: "PUT",
       headers: {
-        "ngrok-skip-browser-warning": "1", "Content-Type": "application/json"
+        "ngrok-skip-browser-warning": "1",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(newActivity),
     })
@@ -98,8 +98,8 @@ const AdminEditActivity = () => {
 
   return (
     <AdminLayout centered={true}>
-      <h1 className="blue-text my-5">Activiteit toevoegen</h1>
-      <Card className="w-50 shadow-lg">
+      <h1 className="blue-text my-5 fw-bolder">Activiteit toevoegen</h1>
+      <Card className="w-50 shadow-lg bg-antes-primary">
         <Card.Body>
           <form className="d-flex flex-column gap-3" onSubmit={handleSubmit}>
             <div className="d-flex flex-column">
@@ -159,7 +159,9 @@ const AdminEditActivity = () => {
               />
             </div>
 
-            <Button type="submit">Activiteit toevoegen</Button>
+            <Button type="submit" className="fw-bold">
+              Activiteit toevoegen
+            </Button>
           </form>
         </Card.Body>
       </Card>

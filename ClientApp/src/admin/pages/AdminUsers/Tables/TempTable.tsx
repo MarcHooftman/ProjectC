@@ -1,3 +1,4 @@
+import React from "react";
 import ITempUser from "../../../../interfaces/ITempUser";
 import { Card, Table } from "react-bootstrap";
 
@@ -8,44 +9,44 @@ interface Props {
 
 const TempTable = ({ tempUsers, filter = "" }: Props) => {
   function BoldSubstring(text: string, shouldBeBold: string) {
-    let textArray = text.toUpperCase().split(shouldBeBold.toUpperCase());
-    console.log(textArray.length);
+    if (!text) return;
+    const regex = new RegExp(`(${shouldBeBold})`, "gi");
+    const textArray = text.split(regex);
 
     return (
       <span>
         {textArray.map((item, index) => (
-          <>
-            {item}
-            {index !== textArray.length - 1 && <b>{shouldBeBold}</b>}
-          </>
+          <React.Fragment key={index}>
+            {regex.test(item) ? <b>{item}</b> : item}
+          </React.Fragment>
         ))}
       </span>
     );
   }
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg bg-antes-primary">
       <Card.Body>
         <Table striped={true} borderless={true} responsive={true}>
           <thead>
             <tr>
-              <th className="blue-text">Email</th>
-              <th className="blue-text">Verloopdatum</th>
+              <th className="text-light">Email</th>
+              <th className="text-light">Verloopdatum</th>
               {filter &&
                 !["Tijdelijk", "Personeel", "Beheerders"].includes(filter) && (
-                  <th className="blue-text">Overeenkomst:</th>
+                  <th className="text-light">Overeenkomst:</th>
                 )}
             </tr>
           </thead>
           <tbody>
             {tempUsers.map((user) => (
               <tr key={user.id}>
-                <td className="blue-text">{user.email}</td>
-                <td className="blue-text">{user.expirationDate}</td>
+                <td className="text-light">{user.email}</td>
+                <td className="text-light">{user.expirationDate}</td>
                 {filter &&
                   !["Tijdelijk", "Personeel", "Beheerders"].includes(
                     filter
                   ) && (
-                    <td className="blue-text">
+                    <td className="text-light">
                       {BoldSubstring(
                         `${Object.values(user).find((_) =>
                           `${_}`.toLowerCase().includes(filter.toLowerCase())

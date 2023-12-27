@@ -28,8 +28,8 @@ const AdminAddAdmin = () => {
 
   return (
     <AdminLayout centered={true}>
-      <h1 className="my-5 blue-text">Beheerder rechten geven</h1>
-      <Card className="shadow-lg">
+      <h1 className="my-5 blue-text fw-bolder">Beheerder rechten geven</h1>
+      <Card className="shadow-lg bg-antes-primary">
         <Card.Body className="p-4">
           <Form className="d-flex flex-column gap-4" onSubmit={handleSubmit}>
             <div className="d-flex flex-column align-items-center">
@@ -41,13 +41,15 @@ const AdminAddAdmin = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 aria-describedby="admin-warning"
               />
-              <Form.Text className="text-danger text-wrap text-center">
+              <Form.Text className="text-warning text-wrap text-center">
                 Let op! Deze rechten bieden toegang tot het admin dashboard.
                 <br></br>
                 Alleen beheerders met hogere niveau's kunnen rechten intrekken.
               </Form.Text>
             </div>
-            <Button type="submit">Versturen</Button>
+            <Button type="submit" className="fw-bold">
+              Versturen
+            </Button>
           </Form>
         </Card.Body>
       </Card>

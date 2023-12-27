@@ -24,7 +24,7 @@ const AdminDashboard = () => {
           to="/admin/forum"
           className="py-3 text-decoration-none"
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Forum beheren
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
           to="/admin/activities"
           className="py-3 text-decoration-none"
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Activiteiten beheren
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
           to="/admin/trainings"
           className="py-3 text-decoration-none"
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Trainingen beheren
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
           to="/admin/reports"
           className="py-3 text-decoration-none"
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Reports beheren
@@ -95,7 +95,7 @@ const AdminDashboard = () => {
           to="/admin/users"
           className="py-3 text-decoration-none"
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Gebruikers beheren
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
             localStorage.removeItem("admin");
           }}
         >
-          <Card className="c shadow-lg p-3">
+          <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Home pagina

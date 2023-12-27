@@ -21,7 +21,6 @@ const AdminAddTempUser = () => {
     fetch(`${getApiUrl()}/tempuser`, {
       method: "POST",
       headers: {
-
         "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
@@ -32,8 +31,8 @@ const AdminAddTempUser = () => {
   };
   return (
     <AdminLayout centered={true}>
-      <h1 className="my-5 blue-text">Verificatie code sturen</h1>
-      <Card className="shadow-lg">
+      <h1 className="my-5 blue-text fw-bolder">Verificatie code sturen</h1>
+      <Card className="shadow-lg bg-antes-primary">
         <Card.Body className="p-4">
           <Form
             onSubmit={(e) => handleSubmit(e)}
@@ -57,11 +56,11 @@ const AdminAddTempUser = () => {
               aria-describedby="expiryContext"
               onChange={(e) => setExpiryDate(e.target.value)}
             />
-            <Form.Text id="expiryContext" className="px-1" muted>
+            <Form.Text id="expiryContext" className="px-1 text-white-50">
               Dit is de datum waarop de verificatie code verloopt.
             </Form.Text>
 
-            <Button type="submit" className="mt-3">
+            <Button type="submit" className="mt-3 fw-bold">
               Verstuur
             </Button>
           </Form>

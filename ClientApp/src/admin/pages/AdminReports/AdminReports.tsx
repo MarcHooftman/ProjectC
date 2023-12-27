@@ -23,12 +23,11 @@ const AdminReports = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const refreshReports = () => {
-    fetch(`${getApiUrl()}/report`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/report`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setReports(data as IReport[]));
   };
@@ -36,14 +35,11 @@ const AdminReports = () => {
   const [selectedReportPost, setSelectedReportPost] = useState<IForumPost>();
   useEffect(() => {
     if (selectedReport) {
-      fetch(
-        `${getApiUrl()}/forumpost/${selectedReport.forumPostID}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
+      fetch(`${getApiUrl()}/forumpost/${selectedReport.forumPostID}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
         },
-      )
+      })
         .then((response) => response.json())
         .then((data) => setSelectedReportPost(data));
     }
@@ -66,17 +62,12 @@ const AdminReports = () => {
   const handleDeletePost = () => {
     console.log(selectedReportPost);
     if (selectedReportPost?.id) {
-      fetch(
-        `${getApiUrl()}/forumpost/${selectedReportPost.id}`,
-        {
-
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-
-          },
-          method: "DELETE",
-        }
-      ).then(() => {
+      fetch(`${getApiUrl()}/forumpost/${selectedReportPost.id}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
+        method: "DELETE",
+      }).then(() => {
         refreshReports();
         handleCloseModal();
       });
@@ -86,10 +77,8 @@ const AdminReports = () => {
   const handleDismissReport = () => {
     if (selectedReport) {
       fetch(`${getApiUrl()}/report/${selectedReport.id}`, {
-
         headers: {
           "ngrok-skip-browser-warning": "1",
-
         },
         method: "DELETE",
       }).then(() => {
@@ -103,18 +92,18 @@ const AdminReports = () => {
     <>
       <AdminLayout>
         <h1 className="my-5 blue-text">Alle Reports</h1>
-        <Card className="shadow-lg">
+        <Card className="shadow-lg bg-antes-primary">
           <Card.Body>
             {reports.length > 0 ? (
               <Table striped={true} borderless={true} responsive={true}>
                 <thead>
                   <tr>
-                    <th className="blue-text">Post/Comment ID</th>
-                    <th className="blue-text">Spam</th>
-                    <th className="blue-text">Ongepast</th>
-                    <th className="blue-text">Niet werk gerelateerd</th>
-                    <th className="blue-text">Anders</th>
-                    <th className="blue-text">Toelichting</th>
+                    <th className="text-light">Post/Comment ID</th>
+                    <th className="text-light">Spam</th>
+                    <th className="text-light">Ongepast</th>
+                    <th className="text-light">Niet werk gerelateerd</th>
+                    <th className="text-light">Anders</th>
+                    <th className="text-light">Toelichting</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,20 +113,20 @@ const AdminReports = () => {
                       onClick={() => handleReportClick(report)}
                       className="hover-pointer"
                     >
-                      <td className="blue-text">{report.forumPostID}</td>
-                      <td className="blue-text">
+                      <td className="text-light">{report.forumPostID}</td>
+                      <td className="text-light">
                         {report.spam ? "Ja" : "Nee"}
                       </td>
-                      <td className="blue-text">
+                      <td className="text-light">
                         {report.inappropriate ? "Ja" : "Nee"}
                       </td>
-                      <td className="blue-text">
+                      <td className="text-light">
                         {report.notWorkRelated ? "Ja" : "Nee"}
                       </td>
-                      <td className="blue-text">
+                      <td className="text-light">
                         {report.other ? "Ja" : "Nee"}
                       </td>
-                      <td className="blue-text">{report.elaboration}</td>
+                      <td className="text-light">{report.elaboration}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -198,13 +187,23 @@ const AdminReports = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button
+            variant="secondary"
+            className="fw-bold"
+            onClick={handleCloseModal}
+          >
             Sluiten
           </Button>
-          <Button variant="danger" onClick={handleDeletePost}>
+          <Button
+            variant="danger"
+            className="fw-bold"
+            onClick={handleDeletePost}
+          >
             Post verwijderen
           </Button>
-          <Button onClick={handleDismissReport}>Report afwijzen</Button>
+          <Button onClick={handleDismissReport} className="fw-bold">
+            Report afwijzen
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

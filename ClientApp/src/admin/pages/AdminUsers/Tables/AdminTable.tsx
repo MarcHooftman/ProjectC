@@ -22,29 +22,29 @@ const AdminTable = ({ admins, filter = "" }: Props) => {
     );
   }
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg bg-antes-primary">
       <Card.Body>
         <Table striped={true} borderless={true} responsive={true}>
           <thead>
             <tr>
-              <th className="blue-text">Email</th>
-              <th className="blue-text">Level</th>
+              <th className="text-light">Email</th>
+              <th className="text-light">Level</th>
               {filter &&
                 !["Tijdelijk", "Personeel", "Beheerders"].includes(filter) && (
-                  <th className="blue-text">Overeenkomst:</th>
+                  <th className="text-light">Overeenkomst:</th>
                 )}
             </tr>
           </thead>
           <tbody>
             {admins.map((admin) => (
               <tr key={admin.id}>
-                <td className="blue-text">{admin.email}</td>
-                <td className="blue-text">{admin.level}</td>
+                <td className="text-light">{admin.email}</td>
+                <td className="text-light">{admin.level}</td>
                 {filter &&
                   !["Tijdelijk", "Personeel", "Beheerders"].includes(
                     filter
                   ) && (
-                    <td className="blue-text">
+                    <td className="text-light">
                       {BoldSubstring(
                         `${Object.values(admin).find((_) =>
                           `${_}`.toLowerCase().includes(filter.toLowerCase())
