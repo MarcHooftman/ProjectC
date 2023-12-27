@@ -48,7 +48,7 @@ const NextTrainingCard = ({ graphData }: Props) => {
         <Card.Title className="mb-0">{training?.title}</Card.Title>
         <div className="d-flex gap-2">
           {training?.tags.map((tag, index) => (
-            <Link to={`/ training ? filter = ${tag.name}`} key={index}>
+            <Link to={`/training?filter=${tag.name}`} key={index}>
               <Badge className="badge-color" text="light" pill={true}>
                 {tag.name}
               </Badge>

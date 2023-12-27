@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IProfile from "../../../interfaces/IProfile";
 import useGraphData from "../../../hooks/useGraphData";
-// import IMedia from "../../../interfaces/IMedia";
 import { Button, Card } from "react-bootstrap";
 import TagInput from "../../../pages/Forum/Post/TagsToevoegen";
 import TextInputWithCounter from "../../../components/TextInputWithCounter";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
+import { getApiUrl } from "../../../utils/getApiUrl";
 
 const AdminAddTrainings = () => {
-  const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const [description, setDescription] = useState("");
   const [url, setUrl] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const { graphData } = useGraphData();
@@ -23,7 +23,7 @@ const AdminAddTrainings = () => {
   useEffect(() => {
     if (graphData) {
       fetch(
-        `${process.env.REACT_APP_API_URL}/profile/by-email/${graphData?.mail}`
+        `${getApiUrl()}/profile/by-email/${graphData?.mail}`
       )
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
@@ -38,6 +38,11 @@ const AdminAddTrainings = () => {
   const onDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault();
     setDescription(event.target.value);
+  };
+
+  const onURLChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setUrl(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,7 +61,7 @@ const AdminAddTrainings = () => {
       url: url,
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/training`, {
+    fetch(`${getApiUrl()}/training`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +79,7 @@ const AdminAddTrainings = () => {
         // Handle network errors
         console.error("Error submitting post:", error);
       });
-    setTimeout(() => navigate("/admin"), 250);
+    setTimeout(() => navigate("/admin/trainings"), 250);
   };
 
   return (
@@ -89,6 +94,7 @@ const AdminAddTrainings = () => {
               >
                 <input placeholder="Titel" className="" onChange={onTitleChange} />
                 <TextInputWithCounter placeholder="Descriptie" maxLength={1000} onChange={onDescriptionChange} />
+                <input placeholder="URL" onChange={onURLChange} />
                 <TagInput onChange={(taglist) => setTags(taglist)} />
                 <Button className="w-25 mt-4" variant="primary" type="submit">
                   Plaats

@@ -1,13 +1,18 @@
 import React, { useState, KeyboardEvent, ChangeEvent, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Badge, Button } from 'react-bootstrap';
 
 interface Props {
+    previousTags?: string[];
     onChange?: (taglist: Array<string>) => void;
 }
 
-const TagInput = ({ onChange = () => { } }: Props) => {
-    const [tags, setTags] = useState<string[]>([]);
+const TagInput = ({ onChange = () => { }, previousTags = [] }: Props) => {
+    const [tags, setTags] = useState<string[]>(previousTags);
     const [input, setInput] = useState<string>('');
+
+    useEffect(() => {
+        setTags(previousTags);
+    }, [previousTags]);
 
     useEffect(() => {
         onChange(tags)
@@ -28,13 +33,19 @@ const TagInput = ({ onChange = () => { } }: Props) => {
     const removeTag = (index: number) => {
         setTags(tags.filter((_, idx) => idx !== index));
     };
-
     return (
         <>
             <span className="d-flex gap-3">{tags.map((tag, index) => (
                 <span className="d-flex flex-row gap-1 align-items-center" key={index}>
-                    {tag}
-                    <Button size="sm" variant="danger" className='remove-tag' onClick={() => removeTag(index)}>X</Button>
+                    <Badge
+                    key={index}
+                    className="badge-color hover-pointer"
+                    text="light"
+                    bg=""
+                    pill={true}
+                    onClick={() => removeTag(index)}>
+                    {tag + " | X"}
+                    </Badge>
                 </span>
             ))}</span>
 

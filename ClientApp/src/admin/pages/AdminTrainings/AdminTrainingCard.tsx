@@ -18,7 +18,7 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
   const getViews = () => {
     fetch(`${getApiUrl()}/trainingprofile`)
     .then((response) => response.json())
-    .then((data) => {console.log(data); setViews(data.filter((i: any) => i.trainingID === Training.id).length);});
+    .then((data) => {setViews(data.filter((i: any) => i.trainingID === Training.id).length)});
 };
 
   const deleteTraining = async () => {
