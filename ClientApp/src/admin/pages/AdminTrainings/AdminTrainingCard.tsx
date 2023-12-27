@@ -9,7 +9,10 @@ interface Props {
   onDelete: () => void;
 }
 
-const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) => {
+const AdminTrainingCard = ({
+  Training: Training,
+  onDelete = () => {},
+}: Props) => {
   const [showModal, setShowModal] = useState<boolean>();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [views, setViews] = useState<number>(0);
@@ -17,9 +20,11 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
 
   const getViews = () => {
     fetch(`${getApiUrl()}/trainingprofile`)
-    .then((response) => response.json())
-    .then((data) => {setViews(data.filter((i: any) => i.trainingID === Training.id).length)});
-};
+      .then((response) => response.json())
+      .then((data) => {
+        setViews(data.filter((i: any) => i.trainingID === Training.id).length);
+      });
+  };
 
   const deleteTraining = async () => {
     setShowConfirm(false);
@@ -56,21 +61,35 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
         <Modal.Header closeButton>
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
-            <p style={{margin: "0px"}} className="fs-5 blue-text">{Training?.description}</p>
-            <p style={{fontSize: "15px", margin: "0px"}}>Views: {views}</p>
+            <p style={{ margin: "0px" }} className="fs-5 blue-text">
+              {Training?.description}
+            </p>
+            <p style={{ fontSize: "15px", margin: "0px" }}>Views: {views}</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe title={Training?.title} className="video" src={Training?.url} allowFullScreen />
+          <iframe
+            title={Training?.title}
+            className="video"
+            src={Training?.url}
+            allowFullScreen
+          />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={() => {
-            setShowConfirm(true);
-            setShowModal(false);
-          }}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setShowConfirm(true);
+              setShowModal(false);
+            }}
+          >
             Verwijderen
           </Button>
-          <Button onClick={() => navigate(`/admin/trainings/edit/${Training.id}`)}>Bewerken</Button>
+          <Button
+            onClick={() => navigate(`/admin/trainings/edit/${Training.id}`)}
+          >
+            Bewerken
+          </Button>
         </Modal.Footer>
       </Modal>
 
@@ -84,10 +103,13 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this training?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => {
-            setShowConfirm(false);
-            setShowModal(true);
-          }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowConfirm(false);
+              setShowModal(true);
+            }}
+          >
             Cancel
           </Button>
           <Button variant="danger" onClick={deleteTraining}>
@@ -97,7 +119,7 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
       </Modal>
 
       <Card
-        className="hover-pointer h-100 shadow-lg"
+        className="hover-pointer h-100 shadow-lg bg-antes-primary"
         onClick={() => setShowModal(!showModal)}
       >
         <Card.Header>
@@ -111,7 +133,8 @@ const AdminTrainingCard = ({ Training: Training, onDelete = () => { } }: Props) 
                 className="badge-color"
                 text="light"
                 bg=""
-                pill={true}>
+                pill={true}
+              >
                 {i.name}
               </Badge>
             ))}
