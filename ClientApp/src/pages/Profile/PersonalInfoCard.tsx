@@ -7,15 +7,17 @@ interface Props {
   className?: string;
 }
 
-const PersonalInfoCard = ({
-  profile,
-  className = "",
-}: Props) => {
+const PersonalInfoCard = ({ profile, className = "" }: Props) => {
   //console.log(graphData)
   return (
-    <Card className={"personalia shadow-lg d-flex px-0 bg-antes-primary".concat(" ", className)}>
-      <Card.Body>
-        <div className="d-flex justify-content-between align-items-center mb-4">
+    <Card
+      className={"personalia shadow-lg d-flex px-0 bg-antes-primary".concat(
+        " ",
+        className
+      )}
+    >
+      <Card.Body className="d-flex flex-column gap-3">
+        <div className="d-flex justify-content-between align-items-center">
           <img className="pfp" src={pfp} alt="profile picture" />
 
           <Table className="d-flex gap-4 mx-5 profile-table justify-content-center align-items-center">
@@ -65,10 +67,10 @@ const PersonalInfoCard = ({
           </Table>
         </div>
         {profile?.bio && profile?.bio !== "" && (
-          <>
+          <div>
             <strong>Bio</strong>
             <p className="card-text">{profile?.bio}</p>
-          </>
+          </div>
         )}
       </Card.Body>
     </Card>

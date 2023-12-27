@@ -74,10 +74,13 @@ const Profile = () => {
         {!isTemporaryUser && (
           <Col
             as={Button}
+            sm={4}
+            lg={3}
+            xl={2}
             onClick={() => {
               navigate("/edit_profile");
             }}
-            className="mt-3 profile-button fw-bold"
+            className="mt-3 profile-button fw-bold p-2"
           >
             Profiel bewerken
           </Col>
@@ -85,8 +88,11 @@ const Profile = () => {
 
         <Col
           as={Button}
+          sm={4}
+          lg={3}
+          xl={2}
           onClick={() => logout()}
-          className="mt-3 profile-button fw-bold"
+          className="mt-3 profile-button fw-bold p-2"
         >
           Uitloggen
         </Col>
