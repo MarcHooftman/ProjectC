@@ -11,7 +11,7 @@ import ReportButton from "./ForumPostButtons/ReportButton";
 import { Badge, Button } from "react-bootstrap";
 import { getApiUrl } from "../../utils/getApiUrl";
 
-const profilePicture = require("../../assets/profile.png");
+import profilePicture from "../../assets/profile-icon.svg";
 
 interface Props {
   comment: IForumPost;
@@ -50,14 +50,13 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
-    console.log(graphData?.mail)
+    console.log(graphData?.mail);
     if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "1",
-          }
-        },)
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
+      })
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -98,20 +97,20 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
   };
 
   return (
-    <div className="border-secondary ms-2 border-start ps-3 pb-0">
+    <div className="border-antes-secondary ms-2 border-start ps-3 pb-0">
       <div className="pb-2">
         <div className="d-flex align-items-center gap-3">
           <Link
             to={`/profile/${comment.profileID}`}
-            className="d-flex flex-row align-items-center gap-2 text-decoration-none blue-text"
+            className="d-flex flex-row align-items-center gap-2 text-decoration-none text-light fw-bold"
           >
             <img
               src={profilePicture}
               style={{ height: "25px", width: "25px" }}
             ></img>
-            <strong>{comment.profile?.fullName}</strong>
+            {comment.profile?.fullName}
           </Link>
-          <p className="text-dark opacity-50 mb-0">
+          <p className="antes-secondary mb-0">
             {formatDate(comment.time)}
           </p>
           {comment?.id && profile?.id && (
@@ -137,7 +136,7 @@ const PostComment = ({ onClick = () => { }, comment }: Props) => {
               Array.isArray(comment?.tags) &&
               comment?.tags.map((tag) => (
                 <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
-                  <Badge className="badge-color" text="light" pill={true}>
+                  <Badge className="bg-antes-secondary fw-bold" text="light" pill={true}>
                     {tag.name}
                   </Badge>
                 </Link>

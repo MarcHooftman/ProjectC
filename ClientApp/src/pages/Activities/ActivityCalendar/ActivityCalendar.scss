@@ -1,18 +1,26 @@
+.calendar-card {
+    padding: 1rem 0 3rem 0;
+    border-radius: 6rem 0 6rem 0 !important;
+    background-color: #0036a0 !important;
+}
+
 // Alle buttons in de Calendar
-.react-calendar button {
-    background: #f6e6e9;
-    color: #0036a0;
-    box-shadow: 0 1rem 3rem rgba(#000, .175);
-    border-radius: 5px;
+.react-calendar {
+    button {
+        background-color: #ffffff;
+        color: #0036a0 !important;
+        //box-shadow: 0 1rem 3rem rgba(#65c2c8, .25);
+        border-radius: 5px;
 
-    // borders voor alle buttons in de Calendar
-    border: 1px solid #0036a0;
-    //border: none;
+        // borders voor alle buttons in de Calendar
+        border: 1px solid #083da7;
+        //border: none;
 
-    &:hover {
-        background: #0036a0;
-        color: #f6e6e9;
-        border: 1px solid #0036a0;
+        &:hover {
+            background: #0036a0;
+            color: #ffffff !important;
+            border: none;
+        }
     }
 }
 
@@ -22,6 +30,11 @@
     justify-content: center;
     column-gap: 0.5rem;
     margin-bottom: 1rem;
+
+    .react-calendar__navigation__label {
+        min-width: 170px !important;
+        flex: 0;
+    }
 
     button {
         max-width: 25%;
@@ -45,20 +58,21 @@
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
-        height: 4rem;
+        max-height: 4rem;
 
         // Elke button is 1/7 van de hele breedte van de parent (vandaar 100%/7)
         // Hiervoor moet de ^column-gap^ worden afgetrokken zodat de buttons niet overflowen
         width: calc(100%/7 - 0.25rem) !important;
         // Flex (grow) uit zodat de width goed kan worden toegepast
         flex: none !important;
+        aspect-ratio: 3/2;
 
         abbr {
             font-weight: 700;
         }
 
         .tile-activity-dot {
-            background-color: #760000;
+            background-color: #ab0909;
             height: 0.5rem;
             width: 0.5rem;
             border-radius: 50%;
@@ -75,5 +89,18 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+    }
+}
+
+@media (max-width: 767px) {
+    .react-calendar__month-view__days {
+        .tile-activity-line {
+            display: none !important;
+        }
+    }
+
+    .calendar-card {
+        border-radius: 0 !important;
+        padding: 0;
     }
 }
