@@ -22,10 +22,12 @@ public class AntesContext : DbContext
             .WithMany()
             .HasForeignKey(_ => _.ProfileID);
 
-        modelBuilder.Entity<Training>()
-            .HasOne(_ => _.Media)
-            .WithMany()
-            .HasForeignKey(_ => _.MediaID);
+
+
+        // modelBuilder.Entity<Training>()
+        //     .HasOne(_ => _.Media)
+        //     .WithMany()
+        //     .HasForeignKey(_ => _.MediaID);
 
         modelBuilder.Entity<ForumPost>()
         .HasMany(_ => _.Comments)
@@ -67,7 +69,7 @@ public class AntesContext : DbContext
 
     public DbSet<Activity> Activity { get; set; } = default!;
     public DbSet<ForumPost> ForumPost { get; set; } = default!;
-    public DbSet<Media> Media { get; set; } = default!;
+    // public DbSet<Media> Media { get; set; } = default!;
     public DbSet<Profile> Profile { get; set; } = default!;
     public DbSet<Training> Training { get; set; } = default!;
     public DbSet<Like> Like { get; set; } = default!;
@@ -79,5 +81,7 @@ public class AntesContext : DbContext
     // public DbSet<Attending> Attending { get; set; } = default!;
     public DbSet<API.Models.ProfileActivity> ProfileActivity { get; set; } = default!;
     public DbSet<API.Models.TrainingProfile> TrainingProfile { get; set; } = default!;
+    public DbSet<API.Models.TrainingTag> TrainingTag { get; set; } = default!;
+    public DbSet<API.Models.ForumTag> ForumTag { get; set; } = default!;
 }
 

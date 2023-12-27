@@ -143,7 +143,7 @@ public static class Seeder
             AddProfiles(context);
             AddActivities(context);
             AddForumPosts(context);
-            AddMedia(context);
+            // AddMedia(context);
             AddTraining(context);
             AddAdmin(context);
         }
@@ -154,7 +154,7 @@ public static class Seeder
         if (context.ForumPost.Any()) return false;
         if (context.Profile.Any()) return false;
         if (context.Activity.Any()) return false;
-        if (context.Media.Any()) return false;
+        // if (context.Media.Any()) return false;
         if (context.Training.Any()) return false;
         if (context.Like.Any()) return false;
         if (context.Report.Any()) return false;
@@ -267,20 +267,20 @@ public static class Seeder
         context.Activity.AddRange(activities);
         context.SaveChanges();
     }
-    private static void AddMedia(AntesContext context)
-    {
-        var media = new List<Media>
-        {
-            new()
-            {
-                Type = "youtube video",
-                URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
-            }
-        };
+    // private static void AddMedia(AntesContext context)
+    // {
+    //     var media = new List<Media>
+    //     {
+    //         new()
+    //         {
+    //             Type = "youtube video",
+    //             URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
+    //         }
+    //     };
 
-        context.Media.AddRange(media);
-        context.SaveChanges();
-    }
+    //     context.Media.AddRange(media);
+    //     context.SaveChanges();
+    // }
 
     private static void AddTags(AntesContext context)
     {
@@ -325,7 +325,7 @@ public static class Seeder
             {
                 Title = "Training 1",
                 Description = Lorem2,
-                MediaID = 1,
+                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag1!,
@@ -337,7 +337,7 @@ public static class Seeder
             {
                 Title = "Training 2",
                 Description = Lorem1,
-                MediaID = 1,
+                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag5!,
@@ -349,7 +349,7 @@ public static class Seeder
             {
                 Title = "Training 3",
                 Description = Lorem3,
-                MediaID = 1,
+                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag4!,
@@ -361,7 +361,7 @@ public static class Seeder
             {
                 Title = "Training 4",
                 Description = Lorem1,
-                MediaID = 1,
+                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
 

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     [DbContext(typeof(AntesContext))]
-    [Migration("20231219235719_A1")]
-    partial class A1
+    [Migration("20231221115053_m1")]
+    partial class m1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,27 +146,6 @@ namespace ProjectC.Migrations
                     b.ToTable("Like");
                 });
 
-            modelBuilder.Entity("API.Models.Media", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("URL")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Media");
-                });
-
             modelBuilder.Entity("API.Models.Profile", b =>
                 {
                     b.Property<int>("ID")
@@ -210,8 +189,6 @@ namespace ProjectC.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ProfilePictureID");
 
                     b.ToTable("Profile");
                 });
@@ -313,16 +290,14 @@ namespace ProjectC.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("MediaID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
 
-                    b.HasIndex("MediaID");
+                    b.HasKey("ID");
 
                     b.ToTable("Training");
                 });
@@ -397,15 +372,6 @@ namespace ProjectC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Models.Profile", b =>
-                {
-                    b.HasOne("API.Models.Media", "ProfilePicture")
-                        .WithMany()
-                        .HasForeignKey("ProfilePictureID");
-
-                    b.Navigation("ProfilePicture");
-                });
-
             modelBuilder.Entity("API.Models.ProfileActivity", b =>
                 {
                     b.HasOne("API.Models.Activity", null)
@@ -428,17 +394,6 @@ namespace ProjectC.Migrations
                         .HasForeignKey("ForumPostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("API.Models.Training", b =>
-                {
-                    b.HasOne("API.Models.Media", "Media")
-                        .WithMany()
-                        .HasForeignKey("MediaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Media");
                 });
 
             modelBuilder.Entity("API.Models.TrainingProfile", b =>

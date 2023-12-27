@@ -39,7 +39,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe title={Training?.title} className="video" src={Training?.media.url} allowFullScreen />
+          <iframe title={Training?.title} className="video" src={Training?.url} allowFullScreen />
         </Modal.Body>
       </Modal>
       <Card
@@ -54,9 +54,9 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
             {(CompletedValue == true) ? <img style={{ height: "30px" }} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
-            {Training?.tags.map((i) => (
+            {Training?.tags.map((i, index) => (
               <Badge
-                key={i.id}
+                key={index}
                 className="bg-antes-secondary fs-6 fw-bolder"
                 text="light"
                 bg=""

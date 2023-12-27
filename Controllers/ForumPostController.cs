@@ -119,7 +119,26 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(forumPost).State = EntityState.Modified;
+            var newTags = new List<Tag>();
+
+            foreach (var tag in forumPost.Tags ?? new List<Tag>())
+            {
+                var existingTag = await _context.Tag.FindAsync(tag.Name);
+
+                if (existingTag != null)
+                {
+                    newTags.Add(existingTag);
+                }
+                else
+                {
+                    _context.Tag.Add(tag);
+                    newTags.Add(tag);
+                }
+            }
+            _context.ForumTag.RemoveRange(_context.ForumTag.Where(_ => _.ForumPostId == id));
+            await _context.SaveChangesAsync();
+            forumPost.Tags = newTags;
+            _context.ForumPost.Update(forumPost);
 
             try
             {
@@ -152,7 +171,7 @@ namespace API.Controllers
 
             var newTags = new List<Tag>();
 
-            foreach (var tag in forumPost.Tags)
+            foreach (var tag in forumPost.Tags ?? new List<Tag>())
             {
                 var existingTag = await _context.Tag.FindAsync(tag.Name);
 

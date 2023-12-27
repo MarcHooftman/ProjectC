@@ -83,11 +83,9 @@ const PopPostCard = () => {
             {post?.content}
             <span className="d-flex gap-2 mt-3">
               {Array.isArray(post?.tags) &&
-                post?.tags.map((tag) => (
-                  <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
-                    <Badge pill={true} className="bg-antes-secondary fs-6">
-                      {tag.name}
-                    </Badge>
+                post?.tags.map((tag, index) => (
+                  <Link to={`/forum?filter=${tag.name}`} key={index}>
+                    <Badge pill={true} className="bg-antes-secondary fs-6">{tag.name}</Badge>
                   </Link>
                 ))}
             </span>

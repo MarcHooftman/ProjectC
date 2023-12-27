@@ -30,7 +30,6 @@ namespace API.Controllers
             }
             return await _context.Training
             .Include(_ => _.Tags)
-            .Include(_ => _.Media)
             .ToListAsync();
         }
 
@@ -44,7 +43,6 @@ namespace API.Controllers
             }
             var training = await _context.Training
             .Include(_ => _.Tags)
-            .Include(_ => _.Media)
             .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (training == null)
@@ -65,7 +63,26 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(training).State = EntityState.Modified;
+            var newTags = new List<Tag>();
+
+            foreach (var tag in training.Tags ?? new List<Tag>())
+            {
+                var existingTag = await _context.Tag.FindAsync(tag.Name);
+
+                if (existingTag != null)
+                {
+                    newTags.Add(existingTag);
+                }
+                else
+                {
+                    _context.Tag.Add(tag);
+                    newTags.Add(tag);
+                }
+            }
+            _context.TrainingTag.RemoveRange(_context.TrainingTag.Where(_ => _.TrainingID == id));
+            await _context.SaveChangesAsync();
+            training.Tags = newTags;
+            _context.Training.Update(training);
 
             try
             {
@@ -98,7 +115,7 @@ namespace API.Controllers
 
             var newTags = new List<Tag>();
 
-            foreach (var tag in training.Tags)
+            foreach (var tag in training.Tags ?? new List<Tag>())
             {
                 var existingTag = await _context.Tag.FindAsync(tag.Name);
 

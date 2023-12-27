@@ -12,7 +12,7 @@ interface Props {
 const FilterDropdown = ({ page, options = [] }: Props) => {
   const navigate = useNavigate();
   const [show, setShow] = useState<boolean>(false);
-  const [searchField, setSearchField] = useState<string>();
+  const [searchField, setSearchField] = useState<string>("");
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     let search = event.target.value;

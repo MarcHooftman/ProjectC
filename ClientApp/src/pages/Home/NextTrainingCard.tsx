@@ -45,11 +45,7 @@ const NextTrainingCard = ({ graphData }: Props) => {
         <div className="d-flex gap-2">
           {training?.tags.map((tag, index) => (
             <Link to={`/training?filter=${tag.name}`} key={index}>
-              <Badge
-                className="bg-antes-secondary fs-6"
-                text="light"
-                pill={true}
-              >
+              <Badge className="badge-color" text="light" pill={true}>
                 {tag.name}
               </Badge>
             </Link>

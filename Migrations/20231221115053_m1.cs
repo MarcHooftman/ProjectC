@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ProjectC.Migrations
 {
     /// <inheritdoc />
-    public partial class A1 : Migration
+    public partial class m1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,17 +44,26 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Media",
+                name: "Profile",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Type = table.Column<string>(type: "text", nullable: false),
-                    URL = table.Column<string>(type: "text", nullable: false)
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    FullName = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    MemberSince = table.Column<DateOnly>(type: "date", nullable: true),
+                    LastLogin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Role = table.Column<string>(type: "text", nullable: true),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
+                    Department = table.Column<string>(type: "text", nullable: true),
+                    ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    UserPrincipalName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Media", x => x.ID);
+                    table.PrimaryKey("PK_Profile", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,34 +93,6 @@ namespace ProjectC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profile",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    FullName = table.Column<string>(type: "text", nullable: true),
-                    Bio = table.Column<string>(type: "text", nullable: true),
-                    MemberSince = table.Column<DateOnly>(type: "date", nullable: true),
-                    LastLogin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Role = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
-                    Department = table.Column<string>(type: "text", nullable: true),
-                    ProfilePictureID = table.Column<int>(type: "integer", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    UserPrincipalName = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profile", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Profile_Media_ProfilePictureID",
-                        column: x => x.ProfilePictureID,
-                        principalTable: "Media",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Training",
                 columns: table => new
                 {
@@ -119,17 +100,11 @@ namespace ProjectC.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    MediaID = table.Column<int>(type: "integer", nullable: false)
+                    Url = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Training", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Training_Media_MediaID",
-                        column: x => x.MediaID,
-                        principalTable: "Media",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,11 +298,6 @@ namespace ProjectC.Migrations
                 column: "ForumPostID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profile_ProfilePictureID",
-                table: "Profile",
-                column: "ProfilePictureID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProfileActivity_ProfileID",
                 table: "ProfileActivity",
                 column: "ProfileID");
@@ -336,11 +306,6 @@ namespace ProjectC.Migrations
                 name: "IX_Report_ForumPostID",
                 table: "Report",
                 column: "ForumPostID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Training_MediaID",
-                table: "Training",
-                column: "MediaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrainingProfile_TrainingID",
@@ -394,9 +359,6 @@ namespace ProjectC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Profile");
-
-            migrationBuilder.DropTable(
-                name: "Media");
         }
     }
 }
