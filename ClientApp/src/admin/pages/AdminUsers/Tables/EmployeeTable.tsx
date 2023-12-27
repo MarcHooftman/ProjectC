@@ -24,35 +24,35 @@ const EmployeeTable = ({ profiles, filter = "" }: Props) => {
     );
   }
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg bg-antes-primary">
       <Card.Body>
         <Table striped={true} borderless={true} responsive={true}>
           <thead>
             <tr>
-              <th className="blue-text">Naam</th>
-              <th className="blue-text">Functie</th>
-              <th className="blue-text">Email</th>
-              <th className="blue-text">Lid sinds</th>
-              <th className="blue-text">Afdeling</th>
+              <th className="text-light">Naam</th>
+              <th className="text-light">Functie</th>
+              <th className="text-light">Email</th>
+              <th className="text-light">Lid sinds</th>
+              <th className="text-light">Afdeling</th>
               {filter &&
                 !["Tijdelijk", "Personeel", "Beheerders"].includes(filter) && (
-                  <th className="blue-text">Overeenkomst:</th>
+                  <th className="text-light">Overeenkomst:</th>
                 )}
             </tr>
           </thead>
           <tbody>
             {profiles.map((profile) => (
               <tr key={profile.id}>
-                <td className="blue-text">{profile.fullName}</td>
-                <td className="blue-text">{profile.role}</td>
-                <td className="blue-text">{profile.email}</td>
-                <td className="blue-text">{profile.memberSince}</td>
-                <td className="blue-text">{profile.department}</td>
+                <td className="text-light">{profile.fullName}</td>
+                <td className="text-light">{profile.role}</td>
+                <td className="text-light">{profile.email}</td>
+                <td className="text-light">{profile.memberSince}</td>
+                <td className="text-light">{profile.department}</td>
                 {filter &&
                   !["Tijdelijk", "Personeel", "Beheerders"].includes(
                     filter
                   ) && (
-                    <td className="blue-text">
+                    <td className="text-light">
                       {BoldSubstring(
                         `${Object.values(profile).find((_) =>
                           `${_}`.toLowerCase().includes(filter.toLowerCase())

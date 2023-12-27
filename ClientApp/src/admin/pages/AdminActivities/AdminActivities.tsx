@@ -20,12 +20,11 @@ const AdminActivities = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
 
   const refreshActivities = () => {
-    fetch(`${getApiUrl()}/activity`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/activity`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setActivities(data as IActivity[]));
   };
@@ -38,7 +37,9 @@ const AdminActivities = () => {
     <AdminLayout>
       <h1 className="my-5 blue-text">Activiteiten</h1>
 
-      <Button href="/admin/activities/add">Activiteit toevoegen</Button>
+      <Button href="/admin/activities/add" className="fw-bold">
+        Activiteit toevoegen
+      </Button>
 
       <div className="d-flex flex-column gap-3 mt-4">
         {activities.map((activity) => (

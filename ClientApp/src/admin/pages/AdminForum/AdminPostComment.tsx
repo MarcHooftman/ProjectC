@@ -65,7 +65,7 @@ const AdminPostComment = ({ comment, onDelete = () => {} }: Props) => {
           <div className="d-flex align-items-center gap-3">
             <Link
               to="/profile"
-              className="d-flex flex-row align-items-center gap-2 text-decoration-none blue-text"
+              className="d-flex flex-row align-items-center gap-2 text-decoration-none text-light"
             >
               <img
                 src={ProfileIcon}
@@ -73,9 +73,7 @@ const AdminPostComment = ({ comment, onDelete = () => {} }: Props) => {
               ></img>
               <strong>{comment.profile?.fullName}</strong>
             </Link>
-            <p className="text-dark opacity-50 mb-0">
-              {formatDate(comment.time)}
-            </p>
+            <p className="antes-secondary mb-0">{formatDate(comment.time)}</p>
             <img
               src={TrashIcon}
               className="trash-icon-small hover-pointer"
@@ -88,7 +86,11 @@ const AdminPostComment = ({ comment, onDelete = () => {} }: Props) => {
               {comment?.tags &&
                 Array.isArray(comment?.tags) &&
                 comment?.tags.map((tag) => (
-                  <Badge className="badge-color" text="light" pill={true}>
+                  <Badge
+                    className="bg-antes-secondary mt-2"
+                    text="light"
+                    pill={true}
+                  >
                     {tag.name}
                   </Badge>
                 ))}

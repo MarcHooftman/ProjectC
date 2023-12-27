@@ -30,12 +30,11 @@ const AdminUsers = () => {
   const [tempUsers, setTempUsers] = useState<ITempUser[]>([]);
 
   const fetchEmployees = () => {
-    fetch(`${getApiUrl()}/profile`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/profile`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (filter) {
@@ -46,12 +45,11 @@ const AdminUsers = () => {
   };
 
   const fetchAdmins = () => {
-    fetch(`${getApiUrl()}/admin`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/admin`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -63,12 +61,11 @@ const AdminUsers = () => {
   };
 
   const fetchTempUsers = () => {
-    fetch(`${getApiUrl()}/tempuser`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/tempuser`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (filter) {
@@ -191,7 +188,7 @@ const AdminUsers = () => {
               <Button
                 onClick={() => navigate("create/admin")}
                 size="sm"
-                className="mb-2"
+                className="mb-2 fw-bold"
               >
                 Beheerder toevoegen
               </Button>
@@ -206,7 +203,7 @@ const AdminUsers = () => {
               <Button
                 onClick={() => navigate("create/temp")}
                 size="sm"
-                className="mb-2"
+                className="mb-2 fw-bold"
               >
                 Tijdelijke gebruiker toevoegen
               </Button>
