@@ -1,127 +1,3 @@
-// using API.Models;
-
-// // namespace API.Models;
-
-// // public class Profile
-// // {
-// //     public int ID { get; set; }
-// //     public string Email { get; set; } = null!;
-// //     public string? FullName { get; set; }
-// //     public string? Bio { get; set; }
-// //     public DateOnly? MemberSince { get; set; }
-// //     public DateTime? LastLogin { get; set; }
-// //     public string? Role { get; set; }
-// //     public DateOnly? DateOfBirth { get; set; }
-// //     public string? Department { get; set; }
-// //     public int? ProfilePictureID { get; set; }
-// //     public Media? ProfilePicture { get; set; }
-// //     public string? PhoneNumber { get; set; }
-// //     public string? UserPrincipalName { get; set; }
-
-// //     // navigational
-// //     public IEnumerable<Training>? Training { get; set; }
-// // }
-
-// // namespace API.Models;
-
-// // public class Activity
-// // {
-// //     public int ID { get; set; }
-// //     public string Title { get; set; } = null!;
-// //     public string Description { get; set; } = null!;
-// //     public string Location { get; set; } = null!;
-// //     public DateTime Time { get; set; }
-// // }
-
-// // namespace API.Models;
-
-// // public class ForumPost
-// // {
-// //     public int ID { get; set; }
-// //     public string Title { get; set; } = null!;
-// //     public string Content { get; set; } = null!;
-// //     public IEnumerable<Tag>? Tags { get; set; }
-// //     public int ProfileID { get; set; }
-// //     public Profile? Profile { get; set; }
-// //     public DateTime Time { get; set; }
-// //     public int? ForumPostID { get; set; }
-// //     public IEnumerable<ForumPost>? Comments { get; set; }
-// //     public IEnumerable<Like>? Likes { get; set; }
-// //     public IEnumerable<Report>? Reports { get; set; }
-// // }
-
-
-
-// public static class Seeder
-// {
-//     public static void Initialize(AntesContext context)
-//     {
-//         context.Database.EnsureCreated();
-
-//         // Seed data
-//         AddProfiles(context);
-//     }
-
-//     private static void AddProfiles(AntesContext context) 
-//     {
-//         if (context.Profile.Any()) return;
-
-//         var profiles = new Profile[]
-//         {
-//             new Profile{
-//                 Email="1000000@hr.nl",
-//                 FullName="Klaas Klaassen",
-//                 Bio="I'm a student at Hogeschool Rotterdam",
-//                 MemberSince=new DateOnly(2021, 1, 1),
-//                 LastLogin=DateTime.Now,
-//                 Role="User",
-//                 DateOfBirth=new DateOnly(2001, 1, 1),
-//                 Department="ICT",
-//                 PhoneNumber="0612345678",
-//                 UserPrincipalName="1000000@hr.nl",
-//             },
-//             new Profile{
-//                 Email="1000001@hr.nl",
-//                 FullName="Jan Janssen",
-//                 Bio="I'm a student at Hogeschool Rotterdam",
-//                 MemberSince=new DateOnly(2021, 1, 1),
-//                 LastLogin=DateTime.Now,
-//                 Role="User",
-//                 DateOfBirth=new DateOnly(2001, 1, 1),
-//                 Department="ICT",
-//                 PhoneNumber="0612345678",
-//                 UserPrincipalName="1000001@hr.nl",
-//             },
-//             new Profile{
-//                 Email="1000002@hr.nl",
-//                 FullName="Frank Frankken",
-//                 Bio="I'm a student at Hogeschool Rotterdam",
-//                 MemberSince=new DateOnly(2021, 1, 1),
-//                 LastLogin=DateTime.Now,
-//                 Role="User",
-//                 DateOfBirth=new DateOnly(2001, 1, 1),
-//                 Department="ICT",
-//                 PhoneNumber="0612345678",
-//                 UserPrincipalName="1000002@hr.nl",
-//             },
-//         };
-
-//         foreach (Profile profile in profiles)
-//         {
-//             context.Profile.Add(profile);
-//         }
-
-//         context.SaveChanges();
-//     }
-
-// namespace API.Models;
-
-// public class Tag
-// {
-//     public int ID { get; set; }
-//     public string Name { get; set; } = null!;
-// }
-
 using API.Models;
 using System;
 using System.Collections.Generic;
@@ -143,7 +19,6 @@ public static class Seeder
             AddProfiles(context);
             AddActivities(context);
             AddForumPosts(context);
-            // AddMedia(context);
             AddTraining(context);
             AddAdmin(context);
         }
@@ -154,7 +29,6 @@ public static class Seeder
         if (context.ForumPost.Any()) return false;
         if (context.Profile.Any()) return false;
         if (context.Activity.Any()) return false;
-        // if (context.Media.Any()) return false;
         if (context.Training.Any()) return false;
         if (context.Like.Any()) return false;
         if (context.Report.Any()) return false;
@@ -172,7 +46,7 @@ public static class Seeder
                 Email="1000000@hr.nl",
                 FullName="Klaas Klaassen",
                 Bio=Lorem3,
-                MemberSince=new DateOnly(2021, 1, 1),
+                MemberSince=new DateOnly(2023, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
@@ -185,7 +59,7 @@ public static class Seeder
                 Email="1000001@hr.nl",
                 FullName="Jan Janssen",
                 Bio=Lorem1,
-                MemberSince=new DateOnly(2021, 1, 1),
+                MemberSince=new DateOnly(2023, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
@@ -198,7 +72,7 @@ public static class Seeder
                 Email="1000002@hr.nl",
                 FullName="Frank Frankken",
                 Bio=Lorem2,
-                MemberSince=new DateOnly(2021, 1, 1),
+                MemberSince=new DateOnly(2023, 1, 1),
                 LastLogin=DateTime.UtcNow,
                 Role="User",
                 DateOfBirth=new DateOnly(2001, 1, 1),
@@ -218,6 +92,10 @@ public static class Seeder
 
     private static void AddActivities(AntesContext context)
     {
+        var Klaas = context.Profile.FirstOrDefault(_ => _.UserPrincipalName == "1000000@hr.nl");
+        var Jan = context.Profile.FirstOrDefault(_ => _.UserPrincipalName == "1000001@hr.nl");
+        var Frank = context.Profile.FirstOrDefault(_ => _.UserPrincipalName == "1000002@hr.nl");
+
         var activities = new List<Activity>
         {
             new()
@@ -226,6 +104,7 @@ public static class Seeder
                 Description = Lorem3,
                 Location = "Rotterdam",
                 Time = DateTime.SpecifyKind(new DateTime(2024, 11, 28, 18, 0, 0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
             },
             new()
             {
@@ -233,6 +112,7 @@ public static class Seeder
                 Description = Lorem1,
                 Location = "Rotterdam",
                 Time = DateTime.SpecifyKind(new DateTime(2024, 11, 29, 15, 0, 0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank!, Jan! }
             },
             new()
             {
@@ -240,6 +120,7 @@ public static class Seeder
                 Description = Lorem2,
                 Location = "Rotterdam",
                 Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 16, 0, 0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
             },
             new()
             {
@@ -247,6 +128,7 @@ public static class Seeder
                 Description = Lorem2,
                 Location = "Rotterdam",
                 Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 17, 0, 0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
             },
             new()
             {
@@ -261,26 +143,13 @@ public static class Seeder
                 Description = Lorem3,
                 Location = "Rotterdam",
                 Time = DateTime.SpecifyKind(new DateTime(2024, 12, 3, 21, 0, 0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
             }
         };
 
         context.Activity.AddRange(activities);
         context.SaveChanges();
     }
-    // private static void AddMedia(AntesContext context)
-    // {
-    //     var media = new List<Media>
-    //     {
-    //         new()
-    //         {
-    //             Type = "youtube video",
-    //             URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
-    //         }
-    //     };
-
-    //     context.Media.AddRange(media);
-    //     context.SaveChanges();
-    // }
 
     private static void AddTags(AntesContext context)
     {
