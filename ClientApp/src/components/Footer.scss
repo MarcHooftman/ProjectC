@@ -1,6 +1,6 @@
 .footer {
     position: static;
-    width: 100%;
+    width: 100% !important;
     height: 5rem;
     background-color: #ab0909;
 
@@ -31,6 +31,14 @@
 
     .footer-social {
         margin-left: 1rem;
+    }
+
+    .bg-overlap {
+        position: absolute;
+        height: 5rem;
+        width: 6.5rem;
+        z-index: 9999 !important;
+        background-color: #790707;
     }
 }
 

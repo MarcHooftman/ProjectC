@@ -62,6 +62,7 @@ const Footer: React.FC = () => {
           </Col>
         </Row>
       </Container>
+      <div className="bg-overlap end-0"></div>
     </footer>
   );
 };
