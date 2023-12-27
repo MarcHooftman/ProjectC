@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Nav, NavItem, NavLink, Offcanvas } from "react-bootstrap";
 import Hamburger from "../../assets/hamburger.svg";
+import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTemplate";
+import { UnauthenticatedTemplate } from "@azure/msal-react";
+import useLogout from "../../hooks/useLogout";
 
 const NavOffcanvas = () => {
   const [show, setShow] = useState<boolean>(false);
+  const logout = useLogout();
   return (
     <>
       <div
@@ -36,23 +40,49 @@ const NavOffcanvas = () => {
         </Offcanvas.Header>
         <Offcanvas.Body className="p-0 pt-3">
           <Nav className="d-flex flex-column">
-            {[
-              ["/", "Home"],
-              ["/forum", "Forum"],
-              ["/activities", "Activiteiten"],
-              ["/training", "Trainingen"],
-              ["/profile", "Profiel"],
-              ["/about", "Wie zijn wij"],
-            ].map((tuple, index) => (
-              <NavItem key={index} className="border-y p-2 ps-3">
+            <CustomAuthenticatedTemplate>
+              {[
+                ["/", "Home"],
+                ["/forum", "Forum"],
+                ["/activities", "Activiteiten"],
+                ["/training", "Trainingen"],
+                ["/profile", "Profiel"],
+                ["/about", "Wie zijn wij"],
+              ].map((tuple, index) => (
+                <NavItem key={index} className="border-y p-2 ps-3">
+                  <NavLink
+                    className="fs-4 ps-0 py-1 text-light offcanvas-link"
+                    href={tuple[0]}
+                  >
+                    {tuple[1]}
+                  </NavLink>
+                </NavItem>
+              ))}
+              <NavItem className="border-y p-2 ps-3">
                 <NavLink
                   className="fs-4 ps-0 py-1 text-light offcanvas-link"
-                  href={tuple[0]}
+                  onClick={() => logout()}
                 >
-                  {tuple[1]}
+                  Uitloggen
                 </NavLink>
               </NavItem>
-            ))}
+            </CustomAuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+              {[
+                ["/", "Home"],
+                ["/about", "Wie zijn wij"],
+                ["/login", "Inloggen"],
+              ].map((tuple, index) => (
+                <NavItem key={index} className="border-y p-2 ps-3">
+                  <NavLink
+                    className="fs-4 ps-0 py-1 text-light offcanvas-link"
+                    href={tuple[0]}
+                  >
+                    {tuple[1]}
+                  </NavLink>
+                </NavItem>
+              ))}
+            </UnauthenticatedTemplate>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
