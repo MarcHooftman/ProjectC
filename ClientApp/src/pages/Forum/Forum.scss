@@ -1,5 +1,6 @@
 .forum-post-card {
     min-width: 21rem !important;
+    border-radius: 3rem 0 3rem 0 !important;
 }
 
 .filter {
@@ -47,6 +48,10 @@
 }
 
 @media (max-width: 575px) {
+    .forum-post-card {
+        border-radius: 0rem 0 3rem 0 !important;
+    }
+
     .profile-section {
         gap: 0;
     }

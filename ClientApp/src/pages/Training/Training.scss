@@ -8,18 +8,23 @@
 //     font-size: 0.6em;
 // }
 
+.category-card {
+    width: max-content !important;
+    border-radius: 1.5rem 0 1.5rem 0 !important;
+}
+
 .training-card {
     min-width: 15rem !important;
 }
 
-.training-card :hover {
-    background-color: #dab0b7 !important;
-}
+// .training-card :hover {
+//     background-color: #dab0b7 !important;
+// }
 
 
-.Category :hover {
-    background-color: #ab0909 !important;
-}
+// .Category :hover {
+//     background-color: #ab0909 !important;
+// }
 
 .badge-color {
     background-color: #ab0909 !important;

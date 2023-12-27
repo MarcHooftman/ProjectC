@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { getApiUrl } from "../../../utils/getApiUrl";
 
 const EditProfile = () => {
-  const { graphData } = useGraphData();
-  const navigate = useNavigate();
+    const { graphData } = useGraphData();
+    const navigate = useNavigate();
 
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
@@ -33,35 +33,36 @@ const EditProfile = () => {
     }
   }, [graphData]);
 
-  const [role, setRole] = useState<string>(profile?.role || "");
-  const [phoneNumber, setPhoneNumber] = useState<string>(
-    profile?.phoneNumber || ""
-  );
-  const [bio, setBio] = useState<string>(profile?.bio || "");
 
-  const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRole(e.target.value);
-  };
+    const [role, setRole] = useState<string>(profile?.role || "");
+    const [phoneNumber, setPhoneNumber] = useState<string>(
+        profile?.phoneNumber || ""
+    );
+    const [bio, setBio] = useState<string>(profile?.bio || "");
 
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
-  };
+    const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setRole(e.target.value);
+    };
 
-  const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setBio(e.target.value);
-  };
+    const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneNumber(e.target.value);
+    };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const payload = {
-        ...profile,
-        Role: role,
-        PhoneNumber: phoneNumber,
-        Bio: bio,
-      };
+    const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setBio(e.target.value);
+    };
 
-      console.log("Request Payload:", JSON.stringify(payload));
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const payload = {
+                ...profile,
+                Role: role,
+                PhoneNumber: phoneNumber,
+                Bio: bio,
+            };
+
+            console.log("Request Payload:", JSON.stringify(payload));
 
       const response = await fetch(
         `${getApiUrl()}/profile/${profile?.id}`,
@@ -75,23 +76,24 @@ const EditProfile = () => {
         }
       );
 
-      if (response.ok) {
-        console.log("Profile updated successfully");
-        // Redirect to the profile page or perform any other actions as needed
-        navigate("/profile");
-      } else {
-        console.error("Failed to update profile:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+            if (response.ok) {
+                console.log("Profile updated successfully");
+                alert("Profiel succesvol bijgewerkt");
+                // Redirect to the profile page or perform any other actions as needed
+                navigate("/profile");
+            } else {
+                console.error("Failed to update profile:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+    };
 
   return (
     <Layout>
       <h1 className="blue-text my-5">Profiel bewerken</h1>
       <div className="container mt-5">
-        <div className="card shadow-lg">
+        <div className="card shadow-lg bg-antes-primary">
           <div className="card-body">
             <form onSubmit={handleFormSubmit}>
               <div className="form-group mt-3">
@@ -129,7 +131,7 @@ const EditProfile = () => {
                   placeholder={bio || ""}
                 />
               </div>
-              <button type="submit" className="btn btn-primary mt-4">
+              <button type="submit" className="btn btn-primary mt-4 fw-bold">
                 Wijzigingen opslaan
               </button>
             </form>

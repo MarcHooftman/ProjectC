@@ -1,0 +1,9 @@
+.cover-card {
+    max-height: 40vh !important;
+    border-radius: 6rem 0 6rem 0 !important;
+    border: none !important;
+
+    > img {
+        width: 50% !important;
+    }
+}

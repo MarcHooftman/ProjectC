@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useTrainingMark from "../../hooks/useTrainingMark";
 import ITraining from "../../interfaces/ITraining";
 import IProfile from "../../interfaces/IProfile";
-import { Modal, Card, Badge, Form} from "react-bootstrap";
+import { Modal, Card, Badge, Form } from "react-bootstrap";
 import "./Training.scss";
 const checkmark = require("../../assets/checkmark.png");
 
@@ -16,9 +16,9 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
   const [showModal, setModelstate] = useState<boolean>();
   const [CompletedValue, setCompletedValue] = useState<boolean>(false);
   const { setTrainingState } = useTrainingMark();
-  
+
   useEffect(() => {
-    setCompletedValue(profile?.training?.some(t => t.id === Training?.id)||false);
+    setCompletedValue(profile?.training?.some(t => t.id === Training?.id) || false);
   }, [profile?.training, Training?.id]);
 
   return (
@@ -35,7 +35,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
             <p className="fs-5 blue-text">{Training?.description}</p>
-            <Form.Switch id="custom-switch" label="Voltooid" style={{fontSize: "20px"}} onChange={() => {setTrainingState(!CompletedValue, Training as ITraining); setCompletedValue(!CompletedValue);}} checked={CompletedValue}></Form.Switch>
+            <Form.Switch id="custom-switch" label="Voltooid" style={{ fontSize: "20px" }} onChange={() => { setTrainingState(!CompletedValue, Training as ITraining); setCompletedValue(!CompletedValue); }} checked={CompletedValue}></Form.Switch>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -43,21 +43,21 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
         </Modal.Body>
       </Modal>
       <Card
-        className="training-card hover-pointer shadow-lg"
+        className="training-card hover-pointer shadow-lg bg-antes-primary"
         onClick={() => {
           setModelstate(true);
         }}
       >
         <Card.Body>
           <Card.Title className="d-flex justify-content-between align-items-center">
-            <h4>{Training?.title}</h4>
-            {(CompletedValue == true) ? <img style={{height: "30px"}} src={checkmark} alt="" /> : null}
+            <h3 className="fw-bolder">{Training?.title}</h3>
+            {(CompletedValue == true) ? <img style={{ height: "30px" }} src={checkmark} alt="" /> : null}
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
             {Training?.tags.map((i, index) => (
               <Badge
                 key={index}
-                className="badge-color"
+                className="bg-antes-secondary fs-6 fw-bolder"
                 text="light"
                 bg=""
                 pill={true}

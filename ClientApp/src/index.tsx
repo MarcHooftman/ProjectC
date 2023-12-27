@@ -6,6 +6,7 @@ import { MsalProvider } from "@azure/msal-react";
 
 import "./index.scss";
 import "./card.scss";
+import "./colors.scss";
 import { msalInstance } from "./utils/msalUtils.tsx";
 
 const initialUrl = window.location.href;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Badge, Button, Modal } from "react-bootstrap";
 import IForumPost from "../../../interfaces/IForumPost";
 import { formatDate } from "../../../utils/formatDate";
-import ProfileIcon from "../../../assets/profile.png";
+import ProfileIcon from "../../../assets/profile-icon.svg";
 import { useState } from "react";
 import TrashIcon from "../../../assets/trash.svg";
 import { getApiUrl } from "../../../utils/getApiUrl";
@@ -12,11 +12,11 @@ interface Props {
   onDelete: () => void;
 }
 
-const AdminPostComment = ({ comment, onDelete = () => { } }: Props) => {
+const AdminPostComment = ({ comment, onDelete = () => {} }: Props) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const handleTrashClick = () => {
     setShowConfirm(true);
-  }
+  };
 
   const deleteComment = async () => {
     setShowConfirm(false);
@@ -26,8 +26,7 @@ const AdminPostComment = ({ comment, onDelete = () => { } }: Props) => {
 
         headers: {
           "ngrok-skip-browser-warning": "1",
-        }
-
+        },
       });
 
       if (!response.ok) {
@@ -77,7 +76,11 @@ const AdminPostComment = ({ comment, onDelete = () => { } }: Props) => {
             <p className="text-dark opacity-50 mb-0">
               {formatDate(comment.time)}
             </p>
-            <img src={TrashIcon} className="trash-icon-small hover-pointer" onClick={handleTrashClick} />
+            <img
+              src={TrashIcon}
+              className="trash-icon-small hover-pointer"
+              onClick={handleTrashClick}
+            />
           </div>
           <p style={{ marginLeft: "35px", marginBottom: "0px" }}>
             {comment.content}
@@ -95,7 +98,11 @@ const AdminPostComment = ({ comment, onDelete = () => { } }: Props) => {
         {comment?.comments && comment?.comments.length > 0 && (
           <div className="comments-container pb-2">
             {comment?.comments.map((comment) => (
-              <AdminPostComment key={comment.id} comment={comment} onDelete={onDelete} />
+              <AdminPostComment
+                key={comment.id}
+                comment={comment}
+                onDelete={onDelete}
+              />
             ))}
           </div>
         )}
