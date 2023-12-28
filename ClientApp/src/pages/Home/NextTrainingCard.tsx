@@ -45,7 +45,9 @@ const NextTrainingCard = ({ graphData }: Props) => {
       className="shadow-lg text-decoration-none bg-antes-primary"
     >
       <Card.Header className="d-flex align-items-center justify-content-between py-3">
-        <Card.Title className="mb-0">{training?.title}</Card.Title>
+        <Card.Title as="h3" className="mb-0 fw-bold">
+          {training?.title}
+        </Card.Title>
         <div className="d-flex gap-2">
           {training?.tags.map((tag, index) => (
             <Link to={`/training?filter=${tag.name}`} key={index}>
@@ -61,7 +63,7 @@ const NextTrainingCard = ({ graphData }: Props) => {
         </div>
       </Card.Header>
       <Card.Body>
-        <Card.Text>{training?.description}</Card.Text>
+        <Card.Text className="fs-5">{training?.description}</Card.Text>
       </Card.Body>
     </Card>
   );

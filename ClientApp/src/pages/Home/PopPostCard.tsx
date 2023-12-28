@@ -5,7 +5,6 @@ import IForumPost from "../../interfaces/IForumPost";
 import { getApiUrl } from "../../utils/getApiUrl";
 import profilePicture from "../../assets/profile-icon.svg";
 
-
 const PopPostCard = () => {
   const [post, setPost] = useState<IForumPost>();
 
@@ -66,26 +65,28 @@ const PopPostCard = () => {
                 to={`/profile/${post.profileID}`}
                 className="text-decoration-none"
               >
-                <h2 className="fs-5 m-0 text-light fw-bolder">
+                <h2 className="fs-4 m-0 text-light fw-bolder">
                   {post?.profile?.fullName}
                 </h2>
                 <h3 className="fs-6 m-0 antes-secondary">
                   lid sinds {post?.profile?.memberSince}
                 </h3>
               </Link>
-              <span className="">{formattedDate}</span>
+              <span className="fw-bold">{formattedDate}</span>
             </span>
           </Card.Header>
           <Card.Body>
-            <Card.Title as={"h5"} className="fw-bolder">
+            <Card.Title as={"h4"} className="fw-bolder">
               {post?.title}
             </Card.Title>
-            {post?.content}
+            <p className="p-0 fs-5">{post?.content}</p>
             <span className="d-flex gap-2 mt-3">
               {Array.isArray(post?.tags) &&
                 post?.tags.map((tag, index) => (
                   <Link to={`/forum?filter=${tag.name}`} key={index}>
-                    <Badge pill={true} className="bg-antes-secondary fs-6">{tag.name}</Badge>
+                    <Badge pill={true} className="bg-antes-secondary fs-6">
+                      {tag.name}
+                    </Badge>
                   </Link>
                 ))}
             </span>

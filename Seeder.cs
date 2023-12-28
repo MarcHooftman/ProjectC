@@ -102,49 +102,737 @@ public static class Seeder
             {
                 Title = "Activiteit 1",
                 Description = Lorem3,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 11, 28, 18, 0, 0), DateTimeKind.Utc),
-                Profiles = new List<Profile>() { Klaas! }
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    6, 
+                    2, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
             },
+
             new()
             {
                 Title = "Activiteit 2",
-                Description = Lorem1,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 11, 29, 15, 0, 0), DateTimeKind.Utc),
-                Profiles = new List<Profile>() { Frank!, Jan! }
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    4, 
+                    9, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
             },
+
             new()
             {
                 Title = "Activiteit 3",
-                Description = Lorem2,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 16, 0, 0), DateTimeKind.Utc),
-                Profiles = new List<Profile>() { Klaas! }
+                Description = Lorem3,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    12, 
+                    17, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
             },
+
             new()
             {
                 Title = "Activiteit 4",
                 Description = Lorem2,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 2, 17, 0, 0), DateTimeKind.Utc),
-                Profiles = new List<Profile>() { Jan! }
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    8, 
+                    22, 
+                    14, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
             },
+
             new()
             {
                 Title = "Activiteit 5",
                 Description = Lorem3,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 3, 20, 0, 0), DateTimeKind.Utc),
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    1, 
+                    5, 
+                    15, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
             },
+
             new()
             {
                 Title = "Activiteit 6",
                 Description = Lorem3,
-                Location = "Rotterdam",
-                Time = DateTime.SpecifyKind(new DateTime(2024, 12, 3, 21, 0, 0), DateTimeKind.Utc),
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    7, 
+                    18, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
                 Profiles = new List<Profile>() { Frank! }
-            }
+            },
+
+            new()
+            {
+                Title = "Activiteit 7",
+                Description = Lorem1,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    11, 
+                    1, 
+                    20, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 8",
+                Description = Lorem1,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    7, 
+                    2, 
+                    10, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 9",
+                Description = Lorem1,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    9, 
+                    21, 
+                    13, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 10",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    24, 
+                    18, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 11",
+                Description = Lorem1,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    2, 
+                    20, 
+                    18, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 12",
+                Description = Lorem3,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    4, 
+                    17, 
+                    10, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 13",
+                Description = Lorem2,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    2, 
+                    9, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 14",
+                Description = Lorem2,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    10, 
+                    11, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 15",
+                Description = Lorem3,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    2, 
+                    7, 
+                    15, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 16",
+                Description = Lorem1,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    6, 
+                    20, 
+                    15, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 17",
+                Description = Lorem3,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    5, 
+                    16, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 18",
+                Description = Lorem2,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    5, 
+                    11, 
+                    14, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 19",
+                Description = Lorem3,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    9, 
+                    26, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 20",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    2, 
+                    1, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 21",
+                Description = Lorem2,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    8, 
+                    25, 
+                    11, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 22",
+                Description = Lorem3,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    8, 
+                    9, 
+                    20, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 23",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    9, 
+                    12, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 24",
+                Description = Lorem1,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    12, 
+                    9, 
+                    10, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 25",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    12, 
+                    23, 
+                    15, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 26",
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    1, 
+                    11, 
+                    10, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 27",
+                Description = Lorem1,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    10, 
+                    5, 
+                    16, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 28",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    5, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 29",
+                Description = Lorem3,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    27, 
+                    20, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 30",
+                Description = Lorem3,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    6, 
+                    8, 
+                    20, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 31",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    7, 
+                    20, 
+                    13, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 32",
+                Description = Lorem1,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    11, 
+                    14, 
+                    14, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 33",
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    11, 
+                    17, 
+                    9, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 34",
+                Description = Lorem1,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    2, 
+                    13, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 35",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    4, 
+                    17, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 36",
+                Description = Lorem2,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    11, 
+                    22, 
+                    12, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 37",
+                Description = Lorem1,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    12, 
+                    9, 
+                    13, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 38",
+                Description = Lorem2,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    1, 
+                    20, 
+                    18, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 39",
+                Description = Lorem2,
+                Location = "Prinsenland",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    2, 
+                    16, 
+                    18, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 40",
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    10, 
+                    14, 
+                    11, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 41",
+                Description = Lorem2,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    11, 
+                    19, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 42",
+                Description = Lorem3,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    3, 
+                    13, 
+                    9, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Frank! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 43",
+                Description = Lorem1,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    10, 
+                    16, 
+                    18, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 44",
+                Description = Lorem2,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    11, 
+                    21, 
+                    13, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 45",
+                Description = Lorem2,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    12, 
+                    10, 
+                    19, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 46",
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    8, 
+                    17, 
+                    17, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Jan! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 47",
+                Description = Lorem1,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2024, 
+                    1, 
+                    17, 
+                    9, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
+            new()
+            {
+                Title = "Activiteit 48",
+                Description = Lorem1,
+                Location = "Portugaal",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    8, 
+                    21, 
+                    10, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() {  }
+            },
+
+            new()
+            {
+                Title = "Activiteit 49",
+                Description = Lorem3,
+                Location = "Nieuwe Binnenweg",
+                Time = DateTime.SpecifyKind(new DateTime(
+                    2023, 
+                    11, 
+                    19, 
+                    21, 
+                    0, 
+                    0), DateTimeKind.Utc),
+                Profiles = new List<Profile>() { Klaas! }
+            },
+
         };
 
         context.Activity.AddRange(activities);

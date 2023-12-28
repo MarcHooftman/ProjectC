@@ -1,45 +1,31 @@
 import IActivity from "../../interfaces/IActivity";
 import IProfile from "../../interfaces/IProfile";
-import useGraphData from "../../hooks/useGraphData";
 import { useEffect, useState } from "react";
-import { Card, Modal, Form, Badge } from "react-bootstrap";
+import { Card, Modal, Form } from "react-bootstrap";
 import { formatDateTimeLong } from "../../utils/formatDate";
 import useActivityMark from "../../hooks/useActivityMark";
-import { getApiUrl } from "../../utils/getApiUrl";
 
 const userIcon = require("../../assets/person-4.png");
 
 interface Props {
+  currentProfile?: IProfile;
   activity?: IActivity;
   className?: string;
 }
 
-const ActivityCard = ({ activity, className = "" }: Props) => {
+const ActivityCard = ({ activity, currentProfile, className = "" }: Props) => {
   const [showModal, setModalstate] = useState<boolean>();
-  const { graphData } = useGraphData();
   const { setActivityState } = useActivityMark(); // Use the useActivityMark hook
   const [AttendingActivity, setAttendingActivity] = useState<boolean>(false);
-  const [profile, setProfile] = useState<IProfile>();
 
   useEffect(() => {
-    if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          const profileData = data as IProfile;
-          setProfile(profileData);
-          // Check if the current profile is in the activity's profiles
-          setAttendingActivity(
-            activity?.profiles?.some((p) => p.id === profileData.id) || false
-          );
-        });
+    if (currentProfile) {
+      // Check if the current profile is in the activity's profiles
+      setAttendingActivity(
+        activity?.profiles?.some((p) => p.id === currentProfile.id) || false
+      );
     }
-  }, [graphData, activity?.profiles]);
-
+  }, [currentProfile, activity?.profiles]);
 
   // Handle switch change
   const handleSwitchChange = () => {
@@ -49,10 +35,12 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
 
     if (newAttendingState) {
       // If the user is now attending the activity, add their profile to the activity's profiles
-      activity?.profiles?.push(profile as IProfile);
+      activity?.profiles?.push(currentProfile as IProfile);
     } else {
       // If the user is no longer attending the activity, remove their profile from the activity's profiles
-      const index = activity?.profiles?.findIndex((p) => p.id === profile?.id);
+      const index = activity?.profiles?.findIndex(
+        (p) => p.id === currentProfile?.id
+      );
       if (index !== undefined && index !== -1) {
         activity?.profiles?.splice(index, 1);
       }
@@ -98,7 +86,10 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
         </Modal.Footer>
       </Modal>
       <Card
-        className={className.concat(" ", "hover-pointer h-100 bg-antes-primary p-2")}
+        className={className.concat(
+          " ",
+          "hover-pointer h-100 bg-antes-primary p-2"
+        )}
         onClick={() => setModalstate(!showModal)}
       >
         <Card.Header>
@@ -110,7 +101,7 @@ const ActivityCard = ({ activity, className = "" }: Props) => {
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{activity?.description}</Card.Text>
+          <Card.Text className="fs-5">{activity?.description}</Card.Text>
         </Card.Body>
         <Card.Footer className="antes-secondary fw-bold">
           {activity?.location}

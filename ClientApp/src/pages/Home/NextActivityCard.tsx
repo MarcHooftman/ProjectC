@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { getApiUrl } from "../../utils/getApiUrl";
 import clockIcon from "../../assets/clock.svg";
 
-
 const NextActivityCard = () => {
   const [activity, setActivity] = useState<IActivity>();
 
@@ -36,7 +35,6 @@ const NextActivityCard = () => {
   }
 
   return (
-    //<Link to="/activities" className="text-decoration-none">
     <>
       {activity == undefined ? (
         <h5 className="">Geen activiteiten ingepland</h5>
@@ -49,12 +47,12 @@ const NextActivityCard = () => {
           <Card.Header className="d-flex align-items-center gap-3">
             <Card.Img src={clockIcon} className="clock-icon" />
             <div>
-              <h2 className="fs-5 m-0 fw-bolder">{activity?.title}</h2>
+              <h2 className="fs-4 m-0 fw-bolder">{activity?.title}</h2>
               <h3 className="fs-6 m-0 antes-secondary">{formattedDate}</h3>
             </div>
           </Card.Header>
           <Card.Body>
-            <Card.Text>{activity?.description}</Card.Text>
+            <Card.Text className="fs-5">{activity?.description}</Card.Text>
           </Card.Body>
           <Card.Footer>
             <Card.Text className="antes-secondary fw-bold">

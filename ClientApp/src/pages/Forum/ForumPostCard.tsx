@@ -10,7 +10,6 @@ import profilePicture from "../../assets/profile-icon.svg";
 import arrowUp from "../../assets/arrow-up.svg";
 import arrowDown from "../../assets/arrow-down.svg";
 
-
 interface Props {
   post: IForumPost;
 }
@@ -35,7 +34,10 @@ const ForumPostCard = ({ post }: Props) => {
   }
 
   return (
-    <Card as="details" className="my-4 shadow-lg forum-post-card bg-antes-primary">
+    <Card
+      as="details"
+      className="my-4 shadow-lg forum-post-card bg-antes-primary"
+    >
       <Card.Header
         as="summary"
         className="d-flex align-items-center w-100"
@@ -51,17 +53,16 @@ const ForumPostCard = ({ post }: Props) => {
               to={`/profile/${post.profileID}`}
               className="text-decoration-none profile-section-info"
             >
-              <h2 className="fs-5 m-0 text-light">
-                <strong>{post?.profile?.fullName}</strong>
+              <h2 className="fs-4 m-0 text-light fw-bold">
+                {post?.profile?.fullName}
               </h2>
               <h3 className="fs-6 m-0 antes-secondary">
                 lid sinds {post?.profile?.memberSince}
               </h3>
             </Link>
-
           </Col>
           <Col className="d-flex justify-content-between align-items-center info-section px-0">
-            <h4>{post?.title}</h4>
+            <h3 className="fw-bold">{post?.title}</h3>
             <div className="d-flex justify-content-between align-items-center gap-3 time-and-arrow">
               <div className="antes-secondary">{formattedDate}</div>
               <img
@@ -73,13 +74,17 @@ const ForumPostCard = ({ post }: Props) => {
         </Row>
       </Card.Header>
       <Card.Body>
-        {post?.content}
+        <p className="p-0 fs-5">{post?.content}</p>
         <span className="d-flex gap-2 mt-2">
           {post?.tags &&
             Array.isArray(post?.tags) &&
             post?.tags.map((tag) => (
-              <Link to={`/forum?filter=${tag.name}`} key={tag.id}>
-                <Badge className="bg-antes-secondary fw-bold fs-6" text="light" pill={true}>
+              <Link to={`/forum?filter=${tag.name}`} key={tag.name}>
+                <Badge
+                  className="bg-antes-secondary fw-bold fs-6"
+                  text="light"
+                  pill={true}
+                >
                   {tag.name}
                 </Badge>
               </Link>

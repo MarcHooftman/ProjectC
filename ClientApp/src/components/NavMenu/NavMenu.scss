@@ -28,7 +28,9 @@
 .offcanvas {
   z-index: 99999 !important;
 }
-
+.offcanvas-header {
+  height: 6rem;
+}
 .offcanvas-link {
   max-width: fit-content;
   padding-right: 2.5rem;
