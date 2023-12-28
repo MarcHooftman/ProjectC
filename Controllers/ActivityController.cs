@@ -28,7 +28,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return await _context.Activity.Include(_ => _.Profiles).ToListAsync();
+            return await _context.Activity.ToListAsync();
         }
 
         // GET: api/Activity/5
@@ -39,7 +39,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.Include(_ => _.Profiles).FirstOrDefaultAsync(_ => _.ID == id);
+            var activity = await _context.Activity.FirstOrDefaultAsync(_ => _.ID == id);
 
             if (activity == null)
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.OrderBy(_ => _.Time).Include(_ => _.Profiles).FirstOrDefaultAsync();
+            var activity = await _context.Activity.OrderBy(_ => _.Time).FirstOrDefaultAsync();
 
             if (activity == null)
             {
@@ -81,7 +81,7 @@ namespace API.Controllers
 
             try
             {
-                foreach (Profile p in activity.Profiles)
+                foreach (Profile p in _context.Profile.Where(p => p.Activity.Contains(activity)))
                 {
                     MailSender.SendMail(p.Email, "Antes - Activiteit gewijzigd", $"<html>Een activiteit waar je aan deelneemt is gewijzigd.<br>Ga naar de <a href=\"https://localhost:44463\">website</a> om de veranderingen te bekijken.<br>{activity.Title}.</html>");
                 }

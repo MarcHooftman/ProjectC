@@ -30,6 +30,7 @@ namespace API.Controllers
             }
             return await _context.Profile
             .Include(_ => _.Training)
+            .Include(_ => _.Activity)
             .ToListAsync();
         }
 
@@ -43,6 +44,7 @@ namespace API.Controllers
             }
             var profile = await _context.Profile
             .Include(_ => _.Training)
+            .Include(_ => _.Activity)
             .FirstOrDefaultAsync(_ => _.ID == id);
 
             if (profile == null)
@@ -63,6 +65,7 @@ namespace API.Controllers
             }
             var profile = await _context.Profile
             .Include(_ => _.Training)
+            .Include(_ => _.Activity)
             .FirstOrDefaultAsync(_ => _.Email == email);
 
             if (profile == null)

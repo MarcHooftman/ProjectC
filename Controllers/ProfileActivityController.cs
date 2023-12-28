@@ -31,22 +31,10 @@ namespace ProjectC.Controllers
             return await _context.ProfileActivity.ToListAsync();
         }
 
-        // GET: api/ProfileActivity/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProfileActivity>> GetProfileActivity(int id)
+        [HttpGet("{activityID}")]
+        public ActionResult<int> GetCountByActivity(int activityID)
         {
-            if (_context.ProfileActivity == null)
-            {
-                return NotFound();
-            }
-            var profileActivity = await _context.ProfileActivity.FindAsync(id);
-
-            if (profileActivity == null)
-            {
-                return NotFound();
-            }
-
-            return profileActivity;
+            return Ok(_context.ProfileActivity.Count(x => x.ActivityID == activityID));
         }
 
         // PUT: api/ProfileActivity/5
