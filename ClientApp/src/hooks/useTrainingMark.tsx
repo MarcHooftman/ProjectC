@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ITraining from "../interfaces/ITraining";
-import useGraphData from "./useGraphData";
+import { useGraphData } from "./useGraphData";
 import IProfile from "../interfaces/IProfile";
 import { getApiUrl } from "../utils/getApiUrl";
 
@@ -9,12 +9,11 @@ const useTrainingMark = () => {
   const { graphData } = useGraphData();
   useEffect(() => {
     if (graphData?.mail === undefined) return;
-    fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        }
-      },)
+    fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setProfile(data as IProfile));
   }, [graphData]);
@@ -27,22 +26,22 @@ const useTrainingMark = () => {
           "ngrok-skip-browser-warning": "1",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ profileId: profile?.id, trainingId: Training.id })
+        body: JSON.stringify({
+          profileId: profile?.id,
+          trainingId: Training.id,
+        }),
       });
-    }
-    else {
+    } else {
       fetch(`${getApiUrl()}/trainingprofile/${profile?.id} / ${Training.id}`, {
         method: "DELETE",
         headers: {
           "ngrok-skip-browser-warning": "1",
           "Content-Type": "application/json",
-        }
+        },
       });
     }
-
-  }
+  };
 
   return { setTrainingState };
-
 };
 export default useTrainingMark;

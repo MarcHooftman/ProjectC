@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Nav, NavItem, NavLink, Offcanvas } from "react-bootstrap";
 import Hamburger from "../../assets/hamburger.svg";
 import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTemplate";
-import { UnauthenticatedTemplate } from "@azure/msal-react";
+import CustomUnauthenticatedTemplate from "../AuthTemplates/CustomUnauthenticatedTemplate";
 import useLogout from "../../hooks/useLogout";
 
 const NavOffcanvas = () => {
@@ -67,7 +67,7 @@ const NavOffcanvas = () => {
                 </NavLink>
               </NavItem>
             </CustomAuthenticatedTemplate>
-            <UnauthenticatedTemplate>
+            <CustomUnauthenticatedTemplate>
               {[
                 ["/", "Home"],
                 ["/about", "Wie zijn wij"],
@@ -82,7 +82,7 @@ const NavOffcanvas = () => {
                   </NavLink>
                 </NavItem>
               ))}
-            </UnauthenticatedTemplate>
+            </CustomUnauthenticatedTemplate>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>

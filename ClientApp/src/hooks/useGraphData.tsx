@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getGraphData } from "../utils/msalUtils";
 import { useIsAuthenticated } from "@azure/msal-react";
 import useLogin from "./useLogin";
+import IGraphData from "../interfaces/IGraphData";
 
 const useGraphData = () => {
   const [graphData, setGraphData] = useState<IGraphData>();
@@ -10,20 +11,22 @@ const useGraphData = () => {
 
   async function fetchData() {
     try {
-      const data = await getGraphData().then(response => { return response as IGraphData });
+      const data = await getGraphData().then((response) => {
+        return response as IGraphData;
+      });
       setGraphData(data as IGraphData);
     } catch {
-      login()
+      login();
     }
   }
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchData()
+      fetchData();
     }
   }, [isAuthenticated]);
 
   return { graphData };
 };
 
-export default useGraphData;
+export { useGraphData };

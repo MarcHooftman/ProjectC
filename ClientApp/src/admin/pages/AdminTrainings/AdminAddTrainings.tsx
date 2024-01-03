@@ -3,9 +3,9 @@ import ITraining from "../../../interfaces/ITraining";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IProfile from "../../../interfaces/IProfile";
-import useGraphData from "../../../hooks/useGraphData";
+import { useGraphData } from "../../../hooks/useGraphData";
 import { Button, Card } from "react-bootstrap";
-import TagInput from "../../../pages/Forum/Post/TagsToevoegen";
+import TagInput from "../../../pages/Forum/components/Post/TagsToevoegen";
 import TextInputWithCounter from "../../../components/TextInputWithCounter";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
 import { getApiUrl } from "../../../utils/getApiUrl";
@@ -22,9 +22,7 @@ const AdminAddTrainings = () => {
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(
-        `${getApiUrl()}/profile/by-email/${graphData?.mail}`
-      )
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`)
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -35,7 +33,9 @@ const AdminAddTrainings = () => {
     setTitle(event.target.value);
   };
 
-  const onDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     event.preventDefault();
     setDescription(event.target.value);
   };
@@ -85,24 +85,33 @@ const AdminAddTrainings = () => {
   return (
     <AdminLayout>
       <h1 className="my-5 blue-text">Training aanmaken</h1>
-        {<Card className="shadow-lg">
-            <Card.Body>
-              <Card.Title>Nieuwe Training</Card.Title>
-              <form
-                className="d-flex flex-column p-3 gap-2"
-                onSubmit={handleSubmit}
-              >
-                <input placeholder="Titel" className="" onChange={onTitleChange} />
-                <TextInputWithCounter placeholder="Descriptie" maxLength={1000} onChange={onDescriptionChange} />
-                <input placeholder="URL" onChange={onURLChange} />
-                <TagInput onChange={(taglist) => setTags(taglist)} />
-                <Button className="w-25 mt-4" variant="primary" type="submit">
-                  Plaats
-                </Button>
-              </form>
-            </Card.Body>
-          </Card>
-        }
+      {
+        <Card className="shadow-lg">
+          <Card.Body>
+            <Card.Title>Nieuwe Training</Card.Title>
+            <form
+              className="d-flex flex-column p-3 gap-2"
+              onSubmit={handleSubmit}
+            >
+              <input
+                placeholder="Titel"
+                className=""
+                onChange={onTitleChange}
+              />
+              <TextInputWithCounter
+                placeholder="Descriptie"
+                maxLength={1000}
+                onChange={onDescriptionChange}
+              />
+              <input placeholder="URL" onChange={onURLChange} />
+              <TagInput onChange={(taglist) => setTags(taglist)} />
+              <Button className="w-25 mt-4" variant="primary" type="submit">
+                Plaats
+              </Button>
+            </form>
+          </Card.Body>
+        </Card>
+      }
     </AdminLayout>
   );
 };
