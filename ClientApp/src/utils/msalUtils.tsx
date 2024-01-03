@@ -4,6 +4,7 @@ import { loginRequest } from "../authConfig";
 
 const allowedRedirectURIs = [
   "https://antesonboarding.vercel.app/",
+  "https://antesonboarding-test.vercel.app/",
   "https://marc-hooftman.ddns.net/",
   "https://192.168.178.80:44463/",
   "https://localhost:44463/",
