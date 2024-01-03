@@ -56,7 +56,7 @@ const PopPostCard = () => {
           role="pop-post-card"
         >
           <Card.Header className="d-flex align-items-center">
-            <Link to={`/ profile / ${post.profileID}`} className="poster-pfp">
+            <Link to={`/profile/${post.profileID}`} className="poster-pfp">
               <Card.Img src={profilePicture}></Card.Img>
             </Link>
             <span className="d-flex flex-grow-1 justify-content-between align-items-center ms-3">

@@ -32,7 +32,7 @@ const useTrainingMark = () => {
         }),
       });
     } else {
-      fetch(`${getApiUrl()}/trainingprofile/${profile?.id} / ${Training.id}`, {
+      fetch(`${getApiUrl()}/trainingprofile/${profile?.id}/${Training.id}`, {
         method: "DELETE",
         headers: {
           "ngrok-skip-browser-warning": "1",

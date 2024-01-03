@@ -10,7 +10,18 @@ public class AntesContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(@"Host=localhost:5432;Username=postgres;Password=antes;Database=Antes;Integrated Security=true;Pooling=true;");
+
+        /*
+POSTGRES_URL="postgres://default:Cj0uAMd7xKaB@ep-curly-night-85683084-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb"
+POSTGRES_PRISMA_URL="postgres://default:Cj0uAMd7xKaB@ep-curly-night-85683084-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb?pgbouncer=true&connect_timeout=15"
+POSTGRES_URL_NON_POOLING="postgres://default:Cj0uAMd7xKaB@ep-curly-night-85683084.eu-central-1.postgres.vercel-storage.com:5432/verceldb"
+POSTGRES_USER="default"
+POSTGRES_HOST="ep-curly-night-85683084-pooler.eu-central-1.postgres.vercel-storage.com"
+POSTGRES_PASSWORD="Cj0uAMd7xKaB"
+POSTGRES_DATABASE="verceldb"
+        */
+        //optionsBuilder.UseNpgsql(@"Host=localhost:5432;Username=postgres;Password=antes;Database=Antes;Integrated Security=true;Pooling=true;");
+        optionsBuilder.UseNpgsql(@"Host=ep-curly-night-85683084-pooler.eu-central-1.postgres.vercel-storage.com;Username=default;Password=Cj0uAMd7xKaB;Database=verceldb;Integrated Security=true;Pooling=true;");
     }
 
 
