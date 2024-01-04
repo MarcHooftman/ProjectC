@@ -65,7 +65,9 @@ const NextTrainingCard = ({ graphData }: Props) => {
         </div>
       </Card.Header>
       <Card.Body>
-        <Card.Text className="fs-5">{training?.description}</Card.Text>
+        <Card.Text className="fs-default mobile-truncate">
+          {training?.description}
+        </Card.Text>
       </Card.Body>
     </Card>
   );

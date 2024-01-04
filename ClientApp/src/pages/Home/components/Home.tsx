@@ -53,17 +53,17 @@ const Home = () => {
       <CoverCard />
       <CustomAuthenticatedTemplate>
         <Tutorial show={showTutorial} onHide={closeTutorial} />
-        <Row className="mx-0 gap-5 mt-5">
-          <Col className="d-flex flex-column px-0 mb-4 home-col">
+        <Row className="mx-0 mt-5 home-row">
+          <Col className="d-flex flex-column px-0 home-col">
             <h3 className="blue-text fw-bold">Populair op dit moment</h3>
             <PopPostCard />
           </Col>
-          <Col className="d-flex flex-column px-0 mb-4 home-col">
+          <Col className="d-flex flex-column px-0 home-col">
             <h3 className="blue-text fw-bold">Eerstvolgende activiteit</h3>
             <NextActivityCard />
           </Col>
         </Row>
-        <Row className="mx-0 mt-3">
+        <Row className="mx-0 mt-4">
           <Col className="px-0 mb-4 home-col">
             <h3 className="blue-text fw-bold">Volgende training</h3>
             <NextTrainingCard graphData={graphData} />

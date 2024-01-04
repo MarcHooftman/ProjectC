@@ -75,7 +75,7 @@ const ForumPostCard = ({ post }: Props) => {
         </Row>
       </Card.Header>
       <Card.Body>
-        <p className="p-0 fs-5">{post?.content}</p>
+        <p className="p-0 fs-default">{post?.content}</p>
         <span className="d-flex gap-2 mt-2">
           {post?.tags &&
             Array.isArray(post?.tags) &&

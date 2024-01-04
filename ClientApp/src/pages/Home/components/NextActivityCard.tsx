@@ -52,7 +52,9 @@ const NextActivityCard = () => {
             </div>
           </Card.Header>
           <Card.Body>
-            <Card.Text className="fs-5">{activity?.description}</Card.Text>
+            <Card.Text className="fs-default mobile-truncate">
+              {activity?.description}
+            </Card.Text>
           </Card.Body>
           <Card.Footer>
             <Card.Text className="antes-secondary fw-bold">

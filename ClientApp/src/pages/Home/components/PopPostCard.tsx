@@ -79,7 +79,7 @@ const PopPostCard = () => {
             <Card.Title as={"h4"} className="fw-bolder">
               {post?.title}
             </Card.Title>
-            <p className="p-0 fs-5">{post?.content}</p>
+            <p className="p-0 fs-default mobile-truncate">{post?.content}</p>
             <span className="d-flex gap-2 mt-3">
               {Array.isArray(post?.tags) &&
                 post?.tags.map((tag, index) => (

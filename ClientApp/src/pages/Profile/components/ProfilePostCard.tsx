@@ -36,7 +36,7 @@ const ProfilePostCard = ({ post }: Props) => {
         onClick={() => setCollapse(!collapse)}
       >
         <Row className="w-100 d-flex align-items-center profile-post-card-header-row mx-0">
-          <Col className="w-100 post-title">
+          <Col className="w-100 post-title px-0 pt-2">
             <h4>{post?.title}</h4>
           </Col>
 
@@ -46,7 +46,9 @@ const ProfilePostCard = ({ post }: Props) => {
           </Col>
         </Row>
       </Card.Header>
-      <Card.Body as="p">{post?.content}</Card.Body>
+      <Card.Body as="p" className="fs-default">
+        {post?.content}
+      </Card.Body>
       {Array.isArray(post?.tags) && (post?.tags.length || -1) > 0 && (
         <Card.Footer>
           <span className="d-flex gap-2 mb-2">

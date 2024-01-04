@@ -3,7 +3,7 @@ import "./AboutParagraph.scss";
 const AboutParagraph = () => {
   return (
     <div className="about-paragraph-container">
-      <p className="blue-text fs-5" role="about-paragraph">
+      <p className="blue-text fs-default" role="about-paragraph">
         Antes is specialist in psychiatrie en verslaving. Antes richt zich als
         ggz-instelling op het herstel van volwassenen en ouderen met (ernstige)
         psychiatrische problemen. Het doel van Antes is mensen met psychische
