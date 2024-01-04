@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IForumPost from "../../../interfaces/IForumPost";
 import { Link } from "react-router-dom";
 import "./PostComment.scss";
@@ -12,7 +12,6 @@ import { Badge, Button } from "react-bootstrap";
 import { getApiUrl } from "../../../utils/getApiUrl";
 
 import profilePicture from "../../../assets/profile-icon.svg";
-import graphDataContext from "../../../contexts/graphDataContext";
 
 interface Props {
   comment: IForumPost;

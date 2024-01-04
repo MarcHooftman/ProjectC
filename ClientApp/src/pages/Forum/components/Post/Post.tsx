@@ -3,7 +3,7 @@ import Layout from "../../../../components/Layout";
 import { Button, Card } from "react-bootstrap";
 import TextInputWithCounter from "../../../../components/TextInputWithCounter";
 import TagInput from "./TagsToevoegen";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IProfile from "../../../../interfaces/IProfile";
 import { useGraphData } from "../../../../hooks/useGraphData";

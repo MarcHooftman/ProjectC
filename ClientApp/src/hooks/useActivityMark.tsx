@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import IActivity from "../interfaces/IActivity";
 import { useGraphData } from "./useGraphData";
 import IProfile from "../interfaces/IProfile";
 import { getApiUrl } from "../utils/getApiUrl";
-import graphDataContext from "../contexts/graphDataContext";
 
 const useActivityMark = () => {
   const [profile, setProfile] = useState<IProfile>();
