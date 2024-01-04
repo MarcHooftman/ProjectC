@@ -10,10 +10,10 @@ const CustomAuthenticatedTemplate = ({ children }: Props) => {
   const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
   const isAuthenticated = useIsAuthenticated();
   return (
-    <>
+    <div role="auth-template">
       <AuthenticatedTemplate>{children}</AuthenticatedTemplate>
       {isTemporaryUser && !isAuthenticated && children}
-    </>
+    </div>
   );
 };
 

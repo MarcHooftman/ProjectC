@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/Layout";
 import "./Activities.scss";
 import IActivity from "../../../interfaces/IActivity";
@@ -12,6 +12,7 @@ import CustomUnauthenticatedTemplate from "../../../components/AuthTemplates/Cus
 import { Button } from "react-bootstrap";
 import { useGraphData } from "../../../hooks/useGraphData";
 import IProfile from "../../../interfaces/IProfile";
+import graphDataContext from "../../../contexts/graphDataContext";
 
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);

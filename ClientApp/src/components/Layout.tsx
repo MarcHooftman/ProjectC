@@ -12,7 +12,7 @@ interface Props {
 const Layout = ({ children, cover, centered = false, role = "" }: Props) => {
   return (
     <>
-      <div className="bg-color pb-5 vw-100">
+      <div className="bg-color pb-5 vw-100" role="layout">
         <NavMenu />
         {cover || <></>}
         <Container

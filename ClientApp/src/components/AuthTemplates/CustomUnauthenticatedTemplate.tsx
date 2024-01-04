@@ -9,11 +9,11 @@ interface Props {
 const CustomUnauthenticatedTemplate = ({ children }: Props) => {
   const isTemporaryUser = localStorage.getItem("temporaryUser") !== null;
   return (
-    <>
+    <div role="unauth-template">
       {!isTemporaryUser && (
         <UnauthenticatedTemplate>{children}</UnauthenticatedTemplate>
       )}
-    </>
+    </div>
   );
 };
 

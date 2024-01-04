@@ -15,17 +15,17 @@ import Auth from "./pages/Auth";
 import TemporaryLogin from "./pages/Login/components/TemporaryLogin/TemporaryLogin";
 import AdminLogin from "./pages/Login/components/AdminLogin/AdminLogin";
 import AdminDashboard from "./admin/pages/Dashboard/AdminDashboard";
-import AdminForum from "./admin/pages/AdminForum/AdminForum";
-import AdminActivities from "./admin/pages/AdminActivities/AdminActivities";
-import AdminTrainings from "./admin/pages/AdminTrainings/AdminTrainings";
-import AdminAddTrainings from "./admin/pages/AdminTrainings/AdminAddTrainings";
-import AdminEditTrainings from "./admin/pages/AdminTrainings/AdminEditTrainings";
+import AdminForum from "./admin/pages/AdminForum/components/AdminForum";
+import AdminActivities from "./admin/pages/AdminActivities/components/AdminActivities";
+import AdminTrainings from "./admin/pages/AdminTrainings/components/AdminTrainings";
+import AdminAddTrainings from "./admin/pages/AdminTrainings/components/AdminAddTrainings";
+import AdminEditTrainings from "./admin/pages/AdminTrainings/components/AdminEditTrainings";
 import AdminReports from "./admin/pages/AdminReports/AdminReports";
-import AdminUsers from "./admin/pages/AdminUsers/AdminUsers";
-import AdminAddActivity from "./admin/pages/AdminActivities/AdminAddActivity/AdminAddActivity";
-import AdminEditActivity from "./admin/pages/AdminActivities/AdminEditActivity/AdminEditActivity";
-import AdminAddAdmin from "./admin/pages/AdminUsers/Add/AdminAddAdmin";
-import AdminAddTempUser from "./admin/pages/AdminUsers/Add/AdminAddTempUser";
+import AdminUsers from "./admin/pages/AdminUsers/components/AdminUsers";
+import AdminAddActivity from "./admin/pages/AdminActivities/components/AdminAddActivity";
+import AdminEditActivity from "./admin/pages/AdminActivities/components/AdminEditActivity";
+import AdminAddAdmin from "./admin/pages/AdminUsers/components/Add/AdminAddAdmin";
+import AdminAddTempUser from "./admin/pages/AdminUsers/components/Add/AdminAddTempUser";
 import ScrollToTop from "./ScrollToTop";
 
 const App = () => {

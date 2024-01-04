@@ -1,7 +1,7 @@
 import Layout from "../../../../components/Layout";
 import "./edit_profile.scss";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGraphData } from "../../../../hooks/useGraphData";
 import IProfile from "../../../../interfaces/IProfile";
 import { useNavigate } from "react-router-dom";

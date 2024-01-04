@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Layout from "../../../components/Layout";
 import PersonalInfoCard from "./PersonalInfoCard";
@@ -15,6 +15,7 @@ import { filterOnlyParent } from "../../../utils/sortPosts";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../../hooks/useLogout";
 import { getApiUrl } from "../../../utils/getApiUrl";
+import graphDataContext from "../../../contexts/graphDataContext";
 
 const Profile = () => {
   const loggedIn = useIsAuthenticated();

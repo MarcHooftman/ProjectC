@@ -5,34 +5,39 @@ import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTem
 import CustomUnauthenticatedTemplate from "../AuthTemplates/CustomUnauthenticatedTemplate";
 import useLogout from "../../hooks/useLogout";
 
-const NavOffcanvas = () => {
-  const [show, setShow] = useState<boolean>(false);
+interface Props {
+  show?: boolean;
+}
+
+const NavOffcanvas = ({ show }: Props) => {
+  const [_show, setShow] = useState<boolean>(show || false);
   const logout = useLogout();
   return (
     <>
       <div
         className={"d-flex bg-antes-red position-absolute end-0 top-0 hamburger-container".concat(
           " ",
-          show ? "hamburger-container-show" : ""
+          _show ? "hamburger-container-show" : ""
         )}
       >
         <img
           src={Hamburger}
           className="hamburger hover-pointer"
-          onClick={() => setShow(!show)}
+          onClick={() => setShow(!_show)}
         />
       </div>
       <Offcanvas
         className="bg-antes-red"
         placement="end"
-        show={show}
+        show={_show}
         onHide={() => setShow(false)}
+        role="nav-offcanvas"
       >
         <Offcanvas.Header className="border-bottom">
           <img
             src={Hamburger}
             className="hamburger hover-pointer"
-            onClick={() => setShow(!show)}
+            onClick={() => setShow(!_show)}
           />
           <Offcanvas.Title as="h2" className="text-light">
             Offcanvas

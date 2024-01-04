@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ITraining from "../interfaces/ITraining";
 import { useGraphData } from "./useGraphData";
 import IProfile from "../interfaces/IProfile";
 import { getApiUrl } from "../utils/getApiUrl";
+import graphDataContext from "../contexts/graphDataContext";
 
 const useTrainingMark = () => {
   const [profile, setProfile] = useState<IProfile>();

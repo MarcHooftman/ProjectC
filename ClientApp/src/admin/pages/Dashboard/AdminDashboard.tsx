@@ -9,13 +9,13 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const admin = isAdmin();
   useEffect(() => {
-    console.log(localStorage.getItem("admin"));
+    //console.log(localStorage.getItem("admin"));
     if (!admin) {
       navigate("/login/admin");
     }
   }, [admin]);
   return (
-    <AdminLayout centered={true}>
+    <AdminLayout centered={true} role="admin-dashboard-page">
       <h1 className="my-5 blue-text">Admin dashboard</h1>
       <Row className="d-flex justify-content-center">
         <Col

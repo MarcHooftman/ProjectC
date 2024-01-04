@@ -12,6 +12,7 @@ const NavMenu = () => {
     <Navbar
       className="navbar-expand-lg p-3 bg-light d-flex align-items-center shadow sticky-top nav-container"
       container={false}
+      role="navmenu"
     >
       <NavbarBrand tag={Link} to="/">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
