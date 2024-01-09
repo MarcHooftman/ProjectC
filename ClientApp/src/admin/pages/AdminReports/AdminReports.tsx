@@ -3,7 +3,7 @@ import IReport from "../../../interfaces/IReport";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
 import { Table, Card, Modal, Button } from "react-bootstrap";
 import IForumPost from "../../../interfaces/IForumPost";
-import AdminForumPostCard from "../AdminForum/AdminForumPostCard";
+import AdminForumPostCard from "../AdminForum/components/AdminForumPostCard";
 import "./AdminReports.scss";
 import { useNavigate } from "react-router-dom";
 import { isAdmin } from "../../../utils/isAdmin";
@@ -13,7 +13,7 @@ const AdminReports = () => {
   const navigate = useNavigate();
   const admin = isAdmin();
   useEffect(() => {
-    console.log(localStorage.getItem("admin"));
+    //console.log(localStorage.getItem("admin"));
     if (!admin) {
       navigate("/login/admin");
     }
@@ -90,7 +90,7 @@ const AdminReports = () => {
 
   return (
     <>
-      <AdminLayout>
+      <AdminLayout role="admin-reports-page">
         <h1 className="my-5 blue-text">Alle Reports</h1>
         <Card className="shadow-lg bg-antes-primary">
           <Card.Body>

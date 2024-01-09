@@ -1,0 +1,35 @@
+.activity-modal {
+    max-width: none !important;
+    width: 40vw !important;
+}
+
+.userIcon-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.modal-footer {
+    justify-content: space-between !important;
+}
+
+.attendeesNumber {
+    text-align: left;
+}
+
+.activity-card {
+    min-width: 20rem !important;
+}
+
+.month-select {
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' fill='%23fff'><polygon points='0,0 100,0 50,50'/></svg>")
+    no-repeat !important;
+  background-size: 16px !important;
+  background-position: calc(100% - 10px) 17px !important;
+  background-repeat: no-repeat !important;
+
+  &:focus {
+    box-shadow: none !important;
+    border-color: #65c2c8 !important;
+  }
+}

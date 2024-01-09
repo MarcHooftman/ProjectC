@@ -10,7 +10,7 @@ const LinkedInIcon = require("../assets/linkedin-white.png");
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer ps-4">
+    <footer className="footer ps-4" role="footer">
       <Container>
         <Row>
           <Col md={3}>
@@ -62,6 +62,7 @@ const Footer: React.FC = () => {
           </Col>
         </Row>
       </Container>
+      <div className="bg-overlap end-0"></div>
     </footer>
   );
 };

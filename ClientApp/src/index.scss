@@ -118,3 +118,20 @@ body {
 .invert {
   filter: invert(100%);
 }
+
+.fs-default {
+  font-size: clamp(12px, 1.4rem, 4vw);
+}
+
+@media (max-width: 768px) {
+  
+  .mobile-truncate {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: calc(1.4rem * 5); // Adjust the line height accordingly
+  }
+  
+}

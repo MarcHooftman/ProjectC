@@ -48,7 +48,12 @@ const FilterDropdown = ({ page, options = [] }: Props) => {
   };
 
   return (
-    <Dropdown autoClose={true} show={show} onToggle={() => setShow(!show)}>
+    <Dropdown
+      autoClose={true}
+      show={show}
+      onToggle={() => setShow(!show)}
+      role="filter-dropdown"
+    >
       <Dropdown.Toggle className="no-after no-border bg-transparent">
         <img src={filterIcon} className="filter antes-blue-image" />
       </Dropdown.Toggle>

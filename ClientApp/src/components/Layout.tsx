@@ -6,24 +6,28 @@ interface Props {
   children?: any;
   centered?: boolean;
   cover?: React.ReactNode;
+  role?: string;
 }
 
-const Layout = ({ children, cover, centered = false, }: Props) => {
+const Layout = ({ children, cover, centered = false, role = "" }: Props) => {
   return (
     <>
-
-      <div className="bg-color pb-5 vw-100">
+      <div className="bg-color pb-5 vw-100" role="layout">
         <NavMenu />
         {cover || <></>}
-        <Container tag="main" className={centered ? " d-flex flex-column align-items-center" : ""}>{children}</Container>
+        <Container
+          role={role}
+          tag="main"
+          className={centered ? " d-flex flex-column align-items-center" : ""}
+        >
+          {children}
+        </Container>
       </div>
 
       <div className="footer bottom-0 w-100">
         <Footer />
       </div>
-
     </>
-
   );
 };
 

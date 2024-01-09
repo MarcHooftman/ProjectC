@@ -9,7 +9,7 @@ const Hamburger = require("../../assets/hamburger.png");
 const NavDropDown = () => {
   const logout = useLogout();
   return (
-    <Dropdown>
+    <Dropdown role="nav-dropdown">
       <Dropdown.Toggle className="no-after bg-transparent no-border">
         <img src={Hamburger} className="hamburger gray-image" />
       </Dropdown.Toggle>

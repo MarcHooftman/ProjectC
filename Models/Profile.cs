@@ -19,4 +19,5 @@ public class Profile
 
     // navigational
     public IEnumerable<Training>? Training { get; set; }
+    public IEnumerable<Activity>? Activity { get; set; }
 }

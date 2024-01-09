@@ -1,0 +1,30 @@
+.clock-icon {
+    height: 60px;
+    width: 60px !important;
+}
+
+.home-col {
+    min-width: 25rem;
+}
+
+.home-row {
+    gap: 2.5rem;
+}
+
+@media (max-width: 450px) {
+    .home-col {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .d-flex.cover-card {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-row {
+        gap: 1.5rem;
+    }
+}

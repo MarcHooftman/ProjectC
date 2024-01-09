@@ -22,13 +22,6 @@ public class AntesContext : DbContext
             .WithMany()
             .HasForeignKey(_ => _.ProfileID);
 
-
-
-        // modelBuilder.Entity<Training>()
-        //     .HasOne(_ => _.Media)
-        //     .WithMany()
-        //     .HasForeignKey(_ => _.MediaID);
-
         modelBuilder.Entity<ForumPost>()
         .HasMany(_ => _.Comments)
         .WithOne()
@@ -58,8 +51,8 @@ public class AntesContext : DbContext
             .WithMany()
             .UsingEntity<TrainingProfile>();
 
-        modelBuilder.Entity<Activity>()
-            .HasMany(_ => _.Profiles)
+        modelBuilder.Entity<Profile>()
+            .HasMany(_ => _.Activity)
             .WithMany()
             .UsingEntity<ProfileActivity>();
 

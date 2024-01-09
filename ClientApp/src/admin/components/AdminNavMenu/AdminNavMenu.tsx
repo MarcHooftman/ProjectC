@@ -9,6 +9,7 @@ const AdminNavMenu = () => {
     <Navbar
       className="navbar-expand-lg p-3 antes-white border-bottom d-flex justify-content-around align-items-center shadow sticky-top"
       container={false}
+      role="admin-navmenu"
     >
       <NavbarBrand tag={Link} to="/admin">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
