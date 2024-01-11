@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { Badge, Button } from "react-bootstrap";
 
 interface Props {
@@ -14,12 +14,9 @@ const TagInput = ({ onChange = () => {}, previousTags = [] }: Props) => {
     setTags(previousTags);
   }, [previousTags]);
 
-  useEffect(() => {
-    onChange(tags);
-  }, [tags]);
-
   const handleAddTag = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    onChange(tags);
     if (input.trim()) {
       setTags((prevTags) => [...prevTags, input]);
       setInput("");

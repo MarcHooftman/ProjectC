@@ -1,4 +1,3 @@
-import React from "react";
 import ITraining from "../../../../interfaces/ITraining";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
