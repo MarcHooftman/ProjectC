@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AntesContext>();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
