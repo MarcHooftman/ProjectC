@@ -5,16 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AntesContext>();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "allow_origins",
-      policy  =>
-      {
-          policy.WithOrigins("https://localhost:44463",
-                              "https://antesonboarding.vercel.app");
-      });
-});
-
 
 var app = builder.Build();
 
@@ -25,7 +15,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseCors("allow_origin");
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -45,7 +34,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net")
+    .WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());
