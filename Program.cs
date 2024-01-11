@@ -36,7 +36,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net")
+    .WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app", "https://5344-2a02-a212-92c8-8400-a99d-7185-f1f5-8289.ngrok-free.app", "https://marc-hooftman.ddns.net")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());
