@@ -18,7 +18,7 @@ if (!app.Environment.IsDevelopment())
 app.Use(async (context, next) =>
 {
     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,ngrok-skip-browser-warning");
     await next.Invoke();
 });
 
