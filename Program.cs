@@ -16,13 +16,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// app.Use(async (context, next) =>
-// {
-//     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
-//     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-//     context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,ngrok-skip-browser-warning");
-//     await next.Invoke();
-// });
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,ngrok-skip-browser-warning");
+    await next.Invoke();
+});
 
 app.Use(async (context, next) =>
 {
@@ -35,13 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app")
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials());
-
-
+app.UseCors();
 
 app.UseEndpoints(endpoints =>
 {
