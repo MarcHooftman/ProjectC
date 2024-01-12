@@ -3,7 +3,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AntesContext>();
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net", "https://antesonboarding.vercel.app")
+            .WithHeaders("Content-Type")
+            .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+            .AllowCredentials();
+    });
+});
 
 
 var app = builder.Build();
@@ -14,14 +23,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
-    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE, OPTIONS");
-    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-    await next.Invoke();
-});
+// app.Use(async (context, next) =>
+// {
+//     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
+//     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
+//     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE, OPTIONS");
+//     context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+//     await next.Invoke();
+// });
 
 app.Use(async (context, next) =>
 {
@@ -33,10 +42,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net", "https://antesonboarding.vercel.app")
-    .AllowAnyHeader()
-    .AllowCredentials());
+app.UseCors();
 
 
 app.UseEndpoints(endpoints =>
