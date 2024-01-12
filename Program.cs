@@ -31,13 +31,13 @@ app.Use(async (context, next) =>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseRouting();
+
 app.UseCors(builder => builder
     .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net", "https://antesonboarding.vercel.app")
     .AllowAnyHeader()
     .AllowCredentials());
 
-
-app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {
