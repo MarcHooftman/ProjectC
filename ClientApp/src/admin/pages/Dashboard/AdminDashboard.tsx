@@ -9,20 +9,19 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const admin = isAdmin();
   useEffect(() => {
-    console.log(localStorage.getItem("admin"));
+    //console.log(localStorage.getItem("admin"));
     if (!admin) {
       navigate("/login/admin");
     }
   }, [admin]);
   return (
-    <AdminLayout centered={true}>
+    <AdminLayout centered={true} role="admin-dashboard-page">
       <h1 className="my-5 blue-text">Admin dashboard</h1>
       <Row className="d-flex justify-content-center">
         <Col
-          xs={4}
           as={Link}
           to="/admin/forum"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
         >
           <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
@@ -36,10 +35,9 @@ const AdminDashboard = () => {
         </Col>
 
         <Col
-          xs={4}
           as={Link}
           to="/admin/activities"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
         >
           <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
@@ -54,10 +52,9 @@ const AdminDashboard = () => {
         </Col>
 
         <Col
-          xs={4}
           as={Link}
           to="/admin/trainings"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
         >
           <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
@@ -72,10 +69,9 @@ const AdminDashboard = () => {
         </Col>
 
         <Col
-          xs={4}
           as={Link}
           to="/admin/reports"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
         >
           <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
@@ -90,10 +86,9 @@ const AdminDashboard = () => {
         </Col>
 
         <Col
-          xs={4}
           as={Link}
           to="/admin/users"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
         >
           <Card className="c shadow-lg p-3 bg-antes-primary">
             <Card.Body>
@@ -108,10 +103,9 @@ const AdminDashboard = () => {
         </Col>
 
         <Col
-          xs={4}
           as={Link}
           to="/"
-          className="py-3 text-decoration-none"
+          className="py-3 text-decoration-none admin-dashboard-col"
           onClick={() => {
             localStorage.removeItem("admin");
           }}

@@ -1,6 +1,7 @@
 import { PublicClientApplication, LogLevel } from "@azure/msal-browser";
 import { callMsGraph } from "../graph";
 import { loginRequest } from "../authConfig";
+import { useIsAuthenticated } from "@azure/msal-react";
 
 const allowedRedirectURIs = [
   "https://antesonboarding.vercel.app/",
@@ -54,6 +55,10 @@ function createMsalConfig() {
 export let msalInstance = new PublicClientApplication(createMsalConfig());
 
 async function getGraphData() {
+  // if (!useIsAuthenticated()) {
+  //   return null;
+  // }
+
   const accounts = msalInstance.getAllAccounts();
 
   const graphData = await msalInstance

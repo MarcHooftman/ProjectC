@@ -7,7 +7,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AntesContext>();
 builder.Services.AddCors();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,24 +16,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// app.Use(async (context, next) =>
-// {
-//     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
-//     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
-//     context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-//     context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-//     await next.Invoke();
-// });
-
-app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
-                .AllowCredentials()); // allow credentials
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,ngrok-skip-browser-warning");
+    await next.Invoke();
+});
 
 app.Use(async (context, next) =>
 {
-    Console.WriteLine($"Using {context.Request.Path}");
+    Console.WriteLine($"{context.Request.Method}: {context.Request.Path}");
     await next.Invoke();
 });
 
@@ -42,13 +35,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseCors(builder => builder
-    .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net")
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials());
-
 
 
 app.UseEndpoints(endpoints =>

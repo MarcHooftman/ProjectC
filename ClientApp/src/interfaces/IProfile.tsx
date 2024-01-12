@@ -8,9 +8,8 @@ export default interface IProfile {
   role: string;
   dateOfBirth?: string;
   email: string;
-  // ProfilePicture: Media;
   training: ITraining[];
-  activity: IActivity[];
+  activity?: IActivity[];
   memberSince: string;
   phoneNumber?: string | null;
   bio?: string;

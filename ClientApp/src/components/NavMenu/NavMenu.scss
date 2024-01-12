@@ -12,7 +12,6 @@
 }
 
 .hamburger-container {
-  transition: 750ms;
   height: 100vh !important;
   width: 6.5rem;
   justify-content: flex-start;
@@ -54,7 +53,10 @@
   width: 4rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
+  .offcanvas {
+    width: 100vw !important;
+  }
 }
 
 @media (max-width: 300px) {

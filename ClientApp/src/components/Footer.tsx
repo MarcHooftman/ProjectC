@@ -10,7 +10,7 @@ const LinkedInIcon = require("../assets/linkedin-white.png");
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer ps-4">
+    <footer className="footer ps-4" role="footer">
       <Container>
         <Row>
           <Col md={3}>
