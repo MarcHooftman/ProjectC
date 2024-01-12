@@ -7,8 +7,8 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net", "https://antesonboarding.vercel.app")
-            .WithHeaders("Content-Type")
+        builder.WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app")
+            .WithHeaders("Content-Type", "ngrok-skip-browser-warning")
             .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
             .AllowCredentials();
     });
