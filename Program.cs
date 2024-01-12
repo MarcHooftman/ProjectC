@@ -1,14 +1,12 @@
 using API;
-
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AntesContext>();
 builder.Services.AddCors();
 
-var app = builder.Build();
 
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -18,10 +16,10 @@ if (!app.Environment.IsDevelopment())
 
 app.Use(async (context, next) =>
 {
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
     context.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44463");
-    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,ngrok-skip-browser-warning");
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "https://antesonboarding.vercel.app");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
     await next.Invoke();
 });
 
@@ -30,25 +28,25 @@ app.Use(async (context, next) =>
     Console.WriteLine($"Using {context.Request.Path}");
     await next.Invoke();
 });
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseCors(builder => builder
+    .WithOrigins("https://localhost:44463", "https://192.168.178.80:44463", "https://marc-hooftman.ddns.net", "https://antesonboarding.vercel.app")
+    .AllowAnyHeader()
+    .AllowCredentials());
 
-app.UseCors();
+
+app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
-
 app.MapFallbackToFile("index.html");
-
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {
@@ -64,5 +62,4 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while seeding the database.");
     }
 }
-
 app.Run();
