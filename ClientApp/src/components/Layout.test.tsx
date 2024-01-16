@@ -3,14 +3,26 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./Layout";
 
 describe("Layout", () => {
-  it("renders without crashing", () => {
-    const { getByRole } = render(
+  let getByRole: (text: string) => HTMLElement;
+  beforeEach(() => {
+    const renderResult = render(
       <Router>
-        <Layout />
+        <Layout role="container" />
       </Router>
     );
+    getByRole = renderResult.getByRole;
+  });
+  it("renders without crashing", () => {
+    expect(getByRole).toBeDefined();
+  });
 
+  it("displays the layout", () => {
     const component = getByRole("layout");
     expect(component).toBeInTheDocument();
+  });
+
+  it("displays the container", () => {  
+    const container = getByRole("container");
+    expect(container).toBeInTheDocument();
   });
 });

@@ -8,11 +8,11 @@ public class AntesContext : DbContext
     {
         this.ChangeTracker.AutoDetectChangesEnabled = false;
     }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(@"Host=localhost:5432;Username=postgres;Password=antes;Database=Antes;Integrated Security=true;Pooling=true;");
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,10 +23,10 @@ public class AntesContext : DbContext
             .HasForeignKey(_ => _.ProfileID);
 
         modelBuilder.Entity<ForumPost>()
-        .HasMany(_ => _.Comments)
-        .WithOne()
-        .HasForeignKey(_ => _.ForumPostID) // Use ForumPostID to set up the relationship
-        .OnDelete(DeleteBehavior.Cascade); // Enable cascade delete
+            .HasMany(_ => _.Comments)
+            .WithOne()
+            .HasForeignKey(_ => _.ForumPostID)
+            .OnDelete(DeleteBehavior.Cascade); 
 
         modelBuilder.Entity<ForumPost>()
             .HasMany(_ => _.Tags)
@@ -62,7 +62,6 @@ public class AntesContext : DbContext
 
     public DbSet<Activity> Activity { get; set; } = default!;
     public DbSet<ForumPost> ForumPost { get; set; } = default!;
-    // public DbSet<Media> Media { get; set; } = default!;
     public DbSet<Profile> Profile { get; set; } = default!;
     public DbSet<Training> Training { get; set; } = default!;
     public DbSet<Like> Like { get; set; } = default!;
