@@ -40,14 +40,18 @@ const AdminAddAdmin = () => {
                 className="text-center"
                 onChange={(e) => setEmail(e.target.value)}
                 aria-describedby="admin-warning"
+                role="email-input"
               />
-              <Form.Text className="text-warning text-wrap text-center">
+              <Form.Text
+                className="text-warning text-wrap text-center"
+                role="warning"
+              >
                 Let op! Deze rechten bieden toegang tot het admin dashboard.
                 <br></br>
                 Alleen beheerders met hogere niveau's kunnen rechten intrekken.
               </Form.Text>
             </div>
-            <Button type="submit" className="fw-bold">
+            <Button type="submit" className="fw-bold" role="submit-button">
               Versturen
             </Button>
           </Form>

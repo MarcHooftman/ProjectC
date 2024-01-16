@@ -124,7 +124,7 @@ const AdminTrainingCard = ({
         role="admin-training-card"
       >
         <Card.Header>
-          <Card.Title>
+          <Card.Title role="training-title">
             <strong>{Training?.title}</strong>
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
@@ -142,7 +142,9 @@ const AdminTrainingCard = ({
           </div>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{Training?.description}</Card.Text>
+          <Card.Text role="training-description">
+            {Training?.description}
+          </Card.Text>
         </Card.Body>
       </Card>
     </>

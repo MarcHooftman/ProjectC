@@ -23,7 +23,7 @@ const AdminDashboard = () => {
           to="/admin/forum"
           className="py-3 text-decoration-none admin-dashboard-col"
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card className="c shadow-lg p-3 bg-antes-primary" role="forum-card">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Forum beheren
@@ -39,7 +39,10 @@ const AdminDashboard = () => {
           to="/admin/activities"
           className="py-3 text-decoration-none admin-dashboard-col"
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card
+            className="c shadow-lg p-3 bg-antes-primary"
+            role="activity-card"
+          >
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Activiteiten beheren
@@ -56,7 +59,10 @@ const AdminDashboard = () => {
           to="/admin/trainings"
           className="py-3 text-decoration-none admin-dashboard-col"
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card
+            className="c shadow-lg p-3 bg-antes-primary"
+            role="training-card"
+          >
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Trainingen beheren
@@ -73,7 +79,7 @@ const AdminDashboard = () => {
           to="/admin/reports"
           className="py-3 text-decoration-none admin-dashboard-col"
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card className="c shadow-lg p-3 bg-antes-primary" role="report-card">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Reports beheren
@@ -90,7 +96,7 @@ const AdminDashboard = () => {
           to="/admin/users"
           className="py-3 text-decoration-none admin-dashboard-col"
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card className="c shadow-lg p-3 bg-antes-primary" role="user-card">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Gebruikers beheren
@@ -110,7 +116,7 @@ const AdminDashboard = () => {
             localStorage.removeItem("admin");
           }}
         >
-          <Card className="c shadow-lg p-3 bg-antes-primary">
+          <Card className="c shadow-lg p-3 bg-antes-primary" role="logout-card">
             <Card.Body>
               <Card.Title className="mb-5" as="h2">
                 Home pagina
