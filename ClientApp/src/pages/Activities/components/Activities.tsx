@@ -12,6 +12,7 @@ import CustomUnauthenticatedTemplate from "../../../components/AuthTemplates/Cus
 import { Button } from "react-bootstrap";
 import { useGraphData } from "../../../hooks/useGraphData";
 import IProfile from "../../../interfaces/IProfile";
+import { useIsAuthenticated } from "@azure/msal-react";
 
 const Activities = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
@@ -104,13 +105,13 @@ const Activities = () => {
   };
 
   return (
-    <Layout>
+    <Layout role="activities-page">
       <h1 className="my-5 blue-text fw-bolder">Activiteiten</h1>
       <CustomAuthenticatedTemplate>
         <ActivityCalendar activities={activities} />
         <span className="d-flex align-items-center justify-content-between mt-5 mb-4">
           <h2 className="blue-text fw-bolder">Activiteiten</h2>
-          <FormGroup noMargin>
+          <FormGroup noMargin role="month-select-form">
             <Input
               type="select"
               value={month || ""}

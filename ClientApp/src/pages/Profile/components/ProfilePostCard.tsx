@@ -37,16 +37,16 @@ const ProfilePostCard = ({ post }: Props) => {
       >
         <Row className="w-100 d-flex align-items-center profile-post-card-header-row mx-0">
           <Col className="w-100 post-title px-0 pt-2">
-            <h4>{post?.title}</h4>
+            <h4 role="post-title">{post?.title}</h4>
           </Col>
 
           <Col className="w-100 d-flex align-items-center gap-2 post-details">
-            <span className="antes-secondary">{formattedDate}</span>
+            <span className="antes-secondary" role="post-date">{formattedDate}</span>
             <img className="arrow-icon" src={collapse ? arrowUp : arrowDown} />
           </Col>
         </Row>
       </Card.Header>
-      <Card.Body as="p" className="fs-default">
+      <Card.Body as="p" className="fs-default" role="post-content">
         {post?.content}
       </Card.Body>
       {Array.isArray(post?.tags) && (post?.tags.length || -1) > 0 && (
