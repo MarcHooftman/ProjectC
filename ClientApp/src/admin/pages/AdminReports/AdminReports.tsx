@@ -107,9 +107,9 @@ const AdminReports = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {reports.map((report) => (
+                  {reports.map((report, index) => (
                     <tr
-                      key={report.id}
+                      key={index}
                       onClick={() => handleReportClick(report)}
                       className="hover-pointer"
                     >
