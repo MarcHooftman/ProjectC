@@ -11,14 +11,14 @@ const AdminNavMenu = () => {
       container={false}
       role="admin-navmenu"
     >
-      <NavbarBrand tag={Link} to="/admin">
+      <NavbarBrand tag={Link} to="/admin" role="nav-brand">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
       </NavbarBrand>
       <div></div>
-      <Nav>
+      <Nav role="nav">
         <NavItem>
-          <Dropdown>
-            <Dropdown.Toggle className="no-after bg-transparent no-border">
+          <Dropdown role="dropdown">
+            <Dropdown.Toggle className="no-after bg-transparent no-border" role="dropdown-toggle">
               <img src={Hamburger} className="hamburger gray-image" />
             </Dropdown.Toggle>
             <Dropdown.Menu className="">
