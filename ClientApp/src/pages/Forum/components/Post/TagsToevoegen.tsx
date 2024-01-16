@@ -12,13 +12,17 @@ const TagInput = ({ onChange = () => {}, previousTags = [] }: Props) => {
 
   useEffect(() => {
     setTags(previousTags);
-  }, [previousTags]);
+  }, []);
+
+  useEffect(() => {
+    onChange(tags);
+  }, [tags]);
 
   const handleAddTag = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onChange(tags);
-    if (input.trim()) {
-      setTags((prevTags) => [...prevTags, input]);
+    if (input.trim()){
+      setTags([...tags, input]);
       setInput("");
     }
   };
