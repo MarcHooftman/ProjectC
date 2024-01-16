@@ -1,30 +1,61 @@
 import { render } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
 import CustomAuthenticatedTemplate from "./CustomAuthenticatedTemplate";
 import CustomUnauthenticatedTemplate from "./CustomUnauthenticatedTemplate";
 
 describe("CustomAuthenticatedTemplate", () => {
-  it("renders without crashing", () => {
-    const { getByRole } = render(
-      <Router>
-        <CustomAuthenticatedTemplate />
-      </Router>
+  let getByRole: (role: string) => HTMLElement;
+  beforeEach(() => {
+    localStorage.setItem("temporaryUser", "test");
+    const component = render(
+      <CustomAuthenticatedTemplate>
+        <div role="child" />
+      </CustomAuthenticatedTemplate>
     );
+    getByRole = component.getByRole;
+  });
 
+  afterEach(() => {
+    localStorage.removeItem("temporaryUser");
+  });
+
+  it("renders without crashing", () => {
+    expect(getByRole).toBeDefined();
+  });
+
+  it("renders a auth-template", () => {
     const component = getByRole("auth-template");
+    expect(component).toBeInTheDocument();
+  });
+
+  it("renders a child", () => {
+    const component = getByRole("child");
     expect(component).toBeInTheDocument();
   });
 });
 
 describe("CustomUnauthenticatedTemplate", () => {
-  it("renders without crashing", () => {
-    const { getByRole } = render(
-      <Router>
-        <CustomUnauthenticatedTemplate />
-      </Router>
+  let getByRole: (role: string) => HTMLElement;
+  beforeEach(() => {
+    localStorage.removeItem("temporaryUser"); // just in case
+    const component = render(
+      <CustomUnauthenticatedTemplate>
+        <div role="child" />
+      </CustomUnauthenticatedTemplate>
     );
+    getByRole = component.getByRole;
+  });
 
+  it("renders without crashing", () => {
+    expect(getByRole).toBeDefined();
+  });
+
+  it("renders a unauth-template", () => {
     const component = getByRole("unauth-template");
     expect(component).toBeInTheDocument();
   });
+
+  // it("renders a child", () => {
+  //   const component = getByRole("child");
+  //   expect(component).toBeInTheDocument();
+  // });
 });

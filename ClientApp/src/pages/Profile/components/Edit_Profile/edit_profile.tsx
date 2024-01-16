@@ -99,6 +99,7 @@ const EditProfile = () => {
                   value={role || ""}
                   onChange={handleRoleChange}
                   placeholder={role || ""}
+                  role="role-input"
                 />
               </div>
               <div className="form-group mt-3">
@@ -111,6 +112,7 @@ const EditProfile = () => {
                   value={phoneNumber || ""}
                   onChange={handlePhoneNumberChange}
                   placeholder={phoneNumber || ""}
+                  role="phone-input"
                 />
               </div>
               <div className="form-group mt-3">
@@ -121,10 +123,11 @@ const EditProfile = () => {
                   name="Bio"
                   value={bio || ""}
                   onChange={handleBioChange}
+                  role="bio-input"
                   placeholder={bio || ""}
                 />
               </div>
-              <button type="submit" className="btn btn-primary mt-4 fw-bold">
+              <button type="submit" className="btn btn-primary mt-4 fw-bold" role="submit-button">
                 Wijzigingen opslaan
               </button>
             </form>

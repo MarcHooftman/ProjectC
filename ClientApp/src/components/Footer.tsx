@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
             </Link>
           </Col>
           <Col md={6}>
-            <div className="footer-links mt-3">
+            <div className="footer-links mt-3" role="footer-links">
               <Link to="https://www.anteszorg.nl/disclaimer" target="_blank">
                 Disclaimer en privacy
               </Link>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
             </div>
           </Col>
           <Col md={3}>
-            <div className="footer-social gap-3 d-flex">
+            <div className="footer-social gap-3 d-flex" role="social-links">
               <a
                 href="https://www.facebook.com/AntesZorg/"
                 target="_blank"

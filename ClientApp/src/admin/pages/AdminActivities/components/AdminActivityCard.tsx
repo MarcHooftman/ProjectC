@@ -170,15 +170,15 @@ const AdminActivityCard = ({ activity, onDelete = () => {} }: Props) => {
         role="admin-activity-card"
       >
         <Card.Header>
-          <Card.Title>
+          <Card.Title role="activity-title">
             <strong>{activity?.title}</strong>
           </Card.Title>
-          <Card.Subtitle>{formattedDate}</Card.Subtitle>
+          <Card.Subtitle role="activity-date">{formattedDate}</Card.Subtitle>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{activity?.description}</Card.Text>
+          <Card.Text role="activity-description">{activity?.description}</Card.Text>
         </Card.Body>
-        <Card.Footer className="text-white-50">
+        <Card.Footer className="text-white-50" role="activity-location">
           {activity?.location}
         </Card.Footer>
       </Card>

@@ -33,8 +33,9 @@ const TextInputWithCounter = ({
         }}
         maxLength={maxLength}
         placeholder={placeholder}
+        role="text-input"
       ></textarea>
-      <div>{charsLeft} characters left</div>
+      <div role="chars-left">{charsLeft} characters left</div>
     </div>
   );
 };

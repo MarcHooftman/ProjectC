@@ -110,6 +110,7 @@ const AdminEditActivity = () => {
                 placeholder="Titel van de activiteit"
                 value={title}
                 onChange={handleTitleChange}
+                role="title-input"
               />
             </div>
 
@@ -123,6 +124,7 @@ const AdminEditActivity = () => {
                 onChange={handleDescriptionChange}
                 maxLength={maxLength}
                 placeholder="Beschrijving van de activiteit"
+                role="description-input"
               />
               {charsLeft} characters left
             </div>
@@ -135,6 +137,7 @@ const AdminEditActivity = () => {
                   type="date"
                   value={date}
                   onChange={handleDateChange}
+                  role="date-input"
                 />
               </div>
               <div className="d-flex flex-column">
@@ -144,6 +147,7 @@ const AdminEditActivity = () => {
                   type="time"
                   value={time}
                   onChange={handleTimeChange}
+                  role="time-input"
                 />
               </div>
             </div>
@@ -156,10 +160,11 @@ const AdminEditActivity = () => {
                 placeholder="Locatie van de activiteit"
                 value={location}
                 onChange={handleLocationChange}
+                role="location-input"
               />
             </div>
 
-            <Button type="submit" className="fw-bold">
+            <Button type="submit" className="fw-bold" role="submit-button">
               Activiteit toevoegen
             </Button>
           </form>

@@ -44,6 +44,7 @@ const AdminAddTempUser = () => {
               id="emailInput"
               placeholder="voorbeeld@mail.nl"
               onChange={(e) => setEmail(e.target.value)}
+              role="email-input"
             />
 
             <Form.Label htmlFor="expiryInput" className="mt-3">
@@ -55,12 +56,13 @@ const AdminAddTempUser = () => {
               placeholder=""
               aria-describedby="expiryContext"
               onChange={(e) => setExpiryDate(e.target.value)}
+              role="expiry-input"
             />
             <Form.Text id="expiryContext" className="px-1 text-white-50">
               Dit is de datum waarop de verificatie code verloopt.
             </Form.Text>
 
-            <Button type="submit" className="mt-3 fw-bold">
+            <Button type="submit" className="mt-3 fw-bold" role="submit-button">
               Verstuur
             </Button>
           </Form>

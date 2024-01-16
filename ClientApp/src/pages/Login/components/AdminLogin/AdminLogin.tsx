@@ -60,6 +60,7 @@ const AdminLogin = () => {
                 type="email"
                 placeholder="E-mailadres"
                 onChange={(e) => setEmail(e.target.value)}
+                role="email-input"
               />
             </Form.Group>
             <Form.Group className="d-flex flex-column align-items-start w-100">
@@ -71,6 +72,7 @@ const AdminLogin = () => {
                 type="password"
                 placeholder="Wachtwoord"
                 onChange={(e) => setPassword(e.target.value)}
+                role="password-input"
               />
             </Form.Group>
             <Form.Group className="d-flex flex-column align-items-start gap-2 w-100">
@@ -81,7 +83,7 @@ const AdminLogin = () => {
               >
                 {feedback}
               </Form.Control.Feedback>
-              <Button type="submit" className="w-50">
+              <Button type="submit" className="w-50" role="submit-button">
                 Inloggen
               </Button>
             </Form.Group>

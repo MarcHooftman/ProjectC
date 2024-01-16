@@ -96,15 +96,16 @@ const AdminAddTrainings = () => {
                 placeholder="Titel"
                 className=""
                 onChange={onTitleChange}
+                role="title-input"
               />
               <TextInputWithCounter
-                placeholder="Descriptie"
+                placeholder="Beschrijving"
                 maxLength={1000}
                 onChange={onDescriptionChange}
               />
-              <input placeholder="URL" onChange={onURLChange} />
-              <TagInput onChange={(taglist) => setTags(taglist)} />
-              <Button className="w-25 mt-4" variant="primary" type="submit">
+              <input placeholder="URL" onChange={onURLChange} role="url-input" />
+              <TagInput onChange={(taglist) => setTags(taglist)}/>
+              <Button className="w-25 mt-4" variant="primary" type="submit" role="submit-button">
                 Plaats
               </Button>
             </form>

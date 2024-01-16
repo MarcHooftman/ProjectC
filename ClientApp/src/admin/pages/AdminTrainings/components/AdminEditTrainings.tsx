@@ -102,6 +102,7 @@ const AdminEditTrainings = () => {
                 className=""
                 onChange={onTitleChange}
                 value={title}
+                role="title-input"
               />
               <TextInputWithCounter
                 value={description}
@@ -109,12 +110,12 @@ const AdminEditTrainings = () => {
                 maxLength={1000}
                 onChange={onDescriptionChange}
               />
-              <input placeholder="URL" onChange={onURLChange} value={url} />
+              <input placeholder="URL" onChange={onURLChange} value={url} role="url-input" />
               <TagInput
                 previousTags={tags}
                 onChange={(taglist) => setTags(taglist)}
               />
-              <Button className="w-25 mt-4" variant="primary" type="submit">
+              <Button className="w-25 mt-4" variant="primary" type="submit" role="submit-button">
                 Opslaan
               </Button>
             </form>

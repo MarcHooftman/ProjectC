@@ -95,7 +95,7 @@ const AdminReports = () => {
         <Card className="shadow-lg bg-antes-primary">
           <Card.Body>
             {reports.length > 0 ? (
-              <Table striped={true} borderless={true} responsive={true}>
+              <Table striped={true} borderless={true} responsive={true} role="report-table">
                 <thead>
                   <tr>
                     <th className="text-light">Post/Comment ID</th>
@@ -107,9 +107,9 @@ const AdminReports = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {reports.map((report) => (
+                  {reports.map((report, index) => (
                     <tr
-                      key={report.id}
+                      key={index}
                       onClick={() => handleReportClick(report)}
                       className="hover-pointer"
                     >

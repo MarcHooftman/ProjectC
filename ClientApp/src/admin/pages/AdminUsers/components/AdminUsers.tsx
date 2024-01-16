@@ -151,7 +151,9 @@ const AdminUsers = () => {
   return (
     <AdminLayout role="admin-users-page">
       <span className="forum-header d-flex justify-content-between align-items-center my-5">
-        <h1 className="blue-text">Gebruikers</h1>
+        <h1 className="blue-text" role="page-title">
+          Gebruikers
+        </h1>
         <FilterDropdown
           page="admin/users"
           options={["Beheerders", "Tijdelijk", "Personeel"]}

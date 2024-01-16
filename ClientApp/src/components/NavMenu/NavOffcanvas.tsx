@@ -24,6 +24,7 @@ const NavOffcanvas = ({ show }: Props) => {
           src={Hamburger}
           className="hamburger hover-pointer"
           onClick={() => setShow(!_show)}
+          role="offcanvas-toggle"
         />
       </div>
       <Offcanvas
@@ -38,13 +39,18 @@ const NavOffcanvas = ({ show }: Props) => {
             src={Hamburger}
             className="hamburger hover-pointer"
             onClick={() => setShow(!_show)}
+            role="offcanvas-toggle-off"
           />
-          <Offcanvas.Title as="h2" className="text-light">
-            Offcanvas
+          <Offcanvas.Title
+            as="h2"
+            className="text-light"
+            role="offcanvas-title"
+          >
+            Overzicht
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="p-0 pt-3">
-          <Nav className="d-flex flex-column">
+          <Nav className="d-flex flex-column" role="nav-offcanvas-nav">
             <CustomAuthenticatedTemplate>
               {[
                 ["/", "Home"],
