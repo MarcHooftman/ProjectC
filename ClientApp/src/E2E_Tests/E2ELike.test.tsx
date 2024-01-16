@@ -25,13 +25,11 @@ describe('Like API endpoints', () => {
     test('GET /api/like', async () => {
         const response = await fetch(fetchUrl, { method: 'GET' });
         expect(response.status).toBe(200);
-        // Add more assertions based on your API response
     });
 
     test('GET /api/like/{id}', async () => {
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
         expect(response.status).toBe(200);
-        // Add more assertions based on your API response
     });
 
 
@@ -49,7 +47,6 @@ describe('Like API endpoints', () => {
             body: JSON.stringify(updatedLike) 
         });
         expect(response.status).toBe(204);
-        // Add more assertions based on your API response
     });
 
     test('DELETE /api/like/{id}', async () => {
