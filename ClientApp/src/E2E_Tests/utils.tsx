@@ -18,7 +18,7 @@ let CREATED_POST_ID: number = 0;
 let CREATED_LIKE_ID: number = 0;
 let CREATED_REPORT_ID: number = 0;
 
-function generateRandomString(length: number = 30): string {
+export function generateRandomString(length: number = 30): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -211,8 +211,8 @@ export async function createMockProfile() {
         fullName: "John Doe",
         role: "User",
         email: generateRandomString() + "@profile.com",
+        activity: [],
         training: [],
-        activity: [],	
         memberSince: new Date().toISOString().slice(0, 10),
         department: "IT",
     };

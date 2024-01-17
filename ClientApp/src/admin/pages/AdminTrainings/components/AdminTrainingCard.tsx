@@ -69,7 +69,7 @@ const AdminTrainingCard = ({
         <Modal.Header closeButton>
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
-            <p style={{ margin: "0px" }} className="fs-5 blue-text">
+            <p style={{ margin: "0px", maxWidth: "60vw" }} className="fs-5 blue-text">
               {Training?.description}
             </p>
             <p style={{ fontSize: "15px", margin: "0px" }}>Views: {views}</p>

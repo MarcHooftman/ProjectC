@@ -24,17 +24,18 @@ describe('Profile API endpoints', () => {
             id: TEST_ID,
             fullName: "Test Profile",
             role: "Test Role",
-            dateOfBirth: "2021-01-01",
+            dateOfBirth: new Date().toISOString().slice(0, 10),
             email: "Test Email",
             training: [],
             activity: [],
-            memberSince: "2021-01-01",
+            memberSince: new Date().toISOString().slice(0, 10),
             department: "Test Department",
         };
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             },
             body: JSON.stringify(profile) 
         });
@@ -42,23 +43,30 @@ describe('Profile API endpoints', () => {
     });
 
     test('GET /api/profile', async () => {
-        const response = await fetch(fetchUrl, { method: 'GET' });
+        const response = await fetch(fetchUrl, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/profile/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/profile/by-email/{email}', async () => {
-        const response = await fetch(`${fetchUrl}/by-email/Test Email`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/by-email/Test%20Email`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
     
     test('GET /api/profile/email-exists/{email}', async () => {
-        const response = await fetch(`${fetchUrl}/email-exists/Test Email`, { method: 'GET' });
-        expect(response).toBe(true);
+        const response = await fetch(`${fetchUrl}/email-exists/Test%20Email`, 
+        { 
+            method: 'GET' , 
+            headers:
+            {
+              "ngrok-skip-browser-warning": "1",
+            },
+        });
+        expect(await response.json()).toBe(true);
         expect(response.status).toBe(200);
     });
 
@@ -68,11 +76,11 @@ describe('Profile API endpoints', () => {
             id: TEST_ID,
             fullName: "Test Profile",
             role: "Test Role",
-            dateOfBirth: "2021-01-01",
+            dateOfBirth: new Date().toISOString().slice(0, 10),
             email: "Test Email",
             training: [],
             activity: [],
-            memberSince: "2021-01-01",
+            memberSince: new Date().toISOString().slice(0, 10),
             department: "Test Department",
             bio: "Test Bio",
             phoneNumber: "Test Phone Number",
@@ -80,21 +88,23 @@ describe('Profile API endpoints', () => {
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { 
             method: 'PUT', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
+
             }, 
             body: JSON.stringify(updatedProfile) 
         });
         expect(response.status).toBe(204);
         
         // has been updated?!
-        const newobj = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const newobj = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" }});
         const newobjjson = await newobj.json().then((data: IProfile) => data);
         expect(newobjjson.bio).toBe("Test Bio");
         expect(newobjjson.phoneNumber).toBe("Test Phone Number");
     });
 
     test('DELETE /api/profile/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(204);
     });
 });

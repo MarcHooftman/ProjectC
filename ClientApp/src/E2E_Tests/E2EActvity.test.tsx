@@ -23,12 +23,13 @@ describe('Activity API endpoints', () => {
             title: "Test Activity",
             description: "Test Description",
             location: "Test Location",
-            time: "2099-01-01 12:00:00+00",
+            time: new Date().toISOString(),
         };
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             },
             body: JSON.stringify(activity) 
         });
@@ -36,17 +37,17 @@ describe('Activity API endpoints', () => {
     });
 
     test('GET /api/activity', async () => {
-        const response = await fetch(fetchUrl, { method: 'GET' });
+        const response = await fetch(fetchUrl, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/activity/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" }});
         expect(response.status).toBe(200);
     });
     
     test('GET /api/activity/first', async () => {
-        const response = await fetch(`${fetchUrl}/first`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/first`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
@@ -57,12 +58,13 @@ describe('Activity API endpoints', () => {
             title: "Updated Test Activity",
             description: "Updated Test Description",
             location: "Updated Test Location",
-            time: "2099-01-01 18:00:00+00",
+            time: new Date().toISOString(),
         };
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { 
             method: 'PUT', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             }, 
             body: JSON.stringify(updatedActivity) 
         });
@@ -70,7 +72,7 @@ describe('Activity API endpoints', () => {
     });
 
     test('DELETE /api/activity/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(204);
     });
 });
