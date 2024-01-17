@@ -66,7 +66,7 @@ const AdminAddTrainings = () => {
         // Handle network errors
         console.error("Error submitting post:", error);
       });
-    setTimeout(() => navigate("/admin/trainings"), 250);
+    setTimeout(() => navigate("/admin/trainings"), 500);
   };
 
   return (
@@ -92,7 +92,7 @@ const AdminAddTrainings = () => {
                 onChange={onDescriptionChange}
               />
               <input placeholder="URL" onChange={onURLChange} role="url-input" />
-              <TagInput onChange={(taglist) => setTags(taglist)}/>
+              <TagInput previousTags={tags} onChange={(taglist) => setTags(taglist)}/>
               <Button className="w-25 mt-4" variant="primary" type="submit" role="submit-button">
                 Plaats
               </Button>
