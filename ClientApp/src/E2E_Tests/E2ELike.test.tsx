@@ -3,7 +3,7 @@ import { getApiUrl } from "../utils/getApiUrl";
 import { createMockForumPost, createMockProfile, deleteAllMockInstances } from "./utils";
 
 const TEST_ID = 123456;
-//jest.setTimeout(20000); // 20 seconds
+
 
 describe('Like API endpoints', () => {
     const fetchUrl = getApiUrl() + "/like";

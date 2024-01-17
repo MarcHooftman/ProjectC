@@ -10,7 +10,7 @@ test /api/tag/{id} DELETE
 */
 import ITag from "../interfaces/ITag";
 import { getApiUrl } from "../utils/getApiUrl";
-import { createMockTag, deleteAllMockInstances, generateRandomString } from "./utils";
+import { generateRandomString } from "./utils";
 
 
 describe('Tag API endpoints', () => {
