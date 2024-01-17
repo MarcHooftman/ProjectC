@@ -34,7 +34,8 @@ describe('Like API endpoints', () => {
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             },
             body: JSON.stringify(like) 
         });
@@ -42,12 +43,12 @@ describe('Like API endpoints', () => {
     });
 
     test('GET /api/like', async () => {
-        const response = await fetch(fetchUrl, { method: 'GET' });
+        const response = await fetch(fetchUrl, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/like/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
@@ -61,7 +62,8 @@ describe('Like API endpoints', () => {
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { 
             method: 'PUT', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             }, 
             body: JSON.stringify(updatedLike) 
         });
@@ -69,7 +71,7 @@ describe('Like API endpoints', () => {
     });
 
     test('DELETE /api/like/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(204);
     });
 });

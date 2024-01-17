@@ -11,7 +11,6 @@ const TagInput = ({ onChange = () => {}, previousTags = [] }: Props) => {
   const [input, setInput] = useState<string>("");
 
   useEffect(() => {
-    console.log(previousTags)
     setTags(previousTags);
   }, [previousTags]);
 

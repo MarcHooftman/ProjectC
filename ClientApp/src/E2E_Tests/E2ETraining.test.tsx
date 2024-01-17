@@ -28,7 +28,8 @@ describe('Training API endpoints', () => {
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             },
             body: JSON.stringify(training) 
         });
@@ -36,12 +37,12 @@ describe('Training API endpoints', () => {
     });
 
     test('GET /api/training', async () => {
-        const response = await fetch(fetchUrl, { method: 'GET' });
+        const response = await fetch(fetchUrl, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/training/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
@@ -57,13 +58,14 @@ describe('Training API endpoints', () => {
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { 
             method: 'PUT', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             }, 
             body: JSON.stringify(updatedTraining) 
         });
         expect(response.status).toBe(204);
         // test tags
-        const newobj = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const newobj = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" }});
         const newobjjson = await newobj.json().then((data: ITraining) => data);
         expect(newobjjson.tags[0].name).toBe("Test Tag 3");
         expect(newobjjson.tags[1].name).toBe("Test Tag 4");
@@ -71,7 +73,7 @@ describe('Training API endpoints', () => {
     });
 
     test('DELETE /api/training/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE' });
+        const response = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'DELETE', headers: { "ngrok-skip-browser-warning": "1" }});
         expect(response.status).toBe(204);
     });
 });

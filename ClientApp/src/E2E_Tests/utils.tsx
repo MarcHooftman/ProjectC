@@ -213,7 +213,6 @@ export async function createMockProfile() {
         email: generateRandomString() + "@profile.com",
         activity: [],
         training: [],
-        activity: [],	
         memberSince: new Date().toISOString().slice(0, 10),
         department: "IT",
     };

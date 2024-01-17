@@ -84,7 +84,6 @@ const AdminEditTrainings = () => {
       .then((_) => navigate("/admin/trainings"))
       .catch((error) => console.error("Error:", error));
   };
-  console.log(tags);
   return (
     <AdminLayout role="admin-edit-training-page">
       <h1 className="my-5 blue-text">Training Bewerken</h1>

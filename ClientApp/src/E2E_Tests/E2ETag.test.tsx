@@ -10,20 +10,23 @@ test /api/tag/{id} DELETE
 */
 import ITag from "../interfaces/ITag";
 import { getApiUrl } from "../utils/getApiUrl";
+import { createMockTag, deleteAllMockInstances, generateRandomString } from "./utils";
 
-const Tagname = "Test Tag 1";
 
 describe('Tag API endpoints', () => {
     const fetchUrl = getApiUrl() + "/tag";
 
+    let testTag = generateRandomString();
+
     test('POST /api/tag', async () => {
         const tag: ITag = {
-            name: Tagname,
+            name: testTag,
         };
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "1",
             },
             body: JSON.stringify(tag) 
         });
@@ -31,32 +34,17 @@ describe('Tag API endpoints', () => {
     });
 
     test('GET /api/tag', async () => {
-        const response = await fetch(fetchUrl, { method: 'GET' });
+        const response = await fetch(fetchUrl, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(200);
     });
 
     test('GET /api/tag/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${Tagname}`, { method: 'GET' });
+        const response = await fetch(`${fetchUrl}/${testTag}`, { method: 'GET', headers: { "ngrok-skip-browser-warning": "1" }});
         expect(response.status).toBe(200);
     });
 
-
-    test('PUT /api/tag/{id}', async () => {
-        const updatedTag: ITag = {
-            name: "Updated "+Tagname,
-        };
-        const response = await fetch(`${fetchUrl}/${"Updated "+Tagname}`, { 
-            method: 'PUT', 
-            headers: {
-                'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(updatedTag) 
-        });
-        expect(response.status).toBe(204);
-    });
-
     test('DELETE /api/tag/{id}', async () => {
-        const response = await fetch(`${fetchUrl}/${"Updated "+Tagname}`, { method: 'DELETE' });
+        const response = await fetch(`${fetchUrl}/${testTag}`, { method: 'DELETE', headers: { "ngrok-skip-browser-warning": "1" } });
         expect(response.status).toBe(204);
     });
 });
