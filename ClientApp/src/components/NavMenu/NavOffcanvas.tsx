@@ -4,6 +4,7 @@ import Hamburger from "../../assets/hamburger.svg";
 import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTemplate";
 import CustomUnauthenticatedTemplate from "../AuthTemplates/CustomUnauthenticatedTemplate";
 import useLogout from "../../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 interface Props {
   show?: boolean;
@@ -62,8 +63,9 @@ const NavOffcanvas = ({ show }: Props) => {
               ].map((tuple, index) => (
                 <NavItem key={index} className="border-y p-2 ps-3">
                   <NavLink
+                    as={Link}
                     className="fs-4 ps-0 py-1 text-light offcanvas-link"
-                    href={tuple[0]}
+                    to={tuple[0]}
                   >
                     {tuple[1]}
                   </NavLink>

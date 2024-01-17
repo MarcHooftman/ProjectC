@@ -1,6 +1,17 @@
+.modal {
+    width: 100vw;
+}
+
 .activity-modal {
-    max-width: none !important;
-    width: 40vw !important;
+    width: max(500px, 40rem) !important;
+    max-width: 100vw;
+}
+
+@media (max-width: 575px) {
+    .activity-modal {
+        margin: 1rem !important;
+        width: calc(100vw - 2rem) !important;
+    }
 }
 
 .userIcon-img {

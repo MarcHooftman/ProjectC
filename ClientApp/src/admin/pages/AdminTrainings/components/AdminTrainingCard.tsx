@@ -19,7 +19,12 @@ const AdminTrainingCard = ({
   const navigate = useNavigate();
 
   const getViews = () => {
-    fetch(`${getApiUrl()}/trainingprofile`)
+    
+    fetch(`${getApiUrl()}/trainingprofile`,  {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setViews(data.filter((i: any) => i.trainingID === Training.id).length);
@@ -31,6 +36,9 @@ const AdminTrainingCard = ({
     try {
       const response = await fetch(`${getApiUrl()}/training/${Training.id}`, {
         method: "DELETE",
+        headers: {
+            "ngrok-skip-browser-warning": "1",
+          },
       });
 
       if (!response.ok) {

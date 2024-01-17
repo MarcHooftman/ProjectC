@@ -1,13 +1,11 @@
 import ITraining from "../../../../interfaces/ITraining";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import IProfile from "../../../../interfaces/IProfile";
 import { Button, Card } from "react-bootstrap";
 import TagInput from "../../../../pages/Forum/components/Post/TagsToevoegen";
 import TextInputWithCounter from "../../../../components/TextInputWithCounter";
 import AdminLayout from "../../../components/AdminLayout/AdminLayout";
 import { getApiUrl } from "../../../../utils/getApiUrl";
-import { useGraphData } from "../../../../hooks/useGraphData";
 
 const AdminAddTrainings = () => {
   const [title, setTitle] = useState("");
@@ -15,17 +13,6 @@ const AdminAddTrainings = () => {
   const [url, setUrl] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const navigate = useNavigate();
-
-  const { graphData } = useGraphData();
-
-  const [profile, setProfile] = useState<IProfile>();
-  useEffect(() => {
-    if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`)
-        .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }
-  }, [graphData]);
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -47,11 +34,11 @@ const AdminAddTrainings = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!profile?.id) {
-      // Handle case where profile is not available
-      console.error("Profile ID not available");
-      return;
-    }
+    // if (!profile?.id) {
+    //   // Handle case where profile is not available
+    //   console.error("Profile ID not available");
+    //   return;
+    // }
 
     const postObject: ITraining = {
       title: title,
@@ -63,6 +50,7 @@ const AdminAddTrainings = () => {
     fetch(`${getApiUrl()}/training`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postObject),
