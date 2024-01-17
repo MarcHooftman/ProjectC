@@ -1,16 +1,35 @@
 import ILike from "../interfaces/ILike";
 import { getApiUrl } from "../utils/getApiUrl";
+import { createMockForumPost, createMockProfile, deleteAllMockInstances } from "./utils";
 
 const TEST_ID = 123456;
+//jest.setTimeout(20000); // 20 seconds
 
 describe('Like API endpoints', () => {
     const fetchUrl = getApiUrl() + "/like";
 
+    let testPostId = -1;
+    let testProfileId = -1;
+
+    beforeAll(async () => {
+        const CREATED_PROFILE_ID = await createMockProfile();
+        const CREATED_POST_ID = await createMockForumPost();
+        testPostId = CREATED_POST_ID;
+        testProfileId = CREATED_PROFILE_ID;
+    });
+
+    afterAll(async () => {
+        await deleteAllMockInstances({
+            profileId: testProfileId,
+            postId: testPostId,
+        });
+    });
+
     test('POST /api/like', async () => {
         const like: ILike = {
             id: 123456,
-            forumPostId: 1,
-            profileID: 1,
+            forumPostId: testPostId,
+            profileID: testProfileId,
         };
         const response = await fetch(fetchUrl, { 
             method: 'POST', 
@@ -36,8 +55,8 @@ describe('Like API endpoints', () => {
     test('PUT /api/like/{id}', async () => {
         const updatedLike: ILike = {
             id: TEST_ID,
-            forumPostId: 1,
-            profileID: 1,
+            forumPostId: testPostId,
+            profileID: testProfileId,
         };
         const response = await fetch(`${fetchUrl}/${TEST_ID}`, { 
             method: 'PUT', 
