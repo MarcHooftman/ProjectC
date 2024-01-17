@@ -1,7 +1,7 @@
 function getApiUrl() {
     return process.env.REACT_APP_LOCAL_API == "true"
         ? "https://localhost:7185/api"
-        : "https://9fdf-2a02-a212-92c8-8400-1d71-9cfc-d50d-d6d.ngrok-free.app/api"
+        : "https://d06a-2a02-a212-92c8-8400-fc7c-2abb-3c3d-d632.ngrok-free.app/api"
 }
 
 export { getApiUrl };
