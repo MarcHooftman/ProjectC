@@ -11,7 +11,7 @@ import { getApiUrl } from "../utils/getApiUrl";
 let CREATED_ACTIVITY_ID = 0;
 let CREATED_ADMIN_ID = 0;
 let CREATED_TEMP_ID = 0;
-let CREATED_TAG_ID = 0;
+let CREATED_TAG_ID = "invalid";
 let CREATED_TRAINING_ID = 0;
 let CREATED_PROFILE_ID = 0;
 let CREATED_POST_ID = 0;
@@ -67,7 +67,7 @@ export async function deleteAllMockInstances({
     activityId?: number,
     adminId?: number,
     tempId?: number,
-    tagId?: number,
+    tagId?: string,
     trainingId?: number,
     profileId?: number,
     postId?: number,
@@ -89,7 +89,7 @@ export async function deleteAllMockInstances({
     if (tempId !== 0) {
         await deleteMockTempUser(tempId);
     }
-    if (tagId !== 0) {
+    if (tagId !== "invalid") {
         await deleteMockTag(tagId);
     }
     if (trainingId !== 0) {
@@ -126,7 +126,7 @@ async function POST(endpoint: string, body: bodyType, fieldName: string = "id") 
     return data[fieldName];
 }
 
-async function DELETE(endpoint: string, id: number) {
+async function DELETE(endpoint: string, id: number|string) {
     await fetch(`${getApiUrl()}/${endpoint}/${id}`, {
         method: 'DELETE',
         headers: {
@@ -188,7 +188,7 @@ export async function createMockTag() {
     return CREATED_TAG_ID;
 }
 
-export async function deleteMockTag(id: number) {
+export async function deleteMockTag(id: string) {
     await DELETE("tag", id);
 }
 
@@ -213,6 +213,7 @@ export async function createMockProfile() {
         email: generateRandomString() + "@profile.com",
         activity: [],
         training: [],
+        activity: [],	
         memberSince: new Date().toISOString().slice(0, 10),
         department: "IT",
     };
