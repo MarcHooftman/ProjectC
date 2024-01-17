@@ -8,15 +8,15 @@ import ITempUser from "../interfaces/ITempUser";
 import ITraining from "../interfaces/ITraining";
 import { getApiUrl } from "../utils/getApiUrl";
 
-let CREATED_ACTIVITY_ID = 0;
-let CREATED_ADMIN_ID = 0;
-let CREATED_TEMP_ID = 0;
-let CREATED_TAG_ID = "invalid";
-let CREATED_TRAINING_ID = 0;
-let CREATED_PROFILE_ID = 0;
-let CREATED_POST_ID = 0;
-let CREATED_LIKE_ID = 0;
-let CREATED_REPORT_ID = 0;
+let CREATED_ACTIVITY_ID: number = 0;
+let CREATED_ADMIN_ID: number = 0;
+let CREATED_TEMP_ID: number = 0;
+let CREATED_TAG_ID: string = "invalid";
+let CREATED_TRAINING_ID: number = 0;
+let CREATED_PROFILE_ID: number = 0;
+let CREATED_POST_ID: number = 0;
+let CREATED_LIKE_ID: number = 0;
+let CREATED_REPORT_ID: number = 0;
 
 function generateRandomString(length: number = 30): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
