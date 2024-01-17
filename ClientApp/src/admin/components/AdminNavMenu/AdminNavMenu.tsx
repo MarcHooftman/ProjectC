@@ -38,7 +38,7 @@ const AdminNavMenu = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to="/admin/training"
+                to="/admin/trainings"
                 className="fs-5 blue-text"
               >
                 Trainingen
