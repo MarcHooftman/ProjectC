@@ -843,7 +843,7 @@ private static void AddProfiles(AntesContext context)
             new()
             {
                 Title = "Voorbeeld Training 1",
-                Description = Lorem2,
+                Description = Lorem1+"\nlink: https://extern.parnassia-academie.nl/nl/ui#/catalog/course/4b278662-a661-468c-bdc4-24d0082a0259",
                 Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
@@ -855,8 +855,8 @@ private static void AddProfiles(AntesContext context)
             new()
             {
                 Title = "Voorbeeld Training 2",
-                Description = Lorem1,
-                Url = "https://extern.parnassia-academie.nl/nl/ui#/",
+                Description = "link: https://extern.parnassia-academie.nl/nl/ui#/catalog/course/86e09164-4a0d-4bb9-a543-4e605c4307f0",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag5!,
@@ -880,7 +880,7 @@ private static void AddProfiles(AntesContext context)
             {
                 Title = "Voorbeeld Training 4",
                 Description = Lorem1,
-                Url = "https://extern.parnassia-academie.nl/nl/ui#/",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
 
