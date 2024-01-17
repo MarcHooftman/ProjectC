@@ -62,6 +62,12 @@ describe('Training API endpoints', () => {
             body: JSON.stringify(updatedTraining) 
         });
         expect(response.status).toBe(204);
+        // test tags
+        const newobj = await fetch(`${fetchUrl}/${TEST_ID}`, { method: 'GET' });
+        const newobjjson = await newobj.json().then((data: ITraining) => data);
+        expect(newobjjson.tags[0].name).toBe("Test Tag 3");
+        expect(newobjjson.tags[1].name).toBe("Test Tag 4");
+        expect(newobjjson.tags.length).toBe(2);
     });
 
     test('DELETE /api/training/{id}', async () => {
