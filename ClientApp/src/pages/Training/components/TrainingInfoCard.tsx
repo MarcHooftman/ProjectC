@@ -35,7 +35,9 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
         <Modal.Header closeButton>
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
-            <p className="fs-5 blue-text">{Training?.description}</p>
+            <p className="fs-5 blue-text training-description">
+              {Training?.description}
+            </p>
             <Form.Switch
               id="custom-switch"
               label="Voltooid"
