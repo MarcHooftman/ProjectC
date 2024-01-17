@@ -842,9 +842,9 @@ private static void AddProfiles(AntesContext context)
         {
             new()
             {
-                Title = "Training 1",
-                Description = Lorem2,
-                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
+                Title = "Voorbeeld Training 1",
+                Description = Lorem1+"\nlink: https://extern.parnassia-academie.nl/nl/ui#/catalog/course/4b278662-a661-468c-bdc4-24d0082a0259",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag1!,
@@ -854,9 +854,9 @@ private static void AddProfiles(AntesContext context)
             },
             new()
             {
-                Title = "Training 2",
-                Description = Lorem1,
-                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
+                Title = "Voorbeeld Training 2",
+                Description = "link: https://extern.parnassia-academie.nl/nl/ui#/catalog/course/86e09164-4a0d-4bb9-a543-4e605c4307f0",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag5!,
@@ -866,9 +866,9 @@ private static void AddProfiles(AntesContext context)
             },
             new()
             {
-                Title = "Training 3",
+                Title = "Voorbeeld Training 3",
                 Description = Lorem3,
-                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
                     tag4!,
@@ -878,9 +878,9 @@ private static void AddProfiles(AntesContext context)
             },
             new()
             {
-                Title = "Training 4",
+                Title = "Voorbeeld Training 4",
                 Description = Lorem1,
-                Url = "https://www.youtube.com/embed/dQw4w9WgXcQ?si=85vUjBYkGD0TeNp6&autoplay=1&muted=1",
+                Url = "https://www.youtube.com/embed/m_pCgfZR3pE?si=0DBheJx20f8ZKBCx&autoplay=1&muted=1",
                 Tags = new List<Tag>
                 {
 

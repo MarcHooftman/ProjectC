@@ -67,9 +67,10 @@ const TemporaryLogin = () => {
                 type="email"
                 placeholder="E-mailadres"
                 onChange={(e) => setEmail(e.target.value)}
+                role="email-input"
               />
             </Form.Group>
-            <Form.Group className="d-flex flex-column align-items-start w-100">
+            <Form.Group className="d-flex flex-column align-items-start w-100" role="code-input">
               <Form.Label className="antes-secondary">
                 Verificatie code
               </Form.Label>
@@ -92,7 +93,7 @@ const TemporaryLogin = () => {
                   <small key={index}>{line}</small>
                 ))}
               </Form.Control.Feedback>
-              <Button type="submit" className="w-50">
+              <Button type="submit" className="w-50" role="submit-button">
                 Inloggen
               </Button>
             </Form.Group>

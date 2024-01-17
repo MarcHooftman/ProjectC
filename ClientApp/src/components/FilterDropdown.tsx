@@ -7,11 +7,12 @@ const filterIcon = require("../assets/filter.png");
 interface Props {
   page: string;
   options?: string[];
+  show?: boolean;
 }
 
-const FilterDropdown = ({ page, options = [] }: Props) => {
+const FilterDropdown = ({ page, options = [], show = false }: Props) => {
   const navigate = useNavigate();
-  const [show, setShow] = useState<boolean>(false);
+  const [_show, setShow] = useState<boolean>(show);
   const [searchField, setSearchField] = useState<string>("");
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -50,11 +51,14 @@ const FilterDropdown = ({ page, options = [] }: Props) => {
   return (
     <Dropdown
       autoClose={true}
-      show={show}
-      onToggle={() => setShow(!show)}
+      show={_show}
+      onToggle={() => setShow(!_show)}
       role="filter-dropdown"
     >
-      <Dropdown.Toggle className="no-after no-border bg-transparent">
+      <Dropdown.Toggle
+        className="no-after no-border bg-transparent"
+        role="dropdown-toggle"
+      >
         <img src={filterIcon} className="filter antes-blue-image" />
       </Dropdown.Toggle>
       <Dropdown.Menu align="end">
@@ -64,14 +68,19 @@ const FilterDropdown = ({ page, options = [] }: Props) => {
             type="search"
             placeholder="Zoeken"
             onChange={onSearchChange}
+            role="dropdown-search"
           ></input>
-          <Button type="submit" size="sm">
+          <Button type="submit" size="sm" role="dropdown-search-submit">
             Zoek
           </Button>
         </form>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={handleNoFilterClick} className="fs-6 blue-text">
-          No filter
+        <Dropdown.Item
+          onClick={handleNoFilterClick}
+          className="fs-6 blue-text"
+          role="remove-filter-option"
+        >
+          Verwijder filter
         </Dropdown.Item>
         {options.length > 0 && (
           <>

@@ -62,7 +62,6 @@ const AdminEditTrainings = () => {
       url: url,
       tags: tags.map((tag) => ({ name: tag })),
     };
-    console.log(newTraining);
     fetch(`${getApiUrl()}/training/${newTraining.id}`, {
       method: "PUT",
       headers: {
@@ -85,7 +84,6 @@ const AdminEditTrainings = () => {
       .then((_) => navigate("/admin/trainings"))
       .catch((error) => console.error("Error:", error));
   };
-  //console.log(tags);
   return (
     <AdminLayout role="admin-edit-training-page">
       <h1 className="my-5 blue-text">Training Bewerken</h1>
@@ -102,6 +100,7 @@ const AdminEditTrainings = () => {
                 className=""
                 onChange={onTitleChange}
                 value={title}
+                role="title-input"
               />
               <TextInputWithCounter
                 value={description}
@@ -109,12 +108,12 @@ const AdminEditTrainings = () => {
                 maxLength={1000}
                 onChange={onDescriptionChange}
               />
-              <input placeholder="URL" onChange={onURLChange} value={url} />
+              <input placeholder="URL" onChange={onURLChange} value={url} role="url-input" />
               <TagInput
                 previousTags={tags}
                 onChange={(taglist) => setTags(taglist)}
               />
-              <Button className="w-25 mt-4" variant="primary" type="submit">
+              <Button className="w-25 mt-4" variant="primary" type="submit" role="submit-button">
                 Opslaan
               </Button>
             </form>

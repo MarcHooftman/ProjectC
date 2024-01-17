@@ -23,7 +23,11 @@ const AdminTrainings = () => {
   }, [admin]);
 
   const refreshTrainings = () => {
-    fetch(`${getApiUrl()}/training`)
+    fetch(`${getApiUrl()}/training`,  {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setTrainings(data as ITraining[]));
   };

@@ -37,7 +37,7 @@ const AdminActivities = () => {
     <AdminLayout role="admin-activities-page">
       <h1 className="my-5 blue-text">Activiteiten</h1>
 
-      <Button href="/admin/activities/add" className="fw-bold">
+      <Button href="/admin/activities/add" className="fw-bold" role="add-activity-button">
         Activiteit toevoegen
       </Button>
 

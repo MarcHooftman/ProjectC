@@ -63,36 +63,6 @@ namespace ProjectC.Controllers
         //     return tag;
         // }
 
-        // PUT: api/Tag/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{name}")]
-        public async Task<IActionResult> PutTag(string name, Tag tag)
-        {
-            if (name != tag.Name)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tag).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TagExists(name))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Tag
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

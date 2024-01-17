@@ -73,17 +73,19 @@ const AdminPostComment = ({ comment, onDelete = () => {} }: Props) => {
               <img
                 src={ProfileIcon}
                 style={{ height: "25px", width: "25px" }}
+                role="profile-picture"
               ></img>
               <strong>{comment.profile?.fullName}</strong>
             </Link>
-            <p className="antes-secondary mb-0">{formatDate(comment.time)}</p>
+            <p className="antes-secondary mb-0" role="comment-date">{formatDate(comment.time)}</p>
             <img
               src={TrashIcon}
               className="trash-icon-small hover-pointer"
               onClick={handleTrashClick}
+              role="trash-icon"
             />
           </div>
-          <p style={{ marginLeft: "35px", marginBottom: "0px" }}>
+          <p style={{ marginLeft: "35px", marginBottom: "0px" }} role="comment-content">
             {comment.content}
             <span className="d-flex gap-2">
               {comment?.tags &&

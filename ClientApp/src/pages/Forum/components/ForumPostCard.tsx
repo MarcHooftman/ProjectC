@@ -12,10 +12,11 @@ import arrowDown from "../../../assets/arrow-down.svg";
 
 interface Props {
   post: IForumPost;
+  collapsed?: boolean;
 }
 
-const ForumPostCard = ({ post }: Props) => {
-  const [collapse, setCollapse] = useState<boolean>(true);
+const ForumPostCard = ({ post, collapsed=true }: Props) => {
+  const [collapse, setCollapse] = useState<boolean>(collapsed);
   const [_post, setPost] = useState<IForumPost>(post);
 
   const fetchPost = () => {

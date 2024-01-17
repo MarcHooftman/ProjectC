@@ -19,7 +19,12 @@ const AdminTrainingCard = ({
   const navigate = useNavigate();
 
   const getViews = () => {
-    fetch(`${getApiUrl()}/trainingprofile`)
+    
+    fetch(`${getApiUrl()}/trainingprofile`,  {
+      headers: {
+        "ngrok-skip-browser-warning": "1",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setViews(data.filter((i: any) => i.trainingID === Training.id).length);
@@ -31,6 +36,9 @@ const AdminTrainingCard = ({
     try {
       const response = await fetch(`${getApiUrl()}/training/${Training.id}`, {
         method: "DELETE",
+        headers: {
+            "ngrok-skip-browser-warning": "1",
+          },
       });
 
       if (!response.ok) {
@@ -61,7 +69,7 @@ const AdminTrainingCard = ({
         <Modal.Header closeButton>
           <Modal.Title className="fs-2 blue-text">
             {Training?.title}
-            <p style={{ margin: "0px" }} className="fs-5 blue-text">
+            <p style={{ margin: "0px", maxWidth: "60vw" }} className="fs-5 blue-text">
               {Training?.description}
             </p>
             <p style={{ fontSize: "15px", margin: "0px" }}>Views: {views}</p>
@@ -124,7 +132,7 @@ const AdminTrainingCard = ({
         role="admin-training-card"
       >
         <Card.Header>
-          <Card.Title>
+          <Card.Title role="training-title">
             <strong>{Training?.title}</strong>
           </Card.Title>
           <div className="d-flex Category gap-2 pb-2 ">
@@ -142,7 +150,9 @@ const AdminTrainingCard = ({
           </div>
         </Card.Header>
         <Card.Body>
-          <Card.Text>{Training?.description}</Card.Text>
+          <Card.Text role="training-description">
+            {Training?.description}
+          </Card.Text>
         </Card.Body>
       </Card>
     </>

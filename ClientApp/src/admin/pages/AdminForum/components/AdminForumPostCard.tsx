@@ -105,14 +105,14 @@ const AdminForumPostCard = ({
                 to={`/admin/users?filter=${post?.profile?.email}`}
                 className="text-decoration-none blue-text"
               >
-                <Card.Img src={ProfileIcon} className="poster-pfp"></Card.Img>
+                <Card.Img src={ProfileIcon} className="poster-pfp" role="profile-picture"></Card.Img>
               </Link>
               <div>
                 <Link
                   to={`/admin/users?filter=${post?.profile?.email}`}
                   className="text-decoration-none text-light"
                 >
-                  <h2 className="fs-5 m-0">
+                  <h2 className="fs-5 m-0" role="profile-name">
                     <strong>{post?.profile?.fullName}</strong>
                   </h2>
                 </Link>
@@ -120,18 +120,18 @@ const AdminForumPostCard = ({
                   to={`/admin/users?filter=${post?.profile?.email}`}
                   className="text-decoration-none blue-text"
                 >
-                  <h3 className="fs-6 m-0 antes-secondary">
+                  <h3 className="fs-6 m-0 antes-secondary" role="profile-member-since">
                     lid sinds {post?.profile?.memberSince}
                   </h3>
                 </Link>
               </div>
             </Col>
             <Col lg={5} className="ps-4">
-              <h4>{post?.title}</h4>
+              <h4 role="post-title">{post?.title}</h4>
             </Col>
 
             <Col lg={2} className="ps-5">
-              <span className="antes-secondary">{formattedDate}</span>
+              <span className="antes-secondary" role="post-date">{formattedDate}</span>
             </Col>
 
             <Col lg={1} className="d-flex justify-content-end">
@@ -152,7 +152,7 @@ const AdminForumPostCard = ({
                 }
               >
                 <span>
-                  <img src={StatIcon} className="stat-icon" />
+                  <img src={StatIcon} className="stat-icon" role="stat-icon" />
                   {post?.reports?.length > 10 && (
                     <img src={RedExclamMark} className="exclam-icon"></img>
                   )}
@@ -164,11 +164,12 @@ const AdminForumPostCard = ({
                 src={TrashIcon}
                 className="trash-icon hover-pointer"
                 onClick={handleTrashClick}
+                role="trash-icon"
               />
             </Col>
           </Row>
         </Card.Header>
-        <Card.Body>
+        <Card.Body role="post-content">
           {post?.content}
           <span className="d-flex gap-2 mt-2">
             {post?.tags &&
@@ -185,7 +186,7 @@ const AdminForumPostCard = ({
               ))}
           </span>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer role="post-comments">
           {post?.comments && post?.comments.length > 0 ? (
             showComments ? (
               <>

@@ -14,7 +14,7 @@ const NavMenu = () => {
       container={false}
       role="navmenu"
     >
-      <NavbarBrand tag={Link} to="/">
+      <NavbarBrand tag={Link} to="/" role="nav-brand">
         <img className="navbar-logo" src={LogoRed} alt="Logo" />
       </NavbarBrand>
       <div></div>
@@ -25,6 +25,7 @@ const NavMenu = () => {
               className="profile-image gray-image"
               src={profile}
               alt="profiel"
+              role="profile-icon"
             />
           </NavLink>
         </NavItem>

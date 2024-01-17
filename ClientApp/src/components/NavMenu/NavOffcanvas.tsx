@@ -4,6 +4,7 @@ import Hamburger from "../../assets/hamburger.svg";
 import CustomAuthenticatedTemplate from "../AuthTemplates/CustomAuthenticatedTemplate";
 import CustomUnauthenticatedTemplate from "../AuthTemplates/CustomUnauthenticatedTemplate";
 import useLogout from "../../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 interface Props {
   show?: boolean;
@@ -24,6 +25,7 @@ const NavOffcanvas = ({ show }: Props) => {
           src={Hamburger}
           className="hamburger hover-pointer"
           onClick={() => setShow(!_show)}
+          role="offcanvas-toggle"
         />
       </div>
       <Offcanvas
@@ -38,13 +40,18 @@ const NavOffcanvas = ({ show }: Props) => {
             src={Hamburger}
             className="hamburger hover-pointer"
             onClick={() => setShow(!_show)}
+            role="offcanvas-toggle-off"
           />
-          <Offcanvas.Title as="h2" className="text-light">
-            Offcanvas
+          <Offcanvas.Title
+            as="h2"
+            className="text-light"
+            role="offcanvas-title"
+          >
+            Overzicht
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="p-0 pt-3">
-          <Nav className="d-flex flex-column">
+          <Nav className="d-flex flex-column" role="nav-offcanvas-nav">
             <CustomAuthenticatedTemplate>
               {[
                 ["/", "Home"],
@@ -56,8 +63,9 @@ const NavOffcanvas = ({ show }: Props) => {
               ].map((tuple, index) => (
                 <NavItem key={index} className="border-y p-2 ps-3">
                   <NavLink
+                    as={Link}
                     className="fs-4 ps-0 py-1 text-light offcanvas-link"
-                    href={tuple[0]}
+                    to={tuple[0]}
                   >
                     {tuple[1]}
                   </NavLink>
