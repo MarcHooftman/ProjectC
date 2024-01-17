@@ -19,6 +19,7 @@ const AdminTrainingCard = ({
   const navigate = useNavigate();
 
   const getViews = () => {
+    
     fetch(`${getApiUrl()}/trainingprofile`,  {
       headers: {
         "ngrok-skip-browser-warning": "1",
@@ -35,6 +36,9 @@ const AdminTrainingCard = ({
     try {
       const response = await fetch(`${getApiUrl()}/training/${Training.id}`, {
         method: "DELETE",
+        headers: {
+            "ngrok-skip-browser-warning": "1",
+          },
       });
 
       if (!response.ok) {
