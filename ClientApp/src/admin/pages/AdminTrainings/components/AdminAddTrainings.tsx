@@ -14,21 +14,6 @@ const AdminAddTrainings = () => {
   const [tags, setTags] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const { graphData } = useGraphData();
-
-  const [profile, setProfile] = useState<IProfile>();
-  useEffect(() => {
-    if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
-        headers: {
-          "ngrok-skip-browser-warning": "1",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setProfile(data as IProfile));
-    }
-  }, [graphData]);
-
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setTitle(event.target.value);
