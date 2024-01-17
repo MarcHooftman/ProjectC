@@ -25,7 +25,11 @@ const AdminActivityCard = ({ activity, onDelete = () => { } }: Props) => {
 
     const fetchProfiles = async () => {
         try {
-            const response = await fetch(`${getApiUrl()}/profile`);
+            const response = await fetch(`${getApiUrl()}/profile`,  {
+                headers: {
+                  "ngrok-skip-browser-warning": "1",
+                },
+              });
             const data = await response.json();
             setAllProfiles(data);
         } catch (error) {

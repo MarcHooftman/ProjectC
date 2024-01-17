@@ -21,7 +21,11 @@ const AdminAddTrainings = () => {
   const [profile, setProfile] = useState<IProfile>();
   useEffect(() => {
     if (graphData) {
-      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`)
+      fetch(`${getApiUrl()}/profile/by-email/${graphData?.mail}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "1",
+        },
+      })
         .then((response) => response.json())
         .then((data) => setProfile(data as IProfile));
     }
@@ -63,6 +67,7 @@ const AdminAddTrainings = () => {
     fetch(`${getApiUrl()}/training`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "1",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(postObject),
