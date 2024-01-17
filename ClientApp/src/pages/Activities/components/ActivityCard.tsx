@@ -22,7 +22,12 @@ const ActivityCard = ({ activity, currentProfile, className = "" }: Props) => {
 
     // Fetch the attendingCount from the database when the component mounts
     useEffect(() => {
-        fetch(`${getApiUrl()}/profileactivity/${activity?.id}`)
+        fetch(`${getApiUrl()}/profileactivity/${activity?.id}`,
+        {
+            headers: {
+              "ngrok-skip-browser-warning": "1",
+            },
+        })
             .then((response) => response.json())
             .then((data) => {
                 setAttendingCount(data);

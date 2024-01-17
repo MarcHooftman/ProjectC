@@ -19,8 +19,7 @@ const AdminTrainingCard = ({
   const navigate = useNavigate();
 
   const getViews = () => {
-    fetch(`${getApiUrl()}/trainingprofile`,
-    {
+    fetch(`${getApiUrl()}/trainingprofile`,  {
       headers: {
         "ngrok-skip-browser-warning": "1",
       },
