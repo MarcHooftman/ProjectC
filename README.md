@@ -2,7 +2,7 @@
 2. in the `src` folder create a `.env` if its not exists and put `REACT_APP_LOCAL_API` on `true`
 3. run dotnet run in the project directory
 
-
+**NOTE**: when running with `REACT_APP_LOCAL_API` set to false, you can run `npm start` in the `ClientApp` directory without starting a local backend server
 
 **testing**
 when runnning test use `npm test` in the `ClientApp` directory
