@@ -111,7 +111,10 @@ const Post = () => {
                   maxLength={300}
                   onChange={onContentChange}
                 />
-                <TagInput onChange={(taglist) => setTags(taglist)} />
+                <TagInput
+                  previousTags={tags}
+                  onChange={(taglist) => setTags(taglist)}
+                />
                 <Button
                   className="mt-4 fw-bold post-button"
                   variant="primary"
