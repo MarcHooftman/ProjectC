@@ -57,7 +57,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            var activity = await _context.Activity.OrderBy(_ => _.Time).FirstOrDefaultAsync();
+            var activity = await _context.Activity.OrderBy(_ => _.Time).Where(a => a.Time > DateTime.Now).FirstOrDefaultAsync();
 
             if (activity == null)
             {
