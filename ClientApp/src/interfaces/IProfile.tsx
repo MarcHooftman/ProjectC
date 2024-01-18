@@ -1,4 +1,3 @@
-// import { Media } from "reactstrap";
 import IActivity from "./IActivity";
 import ITraining from "./ITraining";
 

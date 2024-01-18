@@ -12,6 +12,7 @@ describe("Layout", () => {
     );
     getByRole = renderResult.getByRole;
   });
+  
   it("renders without crashing", () => {
     expect(getByRole).toBeDefined();
   });

@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("https://localhost:44463", "https://antesonboarding.vercel.app")
+        builder.WithOrigins("https://localhost:44463", "http://localhost", "https://antesonboarding.vercel.app")
             .WithHeaders("Content-Type", "ngrok-skip-browser-warning")
             .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
             .AllowCredentials();
@@ -34,7 +34,7 @@ if (!app.Environment.IsDevelopment())
 
 app.Use(async (context, next) =>
 {
-    Console.WriteLine($"Using {context.Request.Path}");
+    Console.WriteLine($"{context.Request.Path} {context.Request.Method}");
     await next.Invoke();
 });
 app.UseHttpsRedirection();
