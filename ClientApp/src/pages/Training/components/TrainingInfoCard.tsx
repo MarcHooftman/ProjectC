@@ -60,7 +60,7 @@ const TrainingInfoCard = ({ Training, profile }: Props) => {
         </Modal.Body>
       </Modal>
       <Card
-        className="training-card hover-pointer shadow-lg bg-antes-primary"
+        className="training-card hover-pointer shadow-lg bg-antes-primary w-100"
         onClick={() => {
           setModelstate(true);
         }}

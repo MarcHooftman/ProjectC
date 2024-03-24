@@ -14,6 +14,7 @@ import { getApiUrl } from "../../../utils/getApiUrl";
 import CoverCard from "../../../components/CoverCard/CoverCard";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import CustomUnauthenticatedTemplate from "../../../components/AuthTemplates/CustomUnauthenticatedTemplate";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -75,6 +76,22 @@ const Home = () => {
       <Button onClick={() => navigate("/about")} className="fw-bold">
         Lees verder
       </Button>
+      <CustomUnauthenticatedTemplate>
+        <h2 className="mt-5 mb-4 blue-text fw-bold">Ontdek meer</h2>
+        <p className="blue-text fs-default">
+          Wil je meer zien van deze website? Door in te loggen kun je toegang
+          krijgen tot:
+          <ul className="ps-4">
+            <li>Het Antes forum</li>
+            <li>De geplande activiteiten</li>
+            <li>De GGZ Ecadamy trainingen</li>
+            <li>Jouw Antes profiel</li>
+          </ul>
+        </p>
+        <Button onClick={() => navigate("/login")} className="fw-bold">
+          Inloggen
+        </Button>
+      </CustomUnauthenticatedTemplate>
     </Layout>
   );
 };
